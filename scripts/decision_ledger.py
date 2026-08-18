@@ -240,12 +240,21 @@ def validate_audit_capture_dependency_summary(
     """Validate the complete versioned capture/state/policy reference summary."""
     if summary.get("summary_id") != "0146-audit-capture-dependencies":
         return ContextAssessment(False, "audit capture dependency summary ID is invalid")
+    if not isinstance(summary.get("summary_sha256"), str):
+        return ContextAssessment(False, "audit capture dependency summary digest is missing")
     for field, expected in expected_refs.items():
         values = summary.get(field)
         if not isinstance(values, list) or set(values) != expected or len(values) != len(expected):
             return ContextAssessment(False, f"audit capture dependency summary {field} differs")
         if not set(values) <= available_paths:
             return ContextAssessment(False, f"audit capture dependency summary {field} is unavailable")
+    payload = dict(summary)
+    payload.pop("summary_sha256", None)
+    expected_digest = hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if summary["summary_sha256"] != expected_digest:
+        return ContextAssessment(False, "audit capture dependency summary digest is stale")
     return ContextAssessment(True, "audit capture dependency summary is complete")
 
 

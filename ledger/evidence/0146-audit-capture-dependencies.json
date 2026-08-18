@@ -1,5 +1,6 @@
 {
   "summary_id": "0146-audit-capture-dependencies",
+  "summary_sha256": "fb1085038e207cab44d4c8f79271359dbaeaf9ab00df7bd722bff81d942f77e4",
   "capture_refs": [
     "ledger/evidence/0093-generation-rerun.json",
     "ledger/evidence/0108-audit-command-capture.json",
