@@ -411,6 +411,12 @@ def validate_failure_evidence(record: dict, available_paths: set[str]) -> Contex
     if "edge_refs" in record and record["edge_refs"] != [[
         "ledger/evidence/0154-freshness-capture-inventory.json",
         "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+    ], [
+        "ledger/evidence/0154-freshness-capture-inventory.json",
+        "ledger/evidence/0194-state-failure-state-failure.json",
+    ], [
+        "ledger/evidence/0154-freshness-capture-inventory.json",
+        "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
     ]]:
         return ContextAssessment(False, "failure evidence edge provenance is malformed")
     return ContextAssessment(True, "failure evidence is valid")
