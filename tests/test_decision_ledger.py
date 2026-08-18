@@ -756,7 +756,7 @@ class DecisionLedgerTest(unittest.TestCase):
         record = json.loads(Path(
             "ledger/evidence/0122-capture-schema-failure.json",
         ).read_text())
-        available = {record["source_capture_ref"]}
+        available = {record["source_capture_ref"], record["diagnostic_ref"]}
         self.assertTrue(validate_failure_evidence(record, available).valid)
         self.assertFalse(validate_failure_evidence(
             dict(record, source_capture_ref="ledger/evidence/missing.json"), available,

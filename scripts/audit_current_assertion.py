@@ -137,7 +137,10 @@ def _run(root: Path = ROOT) -> int:
         (evidence_dir / "0122-capture-schema-failure.json").read_text()
     )
     failure_evidence_check = validate_failure_evidence(
-        failure_evidence, {"ledger/evidence/0119-four-check-audit-capture.json"},
+        failure_evidence, {
+            "ledger/evidence/0119-four-check-audit-capture.json",
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+        },
     )
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},

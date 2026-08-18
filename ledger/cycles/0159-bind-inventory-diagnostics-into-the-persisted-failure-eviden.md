@@ -1,7 +1,7 @@
 # Cycle 0159 — Bind inventory diagnostics into the persisted failure-evidence chain
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind inventory diagnostics into the persisted failure-evidence chain
 
 ## Decision
 
-_To be determined from evidence._
+Persisted failure evidence now carries an explicit inventory diagnostic
+reference and explanation, and the validator rejects missing or unavailable
+diagnostic bindings.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: enriched 0122 failure evidence, validator enforcement, and executable
+audit coverage through the existing freshness gate.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The enriched failure record remains valid and the complete audit still passes;
+all four public checks remain true.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add the inventory diagnostic artifact to the declared dependency manifest.
