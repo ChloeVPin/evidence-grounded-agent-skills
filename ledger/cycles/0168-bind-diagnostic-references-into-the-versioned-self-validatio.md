@@ -1,7 +1,7 @@
 # Cycle 0168 — Bind diagnostic references into the versioned self-validation state schema
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Bind diagnostic references into the versioned self-validation state schema
 
 ## Decision
 
-_To be determined from evidence._
+Versioned self-validation state now records the inventory diagnostic references
+and a stable digest, and rejects stale or mismatched bindings.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0113 state schema, validator enforcement, content-digest
+refresh, and executable audit coverage.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The state remains a complete passing result; 183 tests, compilation, and all
+four public audit checks pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add a dedicated diagnostic-reference failure capture for state drift.

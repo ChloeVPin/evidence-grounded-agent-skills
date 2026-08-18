@@ -14,6 +14,10 @@
   "capture_summary_sha256": "6ceaea481c676227eabd729597024050039ef7068db76e7b707b1ca8b5519347",
   "capture_inventory_ref": "ledger/evidence/0154-freshness-capture-inventory.json",
   "capture_inventory_sha256": "fa5f4b5eff20ca9f5f37e51453ff2acb4e858610b100ef4afe6ddd994a40b8da",
+  "diagnostic_refs": [
+    "ledger/evidence/0130-dependency-state-diagnostics.json"
+  ],
+  "diagnostic_refs_sha256": "d5c6d1c1b6ab1fb47f9faa71718b42515ed8cb1ce00a5a67c2519ff330eeb9f6",
   "checks": {
     "bundle": true,
     "chain": true,
