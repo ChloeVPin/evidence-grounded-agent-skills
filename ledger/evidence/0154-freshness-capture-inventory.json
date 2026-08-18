@@ -1,0 +1,14 @@
+{
+  "inventory_id": "0154-freshness-capture-inventory",
+  "capture_refs": [
+    "ledger/evidence/0093-generation-rerun.json",
+    "ledger/evidence/0108-audit-command-capture.json",
+    "ledger/evidence/0119-four-check-audit-capture.json",
+    "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+    "ledger/evidence/0143-graph-state-diagnostic-capture.json",
+    "ledger/evidence/0151-summary-state-diagnostic-capture.json"
+  ],
+  "state_ref": "ledger/state/0113-complete-self-validation-gate.json",
+  "summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
+  "graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json"
+}

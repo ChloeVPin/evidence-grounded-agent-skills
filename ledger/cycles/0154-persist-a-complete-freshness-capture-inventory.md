@@ -1,7 +1,7 @@
 # Cycle 0154 — Persist a complete freshness capture inventory
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Persist a complete freshness capture inventory
 
 ## Decision
 
-_To be determined from evidence._
+Persisted `ledger/evidence/0154-freshness-capture-inventory.json` enumerates all
+six freshness captures plus state, summary, and graph references. Exact-set and
+availability validation reject inventory drift.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0154 inventory, validator, and mutation test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The inventory is a validated artifact this cycle; the executable audit continues
+to use its direct dependency checks until the next binding cycle.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind the freshness capture inventory into executable validation.

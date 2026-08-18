@@ -25,6 +25,7 @@ from scripts.decision_ledger import (
     validate_snapshot_diagnostic_capture,
     validate_graph_state_diagnostic_capture,
     validate_summary_state_diagnostic_capture,
+    validate_freshness_capture_inventory,
     validate_audit_capture_dependency_summary,
     validate_failure_evidence,
     validate_audit_dependency_manifest,
@@ -897,6 +898,23 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_summary_state_diagnostic_capture(
             dict(capture, summary_sha256="0" * 64),
             summary, {capture["summary_ref"]}, {capture["revision"]},
+        ).valid)
+
+    def test_freshness_capture_inventory_is_complete(self):
+        inventory = json.loads(Path(
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+        ).read_text())
+        expected = set(inventory["capture_refs"])
+        available = expected | {
+            inventory["state_ref"], inventory["summary_ref"], inventory["graph_ref"],
+        }
+        self.assertTrue(validate_freshness_capture_inventory(
+            inventory, available, expected,
+        ).valid)
+        altered = json.loads(json.dumps(inventory))
+        altered["capture_refs"].pop()
+        self.assertFalse(validate_freshness_capture_inventory(
+            altered, available, expected,
         ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
