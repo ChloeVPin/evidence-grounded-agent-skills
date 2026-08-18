@@ -53,6 +53,16 @@ class SkillDocumentTest(unittest.TestCase):
             self.assertIn(section, text)
         self.assertGreaterEqual(text.count("- [ ]"), 8)
 
+    def test_contradiction_resolution_contains_required_operational_sections(self):
+        text = Path("skills/contradiction-resolution/SKILL.md").read_text()
+        for section in (
+            "## Purpose and scope", "## Triggers and prerequisites",
+            "## Procedure", "## Acceptance checklist",
+            "## Failure modes and recovery", "## Validation evidence and provenance",
+        ):
+            self.assertIn(section, text)
+        self.assertGreaterEqual(text.count("- [ ]"), 8)
+
 
 if __name__ == "__main__":
     unittest.main()

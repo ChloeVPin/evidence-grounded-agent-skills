@@ -1,7 +1,7 @@
 # Cycle 0048 — Next Exploration
 
 Date: 2026-08-18
-Status: in progress
+Status: decision recorded; next skill drafted
 
 ## Question
 
@@ -13,16 +13,16 @@ Which next high-leverage skill gap should Hermes explore after verification, dep
 
 ## Decision
 
-_To be determined from primary evidence and disconfirming research._
+Select contradiction resolution and failure learning as the next skill.
 
 ## Evidence and provenance
 
-_Map formal-assurance boundaries, incident learning, taxonomy/ontology maintenance, reviewer identity, and other candidates._
+Candidate map: formal assurance offers high confidence but is domain-specific; reviewer identity/enforcement requires external authority; contradiction resolution has high reuse across every existing skill and can be validated with bounded competing-claim fixtures. The referenced Hermes research specifically requires contradiction hunting, adversarial review, preserved rejected hypotheses, and failure ledgers.
 
 ## Disconfirming evidence sought
 
-_Do not continue adding local policy fixtures when the next improvement requires authenticated external governance or real deployment integration._
+Disconfirming evidence: not every disagreement is resolvable from available evidence; forcing a synthesis can erase real context. The skill must preserve competing claims, identify decision boundaries, and allow an explicit unresolved state.
 
 ## Next action
 
-Conduct a candidate map and select one bounded, verifiable artifact.
+Build and validate `skills/contradiction-resolution/SKILL.md`.
