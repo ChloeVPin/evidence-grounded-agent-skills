@@ -115,8 +115,8 @@ class DecisionLedgerTest(unittest.TestCase):
         ]
         labels = json.loads(Path("ledger/evaluations/0057-paraphrase-labels.json").read_text())
         metrics = evaluate_labeled_queries(entries, labels)
-        self.assertEqual(len(labels), 7)
-        self.assertEqual(metrics["true_positive"], 3)
+        self.assertEqual(len(labels), 8)
+        self.assertEqual(metrics["true_positive"], 4)
         self.assertEqual(metrics["false_positive"], 0)
         self.assertEqual(metrics["false_negative"], 0)
         self.assertEqual(metrics["precision"], 1.0)
