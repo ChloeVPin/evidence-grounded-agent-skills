@@ -32,6 +32,7 @@ EXPECTED_DEPENDENCIES = {
     "ledger/evidence/0184-graph-edge-drift-failure.json",
     "ledger/evidence/0189-edge-failure-state-failure.json",
     "ledger/evidence/0194-state-failure-state-failure.json",
+    "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
     "ledger/state/0113-complete-self-validation-gate.json",
 }
 EXPECTED_FRESHNESS_GRAPH_NODES = {
@@ -214,6 +215,15 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0154-freshness-capture-inventory.json",
         },
     )
+    diagnostic_state_failure = json.loads(
+        (evidence_dir / "0199-diagnostic-state-failure-state-failure.json").read_text()
+    )
+    diagnostic_state_failure_check = validate_failure_evidence(
+        diagnostic_state_failure, {
+            "ledger/evidence/0151-summary-state-diagnostic-capture.json",
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+        },
+    )
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},
     )
@@ -271,6 +281,7 @@ def _run(root: Path = ROOT) -> int:
                 "ledger/evidence/0184-graph-edge-drift-failure.json",
                 "ledger/evidence/0189-edge-failure-state-failure.json",
                 "ledger/evidence/0194-state-failure-state-failure.json",
+                "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
             },
             "diagnostic_refs": {
                 "ledger/evidence/0130-dependency-state-diagnostics.json",
@@ -295,6 +306,7 @@ def _run(root: Path = ROOT) -> int:
             },
             "diagnostic_state_failure_refs": {
                 "ledger/evidence/0194-state-failure-state-failure.json",
+                "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
             },
         },
     )
@@ -339,6 +351,7 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0184-graph-edge-drift-failure.json",
             "ledger/evidence/0189-edge-failure-state-failure.json",
             "ledger/evidence/0194-state-failure-state-failure.json",
+            "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
         },
         {"ledger/evidence/0130-dependency-state-diagnostics.json"},
         {
@@ -355,7 +368,10 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0179-snapshot-provenance-state-failure.json",
             "ledger/evidence/0189-edge-failure-state-failure.json",
         },
-        {"ledger/evidence/0194-state-failure-state-failure.json"},
+        {
+            "ledger/evidence/0194-state-failure-state-failure.json",
+            "ledger/evidence/0199-diagnostic-state-failure-state-failure.json",
+        },
     )
     checks = {
         "bundle": bundle_check.valid,
@@ -371,6 +387,7 @@ def _run(root: Path = ROOT) -> int:
             and graph_edge_drift_failure_check.valid
             and edge_failure_state_check.valid
             and state_failure_state_check.valid
+            and diagnostic_state_failure_check.valid
             and diagnostic_snapshot_check.valid
             and snapshot_capture_check.valid
             and graph_check.valid
@@ -397,6 +414,7 @@ def _run(root: Path = ROOT) -> int:
                 graph_edge_drift_failure_check,
                 edge_failure_state_check,
                 state_failure_state_check,
+                diagnostic_state_failure_check,
                 diagnostic_snapshot_check,
                 snapshot_capture_check,
                 graph_check,

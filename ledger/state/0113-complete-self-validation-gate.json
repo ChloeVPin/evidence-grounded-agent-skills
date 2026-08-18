@@ -5,15 +5,15 @@
   "validated_revision": "57c31de1a9e3aad2e53b44539908d1d40c79265a",
   "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
   "dependency_manifest_ref": "ledger/evidence/0125-audit-dependencies.json",
-  "dependency_paths_sha256": "1b7323b625916745fcd059107376d29a7ffaac1fe3ae18ebdfa0cac790847a7e",
+  "dependency_paths_sha256": "8144cc9ecf2140c76f200cf90084c182748cf9eb6b466dc76fcca011fc46e28b",
   "diagnostic_snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
   "diagnostic_snapshot_sha256": "2dc1d7eb39f82e24114c4b51efeb5eace0505284afa2652c33c97d7484f29afe",
   "dependency_graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",
   "dependency_graph_policy_sha256": "a6878508810c9657d170a7e85181935dc696bd2384b80d51dde47845c2872101",
   "capture_summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
-  "capture_summary_sha256": "41656c719650d0a5c667f7d8583e0844c2cfbc95494b230c5bb8ae8faf4e23dd",
+  "capture_summary_sha256": "4d074c0b08990efab2af4ee496cf73b0513dcf1f7090c80c392660e0141bc968",
   "capture_inventory_ref": "ledger/evidence/0154-freshness-capture-inventory.json",
-  "capture_inventory_sha256": "6e4163626ba1f93bfa39cb52b37d8b5a2088dddd14fcbc40e6f5aa3f71908aae",
+  "capture_inventory_sha256": "ee015b9f18b808c878129dc2095de6ee6a2788c1681f548617feabad7e51eb69",
   "diagnostic_refs": [
     "ledger/evidence/0130-dependency-state-diagnostics.json"
   ],
@@ -41,9 +41,10 @@
   ],
   "state_failure_refs_sha256": "43cd1db745879c545b0e4b77a2e83ea902faba5e4cc0f628b10f57cca469aac3",
   "diagnostic_state_failure_refs": [
-    "ledger/evidence/0194-state-failure-state-failure.json"
+    "ledger/evidence/0194-state-failure-state-failure.json",
+    "ledger/evidence/0199-diagnostic-state-failure-state-failure.json"
   ],
-  "diagnostic_state_failure_refs_sha256": "251fc1efa70e73bf2c3968c71bf83a25546c6ac5f9be5af1facc270baeb6f12f",
+  "diagnostic_state_failure_refs_sha256": "b523503f5679870ed1ff453ee80f09663b5533067e9e4980fb046e0010f5db40",
   "checks": {
     "bundle": true,
     "chain": true,
