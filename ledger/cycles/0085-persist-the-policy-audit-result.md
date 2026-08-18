@@ -1,7 +1,7 @@
 # Cycle 0085 — Persist the policy audit result
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Persist the policy audit result
 
 ## Decision
 
-_To be determined from evidence._
+Persisted a structured policy-audit result linked to the generation capture,
+implementation, and regression tests.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+`ledger/evidence/0085-generation-policy-audit.json` validates its policy, result,
+and non-empty evidence references.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The audit record is a local assertion over referenced artifacts; it does not
+replace rerunning the policy check or prove external trust.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: rerun the audit and compare its result to
+the persisted assertion.

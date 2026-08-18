@@ -135,6 +135,19 @@ def validate_generation_evidence(
     return check_generation_revision(evidence["revision"], history_revisions)
 
 
+def validate_policy_audit(audit: dict) -> ContextAssessment:
+    """Validate a persisted result of generation-evidence policy review."""
+    required = ("audit_id", "policy", "result", "evidence_refs")
+    missing = [field for field in required if field not in audit]
+    if missing:
+        return ContextAssessment(False, f"policy audit missing fields: {', '.join(missing)}")
+    if not audit["policy"] or audit["result"] not in {"passed", "failed"}:
+        return ContextAssessment(False, "policy audit policy and result are required")
+    if not isinstance(audit["evidence_refs"], list) or not audit["evidence_refs"]:
+        return ContextAssessment(False, "policy audit evidence references are required")
+    return ContextAssessment(True, "valid policy audit")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

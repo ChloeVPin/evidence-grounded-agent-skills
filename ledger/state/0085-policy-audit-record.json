@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0085",
+  "mode": "maintenance",
+  "status": "completed",
+  "progress": {
+    "quality_delta": 1,
+    "coverage_delta": 1,
+    "evidence_quality_delta": 1,
+    "validation_delta": 1,
+    "uncertainty_delta": 1,
+    "evidence": [
+      "ledger/evidence/0085-generation-policy-audit.json",
+      "scripts/decision_ledger.py",
+      "tests/test_decision_ledger.py"
+    ]
+  },
+  "decision": "persist structured generation policy audit result",
+  "next_action": "rerun audit and compare with persisted assertion"
+}
