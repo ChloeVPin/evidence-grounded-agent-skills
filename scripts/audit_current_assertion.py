@@ -83,11 +83,15 @@ def _run(root: Path = ROOT) -> int:
     content_check = validate_policy_assertion_content(audit, digests)
     self_bundle = json.loads((evidence_dir / "0108-self-validation-bundle.json").read_text())
     self_capture = json.loads((root / self_bundle["self_validation_capture_ref"]).read_text())
+    diagnostic_snapshot = json.loads(
+        (evidence_dir / "0130-dependency-state-diagnostics.json").read_text()
+    )
     state_path = root / "ledger/state/0113-complete-self-validation-gate.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
     freshness_check = validate_self_validation_state(
         state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
         dependency_manifest,
+        diagnostic_snapshot,
     )
     four_check_capture = json.loads(
         (evidence_dir / "0119-four-check-audit-capture.json").read_text()
@@ -101,9 +105,6 @@ def _run(root: Path = ROOT) -> int:
     )
     failure_evidence_check = validate_failure_evidence(
         failure_evidence, {"ledger/evidence/0119-four-check-audit-capture.json"},
-    )
-    diagnostic_snapshot = json.loads(
-        (evidence_dir / "0130-dependency-state-diagnostics.json").read_text()
     )
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},

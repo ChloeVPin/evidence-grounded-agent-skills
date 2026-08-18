@@ -450,12 +450,14 @@ def validate_complete_self_validation_bundle(
 
 def validate_self_validation_state(
     state: dict, bundle_ref: str, self_capture: dict, manifest: dict | None = None,
+    diagnostic_snapshot: dict | None = None,
 ) -> ContextAssessment:
     """Validate the persisted result of the complete self-validation gate."""
     required = (
         "schema_version", "cycle_id", "status", "validated_revision", "bundle_ref", "checks",
         "self_validation_output_sha256", "dependency_manifest_ref",
-        "dependency_paths_sha256",
+        "dependency_paths_sha256", "diagnostic_snapshot_ref",
+        "diagnostic_snapshot_sha256",
     )
     missing = [field for field in required if field not in state]
     if missing:
@@ -474,6 +476,14 @@ def validate_self_validation_state(
             return ContextAssessment(False, "self-validation state manifest reference is invalid")
         if state["dependency_paths_sha256"] != manifest.get("paths_sha256"):
             return ContextAssessment(False, "self-validation state dependency digest differs from manifest")
+    if diagnostic_snapshot is not None:
+        if state["diagnostic_snapshot_ref"] != "ledger/evidence/0130-dependency-state-diagnostics.json":
+            return ContextAssessment(False, "self-validation state diagnostic reference is invalid")
+        expected_digest = hashlib.sha256(
+            json.dumps(diagnostic_snapshot, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        if state["diagnostic_snapshot_sha256"] != expected_digest:
+            return ContextAssessment(False, "self-validation state diagnostic digest is stale")
     if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
         return ContextAssessment(False, "self-validation state bundle or checks are malformed")
     if set(checks) != expected_checks or any(value is not True for value in checks.values()):
