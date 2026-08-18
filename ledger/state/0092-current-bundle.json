@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0092",
+  "mode": "maintenance",
+  "status": "completed",
+  "progress": {
+    "quality_delta": 1,
+    "coverage_delta": 1,
+    "evidence_quality_delta": 1,
+    "validation_delta": 1,
+    "uncertainty_delta": 1,
+    "evidence": [
+      "ledger/evidence/0087-current-assertion-bundle.json",
+      "scripts/decision_ledger.py",
+      "tests/test_decision_ledger.py"
+    ]
+  },
+  "decision": "join current assertion evidence layers in one durable bundle",
+  "next_action": "rerun complete bundle audit at current revision"
+}

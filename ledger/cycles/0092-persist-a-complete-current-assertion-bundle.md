@@ -1,7 +1,7 @@
 # Cycle 0092 — Persist a complete current assertion bundle
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Persist a complete current assertion bundle
 
 ## Decision
 
-_To be determined from evidence._
+Persisted a durable bundle joining the current assertion, fresh capture, and
+content-digest manifest.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The bundle validator accepts all three existing references and rejects a bundle
+when any layer is unavailable.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The bundle is an index, not a new cryptographic signature; referenced content
+and result checks remain separately required.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: rerun the complete bundle audit at the
+current repository revision.

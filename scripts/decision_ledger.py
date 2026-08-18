@@ -229,6 +229,20 @@ def validate_policy_assertion_content(
     return ContextAssessment(True, "assertion reference content matches")
 
 
+def validate_current_assertion_bundle(
+    bundle: dict, available_paths: set[str],
+) -> ContextAssessment:
+    """Validate the durable index joining current assertion evidence layers."""
+    required = ("bundle_id", "assertion_ref", "capture_ref", "content_digest_ref")
+    missing = [field for field in required if field not in bundle]
+    if missing:
+        return ContextAssessment(False, f"assertion bundle missing: {', '.join(missing)}")
+    refs = [bundle[field] for field in required[1:]]
+    if any(not isinstance(ref, str) or ref not in available_paths for ref in refs):
+        return ContextAssessment(False, "assertion bundle reference is unavailable")
+    return ContextAssessment(True, "current assertion bundle is complete")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
