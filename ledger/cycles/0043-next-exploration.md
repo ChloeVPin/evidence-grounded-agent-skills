@@ -1,7 +1,7 @@
 # Cycle 0043 — Next Exploration
 
 Date: 2026-08-18
-Status: in progress
+Status: decision recorded; next skill drafted
 
 ## Question
 
@@ -13,16 +13,18 @@ Which next high-leverage skill gap should Hermes explore after verification, dep
 
 ## Decision
 
-_To be determined from primary evidence and disconfirming research._
+Select knowledge maintenance and freshness management as the next skill.
 
 ## Evidence and provenance
 
-_Map maintenance freshness, formal verification boundaries, identity enforcement, and other candidates._
+Evidence: [RFC 9745](https://www.rfc-editor.org/rfc/rfc9745.html) defines deprecation signaling and migration documentation; [RFC 8594](https://www.rfc-editor.org/info/rfc8594/) defines sunset signaling while warning that timestamps are hints; [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf) calls for monitoring, incident/error tracking, and measurable continual improvement.
+
+Candidate ranking: maintenance/freshness—high reuse, high temporal leverage, bounded artifact; identity enforcement—high severity but external authority dependent; formal verification—high assurance but domain-specific and expensive.
 
 ## Disconfirming evidence sought
 
-_Do not continue adding local evaluators if the next improvement requires a real external authority or production integration._
+Disconfirming evidence: freshness dates are signals, not proof that content is wrong; timeless knowledge and fast-changing knowledge require different review windows. The skill must support uncertainty, deprecation, supersession, and manual override with provenance.
 
 ## Next action
 
-Conduct a candidate map and select one bounded, verifiable artifact.
+Build and validate `skills/knowledge-maintenance/SKILL.md`.
