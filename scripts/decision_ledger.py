@@ -295,6 +295,22 @@ def validate_self_validation_bundle(
     return ContextAssessment(True, "self-validation bundle is complete")
 
 
+def validate_self_validation_bundle_against_chain(
+    bundle: dict, assertions: list[dict], available_paths: set[str],
+) -> ContextAssessment:
+    """Require a self-validation bundle to name the discovered current head."""
+    bundle_check = validate_self_validation_bundle(bundle, available_paths)
+    if not bundle_check.valid:
+        return bundle_check
+    head = discover_current_assertion(assertions)
+    if not head.valid:
+        return ContextAssessment(False, head.reason)
+    expected = f"ledger/evidence/{head.assertion['audit_id']}.json"
+    if bundle["assertion_ref"] != expected:
+        return ContextAssessment(False, "self-validation bundle does not name current assertion")
+    return ContextAssessment(True, "self-validation bundle names current assertion")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

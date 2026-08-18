@@ -19,6 +19,7 @@ from scripts.decision_ledger import (
     validate_policy_audit, validate_policy_audit_bundle,
     validate_policy_assertion_content, validate_current_assertion_bundle,
     validate_self_validation_bundle,
+    validate_self_validation_bundle_against_chain,
     validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -510,6 +511,27 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(validate_self_validation_bundle(bundle, paths).valid)
         altered = dict(bundle, self_validation_capture_ref=bundle["test_capture_ref"])
         self.assertFalse(validate_self_validation_bundle(altered, paths).valid)
+
+    def test_self_validation_bundle_names_current_assertion_head(self):
+        bundle = json.loads(Path(
+            "ledger/evidence/0108-self-validation-bundle.json",
+        ).read_text())
+        assertions = [
+            json.loads(path.read_text())
+            for path in sorted(Path("ledger/evidence").glob("*-generation-policy-audit.json"))
+        ]
+        paths = {
+            bundle["assertion_ref"], bundle["test_capture_ref"],
+            bundle["self_validation_capture_ref"],
+        }
+        self.assertTrue(
+            validate_self_validation_bundle_against_chain(bundle, assertions, paths).valid,
+        )
+        superseded = dict(bundle, assertion_ref="ledger/evidence/0087-generation-policy-audit.json")
+        paths.add(superseded["assertion_ref"])
+        self.assertFalse(
+            validate_self_validation_bundle_against_chain(superseded, assertions, paths).valid,
+        )
 
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [
