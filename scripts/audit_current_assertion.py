@@ -86,6 +86,7 @@ def _run(root: Path = ROOT) -> int:
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
     freshness_check = validate_self_validation_state(
         state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
+        dependency_manifest,
     )
     four_check_capture = json.loads(
         (evidence_dir / "0119-four-check-audit-capture.json").read_text()

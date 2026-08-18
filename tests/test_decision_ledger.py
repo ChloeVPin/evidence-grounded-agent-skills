@@ -591,6 +591,16 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_self_validation_state(
             dict(state, validated_revision="0" * 40), state["bundle_ref"], self_capture,
         ).valid)
+        manifest = json.loads(Path(
+            "ledger/evidence/0125-audit-dependencies.json",
+        ).read_text())
+        self.assertTrue(validate_self_validation_state(
+            state, state["bundle_ref"], self_capture, manifest,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, dependency_paths_sha256="0" * 64),
+            state["bundle_ref"], self_capture, manifest,
+        ).valid)
         self.assertFalse(validate_self_validation_state(
             dict(state, checks=dict(state["checks"], unexpected=True)),
             state["bundle_ref"], self_capture,

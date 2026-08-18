@@ -1,7 +1,7 @@
 # Cycle 0128 — Bind the dependency digest into a versioned audit state record
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind the dependency digest into a versioned audit state record
 
 ## Decision
 
-_To be determined from evidence._
+The versioned self-validation state now records the dependency manifest
+reference and paths digest. The executable validator compares both against the
+live manifest and rejects stale state.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `ledger/state/0113-complete-self-validation-gate.json`, the extended
+state validator, and manifest-binding tests.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The state’s digest binds only the manifest path set; referenced-file content
+integrity remains covered by the existing content-digest gates.
 
 ## Next action
 
-_Research, validate, and update this record._
+Expose dependency-state freshness as a distinct diagnostic reason.

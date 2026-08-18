@@ -4,6 +4,8 @@
   "status": "passed",
   "validated_revision": "57c31de1a9e3aad2e53b44539908d1d40c79265a",
   "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
+  "dependency_manifest_ref": "ledger/evidence/0125-audit-dependencies.json",
+  "dependency_paths_sha256": "5af86d1039436573299b673cb12087e092d4143da9d078f638484bd2ee7fd095",
   "checks": {
     "bundle": true,
     "chain": true,
