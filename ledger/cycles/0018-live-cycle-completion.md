@@ -1,7 +1,7 @@
 # Cycle 0018 — Live Cycle Completion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes record a real completed cycle state for the live review-system improv
 
 ## Decision
 
-_To be determined._
+Complete the review-system foundation and advance to a new exploration mode.
 
 ## Evidence and provenance
 
-_Use the live test/review output and published commit history._
+State artifact: `ledger/state/0018-live-cycle-completion.json`. Evidence includes the 26-test run and accepted live review at revision `3ce7893`.
 
 ## Disconfirming evidence sought
 
-_Do not mark completion based solely on artifact count or green tests without a stated quality improvement._
+The state records quality, coverage, evidence-quality, and validation deltas with explicit evidence; file and commit counts are not used as progress.
 
 ## Next action
 
-Create a cycle-state artifact for the verified review-system improvements, then open the next exploration cycle with explicit residual uncertainty.
+Cycle state validates as completed; residual uncertainty is recorded in cycle 0019.
