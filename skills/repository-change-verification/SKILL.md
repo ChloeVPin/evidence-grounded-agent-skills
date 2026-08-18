@@ -15,6 +15,10 @@ Use this skill before accepting an AI-generated repository change. It verifies t
 
 Trigger when an agent proposes a patch, commit, or pull request. Prerequisites: access to the repository, the requested outcome, the baseline revision, and the project's documented test/build commands.
 
+## Decision criteria
+
+Accept only when the requested outcome and scope are evidenced, relevant checks have run or their blockers are recorded, and residual risks are understood. Revise or reject when the diff is unexplained, behavior exceeds authorization, or verification evidence is materially incomplete.
+
 ## Procedure
 
 1. Restate the requested outcome as observable acceptance criteria. Record ambiguities instead of silently resolving them.

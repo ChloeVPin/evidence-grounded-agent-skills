@@ -15,6 +15,10 @@ Use this skill to keep skills, evidence, decisions, and taxonomic relationships 
 
 Trigger when a review date arrives, a dependency/tool/version changes, a source is deprecated or superseded, a failure contradicts a skill, or a new authoritative source changes the decision boundary. Prerequisites: artifact provenance, lifecycle state, last validation, review window, owner/process, and known dependents.
 
+## Decision criteria
+
+Retain, revise, deprecate, or supersede knowledge according to current authoritative evidence, contradiction status, dependent impact, and confidence. Staleness or missing evidence lowers trust; it does not by itself prove the guidance false.
+
 ## Procedure
 
 1. Classify the artifact's temporal behavior: stable, slowly changing, or fast-changing. Choose a review window proportional to risk and change rate.

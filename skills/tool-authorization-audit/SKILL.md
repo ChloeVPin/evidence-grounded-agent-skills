@@ -15,6 +15,10 @@ Use this skill to review an AI agent's tool definitions and proposed tool calls 
 
 Trigger when tools, MCP servers, credentials, scopes, command allowlists, parameter schemas, or high-impact workflows change. Prerequisites: task purpose, tool inventory, caller identity/trust level, granted scopes, target resources, and approval policy.
 
+## Decision criteria
+
+Authorize only the least privilege needed for the stated task, with bounded targets, enforceable parameters, and accountable approval for high-impact actions. If enforcement or downstream identity cannot be verified, restrict use and record the assumption rather than treating policy text as proof.
+
 ## Procedure
 
 1. State the task's required capabilities and separate read, write, destructive, network, credential, and administrative actions.

@@ -15,7 +15,7 @@ Find and correct the cause of a software failure without confusing a plausible s
 
 Trigger when behavior is broken, surprising, flaky, slower than required, or contradicted by a test or specification. Before changing code, collect the exact symptom, expected behavior, reproduction inputs, environment/version, relevant revision, logs or traces, and the narrowest command that demonstrates the problem.
 
-## Concepts and decision criteria
+## Decision criteria
 
 - An **observation** is directly reproduced or measured; a **hypothesis** explains it but remains unverified.
 - A useful experiment changes one relevant variable and produces outcomes that distinguish competing hypotheses.

@@ -15,6 +15,10 @@ Use this skill to evaluate whether tests detect meaningful behavioral faults, es
 
 Trigger when a change adds or modifies behavior, when tests are newly generated, when a patch passes tests but remains semantically uncertain, or when regressions recur. Prerequisites: acceptance criteria, baseline behavior, executable tests, and a way to create or obtain representative mutations.
 
+## Decision criteria
+
+Treat a test as effective when it fails for a plausible incorrect behavior relevant to the acceptance criteria and remains meaningful at boundaries and negative paths. Do not accept a score or passing suite as sufficient when representative faults survive unexplored.
+
 ## Procedure
 
 1. Translate the requested behavior into observable positive, negative, boundary, and invariant cases.

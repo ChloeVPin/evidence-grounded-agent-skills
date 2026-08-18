@@ -15,6 +15,10 @@ Use this skill when sources, skills, tests, reviewers, or real-world failures di
 
 Trigger when two claims conflict, a validation result contradicts a trusted skill, a production failure recurs, or reviewers disagree on a material decision. Prerequisites: claims, provenance, contexts, affected artifacts, and the observed failure or counterexample.
 
+## Decision criteria
+
+Prefer the claim supported by more direct, independent, current, and scope-matched evidence. If evidence is incomparable or insufficient, preserve the contradiction and narrow the decision rather than forcing a winner.
+
 ## Procedure
 
 1. State each competing claim separately, including scope, assumptions, knowledge label, confidence, and intended decision.

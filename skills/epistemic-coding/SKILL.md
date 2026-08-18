@@ -15,6 +15,10 @@ Produce repository changes that are justified by evidence, explicit about uncert
 
 Use when a task involves a bug, design choice, refactor, new dependency, incomplete specification, or a claim that code is correct. Before acting, identify the repository instructions, the files and callers in scope, the requested outcome, and the available ways to verify it.
 
+## Decision criteria
+
+Make the smallest reversible change that explains the strongest evidence and satisfies the observable outcome. Ask when interpretations differ materially; otherwise keep claims proportional to evidence and preserve unresolved uncertainty.
+
 ## Knowledge labels
 
 Label material claims as facts, observations, heuristics, conventions, recommendations, hypotheses, or speculation. Facts and observations need direct provenance; heuristics and conventions need scope and limits; recommendations need tradeoffs; hypotheses and speculation must remain visibly uncertain until evidence supports them.

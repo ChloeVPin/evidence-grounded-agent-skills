@@ -15,6 +15,10 @@ Use this skill when an AI-generated or human-proposed change adds, removes, upgr
 
 Trigger on changes to manifest files, lockfiles, package scripts, build configuration, container definitions, CI workflows, generated dependency metadata, or code that downloads and executes external artifacts. Prerequisites: baseline and proposed revisions, package manager, resolved dependency graph, and repository security policy.
 
+## Decision criteria
+
+Accept only when provenance, graph impact, integrity, execution behavior, advisory status, and residual risk are understood at the repository’s required assurance level. Escalate or reject when a critical fact is unverifiable, stale, or outside the reviewer’s authority.
+
 ## Procedure
 
 1. Inventory every changed manifest, lockfile, package script, build step, and external download. Treat generated lockfile changes as consequential.

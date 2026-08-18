@@ -15,6 +15,10 @@ Use this skill when an AI-generated patch passes ordinary tests but semantic ali
 
 Trigger when a patch changes multiple behaviors, passes a narrow test suite, has an under-specified issue, or differs materially from a known-good implementation. Prerequisites: candidate and baseline/reference revisions, executable environment, acceptance criteria, and a source of behavioral expectations.
 
+## Decision criteria
+
+Treat a divergence as acceptable only when it is explained by the contract or an explicitly approved change. Unexplained, security-relevant, or out-of-scope divergence requires revision or a recorded decision boundary; matching text or happy-path output is insufficient.
+
 ## Procedure
 
 1. Define the observable contract: inputs, outputs, errors, side effects, permissions, ordering, and relevant performance constraints.
