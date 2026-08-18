@@ -1,5 +1,6 @@
 {
   "graph_id": "0137-freshness-dependency-graph",
+  "policy_sha256": "a3a64614491e7d1a9f13e9a613dc92289a98bc7ecb08fb7960f647fb8d6974b6",
   "root": "scripts/audit_current_assertion.py",
   "nodes": [
     "scripts/audit_current_assertion.py",

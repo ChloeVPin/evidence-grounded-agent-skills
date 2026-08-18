@@ -293,6 +293,11 @@ def validate_freshness_dependency_graph(
         return ContextAssessment(False, "freshness dependency graph edges are malformed")
     if not set(nodes) <= available_paths:
         return ContextAssessment(False, "freshness dependency graph references unavailable paths")
+    policy_digest = hashlib.sha256(
+        json.dumps(sorted(expected_nodes), separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if graph.get("policy_sha256") != policy_digest:
+        return ContextAssessment(False, "freshness dependency graph policy digest is stale")
     return ContextAssessment(True, "freshness dependency graph is valid")
 
 

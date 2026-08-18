@@ -808,6 +808,11 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_freshness_dependency_graph(
             altered_nodes, expected, expected,
         ).valid)
+        altered_digest = json.loads(json.dumps(graph))
+        altered_digest["policy_sha256"] = "0" * 64
+        self.assertFalse(validate_freshness_dependency_graph(
+            altered_digest, expected, expected,
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

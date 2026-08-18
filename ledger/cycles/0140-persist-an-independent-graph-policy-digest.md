@@ -1,7 +1,7 @@
 # Cycle 0140 — Persist an independent graph-policy digest
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Persist an independent graph-policy digest
 
 ## Decision
 
-_To be determined from evidence._
+Added a canonical SHA-256 over the independent expected graph node set and
+required it in graph validation. Policy-digest tampering is now rejected.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0137 graph’s `policy_sha256`, the validator, and digest-mutation
+coverage.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The digest binds node-policy membership; edge-shape validation remains a
+separate graph invariant.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind the graph-policy digest into versioned state.
