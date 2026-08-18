@@ -1,7 +1,7 @@
 # Cycle 0144 — Add a dedicated validator for graph-state diagnostic captures
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Add a dedicated validator for graph-state diagnostic captures
 
 ## Decision
 
-_To be determined from evidence._
+Added `validate_graph_state_diagnostic_capture`, enforcing command provenance,
+graph reference availability, policy-digest equality, and passing result.
+Valid and tampered captures are covered.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0143 graph-state capture, graph artifact, dedicated validator, and
+integration test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The validator binds graph policy provenance but does not itself replay graph
+mutations; executable temporary-root tests cover those mutations.
 
 ## Next action
 
-_Research, validate, and update this record._
+Use the dedicated validator in the executable audit path.

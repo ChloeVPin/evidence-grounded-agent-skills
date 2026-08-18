@@ -208,6 +208,32 @@ def validate_snapshot_diagnostic_capture(
     return ContextAssessment(True, "snapshot diagnostic capture is valid")
 
 
+def validate_graph_state_diagnostic_capture(
+    capture: dict, graph: dict, available_paths: set[str],
+    history_revisions: set[str],
+) -> ContextAssessment:
+    """Validate a capture that binds graph policy to a successful audit run."""
+    required = (
+        "capture_id", "command", "revision", "exit_status", "output_sha256",
+        "graph_ref", "graph_policy_sha256", "audit_result",
+    )
+    missing = [field for field in required if field not in capture]
+    if missing:
+        return ContextAssessment(False, f"graph capture missing: {', '.join(missing)}")
+    evidence_check = validate_generation_evidence(
+        capture, "python3 scripts/audit_current_assertion.py", history_revisions,
+    )
+    if not evidence_check.valid:
+        return evidence_check
+    if capture["graph_ref"] not in available_paths:
+        return ContextAssessment(False, "graph capture reference is unavailable")
+    if capture["graph_policy_sha256"] != graph.get("policy_sha256"):
+        return ContextAssessment(False, "graph capture policy digest is stale")
+    if capture["audit_result"] != "passed":
+        return ContextAssessment(False, "graph capture audit result is not passed")
+    return ContextAssessment(True, "graph state diagnostic capture is valid")
+
+
 def validate_failure_evidence(record: dict, available_paths: set[str]) -> ContextAssessment:
     """Validate a persisted diagnostic record for a failed audit gate."""
     required = (
