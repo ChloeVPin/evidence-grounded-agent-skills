@@ -563,6 +563,12 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(output["result"], "failed")
         self.assertEqual(output["error_code"], "NO_CURRENT_ASSERTION")
 
+    def test_audit_cli_contract_documents_stable_codes(self):
+        contract = Path("AUDIT_CLI.md").read_text()
+        for code in ("NO_CURRENT_ASSERTION", "MALFORMED_EVIDENCE", "AUDIT_GATE_FAILED"):
+            self.assertIn(code, contract)
+        self.assertIn("python3 scripts/audit_current_assertion.py", contract)
+
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:

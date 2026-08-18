@@ -50,6 +50,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/lifecycle_policy.py`](scripts/lifecycle_policy.py): prevents stale knowledge from remaining trusted without revalidation.
 - [`scripts/contradiction_policy.py`](scripts/contradiction_policy.py): classifies contextual, unresolved, and evidence-supported conflicts.
 - [`scripts/decision_ledger.py`](scripts/decision_ledger.py): validates durable contradiction and failure-learning entries.
+- [`AUDIT_CLI.md`](AUDIT_CLI.md): contract for the executable current-assertion audit.
 - [`scripts/maintenance_review.py`](scripts/maintenance_review.py): binds revalidation to complete review evidence.
 - [`fixtures/fault_target.py`](fixtures/fault_target.py): minimal boundary-mutation target used by the test-effectiveness fixture.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.

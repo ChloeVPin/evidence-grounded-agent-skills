@@ -1,7 +1,7 @@
 # Cycle 0102 — Document CLI contract and exit codes
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Document CLI contract and exit codes
 
 ## Decision
 
-_To be determined from evidence._
+Documented the current-head audit CLI contract, success/failure exit statuses,
+optional root behavior, and stable error codes.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+`AUDIT_CLI.md` is linked from the README and tested for the command and all
+stable codes.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The contract documents interface stability, not semantic sufficiency of the
+underlying audit or permanence of diagnostic reason text.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add machine-readable failure codes
+documentation to the generated audit output examples.
