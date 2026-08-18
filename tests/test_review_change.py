@@ -47,7 +47,31 @@ class EndToEndReviewTest(unittest.TestCase):
         review["allowed_prefixes"] = [".github/workflows/"]
         result = review_change(review)
         self.assertFalse(result.accepted)
-        self.assertFalse(result.scope_ok)
+        self.assertTrue(result.scope_ok)
+        self.assertFalse(result.escalation_ok)
+
+    def test_sensitive_path_accepts_valid_explicit_review(self):
+        review = record()
+        review["paths"] = [".github/workflows/ci.yml"]
+        review["allowed_prefixes"] = [".github/workflows/"]
+        review["escalation"] = {
+            "reviewer": "reviewer@example.test",
+            "decision": "accept",
+            "rationale": "Pinned and minimal workflow change reviewed.",
+            "timestamp": "2026-08-18T12:00:00Z",
+        }
+        result = review_change(review)
+        self.assertTrue(result.accepted)
+        self.assertTrue(result.escalation_ok)
+
+    def test_escalation_marker_without_rationale_is_rejected(self):
+        review = record()
+        review["paths"] = [".github/workflows/ci.yml"]
+        review["allowed_prefixes"] = [".github/workflows/"]
+        review["escalation"] = {"reviewer": "reviewer", "decision": "accept"}
+        result = review_change(review)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.escalation_ok)
 
 
 if __name__ == "__main__":
