@@ -20,3 +20,13 @@ Stable failure codes:
 The optional `--root PATH` argument audits another repository-shaped evidence
 root. Human-readable `reason` text may change; consumers should branch on the
 stable `error_code` and process exit status.
+
+Output examples:
+
+```json
+{"audit_id":"0093-generation-policy-audit","checks":{"bundle":true,"content":true,"result":true},"error_code":null,"result":"passed"}
+```
+
+```json
+{"error_code":"MALFORMED_EVIDENCE","reason":"...","result":"failed"}
+```

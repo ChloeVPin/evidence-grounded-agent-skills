@@ -568,6 +568,8 @@ class DecisionLedgerTest(unittest.TestCase):
         for code in ("NO_CURRENT_ASSERTION", "MALFORMED_EVIDENCE", "AUDIT_GATE_FAILED"):
             self.assertIn(code, contract)
         self.assertIn("python3 scripts/audit_current_assertion.py", contract)
+        self.assertIn('"error_code":null', contract)
+        self.assertIn('"error_code":"MALFORMED_EVIDENCE"', contract)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

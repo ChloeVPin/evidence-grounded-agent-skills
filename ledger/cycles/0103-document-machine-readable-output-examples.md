@@ -1,7 +1,7 @@
 # Cycle 0103 — Document machine-readable output examples
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Document machine-readable output examples
 
 ## Decision
 
-_To be determined from evidence._
+Added success and failure JSON examples to the CLI contract, including null
+success code, stable malformed-evidence code, checks, and result fields.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Contract tests assert the examples’ stable machine-readable fields and codes.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Examples are illustrative output shapes; diagnostic reason text and audit IDs
+vary by repository state.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add a command-level contract verifier for
+all documented output fields.
