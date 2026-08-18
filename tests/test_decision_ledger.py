@@ -791,6 +791,27 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertIn("self-validation state digest differs from capture", output["reason"])
             self.assertTrue(validate_cli_output(output).valid)
 
+            state["self_validation_output_sha256"] = json.loads(
+                (root / "ledger/state/0113-complete-self-validation-gate.json").read_text()
+            )["self_validation_output_sha256"]
+            state["dependency_paths_sha256"] = "0" * 64
+            state_path.write_text(json.dumps(state))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            output = json.loads(result.stdout)
+            self.assertIn("self-validation state dependency digest differs from manifest", output["reason"])
+
+            state["dependency_manifest_ref"] = "ledger/evidence/missing.json"
+            state_path.write_text(json.dumps(state))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            output = json.loads(result.stdout)
+            self.assertIn("self-validation state manifest reference is invalid", output["reason"])
+
     def test_executable_current_head_audit_rejects_malformed_versioned_capture(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
