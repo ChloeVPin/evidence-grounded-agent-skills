@@ -1,7 +1,7 @@
 # Cycle 0041 — Differential Contracts
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with structured contract fixture
 
 ## Question
 
@@ -9,16 +9,16 @@ How should differential review represent contract dimensions beyond return value
 
 ## Decision
 
-_To be determined._
+Differential comparison now detects divergence in structured return value, error, and side-effect trace, even when the primary return value matches.
 
 ## Evidence and provenance
 
-_Record a contract-result shape and tests._
+Structured contract tests are in `tests/test_differential_review.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure a candidate with matching return values but changed errors or side effects is not accepted as equivalent._
+Changed errors and added writes are both reported as divergence.
 
 ## Next action
 
-Extend the fixture to compare structured outputs containing return value, error, and side-effect trace.
+Validation passed locally. Limitation: side-effect traces are fixture-level observations, not an enforcement mechanism for external systems. Next cycle: archive the differential foundation and open the next exploration mode.

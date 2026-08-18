@@ -30,6 +30,26 @@ class DifferentialReviewTest(unittest.TestCase):
         self.assertFalse(result.equivalent)
         self.assertEqual(result.divergences, ((0, True, False),))
 
+    def test_matching_return_but_changed_error_is_divergence(self):
+        def reference_contract(value):
+            return {"value": value, "error": None, "effects": ["read"]}
+
+        def candidate_contract(value):
+            return {"value": value, "error": "warning", "effects": ["read"]}
+
+        result = compare(reference_contract, candidate_contract, [1])
+        self.assertFalse(result.equivalent)
+
+    def test_matching_return_but_changed_side_effect_is_divergence(self):
+        def reference_contract(value):
+            return {"value": value, "error": None, "effects": ["read"]}
+
+        def candidate_contract(value):
+            return {"value": value, "error": None, "effects": ["read", "write"]}
+
+        result = compare(reference_contract, candidate_contract, [1])
+        self.assertFalse(result.equivalent)
+
 
 if __name__ == "__main__":
     unittest.main()
