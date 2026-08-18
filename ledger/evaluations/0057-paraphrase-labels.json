@@ -29,6 +29,6 @@
   },
   {
     "query": "happy path equivalence can hide boundary divergence",
-    "expected_ids": ["0061-differential-boundary-failure"]
+    "expected_ids": ["0053-boundary-mutant-failure", "0061-differential-boundary-failure"]
   }
 ]

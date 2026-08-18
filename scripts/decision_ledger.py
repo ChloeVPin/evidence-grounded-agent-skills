@@ -5,6 +5,10 @@ import re
 
 OUTCOMES = {"supported_refuted", "contextual", "unresolved", "failure"}
 PARAPHRASE_MIN_SHARED_TERMS = 2
+TERM_ALIASES = {
+    "authorization": "authority",
+    "unrestricted": "wildcard",
+}
 
 
 @dataclass(frozen=True)
@@ -71,7 +75,8 @@ def evaluate_labeled_queries(
 
 
 def _terms(text: str) -> set[str]:
-    return {term for term in re.findall(r"[a-z0-9]+", text.lower()) if len(term) > 3}
+    terms = {term for term in re.findall(r"[a-z0-9]+", text.lower()) if len(term) > 3}
+    return {TERM_ALIASES.get(term, term) for term in terms}
 
 
 def validate_entry(entry: dict) -> LedgerAssessment:
