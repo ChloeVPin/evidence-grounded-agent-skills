@@ -49,6 +49,12 @@
       "failed_check": "freshness",
       "error_code": "AUDIT_GATE_FAILED",
       "reason": "self-validation state edge failure provenance is stale"
+    },
+    {
+      "mutation": "replace state_failure_refs_sha256",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "self-validation state state failure provenance is stale"
     }
   ]
 }
