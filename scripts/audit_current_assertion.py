@@ -47,6 +47,7 @@ from scripts.decision_ledger import (
     validate_snapshot_diagnostic_capture,
     validate_freshness_dependency_graph,
     validate_graph_state_diagnostic_capture,
+    validate_audit_capture_dependency_summary,
     validate_cli_output,
 )
 
@@ -147,6 +148,32 @@ def _run(root: Path = ROOT) -> int:
         {"ledger/evidence/0137-freshness-dependency-graph.json"},
         {graph_capture.get("revision")},
     )
+    capture_summary = json.loads(
+        (evidence_dir / "0146-audit-capture-dependencies.json").read_text()
+    )
+    capture_summary_check = validate_audit_capture_dependency_summary(
+        capture_summary,
+        {path for values in (
+            capture_summary.get("capture_refs", []),
+            capture_summary.get("state_refs", []),
+            capture_summary.get("policy_refs", []),
+        ) for path in values if (root / path).exists()},
+        {
+            "capture_refs": {
+                "ledger/evidence/0093-generation-rerun.json",
+                "ledger/evidence/0108-audit-command-capture.json",
+                "ledger/evidence/0119-four-check-audit-capture.json",
+                "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+                "ledger/evidence/0143-graph-state-diagnostic-capture.json",
+            },
+            "state_refs": {"ledger/state/0113-complete-self-validation-gate.json"},
+            "policy_refs": {
+                "ledger/evidence/0125-audit-dependencies.json",
+                "ledger/evidence/0130-dependency-state-diagnostics.json",
+                "ledger/evidence/0137-freshness-dependency-graph.json",
+            },
+        },
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
@@ -158,6 +185,7 @@ def _run(root: Path = ROOT) -> int:
             and snapshot_capture_check.valid
             and graph_check.valid
             and graph_capture_check.valid
+            and capture_summary_check.valid
         ),
     }
     passed = all(checks.values())
@@ -174,6 +202,7 @@ def _run(root: Path = ROOT) -> int:
                 snapshot_capture_check,
                 graph_check,
                 graph_capture_check,
+                capture_summary_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)

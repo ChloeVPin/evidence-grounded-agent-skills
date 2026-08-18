@@ -1,7 +1,7 @@
 # Cycle 0147 — Bind the capture-dependency summary into executable freshness validation
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind the capture-dependency summary into executable freshness validation
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now validates the 0146 capture/state/policy summary as part
+of freshness. Adding an untracked capture reference fails with
+`AUDIT_GATE_FAILED` and a precise diagnostic.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: summary binding in `scripts/audit_current_assertion.py` and the
+temporary-root drift test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The expected reference sets are code-level policy; summary changes require an
+intentional validator/policy update.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a digest for the complete capture-dependency summary.
