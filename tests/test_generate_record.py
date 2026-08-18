@@ -3,6 +3,7 @@ import unittest
 from scripts.generate_record import generate_record
 from scripts.review_record import validate_record
 from scripts.review_change import review_change
+from scripts.lookup_adapter import as_record
 
 
 REVISION = "a" * 40
@@ -130,6 +131,31 @@ class GenerateRecordTest(unittest.TestCase):
                ("revision", "diff_sha256", "criteria_sha256")},
         }
         self.assertTrue(review_change(record).accepted)
+
+    def test_adapter_verified_record_reaches_complete_review(self):
+        lookup = as_record(
+            {"registry_resolved": True, "advisories": []},
+            source="registry", looked_up_at="2026-08-18T12:00:00Z",
+        )
+        package = {"provenance_verified": True, "known_vulnerable": False}
+        dep = {"paths": ["requirements.txt"], "packages": {"sample-lib": package}, "evidence": {"sample-lib": lookup}}
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"], allowed_prefixes=["."],
+            criteria=["behavior works"], diff="diff", evidence=evidence(), dependency=dep,
+        )
+        self.assertTrue(review_change(record).accepted)
+        self.assertEqual(len(record["dependency"]["evidence"]["sample-lib"]["raw_output_sha256"]), 64)
+
+    def test_adapter_unavailable_record_cannot_pass_without_escalation(self):
+        lookup = as_record(None, source="registry", looked_up_at="2026-08-18T12:00:00Z")
+        dep = {"paths": ["requirements.txt"], "packages": {"sample-lib": {
+            "provenance_verified": True, "known_vulnerable": False,
+        }}, "evidence": {"sample-lib": lookup}}
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"], allowed_prefixes=["."],
+            criteria=["behavior works"], diff="diff", evidence=evidence(), dependency=dep,
+        )
+        self.assertFalse(review_change(record).accepted)
 
     def test_dependency_metadata_without_provenance_is_rejected(self):
         dependency = {
