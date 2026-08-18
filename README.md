@@ -47,6 +47,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/tool_call_review.py`](scripts/tool_call_review.py): makes auditing mandatory for allowed and denied tool calls.
 - [`scripts/differential_review.py`](scripts/differential_review.py): compares candidate/reference observable behavior.
 - [`scripts/freshness_policy.py`](scripts/freshness_policy.py): evaluates artifact freshness and lifecycle outcomes.
+- [`scripts/lifecycle_policy.py`](scripts/lifecycle_policy.py): prevents stale knowledge from remaining trusted without revalidation.
 - [`fixtures/fault_target.py`](fixtures/fault_target.py): minimal boundary-mutation target used by the test-effectiveness fixture.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 
