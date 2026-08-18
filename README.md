@@ -54,5 +54,6 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Privacy and data handling](skills/privacy-and-data-handling/SKILL.md) — minimize and govern sensitive data across its lifecycle.
 - [Dependency security audit](skills/dependency-security-audit/SKILL.md) — review dependency and supply-chain changes.
 - [Tool authorization audit](skills/tool-authorization-audit/SKILL.md) — review agent permissions and high-impact calls.
+- [Prompt-injection resistance](skills/prompt-injection-resistance/SKILL.md) — separate untrusted content from authority and actions.
 - [Contradiction resolution](skills/contradiction-resolution/SKILL.md) — handle conflicting evidence and failures.
 - [Knowledge maintenance](skills/knowledge-maintenance/SKILL.md) — track freshness, deprecation, and supersession.
