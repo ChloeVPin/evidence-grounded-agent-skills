@@ -5,6 +5,6 @@
   "exit_status": 0,
   "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
   "summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
-  "summary_sha256": "68356536a3cc8187c59042ba63c2f374ffda20c38f716b7217b27346a771820b",
+  "summary_sha256": "41656c719650d0a5c667f7d8583e0844c2cfbc95494b230c5bb8ae8faf4e23dd",
   "audit_result": "passed"
 }
