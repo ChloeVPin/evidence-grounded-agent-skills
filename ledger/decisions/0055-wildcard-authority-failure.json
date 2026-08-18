@@ -1,0 +1,20 @@
+{
+  "entry_id": "0055-wildcard-authority-failure",
+  "cycle_id": "0055",
+  "artifacts": [
+    "scripts/tool_policy.py",
+    "tests/test_tool_policy.py"
+  ],
+  "claims": [
+    "wildcard authority can bypass least-privilege boundaries",
+    "tool policy must reject wildcard actions and resources"
+  ],
+  "outcome": "failure",
+  "evidence": [
+    "the wildcard policy fixture is rejected by the authorization test"
+  ],
+  "decision": "retain wildcard rejection as a mandatory authorization gate",
+  "mechanism": "an unrestricted wildcard policy could authorize actions beyond declared scope",
+  "corrective_action": "reject wildcard actions and resource prefixes before evaluating a call",
+  "regression_trigger": "fail authorization review if a wildcard policy is accepted"
+}

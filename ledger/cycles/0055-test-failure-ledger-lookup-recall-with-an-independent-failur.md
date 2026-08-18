@@ -1,7 +1,7 @@
 # Cycle 0055 — Test failure-ledger lookup recall with an independent failure record
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,21 @@ Test failure-ledger lookup recall with an independent failure record
 
 ## Decision
 
-_To be determined from evidence._
+Exact-claim lookup recalls two independent failure records and does not return
+the unrelated record for either claim.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The boundary-mutation and wildcard-authority JSON entries both validate, and the
+regression test finds each by its own claim while returning no result for an
+unknown claim.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Exact matching does not recall paraphrases, and two records with overlapping
+claims could still require human review to avoid false merging.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: evaluate paraphrase-aware lookup without
+silently merging claims.

@@ -71,13 +71,18 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertIn("survives", entry["regression_trigger"])
 
     def test_prior_failure_is_found_before_rediscovery(self):
-        path = Path("ledger/decisions/0053-boundary-mutant-failure.json")
-        entry = json.loads(path.read_text())
+        paths = sorted(Path("ledger/decisions").glob("*-failure.json"))
+        entries = [json.loads(path.read_text()) for path in paths]
+        entry = next(item for item in entries if item["entry_id"] == "0053-boundary-mutant-failure")
         matches = find_matching_entries(
-            [entry], "mutation survival is evidence of an incomplete test oracle",
+            entries, "mutation survival is evidence of an incomplete test oracle",
         )
         self.assertEqual([item["entry_id"] for item in matches], [entry["entry_id"]])
-        self.assertEqual(find_matching_entries([entry], "new failure"), [])
+        tool_matches = find_matching_entries(
+            entries, "wildcard authority can bypass least-privilege boundaries",
+        )
+        self.assertEqual([item["entry_id"] for item in tool_matches], ["0055-wildcard-authority-failure"])
+        self.assertEqual(find_matching_entries(entries, "new failure"), [])
 
 
 if __name__ == "__main__":
