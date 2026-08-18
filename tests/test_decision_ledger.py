@@ -550,6 +550,15 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(output["audit_id"], "0093-generation-policy-audit")
         self.assertEqual(output["result"], "passed")
 
+    def test_executable_current_head_audit_fails_without_evidence_root(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py", "--root", "/tmp"],
+            cwd=root, capture_output=True, text=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertEqual(json.loads(result.stdout)["result"], "failed")
+
 
 if __name__ == "__main__":
     unittest.main()

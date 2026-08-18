@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Run the complete current policy-assertion audit as one command."""
 import json
+import argparse
 from pathlib import Path
 import sys
 
@@ -15,8 +16,8 @@ from scripts.decision_ledger import (
 )
 
 
-def main() -> int:
-    evidence_dir = ROOT / "ledger" / "evidence"
+def main(root: Path = ROOT) -> int:
+    evidence_dir = root / "ledger" / "evidence"
     assertions = [
         json.loads(path.read_text())
         for path in sorted(evidence_dir.glob("*-generation-policy-audit.json"))
@@ -32,9 +33,9 @@ def main() -> int:
         bundle["assertion_ref"], bundle["content_digest_ref"],
     }
     bundle_check = validate_current_assertion_bundle(bundle, available)
-    capture = json.loads((ROOT / bundle["capture_ref"]).read_text())
+    capture = json.loads((root / bundle["capture_ref"]).read_text())
     result_check = compare_policy_audit(audit, capture)
-    digests = json.loads((ROOT / bundle["content_digest_ref"]).read_text())
+    digests = json.loads((root / bundle["content_digest_ref"]).read_text())
     content_check = validate_policy_assertion_content(audit, digests)
     checks = {
         "bundle": bundle_check.valid,
@@ -48,4 +49,6 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=ROOT)
+    sys.exit(main(parser.parse_args().root.resolve()))
