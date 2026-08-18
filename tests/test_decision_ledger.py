@@ -5,7 +5,7 @@ from pathlib import Path
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
     audit_context_names, find_matching_entries, find_paraphrase_candidates, validate_contexts,
-    validate_context_artifacts, validate_entry, migrate_contexts,
+    validate_context_artifacts, validate_entry, migrate_contexts, validate_migration,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -288,6 +288,16 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(list(result.contexts), migration["target_contexts"])
         migrated = dict(source, contexts=list(result.contexts))
         self.assertTrue(validate_entry(migrated).valid)
+
+    def test_migration_record_audit_requires_complete_reversible_shape(self):
+        migration = json.loads(Path(
+            "ledger/migrations/0072-differential-context-rename.json",
+        ).read_text())
+        self.assertTrue(validate_migration(migration).valid)
+        malformed = dict(migration, reversible="yes")
+        self.assertFalse(validate_migration(malformed).valid)
+        mismatched = dict(migration, artifacts=["scripts/tool_policy.py"])
+        self.assertFalse(validate_migration(mismatched).valid)
 
 
 if __name__ == "__main__":

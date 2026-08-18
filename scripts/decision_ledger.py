@@ -82,6 +82,31 @@ def validate_context_artifacts(entry: dict) -> ContextAssessment:
     return ContextAssessment(True, "contexts are bound to artifacts")
 
 
+def validate_migration(migration: dict) -> ContextAssessment:
+    """Validate a durable context migration and its artifact continuity."""
+    required = (
+        "migration_id", "source_entry_id", "source_contexts", "target_contexts",
+        "artifacts", "reason", "reversible",
+    )
+    missing = [field for field in required if field not in migration]
+    if missing:
+        return ContextAssessment(False, f"migration missing fields: {', '.join(missing)}")
+    for field in ("source_contexts", "target_contexts"):
+        assessment = validate_contexts(migration[field])
+        if not assessment.valid:
+            return ContextAssessment(False, f"{field}: {assessment.reason}")
+    if not isinstance(migration["artifacts"], list) or not migration["artifacts"]:
+        return ContextAssessment(False, "migration artifacts are required")
+    if not migration["reason"]:
+        return ContextAssessment(False, "migration reason is required")
+    if not isinstance(migration["reversible"], bool):
+        return ContextAssessment(False, "migration reversibility must be boolean")
+    return validate_context_artifacts({
+        "contexts": migration["target_contexts"],
+        "artifacts": migration["artifacts"],
+    })
+
+
 def audit_context_names(entries: list[dict]) -> ContextAssessment:
     """Audit current and legacy names without rewriting historical entries."""
     known = set(CONTEXT_ARTIFACT_HINTS) | set(CONTEXT_RENAMES)
