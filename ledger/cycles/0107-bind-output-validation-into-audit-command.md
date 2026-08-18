@@ -1,7 +1,7 @@
 # Cycle 0107 — Bind output validation into audit command
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind output validation into audit command
 
 ## Decision
 
-_To be determined from evidence._
+The audit CLI now validates every emitted success or failure payload against its
+documented schema before determining its exit status.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Live success, empty-root, tampered-bundle, and malformed-input tests continue to
+pass through the shared output validator.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Self-validation checks structure only; it cannot make an invalid underlying
+audit result true.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: capture self-validation results as audit
+evidence.
