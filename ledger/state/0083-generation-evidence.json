@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0083",
+  "mode": "maintenance",
+  "status": "completed",
+  "progress": {
+    "quality_delta": 1,
+    "coverage_delta": 1,
+    "evidence_quality_delta": 1,
+    "validation_delta": 1,
+    "uncertainty_delta": 1,
+    "evidence": [
+      "ledger/evidence/0083-generation-capture.json",
+      "scripts/capture_evidence.py",
+      "tests/test_decision_ledger.py"
+    ]
+  },
+  "decision": "persist successful generation evidence",
+  "next_action": "audit evidence against current revision and command policy"
+}

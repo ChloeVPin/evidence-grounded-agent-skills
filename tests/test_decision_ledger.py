@@ -370,6 +370,16 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(check_captured_generation_revision(evidence.revision, evidence).valid)
         self.assertFalse(check_captured_generation_revision("0" * 40, evidence).valid)
 
+    def test_persisted_generation_capture_is_consistent(self):
+        record = json.loads(Path(
+            "ledger/evidence/0083-generation-capture.json",
+        ).read_text())
+        self.assertTrue(check_captured_generation_revision(
+            record["revision"], record,
+        ).valid)
+        self.assertEqual(record["exit_status"], 0)
+        self.assertEqual(len(record["output_sha256"]), 64)
+
 
 if __name__ == "__main__":
     unittest.main()

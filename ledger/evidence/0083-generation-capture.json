@@ -1,0 +1,6 @@
+{
+  "command": "python3 -m unittest discover -s tests",
+  "revision": "df954e86c7b7be9ab04491e7a482cfcc06746bd6",
+  "exit_status": 0,
+  "output_sha256": "b63b89ee4d0f6d1bc0ceda213e353a44355d2e5af2c75c4ea58a5a1bd133c212"
+}

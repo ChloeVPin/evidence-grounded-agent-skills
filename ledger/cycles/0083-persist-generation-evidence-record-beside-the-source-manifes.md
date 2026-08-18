@@ -1,7 +1,7 @@
 # Cycle 0083 — Persist generation-evidence record beside the source manifest
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,21 @@ Persist generation-evidence record beside the source manifest
 
 ## Decision
 
-_To be determined from evidence._
+Persisted a generation-capture record containing the verification command,
+repository revision, exit status, and output digest.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+`ledger/evidence/0083-generation-capture.json` was produced by
+`capture_evidence.py`; its integration test verifies the revision binding and
+successful status.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The output digest authenticates captured bytes only; it does not establish that
+the command was sufficient or that the revision is trusted externally.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: audit persisted evidence against the
+current repository revision and command policy.
