@@ -550,6 +550,9 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         output = json.loads(result.stdout)
         self.assertEqual(output["audit_id"], "0093-generation-policy-audit")
+        self.assertEqual(set(output["checks"]), {"bundle", "content", "result"})
+        self.assertTrue(all(output["checks"].values()))
+        self.assertIsNone(output["error_code"])
         self.assertEqual(output["result"], "passed")
 
     def test_executable_current_head_audit_fails_without_evidence_root(self):

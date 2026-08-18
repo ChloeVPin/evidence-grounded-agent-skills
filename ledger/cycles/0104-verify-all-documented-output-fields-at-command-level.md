@@ -1,7 +1,7 @@
 # Cycle 0104 — Verify all documented output fields at command level
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Verify all documented output fields at command level
 
 ## Decision
 
-_To be determined from evidence._
+The live audit command now has contract-level verification for audit ID, all
+three check fields, null success error code, and passed result.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The integration test parses actual command JSON and validates every documented
+success field and check value.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+This verifies output shape and gate status, not the semantic quality of the
+underlying research policy.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add a documented failure-output verifier.
