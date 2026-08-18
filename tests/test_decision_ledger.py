@@ -751,6 +751,26 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertFalse(output["checks"]["freshness"])
             self.assertTrue(validate_cli_output(output).valid)
 
+    def test_executable_current_head_audit_rejects_malformed_versioned_capture(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            (temp_root / "ledger").mkdir()
+            shutil.copytree(root / "ledger" / "evidence", temp_root / "ledger" / "evidence")
+            shutil.copytree(root / "ledger" / "state", temp_root / "ledger" / "state")
+            capture_path = temp_root / "ledger/evidence/0119-four-check-audit-capture.json"
+            capture = json.loads(capture_path.read_text())
+            del capture["checks"]
+            capture_path.write_text(json.dumps(capture))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            output = json.loads(result.stdout)
+            self.assertEqual(output["error_code"], "AUDIT_GATE_FAILED")
+            self.assertFalse(output["checks"]["freshness"])
+
     def test_executable_current_head_audit_reports_malformed_json(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:

@@ -18,6 +18,7 @@ from scripts.decision_ledger import (
     validate_current_assertion_bundle,
     validate_policy_assertion_content,
     validate_self_validation_state,
+    validate_four_check_capture,
     validate_cli_output,
 )
 
@@ -58,11 +59,18 @@ def _run(root: Path = ROOT) -> int:
     freshness_check = validate_self_validation_state(
         state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
     )
+    four_check_capture = json.loads(
+        (evidence_dir / "0119-four-check-audit-capture.json").read_text()
+    )
+    capture_schema_check = validate_four_check_capture(
+        four_check_capture, "python3 scripts/audit_current_assertion.py",
+        {four_check_capture.get("revision")},
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
         "content": content_check.valid,
-        "freshness": freshness_check.valid,
+        "freshness": freshness_check.valid and capture_schema_check.valid,
     }
     passed = all(checks.values())
     output = {"audit_id": audit["audit_id"], "checks": checks,

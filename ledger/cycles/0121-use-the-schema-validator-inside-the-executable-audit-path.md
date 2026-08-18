@@ -1,7 +1,7 @@
 # Cycle 0121 — Use the schema validator inside the executable audit path
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Use the schema validator inside the executable audit path
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now loads and validates the versioned 0119 capture schema
+as part of its freshness gate. A missing `checks` field produces
+`AUDIT_GATE_FAILED` with `freshness: false`.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `scripts/audit_current_assertion.py`, the 0119 capture, and the
+temporary-root malformed-capture integration test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The public output remains four checks; capture-schema validity is intentionally
+composed into freshness rather than exposed as a fifth contract key.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a capture-schema failure reason in the audit evidence ledger.
