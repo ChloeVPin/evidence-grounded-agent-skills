@@ -1,0 +1,9 @@
+{
+  "entries": {
+    "0053-boundary-mutant-failure": "ledger/decisions/0053-boundary-mutant-failure.json",
+    "0055-wildcard-authority-failure": "ledger/decisions/0055-wildcard-authority-failure.json",
+    "0059-unverified-dependency-failure": "ledger/decisions/0059-unverified-dependency-failure.json",
+    "0061-differential-boundary-failure": "ledger/decisions/0061-differential-boundary-failure.json"
+  },
+  "mapping_sha256": "08c3a27d7d3d210707491e63e62df62ca0bd4200213d18b6824ed2ce57fe7e65"
+}

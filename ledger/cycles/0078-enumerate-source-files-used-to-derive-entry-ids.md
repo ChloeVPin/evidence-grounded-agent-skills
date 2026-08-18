@@ -1,7 +1,7 @@
 # Cycle 0078 — Enumerate source files used to derive entry IDs
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Enumerate source files used to derive entry IDs
 
 ## Decision
 
-_To be determined from evidence._
+Created a durable source-entry file manifest mapping all four migration source
+IDs to concrete decision files, with a stable mapping digest.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The integration test recomputes the manifest digest and confirms every mapped
+file exists in the repository.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The manifest proves repository paths at audit time, not external provenance or
+the semantic origin of file contents.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: detect source-file manifest drift after a
+decision file is moved or replaced.

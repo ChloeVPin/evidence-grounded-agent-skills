@@ -46,6 +46,12 @@ def source_inventory_digest(source_entry_ids: set[str]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def source_file_inventory_digest(source_files: dict[str, str]) -> str:
+    """Return a stable digest for entry IDs mapped to source file paths."""
+    payload = json.dumps(dict(sorted(source_files.items())), separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def check_source_inventory_digest(
     recorded_digest: object, source_entry_ids: set[str],
 ) -> ContextAssessment:

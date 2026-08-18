@@ -7,7 +7,7 @@ from scripts.decision_ledger import (
     audit_context_names, audit_migrations, find_matching_entries,
     find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
     check_source_inventory_digest, validate_entry, migrate_contexts,
-    source_inventory_digest, validate_migration,
+    source_file_inventory_digest, source_inventory_digest, validate_migration,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -335,6 +335,15 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(check_source_inventory_digest(
             migration["source_inventory_sha256"], source_ids | {"0077-new-entry"},
         ).valid)
+
+    def test_source_file_inventory_manifest_is_bound(self):
+        manifest = json.loads(Path(
+            "ledger/inventories/0078-source-entry-files.json",
+        ).read_text())
+        self.assertEqual(
+            manifest["mapping_sha256"], source_file_inventory_digest(manifest["entries"]),
+        )
+        self.assertTrue(all(Path(path).is_file() for path in manifest["entries"].values()))
 
 
 if __name__ == "__main__":
