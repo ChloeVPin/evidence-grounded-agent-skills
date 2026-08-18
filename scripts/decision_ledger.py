@@ -4,6 +4,7 @@ from dataclasses import dataclass
 import re
 
 OUTCOMES = {"supported_refuted", "contextual", "unresolved", "failure"}
+PARAPHRASE_MIN_SHARED_TERMS = 2
 
 
 @dataclass(frozen=True)
@@ -18,7 +19,7 @@ def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
 
 
 def find_paraphrase_candidates(
-    entries: list[dict], claim: str, *, min_shared_terms: int = 2,
+    entries: list[dict], claim: str, *, min_shared_terms: int = PARAPHRASE_MIN_SHARED_TERMS,
 ) -> list[dict]:
     """Return possible matches for human review; never merge or resolve claims."""
     query_terms = _terms(claim)
@@ -45,7 +46,7 @@ def candidate_metrics(expected_ids: set[str], predicted_ids: set[str]) -> dict[s
 
 
 def evaluate_labeled_queries(
-    entries: list[dict], labels: list[dict], *, min_shared_terms: int = 2,
+    entries: list[dict], labels: list[dict], *, min_shared_terms: int = PARAPHRASE_MIN_SHARED_TERMS,
 ) -> dict[str, float | int]:
     """Aggregate retrieval errors across labeled queries without changing policy."""
     expected = set()

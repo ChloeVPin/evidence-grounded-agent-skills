@@ -1,7 +1,7 @@
 # Cycle 0060 — Review threshold policy only after cross-domain metrics remain stable
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,21 @@ Review threshold policy only after cross-domain metrics remain stable
 
 ## Decision
 
-_To be determined from evidence._
+Retain the paraphrase candidate threshold at two shared terms. The current
+cross-domain fixture is perfect, but its small size does not justify a policy
+change or semantic auto-resolution.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The threshold is now an explicit constant, and the seven-query fixture measures
+1.0 precision and 1.0 recall. Tests verify the default remains two terms.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The labels are hand-authored and cover only three failure records; exact token
+overlap remains vulnerable to both missed paraphrases and false candidates.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: collect more cross-domain labels before
+revisiting the threshold.

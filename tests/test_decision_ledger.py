@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 
 from scripts.decision_ledger import (
-    candidate_metrics, evaluate_labeled_queries, find_matching_entries,
-    find_paraphrase_candidates, validate_entry,
+    PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
+    find_matching_entries, find_paraphrase_candidates, validate_entry,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -121,6 +121,14 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(metrics["false_negative"], 0)
         self.assertEqual(metrics["precision"], 1.0)
         self.assertEqual(metrics["recall"], 1.0)
+
+    def test_threshold_is_explicit_and_conservative(self):
+        self.assertEqual(PARAPHRASE_MIN_SHARED_TERMS, 2)
+        entries = [{"entry_id": "one", "claims": ["boundary regression"]}]
+        self.assertEqual(
+            [entry["entry_id"] for entry in find_paraphrase_candidates(entries, "boundary regression")],
+            ["one"],
+        )
 
 
 if __name__ == "__main__":
