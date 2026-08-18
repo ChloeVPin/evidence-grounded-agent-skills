@@ -43,6 +43,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Regression test design](skills/regression-test-design/SKILL.md) — create focused behavior and boundary tests.
 - [Test-effectiveness analysis](skills/test-effectiveness-analysis/SKILL.md) — find faults that tests fail to detect.
 - [Concurrency and shared state](skills/concurrency-and-shared-state/SKILL.md) — reason about interleavings, ownership, and liveness.
+- [Resilience and retry design](skills/resilience-and-retry-design/SKILL.md) — bound dependency failures and recovery behavior.
 - [Performance regression analysis](skills/performance-regression-analysis/SKILL.md) — measure changes against representative workloads.
 - [Agent evaluation and benchmarking](skills/agent-evaluation-and-benchmarking/SKILL.md) — measure agent capability without metric gaming.
 - [Observability and instrumentation](skills/observability-and-instrumentation/SKILL.md) — add useful, safe diagnostic signals.
