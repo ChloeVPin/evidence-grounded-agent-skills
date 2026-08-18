@@ -1,4 +1,4 @@
-# Evidence-Grounded Agent Skills: Governing Principles
+# Governing Principles for AI Coding-Agent Skills
 
 ## Mission
 

@@ -1,11 +1,11 @@
-# Knowledge Ledger
+# Skill Provenance Notes
 
-The ledger is the audit trail. Every cycle records what was asked, what was observed, what was concluded, what remains uncertain, and what changed.
+Supporting notes record why a skill exists, what was observed, what remains uncertain, and what should trigger review. The deliverable remains the skill itself.
 
 Required fields for each decision:
 
 ```text
-Question:
+Skill/question:
 Decision:
 Knowledge labels:
 Evidence and provenance:

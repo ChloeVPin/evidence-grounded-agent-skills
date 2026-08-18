@@ -1,6 +1,6 @@
 # Skill Specification
 
-Each skill is a directory containing `SKILL.md` and, where relevant, tests or fixtures.
+Each deliverable is a focused directory containing one `SKILL.md`. Add supporting references only when the skill genuinely needs them; do not add application code or audit machinery merely to make a skill appear complete.
 
 Required sections:
 
