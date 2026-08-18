@@ -1,0 +1,8 @@
+{
+  "evidence_id": "0122-capture-schema-failure",
+  "source_capture_ref": "ledger/evidence/0119-four-check-audit-capture.json",
+  "mutation": "remove checks field",
+  "failed_check": "freshness",
+  "error_code": "AUDIT_GATE_FAILED",
+  "reason": "four-check capture missing: checks"
+}

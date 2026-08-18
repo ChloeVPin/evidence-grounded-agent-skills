@@ -749,6 +749,7 @@ class DecisionLedgerTest(unittest.TestCase):
             output = json.loads(result.stdout)
             self.assertEqual(output["error_code"], "AUDIT_GATE_FAILED")
             self.assertFalse(output["checks"]["freshness"])
+            self.assertIn("self-validation state digest differs from capture", output["reason"])
             self.assertTrue(validate_cli_output(output).valid)
 
     def test_executable_current_head_audit_rejects_malformed_versioned_capture(self):
@@ -770,6 +771,7 @@ class DecisionLedgerTest(unittest.TestCase):
             output = json.loads(result.stdout)
             self.assertEqual(output["error_code"], "AUDIT_GATE_FAILED")
             self.assertFalse(output["checks"]["freshness"])
+            self.assertIn("four-check capture missing: checks", output["reason"])
 
     def test_executable_current_head_audit_reports_malformed_json(self):
         root = Path(__file__).resolve().parents[1]

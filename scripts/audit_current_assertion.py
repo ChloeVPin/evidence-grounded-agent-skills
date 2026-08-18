@@ -76,6 +76,14 @@ def _run(root: Path = ROOT) -> int:
     output = {"audit_id": audit["audit_id"], "checks": checks,
               "error_code": None if passed else AUDIT_GATE_FAILED,
               "result": "passed" if passed else "failed"}
+    if not passed:
+        failed_reasons = [
+            assessment.reason for assessment in (
+                bundle_check, result_check, content_check,
+                freshness_check, capture_schema_check,
+            ) if not assessment.valid
+        ]
+        output["reason"] = "; ".join(failed_reasons)
     emitted = _emit(output)
     return 0 if passed and emitted else 1
 

@@ -1,7 +1,7 @@
 # Cycle 0122 — Persist a capture-schema failure reason in the audit evidence ledger
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Persist a capture-schema failure reason in the audit evidence ledger
 
 ## Decision
 
-_To be determined from evidence._
+Failure output now includes the validator reason while retaining the stable
+`AUDIT_GATE_FAILED` code. The malformed-capture scenario is persisted in
+`ledger/evidence/0122-capture-schema-failure.json`.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the executable audit, its malformed-capture test, and the 0122
+failure-evidence record linked to the 0119 source capture.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Reasons are diagnostic text and may evolve; consumers must continue branching
+on the error code and check booleans rather than exact prose.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add a machine-readable validator for persisted failure evidence.
