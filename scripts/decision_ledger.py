@@ -30,6 +30,20 @@ def find_paraphrase_candidates(
     return candidates
 
 
+def candidate_metrics(expected_ids: set[str], predicted_ids: set[str]) -> dict[str, float | int]:
+    """Score candidate retrieval without treating candidates as resolved matches."""
+    true_positive = len(expected_ids & predicted_ids)
+    false_positive = len(predicted_ids - expected_ids)
+    false_negative = len(expected_ids - predicted_ids)
+    return {
+        "true_positive": true_positive,
+        "false_positive": false_positive,
+        "false_negative": false_negative,
+        "precision": true_positive / len(predicted_ids) if predicted_ids else 0.0,
+        "recall": true_positive / len(expected_ids) if expected_ids else 0.0,
+    }
+
+
 def _terms(text: str) -> set[str]:
     return {term for term in re.findall(r"[a-z0-9]+", text.lower()) if len(term) > 3}
 

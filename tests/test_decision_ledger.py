@@ -3,7 +3,8 @@ import json
 from pathlib import Path
 
 from scripts.decision_ledger import (
-    find_matching_entries, find_paraphrase_candidates, validate_entry,
+    candidate_metrics, find_matching_entries, find_paraphrase_candidates,
+    validate_entry,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -98,6 +99,14 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(
             find_paraphrase_candidates(entries, "database schema migration"), [],
         )
+
+    def test_candidate_metrics_expose_precision_and_recall(self):
+        metrics = candidate_metrics({"boundary", "tool"}, {"boundary", "noise"})
+        self.assertEqual(metrics["true_positive"], 1)
+        self.assertEqual(metrics["false_positive"], 1)
+        self.assertEqual(metrics["false_negative"], 1)
+        self.assertEqual(metrics["precision"], 0.5)
+        self.assertEqual(metrics["recall"], 0.5)
 
 
 if __name__ == "__main__":

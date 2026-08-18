@@ -1,0 +1,14 @@
+[
+  {
+    "query": "missing boundary coverage can let a regression survive",
+    "expected_ids": ["0053-boundary-mutant-failure"]
+  },
+  {
+    "query": "unrestricted authorization can escape declared scope",
+    "expected_ids": ["0055-wildcard-authority-failure"]
+  },
+  {
+    "query": "database schema migration",
+    "expected_ids": []
+  }
+]
