@@ -2,6 +2,8 @@
 
 This repository contains practical, evidence-grounded `SKILL.md` files for AI coding agents.
 
+The skills are vendor-neutral Markdown guidance intended for any coding agent that can read `SKILL.md`. They do not require a particular model, host application, plugin, runtime, tool protocol, or programming language; adapt tool names and repository commands to the agent and codebase in scope.
+
 The goal is useful skills: clear triggers, bounded procedures, failure handling, examples, provenance, and review conditions. A file is not valuable merely because it exists.
 
 ## Operating model
