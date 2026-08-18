@@ -173,7 +173,7 @@ def validate_cli_output(output: dict) -> ContextAssessment:
         if not isinstance(output.get("audit_id"), str):
             return ContextAssessment(False, "successful CLI output needs audit_id")
         checks = output.get("checks")
-        if checks != {"bundle": True, "content": True, "result": True}:
+        if checks != {"bundle": True, "content": True, "result": True, "freshness": True}:
             return ContextAssessment(False, "successful CLI checks are incomplete")
         if output.get("error_code") is not None:
             return ContextAssessment(False, "successful CLI output must have null error code")

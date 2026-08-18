@@ -645,7 +645,7 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(result.returncode, 0)
         output = json.loads(result.stdout)
         self.assertEqual(output["audit_id"], "0093-generation-policy-audit")
-        self.assertEqual(set(output["checks"]), {"bundle", "content", "result"})
+        self.assertEqual(set(output["checks"]), {"bundle", "content", "result", "freshness"})
         self.assertTrue(all(output["checks"].values()))
         self.assertIsNone(output["error_code"])
         self.assertEqual(output["result"], "passed")

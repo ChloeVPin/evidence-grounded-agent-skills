@@ -17,6 +17,7 @@ from scripts.decision_ledger import (
     discover_current_assertion,
     validate_current_assertion_bundle,
     validate_policy_assertion_content,
+    validate_self_validation_state,
     validate_cli_output,
 )
 
@@ -50,10 +51,18 @@ def _run(root: Path = ROOT) -> int:
     result_check = compare_policy_audit(audit, capture)
     digests = json.loads((root / bundle["content_digest_ref"]).read_text())
     content_check = validate_policy_assertion_content(audit, digests)
+    self_bundle = json.loads((evidence_dir / "0108-self-validation-bundle.json").read_text())
+    self_capture = json.loads((root / self_bundle["self_validation_capture_ref"]).read_text())
+    state_path = root / "ledger/state/0113-complete-self-validation-gate.json"
+    state = json.loads(state_path.read_text()) if state_path.exists() else {}
+    freshness_check = validate_self_validation_state(
+        state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
         "content": content_check.valid,
+        "freshness": freshness_check.valid,
     }
     passed = all(checks.values())
     output = {"audit_id": audit["audit_id"], "checks": checks,

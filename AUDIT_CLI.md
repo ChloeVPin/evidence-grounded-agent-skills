@@ -15,7 +15,7 @@ Stable failure codes:
 - `NO_CURRENT_ASSERTION`: no valid current assertion head was discovered.
 - `MALFORMED_EVIDENCE`: evidence JSON, required fields, or filesystem inputs
   could not be read or validated.
-- `AUDIT_GATE_FAILED`: the bundle, fresh-result, or content-digest check failed.
+- `AUDIT_GATE_FAILED`: the bundle, fresh-result, content-digest, or freshness check failed.
 
 The optional `--root PATH` argument audits another repository-shaped evidence
 root. Human-readable `reason` text may change; consumers should branch on the
@@ -24,7 +24,7 @@ stable `error_code` and process exit status.
 Output examples:
 
 ```json
-{"audit_id":"0093-generation-policy-audit","checks":{"bundle":true,"content":true,"result":true},"error_code":null,"result":"passed"}
+{"audit_id":"0093-generation-policy-audit","checks":{"bundle":true,"content":true,"freshness":true,"result":true},"error_code":null,"result":"passed"}
 ```
 
 ```json
