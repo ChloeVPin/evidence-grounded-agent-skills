@@ -1,0 +1,48 @@
+# Dependency and Supply-Chain Security Audit
+
+Lifecycle: `draft`
+
+## Purpose and scope
+
+Use this skill when an AI-generated or human-proposed change adds, removes, upgrades, or changes the execution behavior of a dependency. It covers direct and transitive dependency review, provenance, known vulnerabilities, lockfile consistency, and install/build scripts. It does not replace a full threat model, license review, or maintainer security process.
+
+## Triggers and prerequisites
+
+Trigger on changes to manifest files, lockfiles, package scripts, build configuration, container definitions, CI workflows, generated dependency metadata, or code that downloads and executes external artifacts. Prerequisites: baseline and proposed revisions, package manager, resolved dependency graph, and repository security policy.
+
+## Procedure
+
+1. Inventory every changed manifest, lockfile, package script, build step, and external download. Treat generated lockfile changes as consequential.
+2. Compare the resolved graph before and after the change, including transitive additions, removals, version ranges, integrity hashes, and platform-specific branches.
+3. Verify each new package and action through its authoritative registry or maintainer source. Reject names or versions that cannot be independently resolved; AI suggestions are not provenance.
+4. Check advisories and repository security tooling for known vulnerabilities, affected ranges, reachability, and available fixes. Record the advisory source and lookup date.
+5. Inspect install, prepare, build, test, and deploy scripts for network access, arbitrary command execution, credential access, or behavior newly activated by the dependency.
+6. Require immutable or policy-approved references for executable third-party actions and artifacts. Record exceptions with explicit reviewer approval.
+7. Run the package manager's lockfile, integrity, audit, and relevant test checks. Capture command, revision, exit status, and output digest using the repository evidence tools.
+8. Record direct and transitive risk, residual uncertainty, decision, and the next review trigger. Do not mark the audit trusted solely because installation succeeds.
+
+## Acceptance checklist
+
+- [ ] Changed manifests, lockfiles, scripts, and external artifacts are inventoried.
+- [ ] Direct and transitive graph changes are understood.
+- [ ] Every new package/action has authoritative provenance.
+- [ ] Vulnerability and fix status were checked at a recorded time.
+- [ ] Install/build/deploy execution paths were inspected.
+- [ ] Integrity, audit, and relevant regression checks passed with captured evidence.
+- [ ] Exceptions, residual risk, and review trigger are recorded.
+
+## Failure modes and recovery
+
+If a package cannot be resolved from an authoritative source, stop and reject or escalate; do not guess. If advisory data is unavailable or stale, record the limitation and keep the change below trusted status. If a lockfile changes without an understandable graph explanation, regenerate from a clean baseline and review the full diff.
+
+## Validation evidence and provenance
+
+- [GitHub dependency review documentation](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review): dependency diffs can be scanned and enforced in pull requests.
+- [OWASP Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html): hallucinated dependencies, outdated CVEs, and AI-modified build/deploy paths are explicit risks.
+- [NIST AI RMF: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): lifecycle risk-management guidance for generative AI systems.
+
+Confidence: medium-high for the audit procedure; medium for prioritization as the next skill. Freshness review: on dependency-policy changes and at least quarterly.
+
+## Related skills and conflicts
+
+Related: repository-change-verification, secure-agent-runtime, test-design, and license-compliance skills. This skill does not override repository-specific security policies or required human approval.
