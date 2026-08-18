@@ -1,7 +1,7 @@
 # Cycle 0024 — Integrate Dependency Policy
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with policy-integrated review
 
 ## Question
 
@@ -9,16 +9,16 @@ Can complete review distinguish dependency evidence that passes, blocks, or requ
 
 ## Decision
 
-_To be determined._
+Complete review now blocks vulnerable/malformed dependency evidence, passes fresh verified evidence, and requires bound escalation for unknown, stale, or executable dependency paths.
 
 ## Evidence and provenance
 
-_Record integration tests and policy-driven decisions._
+Integrated in `scripts/review_change.py`; tests cover unknown evidence with and without bound escalation.
 
 ## Disconfirming evidence sought
 
-_Try to accept unknown or stale evidence without a valid escalation record._
+Unknown evidence is rejected without escalation and accepted only with an attestation-bound explicit approval.
 
 ## Next action
 
-Add policy outcomes to the dependency review gate and require bound escalation for stale/unknown evidence.
+Validation passed locally. Limitation: the clock and source freshness are locally evaluated; production use needs authoritative advisory queries and a controlled clock policy. Next cycle: add dependency metadata to generated records and live-review output.

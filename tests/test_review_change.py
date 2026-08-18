@@ -80,6 +80,35 @@ class EndToEndReviewTest(unittest.TestCase):
         self.assertTrue(result.accepted)
         self.assertTrue(result.dependency_ok)
 
+    def test_unknown_dependency_requires_bound_escalation(self):
+        review = record()
+        review["dependency"] = {
+            "paths": ["requirements.txt"],
+            "packages": {"new-lib": {"provenance_verified": True, "known_vulnerable": False}},
+            "evidence": dependency_evidence("new-lib", "unknown"),
+        }
+        result = review_change(review)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.dependency_ok)
+
+    def test_unknown_dependency_with_bound_escalation_can_pass(self):
+        review = record()
+        review["dependency"] = {
+            "paths": ["requirements.txt"],
+            "packages": {"new-lib": {"provenance_verified": True, "known_vulnerable": False}},
+            "evidence": dependency_evidence("new-lib", "unknown"),
+        }
+        review["escalation"] = {
+            "reviewer": "reviewer@example.test",
+            "decision": "accept",
+            "rationale": "Unknown status explicitly reviewed and accepted temporarily.",
+            "timestamp": "2026-08-18T12:00:00Z",
+            **{key: review["attestation"][key] for key in
+               ("revision", "diff_sha256", "criteria_sha256")},
+        }
+        result = review_change(review)
+        self.assertTrue(result.accepted)
+
     def test_sensitive_path_accepts_valid_explicit_review(self):
         review = record()
         review["paths"] = [".github/workflows/ci.yml"]

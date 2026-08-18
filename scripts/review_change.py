@@ -4,13 +4,14 @@ from dataclasses import dataclass
 import argparse
 import json
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 
 from scripts.bind_evidence import verify_attestation
 from scripts.change_review import review_paths
 from scripts.evidence_review import review_evidence
 from scripts.dependency_review import review_dependencies
 from scripts.dependency_evidence import validate_dependency_evidence
+from scripts.dependency_policy import assess_dependency_evidence
 
 
 @dataclass(frozen=True)
@@ -68,9 +69,21 @@ def review_change(record: dict) -> ChangeReview:
         dependency_result = review_dependencies(
             dependency.get("paths", []), dependency.get("packages", {}),
         )
-        dependency_ok = dependency_result.accepted and not validate_dependency_evidence(
+        dependency_ok = not validate_dependency_evidence(
             dependency.get("evidence", {}), dependency.get("packages", {}),
         )
+        needs_escalation = bool(dependency_result.execution_paths)
+        for name in dependency.get("packages", {}):
+            item = dependency.get("evidence", {}).get(name, {})
+            outcome = assess_dependency_evidence(item, now=datetime.now(timezone.utc))
+            if outcome.outcome == "block":
+                dependency_ok = False
+            elif outcome.outcome == "escalate":
+                needs_escalation = True
+        if needs_escalation and dependency_ok:
+            dependency_ok = attestation_ok and valid_escalation(
+                record.get("escalation"), record["attestation"],
+            )
     return ChangeReview(
         scope_ok=not paths.out_of_scope,
         evidence_ok=evidence.accepted,
