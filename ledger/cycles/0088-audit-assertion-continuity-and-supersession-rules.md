@@ -1,7 +1,7 @@
 # Cycle 0088 — Audit assertion continuity and supersession rules
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Audit assertion continuity and supersession rules
 
 ## Decision
 
-_To be determined from evidence._
+Policy assertions now form a linked chain: 0085 is superseded by current 0087,
+with exactly one current head and explicit successor reference.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The chain audit accepts both stored assertions and rejects a chain with no
+superseded predecessor/current head relationship.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The chain proves repository continuity only; it does not prove that a current
+assertion remains valid without a fresh rerun.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: audit assertion evidence references and
+detect missing or stale captures.

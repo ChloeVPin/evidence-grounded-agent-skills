@@ -148,6 +148,27 @@ def validate_policy_audit(audit: dict) -> ContextAssessment:
     return ContextAssessment(True, "valid policy audit")
 
 
+def audit_policy_assertion_chain(assertions: list[dict]) -> ContextAssessment:
+    """Ensure versioned policy assertions have one current, linked head."""
+    ids = [item.get("audit_id") for item in assertions]
+    if not assertions or any(not item_id for item_id in ids):
+        return ContextAssessment(False, "policy assertion IDs are required")
+    if len(set(ids)) != len(ids):
+        return ContextAssessment(False, "duplicate policy assertion IDs")
+    known = set(ids)
+    current = [item for item in assertions if item.get("status") == "current"]
+    if len(current) != 1:
+        return ContextAssessment(False, "exactly one current policy assertion is required")
+    for item in assertions:
+        if item.get("status") == "superseded":
+            successor = item.get("superseded_by")
+            if successor not in known:
+                return ContextAssessment(False, "superseded assertion references unknown successor")
+        elif item.get("status") != "current":
+            return ContextAssessment(False, "unknown policy assertion status")
+    return ContextAssessment(True, "policy assertion chain is continuous")
+
+
 def compare_policy_audit(audit: dict, evidence: dict) -> ContextAssessment:
     """Compare a persisted policy assertion with a fresh captured result."""
     audit_check = validate_policy_audit(audit)

@@ -1,5 +1,7 @@
 {
   "audit_id": "0085-generation-policy-audit",
+  "status": "superseded",
+  "superseded_by": "0087-generation-policy-audit",
   "policy": "python3 -m unittest discover -s tests",
   "result": "passed",
   "evidence_refs": [
