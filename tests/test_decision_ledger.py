@@ -4,8 +4,9 @@ from pathlib import Path
 
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
-    audit_context_names, find_matching_entries, find_paraphrase_candidates, validate_contexts,
-    validate_context_artifacts, validate_entry, migrate_contexts, validate_migration,
+    audit_context_names, audit_migrations, find_matching_entries,
+    find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
+    validate_entry, migrate_contexts, validate_migration,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -298,6 +299,13 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_migration(malformed).valid)
         mismatched = dict(migration, artifacts=["scripts/tool_policy.py"])
         self.assertFalse(validate_migration(mismatched).valid)
+
+    def test_migration_inventory_audit_rejects_duplicate_ids(self):
+        migration = json.loads(Path(
+            "ledger/migrations/0072-differential-context-rename.json",
+        ).read_text())
+        self.assertTrue(audit_migrations([migration]).valid)
+        self.assertFalse(audit_migrations([migration, dict(migration)]).valid)
 
 
 if __name__ == "__main__":

@@ -107,6 +107,19 @@ def validate_migration(migration: dict) -> ContextAssessment:
     })
 
 
+def audit_migrations(migrations: list[dict]) -> ContextAssessment:
+    """Audit every migration record for validity and unique identity."""
+    migration_ids = []
+    for migration in migrations:
+        assessment = validate_migration(migration)
+        if not assessment.valid:
+            return assessment
+        migration_ids.append(migration["migration_id"])
+    if len(set(migration_ids)) != len(migration_ids):
+        return ContextAssessment(False, "duplicate migration IDs")
+    return ContextAssessment(True, "all migration records are valid")
+
+
 def audit_context_names(entries: list[dict]) -> ContextAssessment:
     """Audit current and legacy names without rewriting historical entries."""
     known = set(CONTEXT_ARTIFACT_HINTS) | set(CONTEXT_RENAMES)
