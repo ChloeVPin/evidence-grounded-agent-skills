@@ -1,7 +1,7 @@
 # Cycle 0042 — Differential Review Completion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes archive the differential-review foundation while preserving the limit
 
 ## Decision
 
-_To be determined._
+Archive differential review with structured return, error, and side-effect comparison while retaining fixture limitations.
 
 ## Evidence and provenance
 
-_Use the 89+ test suite and structured differential fixture._
+State artifact: `ledger/state/0042-differential-foundation.json`; evidence includes the 91-test suite and structured fixture.
 
 ## Disconfirming evidence sought
 
-_Do not claim that a finite input set or mocked side-effect trace proves all runtime behavior._
+The state explicitly limits the result to supplied inputs and fixture-level traces.
 
 ## Next action
 
-Create a durable completed state for differential review, then open the next exploration cycle.
+Cycle state validates as completed; cycle 0043 records the next exploration.
