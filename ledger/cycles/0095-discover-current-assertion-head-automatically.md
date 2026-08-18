@@ -1,7 +1,7 @@
 # Cycle 0095 — Discover current assertion head automatically
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Discover current assertion head automatically
 
 ## Decision
 
-_To be determined from evidence._
+Current-head selection now discovers all stored generation-policy assertions,
+validates the full supersession chain, and returns the single current 0093 head.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The test loads policy assertions by repository glob and verifies automatic
+discovery of `0093-generation-policy-audit`.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Discovery depends on complete repository enumeration; an omitted or untracked
+assertion cannot be found by this local audit.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: make automatic discovery include bundle
+and content validation for the selected head.

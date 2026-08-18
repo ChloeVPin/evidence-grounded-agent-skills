@@ -10,6 +10,7 @@ from scripts.decision_ledger import (
     check_captured_generation_revision, migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
     audit_policy_assertion_chain, audit_policy_assertion_references,
+    discover_current_assertion,
     compare_policy_audit, validate_generation_evidence,
     validate_migration,
     validate_policy_audit, validate_policy_audit_bundle,
@@ -509,6 +510,15 @@ class DecisionLedgerTest(unittest.TestCase):
             "ledger/evidence/0093-policy-content-digests.json",
         ).read_text())
         self.assertTrue(validate_policy_assertion_content(current, digests).valid)
+
+    def test_current_assertion_is_discovered_from_repository_records(self):
+        assertions = [
+            json.loads(path.read_text())
+            for path in sorted(Path("ledger/evidence").glob("*-generation-policy-audit.json"))
+        ]
+        head = discover_current_assertion(assertions)
+        self.assertTrue(head.valid)
+        self.assertEqual(head.assertion["audit_id"], "0093-generation-policy-audit")
 
 
 if __name__ == "__main__":
