@@ -112,6 +112,7 @@ def _run(root: Path = ROOT) -> int:
         state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
         dependency_manifest,
         diagnostic_snapshot,
+        dependency_graph,
     )
     four_check_capture = json.loads(
         (evidence_dir / "0119-four-check-audit-capture.json").read_text()

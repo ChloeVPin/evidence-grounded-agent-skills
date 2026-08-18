@@ -8,6 +8,8 @@
   "dependency_paths_sha256": "5af86d1039436573299b673cb12087e092d4143da9d078f638484bd2ee7fd095",
   "diagnostic_snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
   "diagnostic_snapshot_sha256": "f04caa09ee8f599d0949d9e71a52890edd41a5b1bb62d4a7e1702fd528fa9206",
+  "dependency_graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",
+  "dependency_graph_policy_sha256": "a3a64614491e7d1a9f13e9a613dc92289a98bc7ecb08fb7960f647fb8d6974b6",
   "checks": {
     "bundle": true,
     "chain": true,

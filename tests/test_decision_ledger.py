@@ -604,6 +604,16 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(state, dependency_paths_sha256="0" * 64),
             state["bundle_ref"], self_capture, manifest,
         ).valid)
+        graph = json.loads(Path(
+            "ledger/evidence/0137-freshness-dependency-graph.json",
+        ).read_text())
+        self.assertTrue(validate_self_validation_state(
+            state, state["bundle_ref"], self_capture, manifest, None, graph,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, dependency_graph_policy_sha256="0" * 64),
+            state["bundle_ref"], self_capture, manifest, None, graph,
+        ).valid)
         self.assertFalse(validate_self_validation_state(
             dict(state, checks=dict(state["checks"], unexpected=True)),
             state["bundle_ref"], self_capture,

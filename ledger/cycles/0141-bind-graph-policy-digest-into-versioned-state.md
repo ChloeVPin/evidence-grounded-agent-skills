@@ -1,7 +1,7 @@
 # Cycle 0141 — Bind graph-policy digest into versioned state
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind graph-policy digest into versioned state
 
 ## Decision
 
-_To be determined from evidence._
+Versioned state now records the graph reference and independent policy digest;
+the state validator compares both against the live graph and rejects stale
+policy provenance.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the updated 0113 state artifact, validator binding, and stale graph
+policy-digest test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The graph policy digest is checked in addition to graph structure; both layers
+remain necessary to detect different classes of drift.
 
 ## Next action
 
-_Research, validate, and update this record._
+Expose graph-state freshness failures as distinct diagnostics.
