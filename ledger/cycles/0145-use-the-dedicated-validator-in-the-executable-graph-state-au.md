@@ -1,7 +1,7 @@
 # Cycle 0145 — Use the dedicated validator in the executable graph-state audit path
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Use the dedicated validator in the executable graph-state audit path
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now validates the 0143 graph-state capture as part of
+freshness. Tampering its policy digest fails with `AUDIT_GATE_FAILED` and the
+dedicated validator reason.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the validator binding, 0143 capture, and temporary-root tamper test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The graph capture gate is composed into freshness while the public four-check
+contract remains unchanged.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a complete audit-capture dependency summary.
