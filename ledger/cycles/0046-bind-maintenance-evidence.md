@@ -1,7 +1,7 @@
 # Cycle 0046 — Bind Maintenance Evidence
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with attested revalidation
 
 ## Question
 
@@ -9,16 +9,16 @@ Can lifecycle revalidation require the same attested evidence and revision bindi
 
 ## Decision
 
-_To be determined._
+Review-due knowledge returns to `validated` only when its complete review record passes; stale or tampered evidence leaves it suspended.
 
 ## Evidence and provenance
 
-_Record integration tests between freshness, lifecycle, and review records._
+Implemented in `scripts/maintenance_review.py` with three integration tests in `tests/test_maintenance_review.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure a stale artifact cannot be re-trusted using an unbound or incomplete evidence claim._
+Tampering with the bound diff prevents revalidation; valid attested evidence restores only `validated`, not `trusted`.
 
 ## Next action
 
-Require valid review evidence and attestation before transitioning review-due knowledge back to validated.
+Validation passed locally. Limitation: this binds local review artifacts but does not authenticate the reviewer or provide append-only history. Next cycle: archive the maintenance foundation and open the next exploration mode.
