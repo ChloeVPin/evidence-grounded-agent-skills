@@ -39,6 +39,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 
 - [Regression test design](skills/regression-test-design/SKILL.md) — create focused behavior and boundary tests.
 - [Test-effectiveness analysis](skills/test-effectiveness-analysis/SKILL.md) — find faults that tests fail to detect.
+- [Concurrency and shared state](skills/concurrency-and-shared-state/SKILL.md) — reason about interleavings, ownership, and liveness.
 - [Performance regression analysis](skills/performance-regression-analysis/SKILL.md) — measure changes against representative workloads.
 - [Observability and instrumentation](skills/observability-and-instrumentation/SKILL.md) — add useful, safe diagnostic signals.
 - [Accessibility review](skills/accessibility-review/SKILL.md) — check user tasks across input modes and assistive technology.
