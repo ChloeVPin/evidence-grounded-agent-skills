@@ -1,0 +1,12 @@
+{
+  "migration_id": "0072-differential-context-rename",
+  "source_entry_id": "0061-differential-boundary-failure",
+  "source_contexts": ["differential-review"],
+  "target_contexts": ["behavioral-differential"],
+  "artifacts": [
+    "scripts/differential_review.py",
+    "tests/test_differential_review.py"
+  ],
+  "reason": "separate observable behavior comparison from broader differential terminology",
+  "reversible": true
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0072",
+  "mode": "restructuring",
+  "status": "completed",
+  "progress": {
+    "quality_delta": 1,
+    "coverage_delta": 1,
+    "evidence_quality_delta": 1,
+    "validation_delta": 1,
+    "uncertainty_delta": 1,
+    "evidence": [
+      "ledger/migrations/0072-differential-context-rename.json",
+      "ledger/decisions/0061-differential-boundary-failure.json",
+      "tests/test_decision_ledger.py"
+    ]
+  },
+  "decision": "validated reversible historical context rename",
+  "next_action": "audit migration records for completeness and reversibility"
+}

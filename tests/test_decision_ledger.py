@@ -273,6 +273,22 @@ class DecisionLedgerTest(unittest.TestCase):
         )
         self.assertFalse(collision.valid)
 
+    def test_durable_context_migration_matches_historical_entry(self):
+        source = json.loads(Path(
+            "ledger/decisions/0061-differential-boundary-failure.json",
+        ).read_text())
+        migration = json.loads(Path(
+            "ledger/migrations/0072-differential-context-rename.json",
+        ).read_text())
+        result = migrate_contexts(
+            migration["source_contexts"], {"differential-review": "behavioral-differential"},
+        )
+        self.assertTrue(result.valid)
+        self.assertEqual(migration["source_entry_id"], source["entry_id"])
+        self.assertEqual(list(result.contexts), migration["target_contexts"])
+        migrated = dict(source, contexts=list(result.contexts))
+        self.assertTrue(validate_entry(migrated).valid)
+
 
 if __name__ == "__main__":
     unittest.main()
