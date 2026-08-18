@@ -5,7 +5,7 @@ description: Verify that an AI-generated repository change matches the requested
 
 # Repository Change Verification
 
-Lifecycle: `validated`
+Lifecycle: `draft`
 
 ## Purpose and scope
 
