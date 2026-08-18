@@ -198,6 +198,16 @@ def compare_policy_audit(audit: dict, evidence: dict) -> ContextAssessment:
     return ContextAssessment(True, "persisted policy assertion matches fresh evidence")
 
 
+def validate_policy_audit_bundle(
+    audit: dict, evidence: dict, available_paths: set[str],
+) -> ContextAssessment:
+    """Compose assertion shape, reference, and fresh-result validation."""
+    reference_check = audit_policy_assertion_references([audit], available_paths)
+    if not reference_check.valid:
+        return reference_check
+    return compare_policy_audit(audit, evidence)
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
