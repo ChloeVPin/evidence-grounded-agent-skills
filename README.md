@@ -29,6 +29,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Repository exploration](skills/repository-exploration/SKILL.md) — map code, callers, boundaries, and verification paths.
 - [Skill quality review](skills/skill-quality-review/SKILL.md) — assess evidence, scope, overlap, and lifecycle before publication.
 - [Implementation planning](skills/implementation-planning/SKILL.md) — sequence bounded work with risks and verification.
+- [Architecture decision-making](skills/architecture-decision-making/SKILL.md) — compare system designs and record tradeoffs.
 
 ### Change and diagnosis
 
