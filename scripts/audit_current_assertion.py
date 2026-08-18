@@ -224,10 +224,14 @@ def _run(root: Path = ROOT) -> int:
         path for values in (
             capture_inventory.get("capture_refs", []),
             [capture_inventory.get("state_ref"), capture_inventory.get("summary_ref"), capture_inventory.get("graph_ref")],
+            capture_inventory.get("failure_refs", []),
         ) for path in values if path and (root / path).exists()
     }
     inventory_check = validate_freshness_capture_inventory(
-        capture_inventory, inventory_available, inventory_expected,
+        capture_inventory, inventory_available, inventory_expected, {
+            "ledger/evidence/0122-capture-schema-failure.json",
+            "ledger/evidence/0162-graph-edge-failure.json",
+        },
     )
     checks = {
         "bundle": bundle_check.valid,

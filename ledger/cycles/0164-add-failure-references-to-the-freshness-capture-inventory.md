@@ -1,7 +1,7 @@
 # Cycle 0164 — Add failure references to the freshness capture inventory
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Add failure references to the freshness capture inventory
 
 ## Decision
 
-_To be determined from evidence._
+The freshness capture inventory now explicitly includes both persisted failure
+records and validates their references and digest binding.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0154 inventory, 0113 state digest, validator enforcement, and
+executable inventory validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The expanded inventory remains complete; 183 tests, compilation, and the full
+four-check audit pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Make failure-reference inventory state visible in the next diagnostic capture.
