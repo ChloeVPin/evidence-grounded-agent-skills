@@ -1,7 +1,7 @@
 # Cycle 0010 — Review Record Format
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with versioned record schema
 
 ## Question
 
@@ -9,16 +9,16 @@ What repository-native artifact should preserve a complete review decision for l
 
 ## Decision
 
-_To be determined._
+Use schema version 1 with required revision, paths, allowed prefixes, acceptance criteria, diff, evidence, and attestation fields. The attestation revision must match the record revision.
 
 ## Evidence and provenance
 
-_Record schema, generation command, and tests._
+Implemented in `scripts/review_record.py` with three schema tests in `tests/test_review_record.py`.
 
 ## Disconfirming evidence sought
 
-_Try to omit required evidence or create a record that does not identify the reviewed revision._
+Missing revision and revision-mismatched attestations are rejected.
 
 ## Next action
 
-Define a versioned JSON review record schema and generate records only from captured evidence and attestation inputs.
+Validation passed locally. Limitation: schema validation does not prove the truth of evidence fields. Next cycle: generate complete records from the existing capture, bind, and review utilities, then validate them as one artifact.
