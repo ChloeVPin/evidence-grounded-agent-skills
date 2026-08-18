@@ -5,15 +5,15 @@
   "validated_revision": "57c31de1a9e3aad2e53b44539908d1d40c79265a",
   "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
   "dependency_manifest_ref": "ledger/evidence/0125-audit-dependencies.json",
-  "dependency_paths_sha256": "07f305dc4d4f66636435187bc1743b83bb836b9f69e27cb691606f663cced707",
+  "dependency_paths_sha256": "7c22c1578b848edf461ca656fd5483a69280a1b5893e05c24bb7db8255a538b7",
   "diagnostic_snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
   "diagnostic_snapshot_sha256": "baf755ffa79794a560f724e334f669cb9a827ea3f39543dc1d654464bd206580",
   "dependency_graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",
   "dependency_graph_policy_sha256": "a6878508810c9657d170a7e85181935dc696bd2384b80d51dde47845c2872101",
   "capture_summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
-  "capture_summary_sha256": "270966940a9ebccaef20cb39397147afade6704d8bbd499e7de7b9e33314e389",
+  "capture_summary_sha256": "c54cce5795117f73821dd635a45e2f06f44a3e33fbfa84aef53a404454a15bc3",
   "capture_inventory_ref": "ledger/evidence/0154-freshness-capture-inventory.json",
-  "capture_inventory_sha256": "cc076f5cbfb53dfd19dcc3e56914131c63660aaf5274b51fe9129e05b0b5fa11",
+  "capture_inventory_sha256": "3835cbe57f9151c97fa3ccfd1299b239cc7de8fad2d7b01c2d1037c8b99609fe",
   "diagnostic_refs": [
     "ledger/evidence/0130-dependency-state-diagnostics.json"
   ],

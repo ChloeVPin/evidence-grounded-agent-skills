@@ -1,6 +1,6 @@
 {
   "manifest_id": "0125-audit-dependencies",
-  "paths_sha256": "07f305dc4d4f66636435187bc1743b83bb836b9f69e27cb691606f663cced707",
+  "paths_sha256": "7c22c1578b848edf461ca656fd5483a69280a1b5893e05c24bb7db8255a538b7",
   "paths": [
     "scripts/audit_current_assertion.py",
     "ledger/evidence/0085-generation-policy-audit.json",
@@ -19,6 +19,7 @@
     "ledger/evidence/0169-diagnostic-reference-state-failure.json",
     "ledger/evidence/0174-graph-provenance-state-failure.json",
     "ledger/evidence/0179-snapshot-provenance-state-failure.json",
-    "ledger/evidence/0184-graph-edge-drift-failure.json"
+    "ledger/evidence/0184-graph-edge-drift-failure.json",
+    "ledger/evidence/0189-edge-failure-state-failure.json"
   ]
 }
