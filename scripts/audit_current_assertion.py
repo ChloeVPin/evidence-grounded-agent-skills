@@ -33,6 +33,7 @@ EXPECTED_FRESHNESS_GRAPH_NODES = {
     "ledger/evidence/0130-dependency-state-diagnostics.json",
     "ledger/evidence/0134-snapshot-diagnostic-capture.json",
     "ledger/state/0113-complete-self-validation-gate.json",
+    "ledger/evidence/0154-freshness-capture-inventory.json",
 }
 
 from scripts.decision_ledger import (
