@@ -1,7 +1,7 @@
 # Cycle 0053 — Archive a concrete failure-learning entry with a corrective action and regression trigger
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -13,14 +13,18 @@ _To be determined from evidence._
 
 ## Evidence and provenance
 
-Record a reproducible fixture failure with its mechanism, corrective action,
-and regression trigger in the durable decision ledger.
+Archive the surviving boundary mutant as a failure-learning entry with its
+mechanism, corrective action, and regression trigger.
 
 ## Disconfirming evidence sought
 
-Check that an activity-only description, missing mechanism, or missing regression
-trigger cannot be accepted as a failure-learning entry.
+The entry is rejected without its failure-specific mechanism, correction, or
+regression trigger; the stored evidence distinguishes surviving from killed
+mutation outcomes.
 
 ## Next action
 
-Create and validate the failure-learning entry, then add its regression test.
+`ledger/decisions/0053-boundary-mutant-failure.json` validates and is covered by
+the decision-ledger integration test. Limitation: this is a controlled fixture,
+not a population-level estimate of test quality. Next cycle: select the next
+high-leverage exploration question.

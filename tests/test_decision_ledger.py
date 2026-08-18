@@ -61,6 +61,15 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(validate_entry(entry).valid)
         self.assertEqual(entry["cycle_id"], "0052")
 
+    def test_archived_failure_entry_preserves_correction_and_regression_guard(self):
+        path = Path("ledger/decisions/0053-boundary-mutant-failure.json")
+        entry = json.loads(path.read_text())
+        assessment = validate_entry(entry)
+        self.assertTrue(assessment.valid)
+        self.assertEqual(entry["outcome"], "failure")
+        self.assertIn("zero-value", entry["corrective_action"])
+        self.assertIn("survives", entry["regression_trigger"])
+
 
 if __name__ == "__main__":
     unittest.main()
