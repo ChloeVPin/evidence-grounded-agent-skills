@@ -275,6 +275,27 @@ def validate_dependency_diagnostic_snapshot(
     return ContextAssessment(True, "dependency diagnostic snapshot is valid")
 
 
+def validate_freshness_dependency_graph(
+    graph: dict, expected_nodes: set[str], available_paths: set[str],
+) -> ContextAssessment:
+    """Validate the persisted graph of freshness-specific audit inputs."""
+    if graph.get("graph_id") != "0137-freshness-dependency-graph":
+        return ContextAssessment(False, "freshness dependency graph ID is invalid")
+    nodes = graph.get("nodes")
+    edges = graph.get("edges")
+    if not isinstance(nodes, list) or set(nodes) != expected_nodes or len(nodes) != len(expected_nodes):
+        return ContextAssessment(False, "freshness dependency graph nodes differ")
+    if not isinstance(edges, list) or any(
+        not isinstance(edge, list) or len(edge) != 2
+        or edge[0] not in expected_nodes or edge[1] not in expected_nodes
+        for edge in edges
+    ):
+        return ContextAssessment(False, "freshness dependency graph edges are malformed")
+    if not set(nodes) <= available_paths:
+        return ContextAssessment(False, "freshness dependency graph references unavailable paths")
+    return ContextAssessment(True, "freshness dependency graph is valid")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")

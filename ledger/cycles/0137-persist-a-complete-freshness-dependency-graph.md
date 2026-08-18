@@ -1,7 +1,7 @@
 # Cycle 0137 — Persist a complete freshness dependency graph
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Persist a complete freshness dependency graph
 
 ## Decision
 
-_To be determined from evidence._
+Persisted `ledger/evidence/0137-freshness-dependency-graph.json` records the
+freshness-specific nodes and directed edges, with validation for exact nodes,
+well-formed edges, and available paths.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the graph artifact, `validate_freshness_dependency_graph`, and its
+mutation test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The graph is currently a validated artifact rather than an executable gate; the
+next cycle will bind it into the audit.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind the freshness dependency graph into the executable audit.

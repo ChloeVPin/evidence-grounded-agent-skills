@@ -26,6 +26,7 @@ from scripts.decision_ledger import (
     validate_failure_evidence,
     validate_audit_dependency_manifest,
     validate_dependency_diagnostic_snapshot,
+    validate_freshness_dependency_graph,
     validate_complete_self_validation_bundle,
     validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
@@ -792,6 +793,16 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(capture, snapshot_sha256="0" * 64),
             snapshot, {capture["snapshot_ref"]}, {capture["revision"]},
         ).valid)
+
+    def test_freshness_dependency_graph_is_explicit_and_available(self):
+        graph = json.loads(Path(
+            "ledger/evidence/0137-freshness-dependency-graph.json",
+        ).read_text())
+        expected = set(graph["nodes"])
+        self.assertTrue(validate_freshness_dependency_graph(graph, expected, expected).valid)
+        altered = json.loads(json.dumps(graph))
+        altered["edges"][0] = ["missing", graph["nodes"][0]]
+        self.assertFalse(validate_freshness_dependency_graph(altered, expected, expected).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

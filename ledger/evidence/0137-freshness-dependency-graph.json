@@ -1,0 +1,18 @@
+{
+  "graph_id": "0137-freshness-dependency-graph",
+  "root": "scripts/audit_current_assertion.py",
+  "nodes": [
+    "scripts/audit_current_assertion.py",
+    "ledger/evidence/0125-audit-dependencies.json",
+    "ledger/evidence/0130-dependency-state-diagnostics.json",
+    "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+    "ledger/state/0113-complete-self-validation-gate.json"
+  ],
+  "edges": [
+    ["scripts/audit_current_assertion.py", "ledger/evidence/0125-audit-dependencies.json"],
+    ["scripts/audit_current_assertion.py", "ledger/evidence/0130-dependency-state-diagnostics.json"],
+    ["scripts/audit_current_assertion.py", "ledger/evidence/0134-snapshot-diagnostic-capture.json"],
+    ["ledger/evidence/0130-dependency-state-diagnostics.json", "ledger/state/0113-complete-self-validation-gate.json"],
+    ["ledger/evidence/0134-snapshot-diagnostic-capture.json", "ledger/evidence/0130-dependency-state-diagnostics.json"]
+  ]
+}
