@@ -39,12 +39,12 @@ If the evidence is contradictory, preserve the competing explanations and use th
 
 ## Validation evidence and provenance
 
-- `CONSTITUTION.md`: truth over confidence, evidence over convention, verification over assertion, tradeoffs, simplicity, reversibility, and explicit disconfirmation.
-- `RESEARCH_PROTOCOL.md`: reconnaissance, evidence evaluation, adversarial review, validation, and maintenance.
-- `QUALITY_RUBRIC.md`: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.
+- Governing principles: truth over confidence, evidence over convention, verification over assertion, tradeoffs, simplicity, reversibility, and explicit disconfirmation.
+- Research basis: distinguish facts from advice, trace important claims to authoritative sources, review adversarially, validate with examples and counterexamples, and maintain skills when evidence changes.
+- Quality standard: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.
 - Governing research report: an evidence-first agent must distinguish knowledge types, seek disconfirming evidence, preserve uncertainty, and measure substantive improvement rather than activity.
 
-Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Review when the constitution, research protocol, or quality rubric changes.
+Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Review when the governing principles or source evidence changes.
 
 ## Related skills and conflicts
 

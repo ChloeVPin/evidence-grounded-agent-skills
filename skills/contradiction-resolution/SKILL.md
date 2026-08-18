@@ -38,11 +38,11 @@ If evidence is incomparable, split the claims by context instead of choosing a w
 
 ## Validation evidence and provenance
 
-- Governing research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and a knowledge ledger improve agent reliability.
+- Governing research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and provenance notes improve agent reliability.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident/error tracking, after-action assessment, and continual improvement guidance.
 
 Confidence: medium. Freshness review: after material failures, contradictory evidence, or methodology changes.
 
 ## Related skills and conflicts
 
-Related: evidence-attestation, differential-patch-review, knowledge-maintenance, and cycle-state. This skill does not authorize silently weakening constitutional principles to resolve local disagreement.
+Related: differential-patch-review, knowledge-maintenance, and repository-change-verification. This skill does not authorize silently weakening governing principles to resolve local disagreement.

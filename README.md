@@ -13,14 +13,8 @@ The goal is useful skills: clear triggers, bounded procedures, failure handling,
 5. Validate usefulness, correctness, safety, and maintainability.
 6. Revise, deprecate, or replace skills when evidence changes.
 
-The research and design notes are retained as supporting material; the deliverables are the files under [`skills/`](skills/).
+The deliverables are the directories under [`skills/`](skills/). Each contains a standalone `SKILL.md`; no runtime, test suite, or audit framework is required.
 
-## Repository map
+## Skill structure
 
-- [`CONSTITUTION.md`](CONSTITUTION.md): governing principles for skill quality.
-- [`RESEARCH_PROTOCOL.md`](RESEARCH_PROTOCOL.md): the repeatable skill-research process.
-- [`SKILL_SPEC.md`](SKILL_SPEC.md): schema for skills.
-- [`QUALITY_RUBRIC.md`](QUALITY_RUBRIC.md): release gates.
-- [`KNOWLEDGE_LEDGER.md`](KNOWLEDGE_LEDGER.md): provenance and decisions supporting skills.
-- [`skills/`](skills/): validated and experimental skills.
-- [`QUALITY_RUBRIC.md`](QUALITY_RUBRIC.md): release criteria for each skill.
+Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.

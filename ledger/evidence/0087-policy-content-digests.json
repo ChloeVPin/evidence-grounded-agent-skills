@@ -1,5 +1,0 @@
-{
-  "ledger/evidence/0087-generation-rerun.json": "c3d72712a6ae4c05751ad3bdbb4b2635d8510f7a6e45a0a1faa6df558545abd5",
-  "scripts/decision_ledger.py": "16cb96ffc8575100d67fdd81132593f4252e7757edfec20c4d7d1d597fef0fab",
-  "tests/test_decision_ledger.py": "e18dda222c149d983ca58d23e5dcb5d446d02f88467db0e3ff286f0cf2816f58"
-}
