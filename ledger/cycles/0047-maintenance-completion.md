@@ -1,7 +1,7 @@
 # Cycle 0047 — Maintenance Completion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes archive the knowledge-maintenance foundation while preserving freshne
 
 ## Decision
 
-_To be determined._
+Archive freshness, lifecycle, and attested revalidation behavior without claiming external truth or reviewer identity.
 
 ## Evidence and provenance
 
-_Use the 100+ test suite and maintenance-review integration._
+State artifact: `ledger/state/0047-maintenance-foundation.json`; evidence includes the 103-test suite and maintenance-review integration.
 
 ## Disconfirming evidence sought
 
-_Do not claim that local freshness dates or revalidation records prove external truth or reviewer identity._
+Those limitations remain explicit in the state decision.
 
 ## Next action
 
-Create a durable completion state for maintenance and open the next exploration cycle.
+Cycle state validates as completed; cycle 0048 records the next exploration.
