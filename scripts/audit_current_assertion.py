@@ -24,6 +24,7 @@ EXPECTED_DEPENDENCIES = {
     "ledger/evidence/0108-audit-command-capture.json",
     "ledger/evidence/0119-four-check-audit-capture.json",
     "ledger/evidence/0122-capture-schema-failure.json",
+    "ledger/evidence/0154-freshness-capture-inventory.json",
     "ledger/state/0113-complete-self-validation-gate.json",
 }
 EXPECTED_FRESHNESS_GRAPH_NODES = {
