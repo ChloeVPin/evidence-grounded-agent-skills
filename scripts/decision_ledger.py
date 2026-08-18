@@ -40,6 +40,13 @@ class ContextMigration:
     reason: str
 
 
+@dataclass(frozen=True)
+class AssertionHead:
+    valid: bool
+    assertion: dict | None
+    reason: str
+
+
 def source_inventory_digest(source_entry_ids: set[str]) -> str:
     """Return a stable digest for the sorted source-entry inventory."""
     payload = json.dumps(sorted(source_entry_ids), separators=(",", ":"))
@@ -167,6 +174,15 @@ def audit_policy_assertion_chain(assertions: list[dict]) -> ContextAssessment:
         elif item.get("status") != "current":
             return ContextAssessment(False, "unknown policy assertion status")
     return ContextAssessment(True, "policy assertion chain is continuous")
+
+
+def discover_current_assertion(assertions: list[dict]) -> AssertionHead:
+    """Discover the current assertion only after validating the full chain."""
+    chain = audit_policy_assertion_chain(assertions)
+    if not chain.valid:
+        return AssertionHead(False, None, chain.reason)
+    current = next(item for item in assertions if item.get("status") == "current")
+    return AssertionHead(True, current, "current assertion discovered")
 
 
 def audit_policy_assertion_references(
