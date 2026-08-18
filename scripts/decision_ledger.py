@@ -102,6 +102,22 @@ def check_generation_revision(
     return ContextAssessment(True, "generation revision is present in history")
 
 
+def check_captured_generation_revision(
+    recorded_revision: object, evidence: object,
+) -> ContextAssessment:
+    """Bind a recorded revision to successful captured command evidence."""
+    evidence_revision = getattr(evidence, "revision", None)
+    exit_status = getattr(evidence, "exit_status", None)
+    if isinstance(evidence, dict):
+        evidence_revision = evidence.get("revision")
+        exit_status = evidence.get("exit_status")
+    if recorded_revision != evidence_revision:
+        return ContextAssessment(False, "captured revision does not match record")
+    if exit_status != 0:
+        return ContextAssessment(False, "captured command did not succeed")
+    return ContextAssessment(True, "captured revision is bound to successful evidence")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

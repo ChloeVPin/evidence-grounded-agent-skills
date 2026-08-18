@@ -7,7 +7,7 @@ from scripts.decision_ledger import (
     audit_context_names, audit_migrations, find_matching_entries,
     find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
     check_generation_revision, check_source_inventory_digest, validate_entry,
-    migrate_contexts,
+    check_captured_generation_revision, migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
     validate_migration, validate_source_file_manifest,
 )
@@ -362,6 +362,13 @@ class DecisionLedgerTest(unittest.TestCase):
         revision = manifest["generated_by"]["revision"]
         self.assertTrue(check_generation_revision(revision, {revision, "current"}).valid)
         self.assertFalse(check_generation_revision(revision, {"current"}).valid)
+
+    def test_generation_revision_binds_to_captured_success(self):
+        from scripts.capture_evidence import capture
+        root = Path(__file__).resolve().parents[1]
+        evidence = capture("python3 -c 'print(\"manifest\")'", root)
+        self.assertTrue(check_captured_generation_revision(evidence.revision, evidence).valid)
+        self.assertFalse(check_captured_generation_revision("0" * 40, evidence).valid)
 
 
 if __name__ == "__main__":

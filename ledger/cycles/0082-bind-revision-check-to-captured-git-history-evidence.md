@@ -1,7 +1,7 @@
 # Cycle 0082 — Bind revision check to captured Git history evidence
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind revision check to captured Git history evidence
 
 ## Decision
 
-_To be determined from evidence._
+Generation revision checks now bind to successful `capture_evidence` output;
+revision mismatches and failed commands are rejected.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Integration tests capture a real repository revision and successful command, then
+reject a fabricated revision.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Captured evidence is local process output and does not prove remote identity or
+that the command was the intended generation procedure.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: persist a generation-evidence record beside
+the source manifest.
