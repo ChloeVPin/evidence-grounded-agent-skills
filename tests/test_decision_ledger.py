@@ -909,6 +909,10 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(capture, summary_sha256="0" * 64),
             summary, {capture["summary_ref"]}, {capture["revision"]},
         ).valid)
+        self.assertFalse(validate_summary_state_diagnostic_capture(
+            dict(capture, diagnostic_case_refs_sha256="0" * 64),
+            summary, {capture["summary_ref"]}, {capture["revision"]},
+        ).valid)
 
     def test_freshness_capture_inventory_is_complete(self):
         inventory = json.loads(Path(

@@ -278,7 +278,8 @@ def validate_summary_state_diagnostic_capture(
     """Validate a capture that binds summary state to a successful audit run."""
     required = (
         "capture_id", "command", "revision", "exit_status", "output_sha256",
-        "summary_ref", "summary_sha256", "audit_result",
+        "summary_ref", "summary_sha256", "diagnostic_case_refs",
+        "diagnostic_case_refs_sha256", "audit_result",
     )
     missing = [field for field in required if field not in capture]
     if missing:
@@ -292,6 +293,12 @@ def validate_summary_state_diagnostic_capture(
         return ContextAssessment(False, "summary capture reference is unavailable")
     if capture["summary_sha256"] != summary.get("summary_sha256"):
         return ContextAssessment(False, "summary capture digest is stale")
+    expected_cases = summary.get("diagnostic_case_refs")
+    if (capture["diagnostic_case_refs"] != expected_cases
+            or capture["diagnostic_case_refs_sha256"] != hashlib.sha256(
+                json.dumps(sorted(expected_cases), separators=(",", ":")).encode("utf-8")
+            ).hexdigest()):
+        return ContextAssessment(False, "summary capture diagnostic case provenance is stale")
     if capture["audit_result"] != "passed":
         return ContextAssessment(False, "summary capture audit result is not passed")
     return ContextAssessment(True, "summary state diagnostic capture is valid")

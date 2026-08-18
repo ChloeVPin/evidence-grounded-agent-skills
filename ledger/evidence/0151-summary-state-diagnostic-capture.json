@@ -6,5 +6,10 @@
   "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
   "summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
   "summary_sha256": "570f70608f11df24ccfd1bb50cff0c4c376492820c9d4f6d920ab15ea32acf83",
+  "diagnostic_case_refs": [
+    "ledger/evidence/0194-state-failure-state-failure.json",
+    "ledger/evidence/0199-diagnostic-state-failure-state-failure.json"
+  ],
+  "diagnostic_case_refs_sha256": "b523503f5679870ed1ff453ee80f09663b5533067e9e4980fb046e0010f5db40",
   "audit_result": "passed"
 }
