@@ -290,12 +290,21 @@ def validate_freshness_capture_inventory(
     """Validate the complete inventory of persisted freshness captures."""
     if inventory.get("inventory_id") != "0154-freshness-capture-inventory":
         return ContextAssessment(False, "freshness capture inventory ID is invalid")
+    if not isinstance(inventory.get("inventory_sha256"), str):
+        return ContextAssessment(False, "freshness capture inventory digest is missing")
     captures = inventory.get("capture_refs")
     if not isinstance(captures, list) or set(captures) != expected_captures or len(captures) != len(expected_captures):
         return ContextAssessment(False, "freshness capture inventory captures differ")
     refs = captures + [inventory.get("state_ref"), inventory.get("summary_ref"), inventory.get("graph_ref")]
     if any(ref not in available_paths for ref in refs):
         return ContextAssessment(False, "freshness capture inventory reference is unavailable")
+    payload = dict(inventory)
+    payload.pop("inventory_sha256", None)
+    expected_digest = hashlib.sha256(
+        json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if inventory["inventory_sha256"] != expected_digest:
+        return ContextAssessment(False, "freshness capture inventory digest is stale")
     return ContextAssessment(True, "freshness capture inventory is complete")
 
 

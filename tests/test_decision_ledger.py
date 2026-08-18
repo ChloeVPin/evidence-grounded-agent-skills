@@ -916,6 +916,11 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_freshness_capture_inventory(
             altered, available, expected,
         ).valid)
+        altered_digest = json.loads(json.dumps(inventory))
+        altered_digest["inventory_sha256"] = "0" * 64
+        self.assertFalse(validate_freshness_capture_inventory(
+            altered_digest, available, expected,
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

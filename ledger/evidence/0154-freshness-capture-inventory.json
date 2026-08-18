@@ -1,5 +1,6 @@
 {
   "inventory_id": "0154-freshness-capture-inventory",
+  "inventory_sha256": "472065562c298274c93ddf82b3d27cff9b2226fcd483211dee51cf3dbe17fa29",
   "capture_refs": [
     "ledger/evidence/0093-generation-rerun.json",
     "ledger/evidence/0108-audit-command-capture.json",
