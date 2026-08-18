@@ -53,6 +53,7 @@ Skills are guidance, not guarantees. Repository instructions, user authorization
 
 - [Regression test design](skills/regression-test-design/SKILL.md) — create focused behavior and boundary tests.
 - [Test-effectiveness analysis](skills/test-effectiveness-analysis/SKILL.md) — find faults that tests fail to detect.
+- [Static analysis and type safety](skills/static-analysis-and-type-safety/SKILL.md) — interpret diagnostics without hiding risk.
 - [Concurrency and shared state](skills/concurrency-and-shared-state/SKILL.md) — reason about interleavings, ownership, and liveness.
 - [Resilience and retry design](skills/resilience-and-retry-design/SKILL.md) — bound dependency failures and recovery behavior.
 - [Performance regression analysis](skills/performance-regression-analysis/SKILL.md) — measure changes against representative workloads.
