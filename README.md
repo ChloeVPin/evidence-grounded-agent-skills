@@ -37,6 +37,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/cycle_policy.py`](scripts/cycle_policy.py): enforces operating modes and no-gain stopping rules.
 - [`scripts/progress_record.py`](scripts/progress_record.py): rejects activity-only progress claims.
 - [`scripts/cycle_state.py`](scripts/cycle_state.py): validates durable cycle state and terminal transitions.
+- [`scripts/dependency_review.py`](scripts/dependency_review.py): checks provenance, known vulnerability flags, and executable paths.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 
 ## Running a cycle
