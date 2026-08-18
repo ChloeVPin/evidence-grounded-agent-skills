@@ -46,6 +46,7 @@ If the evidence is contradictory, preserve the competing explanations and use th
 ## Validation evidence and provenance
 
 - Governing principles: truth over confidence, evidence over convention, verification over assertion, tradeoffs, simplicity, reversibility, and explicit disconfirmation.
+- [NIST AI Risk Management Framework](https://www.nist.gov/itl/ai-risk-management-framework): risk-management guidance emphasizes valid and reliable evaluation, transparency, and managing uncertainty across an AI system’s lifecycle.
 - Research basis: distinguish facts from advice, trace important claims to authoritative sources, review adversarially, validate with examples and counterexamples, and maintain skills when evidence changes.
 - Check source independence: trace repeated claims to their origin and do not count copied summaries as separate confirmation.
 - Quality standard: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.

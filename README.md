@@ -19,6 +19,10 @@ The deliverables are the directories under [`skills/`](skills/). Each contains a
 
 Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.
 
+## Evidence standard
+
+Every material conclusion in a skill must distinguish direct observations from hypotheses and recommendations. Authors should seek disconfirming evidence, trace repeated claims to their originating source, record tradeoffs and uncertainty, and state confidence and freshness. Reachable citations are necessary but do not prove that a skill is correct; each skill remains draft until representative use, adversarial review, and applicable verification provide stronger evidence.
+
 ## Using the library
 
 1. Start with [repository exploration](skills/repository-exploration/SKILL.md) and [requirements to acceptance](skills/requirements-to-acceptance/SKILL.md) when the codebase or target is unclear.

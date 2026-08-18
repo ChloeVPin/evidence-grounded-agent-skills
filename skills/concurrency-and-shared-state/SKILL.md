@@ -51,6 +51,7 @@ If the memory or transaction model is unknown, stop and resolve it before reason
 ## Validation evidence and provenance
 
 - The governing research identifies concurrency and correctness-critical systems as candidates for empirical and formal validation, adversarial testing, and explicit failure recovery.
+- [The Go Memory Model](https://go.dev/ref/mem): concurrent reasoning depends on the language memory model and its happens-before guarantees; synchronization assumptions must be stated rather than inferred.
 - Concurrent correctness is a property of allowed interleavings and the language/runtime model; a passing sequential test is insufficient evidence.
 - Check whether concurrency guidance and observed failures come from independent models or merely repeat one assumption; distinguish a source specification from an implementation-specific observation.
 - Confidence: medium-high for ownership, invariant, interleaving, liveness, and idempotence principles; medium for any implementation strategy until its model and schedules are tested.

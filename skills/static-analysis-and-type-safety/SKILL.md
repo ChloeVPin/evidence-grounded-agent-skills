@@ -55,6 +55,7 @@ If the tool’s semantics or configuration are unknown, establish them before re
 ## Validation evidence and provenance
 
 - The governing research emphasizes verification over assertion, explicit uncertainty, adversarial testing, source independence, simplicity, and tradeoffs over dogma.
+- [MITRE CWE](https://cwe.mitre.org/): a maintained weakness taxonomy supports consistent classification of recurring software defects while leaving project-specific severity and applicability to evidence.
 - Static-analysis results are observations conditioned on tool/version/configuration and modeled properties; explanations are hypotheses; fixes or suppressions are recommendations until runtime and boundary evidence support them.
 - Trace analyzer rules and language semantics to primary documentation and distinguish independent findings from multiple tools sharing the same model or source.
 - Confidence: high for treating diagnostics as bounded evidence and suppressions as risk decisions; medium for any particular tool’s coverage until its configuration and blind spots are known.

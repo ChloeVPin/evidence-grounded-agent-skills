@@ -51,6 +51,7 @@ If requirements or quality attributes conflict, use `requirements-to-acceptance`
 ## Validation evidence and provenance
 
 - The governing research emphasizes dynamic ontologies, dependency graphs, tradeoffs over dogma, simplicity, reversibility, adversarial review, and explicit methodological change.
+- [AWS Prescriptive Guidance: Architectural Decision Record Process](https://docs.aws.amazon.com/prescriptive-guidance/latest/architectural-decision-records/adr-process.html): record the context, decision, alternatives, and consequences of architectural choices.
 - Architecture observations should cite code, interfaces, measurements, or operational evidence; design explanations are hypotheses; the selected structure is a recommendation with stated tradeoffs.
 - Trace repeated pattern claims to their originating specification, measurement, or implementation; popularity and copied architecture diagrams are not independent evidence.
 - Confidence: medium-high for explicit alternatives, criteria, tradeoffs, and reversible seams; medium for predicted long-term outcomes until the design is exercised in the target workload and organization.

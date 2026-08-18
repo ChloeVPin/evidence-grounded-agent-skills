@@ -52,6 +52,7 @@ If the request has materially different interpretations, pause and ask instead o
 ## Validation evidence and provenance
 
 - The governing research requires explicit scope, decision criteria, tradeoffs, examples, counterexamples, uncertainty, adversarial review, and verification before skill or code creation.
+- [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119): standardized requirement terms help distinguish obligations, permissions, and optional guidance when converting intent into acceptance criteria.
 - This skill applies falsifiability and anti-bias practice to requirements: competing interpretations are made explicit and disconfirming evidence is sought before implementation.
 - Confidence: high for the clarification workflow; medium for domain-specific criteria, which require domain evidence.
 - Freshness: review when repository interfaces, product constraints, or requirements practices materially change.
