@@ -1,3 +1,8 @@
+---
+name: dependency-security-audit
+description: Review dependency and supply-chain changes for provenance, vulnerabilities, integrity, execution behavior, and residual risk. Use when manifests, lockfiles, build scripts, or external artifacts change.
+---
+
 # Dependency and Supply-Chain Security Audit
 
 Lifecycle: `draft`

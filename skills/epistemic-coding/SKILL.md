@@ -3,6 +3,8 @@ name: epistemic-coding
 description: Apply an evidence-first philosophy while investigating, changing, or explaining a software repository. Use when correctness, uncertainty, scope, or the evidence behind a coding decision matters.
 ---
 
+Lifecycle: `draft`
+
 # Evidence-First Coding
 
 ## Purpose and scope

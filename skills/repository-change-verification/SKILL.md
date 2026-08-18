@@ -1,3 +1,8 @@
+---
+name: repository-change-verification
+description: Verify that an AI-generated repository change matches the requested outcome, preserves unrelated behavior, and has adequate evidence before acceptance. Use for patches, commits, and pull requests.
+---
+
 # Repository Change Verification
 
 Lifecycle: `validated`

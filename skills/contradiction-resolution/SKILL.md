@@ -1,3 +1,8 @@
+---
+name: contradiction-resolution
+description: Resolve conflicting claims, evidence, tests, or failures without forcing false consensus. Use when sources or observed behavior disagree and the coding agent must preserve uncertainty and decision boundaries.
+---
+
 # Contradiction Resolution and Failure Learning
 
 Lifecycle: `draft`

@@ -3,6 +3,8 @@ name: evidence-driven-debugging
 description: Diagnose software failures by reproducing the symptom, separating observations from hypotheses, testing competing explanations, and making the smallest verified fix. Use for bugs, regressions, flaky behavior, failing builds, and unexplained runtime errors in AI coding-agent work.
 ---
 
+Lifecycle: `draft`
+
 # Evidence-Driven Debugging
 
 ## Purpose and scope

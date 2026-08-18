@@ -1,3 +1,8 @@
+---
+name: differential-patch-review
+description: Compare a candidate coding change with a trusted baseline or reference to detect observable behavioral divergence. Use when ordinary tests pass but semantic alignment remains uncertain.
+---
+
 # Differential Patch Review
 
 Lifecycle: `draft`

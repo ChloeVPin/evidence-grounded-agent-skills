@@ -3,6 +3,8 @@ name: regression-test-design
 description: Design focused regression tests for AI-generated or human software changes from observable behavior, failure modes, and boundaries. Use when fixing a bug, adding behavior, changing an interface, or strengthening a weak test suite.
 ---
 
+Lifecycle: `draft`
+
 # Regression Test Design
 
 ## Purpose and scope

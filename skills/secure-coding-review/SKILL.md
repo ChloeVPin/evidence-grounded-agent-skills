@@ -3,6 +3,8 @@ name: secure-coding-review
 description: Review an AI-generated coding change for application security risks at trust boundaries, including input handling, authorization, secrets, data exposure, injection, and unsafe failure behavior. Use before accepting security-relevant features, bug fixes, or refactors.
 ---
 
+Lifecycle: `draft`
+
 # Secure Coding Review
 
 ## Purpose and scope

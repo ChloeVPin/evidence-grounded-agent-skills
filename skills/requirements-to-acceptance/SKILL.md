@@ -3,6 +3,8 @@ name: requirements-to-acceptance
 description: Turn an ambiguous software request into explicit, testable acceptance criteria before an AI coding agent changes a repository. Use for feature requests, bug reports, refactors, migrations, and tasks with hidden assumptions or unclear boundaries.
 ---
 
+Lifecycle: `draft`
+
 # Requirements to Acceptance Criteria
 
 ## Purpose and scope

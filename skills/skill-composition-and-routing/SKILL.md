@@ -3,6 +3,8 @@ name: skill-composition-and-routing
 description: Select, order, and combine skills for an AI coding-agent task without activating irrelevant, duplicate, or conflicting guidance. Use when several skills may apply, a workflow spans phases, or a skill library is being extended.
 ---
 
+Lifecycle: `draft`
+
 # Skill Composition and Routing
 
 ## Purpose and scope

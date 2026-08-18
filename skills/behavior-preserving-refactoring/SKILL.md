@@ -3,6 +3,8 @@ name: behavior-preserving-refactoring
 description: Restructure code without changing its observable contract. Use when an AI coding agent extracts modules, renames interfaces, reduces duplication, changes control flow, or modernizes implementation while behavior should remain stable.
 ---
 
+Lifecycle: `draft`
+
 # Behavior-Preserving Refactoring
 
 ## Purpose and scope
