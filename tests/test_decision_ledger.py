@@ -306,6 +306,10 @@ class DecisionLedgerTest(unittest.TestCase):
         ).read_text())
         self.assertTrue(audit_migrations([migration]).valid)
         self.assertFalse(audit_migrations([migration, dict(migration)]).valid)
+        self.assertTrue(audit_migrations(
+            [migration], {"0061-differential-boundary-failure"},
+        ).valid)
+        self.assertFalse(audit_migrations([migration], {"missing-entry"}).valid)
 
 
 if __name__ == "__main__":

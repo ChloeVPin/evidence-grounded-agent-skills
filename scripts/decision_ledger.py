@@ -107,13 +107,17 @@ def validate_migration(migration: dict) -> ContextAssessment:
     })
 
 
-def audit_migrations(migrations: list[dict]) -> ContextAssessment:
+def audit_migrations(
+    migrations: list[dict], source_entry_ids: set[str] | None = None,
+) -> ContextAssessment:
     """Audit every migration record for validity and unique identity."""
     migration_ids = []
     for migration in migrations:
         assessment = validate_migration(migration)
         if not assessment.valid:
             return assessment
+        if source_entry_ids is not None and migration["source_entry_id"] not in source_entry_ids:
+            return ContextAssessment(False, f"missing migration source entry: {migration['source_entry_id']}")
         migration_ids.append(migration["migration_id"])
     if len(set(migration_ids)) != len(migration_ids):
         return ContextAssessment(False, "duplicate migration IDs")
