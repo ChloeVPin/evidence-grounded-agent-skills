@@ -1,7 +1,7 @@
 # Cycle 0009 — Durable Review Decisions
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with bound review decisions
 
 ## Question
 
@@ -9,16 +9,16 @@ How should sensitive-path review decisions be stored so they remain auditable an
 
 ## Decision
 
-_To be determined._
+Sensitive approvals are durable only when they include reviewer identity, rationale, timestamp, and the exact revision, diff digest, and criteria digest from the attestation.
 
 ## Evidence and provenance
 
-_Record artifact format and tests._
+The escalation record is validated by `scripts/review_change.py`; tests cover valid binding and copied-approval rejection.
 
 ## Disconfirming evidence sought
 
-_Try to apply a valid decision artifact to a different revision or changed sensitive path._
+Changing the reviewed diff invalidates both the attestation and the copied escalation decision.
 
 ## Next action
 
-Bind escalation decisions to the same revision, diff hash, and criteria hash used by the evidence attestation.
+Validation passed locally. Limitation: local records still depend on the claimed reviewer identity; repository permissions and signatures remain an operational control. Next cycle: add a repository-native review record format and a command to generate it from captured evidence.

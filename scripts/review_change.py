@@ -23,14 +23,20 @@ class ChangeReview:
         return self.scope_ok and self.evidence_ok and self.attestation_ok and self.escalation_ok
 
 
-def valid_escalation(escalation: dict | None) -> bool:
+def valid_escalation(escalation: dict | None, attestation: dict) -> bool:
     if not escalation:
         return False
-    required = ("reviewer", "decision", "rationale", "timestamp")
+    required = (
+        "reviewer", "decision", "rationale", "timestamp",
+        "revision", "diff_sha256", "criteria_sha256",
+    )
     if any(not escalation.get(field) for field in required):
         return False
     if escalation["decision"] != "accept":
         return False
+    for field in ("revision", "diff_sha256", "criteria_sha256"):
+        if escalation[field] != attestation.get(field):
+            return False
     try:
         datetime.fromisoformat(escalation["timestamp"].replace("Z", "+00:00"))
     except ValueError:
@@ -43,9 +49,11 @@ def review_change(record: dict) -> ChangeReview:
         record["paths"], tuple(record["allowed_prefixes"]),
     )
     evidence = review_evidence(record["evidence"])
-    escalation_ok = not paths.sensitive or valid_escalation(record.get("escalation"))
     attestation_ok = verify_attestation(
         record["attestation"], record["diff"], record["acceptance_criteria"],
+    )
+    escalation_ok = not paths.sensitive or valid_escalation(
+        record.get("escalation"), record["attestation"],
     )
     return ChangeReview(
         scope_ok=not paths.out_of_scope,

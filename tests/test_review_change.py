@@ -59,6 +59,8 @@ class EndToEndReviewTest(unittest.TestCase):
             "decision": "accept",
             "rationale": "Pinned and minimal workflow change reviewed.",
             "timestamp": "2026-08-18T12:00:00Z",
+            **{key: review["attestation"][key] for key in
+               ("revision", "diff_sha256", "criteria_sha256")},
         }
         result = review_change(review)
         self.assertTrue(result.accepted)
@@ -71,6 +73,25 @@ class EndToEndReviewTest(unittest.TestCase):
         review["escalation"] = {"reviewer": "reviewer", "decision": "accept"}
         result = review_change(review)
         self.assertFalse(result.accepted)
+        self.assertFalse(result.escalation_ok)
+
+    def test_approval_copied_to_different_diff_is_rejected(self):
+        approved = record()
+        approved["paths"] = [".github/workflows/ci.yml"]
+        approved["allowed_prefixes"] = [".github/workflows/"]
+        approved["escalation"] = {
+            "reviewer": "reviewer@example.test",
+            "decision": "accept",
+            "rationale": "Reviewed workflow change.",
+            "timestamp": "2026-08-18T12:00:00Z",
+            **{key: approved["attestation"][key] for key in
+               ("revision", "diff_sha256", "criteria_sha256")},
+        }
+        copied = dict(approved)
+        copied["diff"] = "different-diff"
+        result = review_change(copied)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.attestation_ok)
         self.assertFalse(result.escalation_ok)
 
 
