@@ -258,6 +258,32 @@ def validate_audit_capture_dependency_summary(
     return ContextAssessment(True, "audit capture dependency summary is complete")
 
 
+def validate_summary_state_diagnostic_capture(
+    capture: dict, summary: dict, available_paths: set[str],
+    history_revisions: set[str],
+) -> ContextAssessment:
+    """Validate a capture that binds summary state to a successful audit run."""
+    required = (
+        "capture_id", "command", "revision", "exit_status", "output_sha256",
+        "summary_ref", "summary_sha256", "audit_result",
+    )
+    missing = [field for field in required if field not in capture]
+    if missing:
+        return ContextAssessment(False, f"summary capture missing: {', '.join(missing)}")
+    evidence_check = validate_generation_evidence(
+        capture, "python3 scripts/audit_current_assertion.py", history_revisions,
+    )
+    if not evidence_check.valid:
+        return evidence_check
+    if capture["summary_ref"] not in available_paths:
+        return ContextAssessment(False, "summary capture reference is unavailable")
+    if capture["summary_sha256"] != summary.get("summary_sha256"):
+        return ContextAssessment(False, "summary capture digest is stale")
+    if capture["audit_result"] != "passed":
+        return ContextAssessment(False, "summary capture audit result is not passed")
+    return ContextAssessment(True, "summary state diagnostic capture is valid")
+
+
 def validate_failure_evidence(record: dict, available_paths: set[str]) -> ContextAssessment:
     """Validate a persisted diagnostic record for a failed audit gate."""
     required = (

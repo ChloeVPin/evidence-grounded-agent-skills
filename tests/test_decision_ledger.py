@@ -24,6 +24,7 @@ from scripts.decision_ledger import (
     validate_four_check_capture,
     validate_snapshot_diagnostic_capture,
     validate_graph_state_diagnostic_capture,
+    validate_summary_state_diagnostic_capture,
     validate_audit_capture_dependency_summary,
     validate_failure_evidence,
     validate_audit_dependency_manifest,
@@ -889,6 +890,14 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(result.returncode, capture["exit_status"])
         self.assertTrue(validate_captured_output(capture, result.stdout).valid)
         self.assertEqual(json.loads(result.stdout)["result"], capture["audit_result"])
+        summary = json.loads((root / capture["summary_ref"]).read_text())
+        self.assertTrue(validate_summary_state_diagnostic_capture(
+            capture, summary, {capture["summary_ref"]}, {capture["revision"]},
+        ).valid)
+        self.assertFalse(validate_summary_state_diagnostic_capture(
+            dict(capture, summary_sha256="0" * 64),
+            summary, {capture["summary_ref"]}, {capture["revision"]},
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

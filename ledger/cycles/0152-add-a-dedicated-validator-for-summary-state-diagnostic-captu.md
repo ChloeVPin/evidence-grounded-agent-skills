@@ -1,7 +1,7 @@
 # Cycle 0152 — Add a dedicated validator for summary-state diagnostic captures
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Add a dedicated validator for summary-state diagnostic captures
 
 ## Decision
 
-_To be determined from evidence._
+Added `validate_summary_state_diagnostic_capture`, enforcing command provenance,
+summary reference availability, digest equality, and passing result. Valid and
+tampered captures are covered.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0151 capture, 0146 summary, dedicated validator, and integration
+test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The validator binds summary provenance but does not replay summary mutations;
+those remain covered by executable temporary-root tests.
 
 ## Next action
 
-_Research, validate, and update this record._
+Use the dedicated validator in the executable summary-state path.
