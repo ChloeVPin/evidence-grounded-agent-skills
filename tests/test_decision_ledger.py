@@ -565,6 +565,12 @@ class DecisionLedgerTest(unittest.TestCase):
             digests, output, paths,
         ).valid)
 
+        state = json.loads((root / "ledger/state/0113-complete-self-validation-gate.json").read_text())
+        self.assertEqual(state["status"], "passed")
+        self.assertEqual(state["bundle_ref"], "ledger/evidence/0108-self-validation-bundle.json")
+        self.assertTrue(all(state["checks"].values()))
+        self.assertEqual(state["self_validation_output_sha256"], self_capture["output_sha256"])
+
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [
             json.loads(Path(f"ledger/evidence/{name}").read_text())

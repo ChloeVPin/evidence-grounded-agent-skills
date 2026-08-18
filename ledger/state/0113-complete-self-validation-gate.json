@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0113",
+  "status": "passed",
+  "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
+  "checks": {
+    "bundle": true,
+    "chain": true,
+    "assertion": true,
+    "test_result": true,
+    "content": true,
+    "self_capture": true,
+    "self_output_digest": true
+  },
+  "self_validation_output_sha256": "614823990dd2900727863828c6b4e7aae97f2e4fc443ca7233b9026ed92ee119"
+}
