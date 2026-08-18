@@ -1,7 +1,7 @@
 # Cycle 0015 — Progress Ledger
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with substantive-progress schema
 
 ## Question
 
@@ -9,16 +9,16 @@ What evidence fields should distinguish meaningful ecosystem improvement from ac
 
 ## Decision
 
-_To be determined._
+Progress requires numeric deltas for quality, coverage, evidence quality, validation, or uncertainty, plus evidence. File, source, and commit counts cannot qualify by themselves.
 
 ## Evidence and provenance
 
-_Record progress schema and tests._
+Implemented in `scripts/progress_record.py` with three tests in `tests/test_progress_record.py`.
 
 ## Disconfirming evidence sought
 
-_Try to report a successful cycle with only file count, source count, or commit count._
+An artifact-count-only record is rejected; a quality delta without evidence is also rejected.
 
 ## Next action
 
-Define progress records around quality delta, coverage, evidence quality, validation results, and residual uncertainty.
+Validation passed locally. Limitation: the schema validates the presence and shape of evidence but cannot independently measure the deltas. Next cycle: add durable cycle state that records mode, outcome, progress assessment, and next action.
