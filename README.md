@@ -44,6 +44,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/mutation_review.py`](scripts/mutation_review.py): classifies mutation outcomes without score inflation.
 - [`scripts/tool_policy.py`](scripts/tool_policy.py): evaluates least-privilege tool-call requests and approval gates.
 - [`scripts/tool_audit.py`](scripts/tool_audit.py): builds redacted, digest-bound tool-call audit records.
+- [`scripts/tool_call_review.py`](scripts/tool_call_review.py): makes auditing mandatory for allowed and denied tool calls.
 - [`fixtures/fault_target.py`](fixtures/fault_target.py): minimal boundary-mutation target used by the test-effectiveness fixture.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 
