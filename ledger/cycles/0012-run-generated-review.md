@@ -1,7 +1,7 @@
 # Cycle 0012 — Run Generated Review
 
 Date: 2026-08-18
-Status: in progress
+Status: validated end to end
 
 ## Question
 
@@ -9,16 +9,16 @@ Does a generated record pass the complete review flow, and does changing any bou
 
 ## Decision
 
-_To be determined._
+Generated version-1 records pass schema validation and the complete reviewer; mutating the bound diff rejects the record.
 
 ## Evidence and provenance
 
-_Record end-to-end command output and tests._
+The generator and complete reviewer are exercised together in `tests/test_generate_record.py`.
 
 ## Disconfirming evidence sought
 
-_Change generated diff, criteria, evidence status, or sensitive-path handling after generation._
+Mutating the generated diff makes attestation validation fail; generator tests also reject mismatched revisions and incomplete evidence.
 
 ## Next action
 
-Run generated records through schema validation and `review_change`, then add stale-input and failed-evidence cases.
+Validation passed locally. Limitation: the end-to-end fixture uses deterministic in-memory evidence; the next cycle should generate a persisted record from an actual repository command and inspect its serialized artifact.
