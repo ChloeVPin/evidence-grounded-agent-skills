@@ -1,6 +1,7 @@
 import unittest
 import json
 from pathlib import Path
+import subprocess
 
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
@@ -537,6 +538,17 @@ class DecisionLedgerTest(unittest.TestCase):
             "ledger/evidence/0093-policy-content-digests.json",
         ).read_text())
         self.assertTrue(validate_policy_assertion_content(head.assertion, digests).valid)
+
+    def test_executable_current_head_audit_passes(self):
+        root = Path(__file__).resolve().parents[1]
+        result = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py"],
+            cwd=root, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0)
+        output = json.loads(result.stdout)
+        self.assertEqual(output["audit_id"], "0093-generation-policy-audit")
+        self.assertEqual(output["result"], "passed")
 
 
 if __name__ == "__main__":
