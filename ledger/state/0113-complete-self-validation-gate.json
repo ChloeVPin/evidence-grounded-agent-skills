@@ -5,7 +5,7 @@
   "validated_revision": "57c31de1a9e3aad2e53b44539908d1d40c79265a",
   "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
   "dependency_manifest_ref": "ledger/evidence/0125-audit-dependencies.json",
-  "dependency_paths_sha256": "755b339677afa638724df5fbaca49215d0476c405ac02cffce810e1004f31c55",
+  "dependency_paths_sha256": "83f9185f611990d32642f7a9d34d8bd03d08673f91739b286e19794818359c9d",
   "diagnostic_snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
   "diagnostic_snapshot_sha256": "f04caa09ee8f599d0949d9e71a52890edd41a5b1bb62d4a7e1702fd528fa9206",
   "dependency_graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",

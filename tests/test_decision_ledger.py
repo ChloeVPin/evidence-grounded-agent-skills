@@ -764,6 +764,11 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_failure_evidence(
             dict(record, reason=""), available,
         ).valid)
+        graph_record = json.loads(Path(
+            "ledger/evidence/0162-graph-edge-failure.json",
+        ).read_text())
+        graph_available = {graph_record["source_capture_ref"], graph_record["diagnostic_ref"]}
+        self.assertTrue(validate_failure_evidence(graph_record, graph_available).valid)
 
     def test_audit_dependency_manifest_is_exact_and_existing(self):
         manifest = json.loads(Path(

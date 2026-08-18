@@ -25,6 +25,7 @@ EXPECTED_DEPENDENCIES = {
     "ledger/evidence/0119-four-check-audit-capture.json",
     "ledger/evidence/0122-capture-schema-failure.json",
     "ledger/evidence/0154-freshness-capture-inventory.json",
+    "ledger/evidence/0162-graph-edge-failure.json",
     "ledger/state/0113-complete-self-validation-gate.json",
 }
 EXPECTED_FRESHNESS_GRAPH_NODES = {
@@ -144,6 +145,15 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0154-freshness-capture-inventory.json",
         },
     )
+    graph_failure_evidence = json.loads(
+        (evidence_dir / "0162-graph-edge-failure.json").read_text()
+    )
+    graph_failure_evidence_check = validate_failure_evidence(
+        graph_failure_evidence, {
+            "ledger/evidence/0143-graph-state-diagnostic-capture.json",
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+        },
+    )
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},
     )
@@ -221,6 +231,7 @@ def _run(root: Path = ROOT) -> int:
         "freshness": (
             freshness_check.valid and capture_schema_check.valid
             and failure_evidence_check.valid and dependency_check.valid
+            and graph_failure_evidence_check.valid
             and diagnostic_snapshot_check.valid
             and snapshot_capture_check.valid
             and graph_check.valid
@@ -240,6 +251,7 @@ def _run(root: Path = ROOT) -> int:
                 bundle_check, result_check, content_check,
                 freshness_check, capture_schema_check,
                 failure_evidence_check, dependency_check,
+                graph_failure_evidence_check,
                 diagnostic_snapshot_check,
                 snapshot_capture_check,
                 graph_check,
