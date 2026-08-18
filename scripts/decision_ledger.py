@@ -11,6 +11,11 @@ class LedgerAssessment:
     reason: str
 
 
+def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
+    """Return prior entries whose recorded claims contain the exact claim."""
+    return [entry for entry in entries if claim in entry.get("claims", [])]
+
+
 def validate_entry(entry: dict) -> LedgerAssessment:
     required = ("entry_id", "cycle_id", "artifacts", "claims", "outcome", "evidence", "decision")
     missing = [field for field in required if field not in entry]

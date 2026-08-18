@@ -2,7 +2,7 @@ import unittest
 import json
 from pathlib import Path
 
-from scripts.decision_ledger import validate_entry
+from scripts.decision_ledger import find_matching_entries, validate_entry
 from scripts.contradiction_policy import Claim, resolve_claims
 
 
@@ -69,6 +69,15 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(entry["outcome"], "failure")
         self.assertIn("zero-value", entry["corrective_action"])
         self.assertIn("survives", entry["regression_trigger"])
+
+    def test_prior_failure_is_found_before_rediscovery(self):
+        path = Path("ledger/decisions/0053-boundary-mutant-failure.json")
+        entry = json.loads(path.read_text())
+        matches = find_matching_entries(
+            [entry], "mutation survival is evidence of an incomplete test oracle",
+        )
+        self.assertEqual([item["entry_id"] for item in matches], [entry["entry_id"]])
+        self.assertEqual(find_matching_entries([entry], "new failure"), [])
 
 
 if __name__ == "__main__":
