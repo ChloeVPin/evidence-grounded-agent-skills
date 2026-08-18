@@ -1,6 +1,6 @@
 {
   "inventory_id": "0154-freshness-capture-inventory",
-  "inventory_sha256": "3835cbe57f9151c97fa3ccfd1299b239cc7de8fad2d7b01c2d1037c8b99609fe",
+  "inventory_sha256": "f92910a4a7be587d751ac70920e57cf4e8d5397c92d9cf7b2b0f2f9f9643df46",
   "capture_refs": [
     "ledger/evidence/0093-generation-rerun.json",
     "ledger/evidence/0108-audit-command-capture.json",
@@ -31,5 +31,11 @@
   "edge_failure_refs": [
     "ledger/evidence/0162-graph-edge-failure.json",
     "ledger/evidence/0184-graph-edge-drift-failure.json"
+  ],
+  "state_failure_refs": [
+    "ledger/evidence/0169-diagnostic-reference-state-failure.json",
+    "ledger/evidence/0174-graph-provenance-state-failure.json",
+    "ledger/evidence/0179-snapshot-provenance-state-failure.json",
+    "ledger/evidence/0189-edge-failure-state-failure.json"
   ]
 }
