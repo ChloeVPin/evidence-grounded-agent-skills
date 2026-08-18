@@ -6,7 +6,8 @@ from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
     audit_context_names, audit_migrations, find_matching_entries,
     find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
-    check_source_inventory_digest, validate_entry, migrate_contexts,
+    check_generation_revision, check_source_inventory_digest, validate_entry,
+    migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
     validate_migration, validate_source_file_manifest,
 )
@@ -353,6 +354,14 @@ class DecisionLedgerTest(unittest.TestCase):
         missing_provenance = json.loads(json.dumps(manifest))
         del missing_provenance["generated_by"]
         self.assertFalse(validate_source_file_manifest(missing_provenance).valid)
+
+    def test_generation_revision_must_remain_in_history(self):
+        manifest = json.loads(Path(
+            "ledger/inventories/0078-source-entry-files.json",
+        ).read_text())
+        revision = manifest["generated_by"]["revision"]
+        self.assertTrue(check_generation_revision(revision, {revision, "current"}).valid)
+        self.assertFalse(check_generation_revision(revision, {"current"}).valid)
 
 
 if __name__ == "__main__":

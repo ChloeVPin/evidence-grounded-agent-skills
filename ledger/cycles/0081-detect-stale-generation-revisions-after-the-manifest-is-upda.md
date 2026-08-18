@@ -1,7 +1,7 @@
 # Cycle 0081 — Detect stale generation revisions after the manifest is updated
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Detect stale generation revisions after the manifest is updated
 
 ## Decision
 
-_To be determined from evidence._
+Generation provenance remains valid across later commits when its recorded
+revision is still in repository history; unknown revisions are rejected.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Tests accept the manifest’s historical generation revision in a supplied history
+set and reject the same revision when it is absent.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The check requires an authoritative history set from the caller and does not
+itself query Git or prove that the generation command was actually run.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: bind the revision check to captured Git
+history evidence.

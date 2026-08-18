@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "cycle_id": "0081",
+  "mode": "maintenance",
+  "status": "completed",
+  "progress": {
+    "quality_delta": 1,
+    "coverage_delta": 1,
+    "evidence_quality_delta": 1,
+    "validation_delta": 1,
+    "uncertainty_delta": 1,
+    "evidence": [
+      "scripts/decision_ledger.py",
+      "tests/test_decision_ledger.py",
+      "ledger/inventories/0078-source-entry-files.json"
+    ]
+  },
+  "decision": "accept only generation revisions present in history",
+  "next_action": "bind revision check to captured Git history evidence"
+}

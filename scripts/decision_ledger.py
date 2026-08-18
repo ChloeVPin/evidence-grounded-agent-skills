@@ -91,6 +91,17 @@ def check_source_inventory_digest(
     return ContextAssessment(True, "source inventory digest matches")
 
 
+def check_generation_revision(
+    recorded_revision: object, history_revisions: set[str],
+) -> ContextAssessment:
+    """Accept historical generation commits only when they remain reachable."""
+    if not isinstance(recorded_revision, str) or not recorded_revision:
+        return ContextAssessment(False, "generation revision is required")
+    if recorded_revision not in history_revisions:
+        return ContextAssessment(False, "generation revision is not in repository history")
+    return ContextAssessment(True, "generation revision is present in history")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
