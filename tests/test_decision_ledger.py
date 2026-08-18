@@ -520,6 +520,24 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(head.valid)
         self.assertEqual(head.assertion["audit_id"], "0093-generation-policy-audit")
 
+    def test_discovered_head_bundle_and_content_pass(self):
+        assertions = [
+            json.loads(path.read_text())
+            for path in sorted(Path("ledger/evidence").glob("*-generation-policy-audit.json"))
+        ]
+        head = discover_current_assertion(assertions)
+        bundle = json.loads(Path(
+            "ledger/evidence/0093-current-assertion-bundle.json",
+        ).read_text())
+        paths = set(head.assertion["evidence_refs"]) | {
+            bundle["assertion_ref"], bundle["content_digest_ref"],
+        }
+        self.assertTrue(validate_current_assertion_bundle(bundle, paths).valid)
+        digests = json.loads(Path(
+            "ledger/evidence/0093-policy-content-digests.json",
+        ).read_text())
+        self.assertTrue(validate_policy_assertion_content(head.assertion, digests).valid)
+
 
 if __name__ == "__main__":
     unittest.main()
