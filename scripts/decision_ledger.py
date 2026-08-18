@@ -14,6 +14,7 @@ CONTEXT_ARTIFACT_HINTS = {
     "tool-authorization": ("tool_policy", "tool_audit"),
     "dependency-security": ("dependency",),
     "differential-review": ("differential",),
+    "behavioral-differential": ("differential",),
 }
 
 
@@ -29,6 +30,13 @@ class ContextAssessment:
     reason: str
 
 
+@dataclass(frozen=True)
+class ContextMigration:
+    valid: bool
+    contexts: tuple[str, ...]
+    reason: str
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
@@ -40,6 +48,19 @@ def validate_contexts(contexts: object) -> ContextAssessment:
     if len(set(contexts)) != len(contexts):
         return ContextAssessment(False, "duplicate contexts are ambiguous")
     return ContextAssessment(True, "valid context declaration")
+
+
+def migrate_contexts(contexts: object, rename_map: dict[str, str]) -> ContextMigration:
+    """Apply an explicit context rename without losing or duplicating scope."""
+    assessment = validate_contexts(contexts)
+    if not assessment.valid:
+        return ContextMigration(False, (), assessment.reason)
+    if any(not isinstance(key, str) or not isinstance(value, str) for key, value in rename_map.items()):
+        return ContextMigration(False, (), "context rename keys and values must be strings")
+    migrated = tuple(rename_map.get(context, context) for context in contexts)
+    if len(set(migrated)) != len(migrated):
+        return ContextMigration(False, (), "context rename creates duplicate scope")
+    return ContextMigration(True, migrated, "context migration is valid")
 
 
 def validate_context_artifacts(entry: dict) -> ContextAssessment:

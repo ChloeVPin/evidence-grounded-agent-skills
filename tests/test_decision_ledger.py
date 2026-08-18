@@ -5,7 +5,7 @@ from pathlib import Path
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
     find_matching_entries, find_paraphrase_candidates, validate_contexts,
-    validate_context_artifacts, validate_entry,
+    validate_context_artifacts, validate_entry, migrate_contexts,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -246,6 +246,22 @@ class DecisionLedgerTest(unittest.TestCase):
     def test_archived_failure_contexts_bind_to_artifacts(self):
         for path in Path("ledger/decisions").glob("*-failure.json"):
             self.assertTrue(validate_entry(json.loads(path.read_text())).valid)
+
+    def test_context_rename_preserves_binding_and_rejects_collision(self):
+        migration = migrate_contexts(
+            ["differential-review"], {"differential-review": "behavioral-differential"},
+        )
+        self.assertTrue(migration.valid)
+        self.assertEqual(migration.contexts, ("behavioral-differential",))
+        self.assertTrue(validate_context_artifacts({
+            "contexts": list(migration.contexts),
+            "artifacts": ["scripts/differential_review.py"],
+        }).valid)
+        collision = migrate_contexts(
+            ["differential-review", "behavioral-differential"],
+            {"differential-review": "behavioral-differential"},
+        )
+        self.assertFalse(collision.valid)
 
 
 if __name__ == "__main__":
