@@ -1,7 +1,7 @@
 # Cycle 0069 — Validate context policy against ledger artifact paths
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Validate context policy against ledger artifact paths
 
 ## Decision
 
-_To be determined from evidence._
+Known contexts now have artifact-path hints, and ledger validation rejects
+unknown or mismatched context declarations.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Tests validate all archived failure records, a valid tool-policy binding, and
+invalid dependency, unknown-context, and mismatched-path cases.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Path hints establish structural provenance only; they do not prove that an
+artifact semantically belongs to a context or that the context is complete.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: test context-policy evolution when a
+domain is split or renamed.

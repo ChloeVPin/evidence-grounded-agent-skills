@@ -9,6 +9,12 @@ TERM_ALIASES = {
     "authorization": "authority",
     "unrestricted": "wildcard",
 }
+CONTEXT_ARTIFACT_HINTS = {
+    "test-effectiveness": ("fault", "mutation"),
+    "tool-authorization": ("tool_policy", "tool_audit"),
+    "dependency-security": ("dependency",),
+    "differential-review": ("differential",),
+}
 
 
 @dataclass(frozen=True)
@@ -34,6 +40,24 @@ def validate_contexts(contexts: object) -> ContextAssessment:
     if len(set(contexts)) != len(contexts):
         return ContextAssessment(False, "duplicate contexts are ambiguous")
     return ContextAssessment(True, "valid context declaration")
+
+
+def validate_context_artifacts(entry: dict) -> ContextAssessment:
+    """Require each declared known context to be represented by an artifact."""
+    contexts = entry.get("contexts")
+    if contexts is None:
+        return ContextAssessment(True, "no context binding declared")
+    assessment = validate_contexts(contexts)
+    if not assessment.valid:
+        return assessment
+    artifacts = entry.get("artifacts", [])
+    for context in contexts:
+        hints = CONTEXT_ARTIFACT_HINTS.get(context)
+        if hints is None:
+            return ContextAssessment(False, f"unknown context: {context}")
+        if not any(any(hint in artifact for hint in hints) for artifact in artifacts):
+            return ContextAssessment(False, f"context is not bound to artifacts: {context}")
+    return ContextAssessment(True, "contexts are bound to artifacts")
 
 
 def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
@@ -127,6 +151,9 @@ def validate_entry(entry: dict) -> LedgerAssessment:
         return LedgerAssessment(False, "claims are required")
     if not isinstance(entry["artifacts"], list) or not entry["artifacts"]:
         return LedgerAssessment(False, "artifact references are required")
+    context_binding = validate_context_artifacts(entry)
+    if not context_binding.valid:
+        return LedgerAssessment(False, context_binding.reason)
     if entry["outcome"] not in OUTCOMES:
         return LedgerAssessment(False, "unknown outcome")
     if not entry["evidence"]:

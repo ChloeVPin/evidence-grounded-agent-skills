@@ -5,7 +5,7 @@ from pathlib import Path
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
     find_matching_entries, find_paraphrase_candidates, validate_contexts,
-    validate_entry,
+    validate_context_artifacts, validate_entry,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -228,6 +228,24 @@ class DecisionLedgerTest(unittest.TestCase):
             evaluate_labeled_queries(
                 [], [{"query": "anything", "expected_ids": [], "contexts": ["*"]}],
             )
+
+    def test_contexts_are_bound_to_artifact_paths(self):
+        valid = {
+            "contexts": ["tool-authorization"],
+            "artifacts": ["scripts/tool_policy.py"],
+        }
+        invalid = {
+            "contexts": ["tool-authorization"],
+            "artifacts": ["scripts/dependency_review.py"],
+        }
+        unknown = {"contexts": ["unknown"], "artifacts": ["scripts/tool.py"]}
+        self.assertTrue(validate_context_artifacts(valid).valid)
+        self.assertFalse(validate_context_artifacts(invalid).valid)
+        self.assertFalse(validate_context_artifacts(unknown).valid)
+
+    def test_archived_failure_contexts_bind_to_artifacts(self):
+        for path in Path("ledger/decisions").glob("*-failure.json"):
+            self.assertTrue(validate_entry(json.loads(path.read_text())).valid)
 
 
 if __name__ == "__main__":
