@@ -26,6 +26,13 @@ EXPECTED_DEPENDENCIES = {
     "ledger/evidence/0122-capture-schema-failure.json",
     "ledger/state/0113-complete-self-validation-gate.json",
 }
+EXPECTED_FRESHNESS_GRAPH_NODES = {
+    "scripts/audit_current_assertion.py",
+    "ledger/evidence/0125-audit-dependencies.json",
+    "ledger/evidence/0130-dependency-state-diagnostics.json",
+    "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+    "ledger/state/0113-complete-self-validation-gate.json",
+}
 
 from scripts.decision_ledger import (
     compare_policy_audit,
@@ -80,7 +87,7 @@ def _run(root: Path = ROOT) -> int:
         or (path == "scripts/audit_current_assertion.py" and Path(__file__).exists())
     }
     graph_check = validate_freshness_dependency_graph(
-        dependency_graph, set(dependency_graph.get("nodes", [])), graph_available,
+        dependency_graph, EXPECTED_FRESHNESS_GRAPH_NODES, graph_available,
     )
     audit = head.assertion
     bundle_path = evidence_dir / f"{audit['audit_id'][:4]}-current-assertion-bundle.json"

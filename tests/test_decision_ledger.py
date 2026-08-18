@@ -803,6 +803,11 @@ class DecisionLedgerTest(unittest.TestCase):
         altered = json.loads(json.dumps(graph))
         altered["edges"][0] = ["missing", graph["nodes"][0]]
         self.assertFalse(validate_freshness_dependency_graph(altered, expected, expected).valid)
+        altered_nodes = json.loads(json.dumps(graph))
+        altered_nodes["nodes"] = altered_nodes["nodes"][:-1]
+        self.assertFalse(validate_freshness_dependency_graph(
+            altered_nodes, expected, expected,
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

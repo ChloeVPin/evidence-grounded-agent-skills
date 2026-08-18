@@ -1,7 +1,7 @@
 # Cycle 0139 — Bind graph nodes to an independent expected dependency set
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Bind graph nodes to an independent expected dependency set
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now supplies an independent expected node set rather than
+trusting the graph’s own node list. Graph node removal or edge drift fails the
+freshness gate.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `EXPECTED_FRESHNESS_GRAPH_NODES` in the executable audit and expanded
+graph mutation tests.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The expected set is code-level policy and must be updated deliberately when the
+freshness architecture changes.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist an independent graph-policy digest.
