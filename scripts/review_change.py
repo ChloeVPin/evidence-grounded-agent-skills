@@ -52,8 +52,9 @@ def review_change(record: dict) -> ChangeReview:
     attestation_ok = verify_attestation(
         record["attestation"], record["diff"], record["acceptance_criteria"],
     )
-    escalation_ok = not paths.sensitive or valid_escalation(
-        record.get("escalation"), record["attestation"],
+    escalation_ok = not paths.sensitive or (
+        attestation_ok
+        and valid_escalation(record.get("escalation"), record["attestation"])
     )
     return ChangeReview(
         scope_ok=not paths.out_of_scope,
