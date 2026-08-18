@@ -27,6 +27,17 @@ Every material conclusion in a skill must distinguish direct observations from h
 
 `Lifecycle: draft` means the skill is usable guidance under review, not a guarantee of correctness. A future `validated`, `trusted`, `deprecated`, or `superseded` state must be earned and explained by current evidence; lifecycle labels never override repository instructions, user authorization, or specialist review.
 
+## Publication gate
+
+Before adding or materially revising a skill, confirm:
+
+- [ ] The task is recurring and distinct from every existing skill; overlap is narrowed or explicitly composed.
+- [ ] Trigger, prerequisites, decision boundaries, permissions, side effects, and stopping conditions are concrete.
+- [ ] Observations, hypotheses, recommendations, confidence, uncertainty, and tradeoffs are labeled.
+- [ ] Authoritative evidence is cited, source independence is checked, and disconfirming cases are recorded.
+- [ ] Examples, counterexamples, failure recovery, misuse limits, freshness, lifecycle, and review triggers are present.
+- [ ] Related references resolve, the README index is updated, and only the standalone `SKILL.md` plus minimal documentation is added.
+
 ## Using the library
 
 1. Start with [repository exploration](skills/repository-exploration/SKILL.md) and [requirements to acceptance](skills/requirements-to-acceptance/SKILL.md) when the codebase or target is unclear.
