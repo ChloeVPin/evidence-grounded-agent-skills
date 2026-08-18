@@ -1,7 +1,7 @@
 # Cycle 0150 — Expose summary-state freshness failures as distinct diagnostics
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Expose summary-state freshness failures as distinct diagnostics
 
 ## Decision
 
-_To be determined from evidence._
+Summary-state freshness now has distinct executable diagnostics for stale summary
+digest and invalid summary reference, alongside the existing state bindings.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `validate_self_validation_state` and expanded temporary-root mutation
+coverage in `tests/test_decision_ledger.py`.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Stable consumers continue using `AUDIT_GATE_FAILED` and the false freshness check;
+diagnostic prose is explanatory.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a summary-state diagnostic capture.
