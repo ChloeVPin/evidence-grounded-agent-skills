@@ -6,7 +6,8 @@ from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
     audit_context_names, audit_migrations, find_matching_entries,
     find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
-    validate_entry, migrate_contexts, source_inventory_digest, validate_migration,
+    check_source_inventory_digest, validate_entry, migrate_contexts,
+    source_inventory_digest, validate_migration,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -321,6 +322,19 @@ class DecisionLedgerTest(unittest.TestCase):
             migration["source_inventory_sha256"], source_inventory_digest(source_ids),
         )
         self.assertNotEqual(source_inventory_digest(source_ids), source_inventory_digest({"other"}))
+
+    def test_source_inventory_drift_is_detected(self):
+        source_ids = {"0053-boundary-mutant-failure", "0055-wildcard-authority-failure",
+                      "0059-unverified-dependency-failure", "0061-differential-boundary-failure"}
+        migration = json.loads(Path(
+            "ledger/migrations/0072-differential-context-rename.json",
+        ).read_text())
+        self.assertTrue(check_source_inventory_digest(
+            migration["source_inventory_sha256"], source_ids,
+        ).valid)
+        self.assertFalse(check_source_inventory_digest(
+            migration["source_inventory_sha256"], source_ids | {"0077-new-entry"},
+        ).valid)
 
 
 if __name__ == "__main__":

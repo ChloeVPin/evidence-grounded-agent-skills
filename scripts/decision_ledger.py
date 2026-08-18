@@ -46,6 +46,18 @@ def source_inventory_digest(source_entry_ids: set[str]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def check_source_inventory_digest(
+    recorded_digest: object, source_entry_ids: set[str],
+) -> ContextAssessment:
+    """Detect stale migration provenance after the source inventory changes."""
+    if not isinstance(recorded_digest, str):
+        return ContextAssessment(False, "recorded source inventory digest is not a string")
+    expected = source_inventory_digest(source_entry_ids)
+    if recorded_digest != expected:
+        return ContextAssessment(False, "source inventory digest is stale")
+    return ContextAssessment(True, "source inventory digest matches")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

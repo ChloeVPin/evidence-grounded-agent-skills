@@ -1,7 +1,7 @@
 # Cycle 0077 — Detect source-inventory drift after a new decision entry is added
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Detect source-inventory drift after a new decision entry is added
 
 ## Decision
 
-_To be determined from evidence._
+Source-inventory drift is now detected by recomputing the recorded digest; the
+original four-entry inventory passes and a simulated fifth entry fails.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Regression tests exercise both matching and stale-digest paths against the
+durable migration record.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The check detects changes only when the caller supplies the changed inventory;
+it does not itself discover untracked entries.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add inventory provenance that enumerates
+the source files used to derive entry IDs.
