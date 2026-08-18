@@ -1,6 +1,6 @@
 {
   "summary_id": "0146-audit-capture-dependencies",
-  "summary_sha256": "dcaf54224df3cd05362014801476c3b478d2e59bb0cd6148376530e3d9252967",
+  "summary_sha256": "0e4ed0414de3f98402ed83399fa9c3b18177f9f37bdea2e6a1432b239be3d43d",
   "capture_refs": [
     "ledger/evidence/0093-generation-rerun.json",
     "ledger/evidence/0108-audit-command-capture.json",
@@ -28,5 +28,9 @@
   "graph_provenance_refs": [
     "ledger/evidence/0137-freshness-dependency-graph.json",
     "ledger/evidence/0143-graph-state-diagnostic-capture.json"
+  ],
+  "snapshot_provenance_refs": [
+    "ledger/evidence/0130-dependency-state-diagnostics.json",
+    "ledger/evidence/0134-snapshot-diagnostic-capture.json"
   ]
 }
