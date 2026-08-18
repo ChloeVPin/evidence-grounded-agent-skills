@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 
 from scripts.cycle_policy import MODES
+from scripts.progress_record import assess_progress
 
 STATUSES = ("in_progress", "completed", "stopped")
 TERMINAL = {"completed", "stopped"}
@@ -40,6 +41,10 @@ def transition(state: dict, status: str, decision: str, next_action: str = "") -
         raise ValueError("terminal cycle cannot transition")
     if status not in TERMINAL:
         raise ValueError("transition status must be completed or stopped")
+    if status == "completed":
+        progress = assess_progress(state["progress"])
+        if not progress.valid:
+            raise ValueError(f"cannot complete cycle: {progress.reason}")
     updated = dict(state)
     updated.update(status=status, decision=decision, next_action=next_action)
     final = validate_state(updated)
