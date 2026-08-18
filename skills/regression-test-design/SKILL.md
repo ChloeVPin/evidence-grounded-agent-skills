@@ -52,6 +52,7 @@ If the contract is unclear, use `requirements-to-acceptance` before writing the 
 ## Validation evidence and provenance
 
 - The governing research requires automated validation, empirical failure analysis, adversarial testing, boundary cases, and honest accounting of limitations.
+- [Google Research: Long-Term Effects of Mutation Testing](https://research.google/pubs/long-term-effects-of-mutation-testing/): mutation testing provides evidence about whether tests detect seeded behavioral changes, while its interpretation remains bounded by the selected mutations.
 - Mutation testing is used here as a diagnostic question—“what plausible wrong behavior would this test miss?”—not as a universal correctness score.
 - Label test results as observations, suspected uncovered faults as hypotheses, and new assertions as recommendations until the relevant behavior is demonstrated.
 - Confidence: high for behavior-first and boundary-oriented test design; medium for the right test level and tooling in any particular repository.

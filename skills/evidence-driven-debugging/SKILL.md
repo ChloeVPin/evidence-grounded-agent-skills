@@ -54,6 +54,7 @@ If the failure cannot be reproduced, preserve the report and add instrumentation
 Separate observed symptoms from hypotheses and recommendations. Record confidence and freshness, and verify whether supporting reports or documentation are genuinely independent.
 
 - The governing research emphasizes falsifiability, disconfirming evidence, adversarial review, empirical failure analysis, regression testing, and preserving failure learning.
+- [Google SRE: Managing Incidents](https://sre.google/sre-book/managing-incidents/): incident work benefits from clear roles, explicit communication, and preserving facts and follow-up actions while the failure is investigated.
 - The skill’s procedure applies the scientific method operationally: observations precede hypotheses, experiments distinguish explanations, and conclusions remain proportional to evidence.
 - Confidence: high for the general debugging workflow; medium for any diagnosis until the specific reproduction and regression evidence exist.
 - Freshness: review when debugging tooling, runtime architecture, or the repository’s incident and testing practices materially change.
