@@ -154,6 +154,31 @@ def validate_captured_output(evidence: dict, output: str) -> ContextAssessment:
     return ContextAssessment(True, "captured output digest matches output")
 
 
+def validate_four_check_capture(
+    capture: dict, expected_command: str, history_revisions: set[str],
+) -> ContextAssessment:
+    """Validate the structured versioned capture of a successful CLI audit."""
+    required = (
+        "capture_id", "audit_id", "command", "revision", "exit_status",
+        "output_sha256", "checks", "result", "error_code",
+    )
+    missing = [field for field in required if field not in capture]
+    if missing:
+        return ContextAssessment(False, f"four-check capture missing: {', '.join(missing)}")
+    evidence_check = validate_generation_evidence(
+        capture, expected_command, history_revisions,
+    )
+    if not evidence_check.valid:
+        return evidence_check
+    if not isinstance(capture["audit_id"], str) or capture["result"] != "passed":
+        return ContextAssessment(False, "four-check capture result is malformed")
+    if capture["checks"] != {
+        "bundle": True, "content": True, "freshness": True, "result": True,
+    } or capture["error_code"] is not None:
+        return ContextAssessment(False, "four-check capture checks are incomplete")
+    return ContextAssessment(True, "four-check capture is valid")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")

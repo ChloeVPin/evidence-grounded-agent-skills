@@ -21,6 +21,7 @@ from scripts.decision_ledger import (
     validate_self_validation_bundle,
     validate_self_validation_bundle_against_chain,
     validate_captured_output,
+    validate_four_check_capture,
     validate_complete_self_validation_bundle,
     validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
@@ -704,6 +705,13 @@ class DecisionLedgerTest(unittest.TestCase):
             {key: capture[key] for key in ("audit_id", "checks", "result", "error_code")},
             live,
         )
+        self.assertTrue(validate_four_check_capture(
+            capture, "python3 scripts/audit_current_assertion.py", {capture["revision"]},
+        ).valid)
+        self.assertFalse(validate_four_check_capture(
+            dict(capture, result="failed"),
+            "python3 scripts/audit_current_assertion.py", {capture["revision"]},
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
