@@ -51,6 +51,7 @@ If a package cannot be resolved from an authoritative source, stop and reject or
 - [GitHub dependency review documentation](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review): dependency diffs can be scanned and enforced in pull requests.
 - [OWASP Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html): hallucinated dependencies, outdated CVEs, and AI-modified build/deploy paths are explicit risks.
 - [NIST AI RMF: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): lifecycle risk-management guidance for generative AI systems.
+- Label resolved package facts and advisory observations separately from inferred exploitability and recommended action; do not treat an unresolved hypothesis as a finding.
 
 Confidence: medium-high for the audit procedure; medium for prioritization as the next skill. Freshness review: on dependency-policy changes and at least quarterly.
 

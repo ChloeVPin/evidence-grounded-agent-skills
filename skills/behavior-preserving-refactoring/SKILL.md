@@ -57,6 +57,7 @@ If the preservation contract is unclear, use `requirements-to-acceptance` or ask
 
 - The governing research prioritizes simplicity, reversibility, composability, explicit tradeoffs, adversarial review, regression analysis, and evidence over convention.
 - Differential comparison and characterization testing are used as evidence of preserved behavior, with explicit limits for unobservable or environment-dependent behavior.
+- Label measured behavior as observations, causal explanations as hypotheses, and proposed transformations as recommendations; do not present one as another.
 - Confidence: high for incremental, boundary-based refactoring practice; medium for equivalence claims when coverage, consumers, or runtime environments are incomplete.
 - Freshness: review when interfaces, architecture, test strategy, or compatibility policy changes.
 

@@ -54,6 +54,7 @@ If tests cannot run, record the exact command and blocker; do not claim validati
 - [GitHub: About pull requests](https://docs.github.com/en/pull-requests/get-started/about-pull-requests).
 - [OWASP: Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html).
 - Trace important claims to primary evidence and assess source independence; multiple summaries of one benchmark or policy are not multiple confirmations.
+- Label diff and test findings as observations, causal interpretations as hypotheses, and accept/revise/reject outcomes as recommendations supported by the evidence.
 
 Confidence: medium-high. Freshness review: annually, and immediately after material changes to agent tooling, CI policy, or supply-chain guidance.
 

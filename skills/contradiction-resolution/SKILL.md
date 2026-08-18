@@ -51,6 +51,7 @@ If evidence is incomparable, split the claims by context instead of choosing a w
 
 - Governing research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and provenance notes improve agent reliability.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident/error tracking, after-action assessment, and continual improvement guidance.
+- Label observed conflicts separately from explanatory hypotheses and recommended resolutions; preserve uncertainty when the evidence does not decide between them.
 
 Confidence: medium. Freshness review: after material failures, contradictory evidence, or methodology changes.
 

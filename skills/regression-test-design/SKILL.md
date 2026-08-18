@@ -53,6 +53,7 @@ If the contract is unclear, use `requirements-to-acceptance` before writing the 
 
 - The governing research requires automated validation, empirical failure analysis, adversarial testing, boundary cases, and honest accounting of limitations.
 - Mutation testing is used here as a diagnostic question—“what plausible wrong behavior would this test miss?”—not as a universal correctness score.
+- Label test results as observations, suspected uncovered faults as hypotheses, and new assertions as recommendations until the relevant behavior is demonstrated.
 - Confidence: high for behavior-first and boundary-oriented test design; medium for the right test level and tooling in any particular repository.
 - Freshness: review when the project’s test framework, architecture, risk profile, or evaluation strategy changes.
 

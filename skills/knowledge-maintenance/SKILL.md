@@ -52,6 +52,7 @@ If freshness cannot be determined, label it unknown and keep the artifact below 
 - [RFC 9745: Deprecation HTTP Response Header Field](https://www.rfc-editor.org/rfc/rfc9745.html): deprecation signaling and documentation/migration links.
 - [RFC 8594: Sunset HTTP Header Field](https://www.rfc-editor.org/info/rfc8594/): sunset signaling and its status as a hint rather than a guarantee.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident tracking, and measurable continual improvement.
+- Label freshness measurements and source changes as observations, explanations of impact as hypotheses, and lifecycle actions as recommendations until evidence supports them.
 
 Confidence: medium-high for lifecycle principles; medium for default review windows, which are domain- and risk-dependent.
 

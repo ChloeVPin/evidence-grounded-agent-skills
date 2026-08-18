@@ -58,6 +58,7 @@ If the trust boundary or deployment context is unknown, narrow the review and es
 - [OWASP Secure Coding Practices](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/): input validation, output encoding, authentication, access control, cryptographic practices, error handling, and logging controls.
 - [OWASP Top 10](https://owasp.org/www-project-top-ten/): recurring application-security risk categories and prevention guidance.
 - [CWE](https://cwe.mitre.org/): weakness descriptions and mitigations for reasoning about concrete failure mechanisms.
+- Label observed data flows and failures separately from exploitability hypotheses and recommended controls; do not report a possibility as a confirmed vulnerability without evidence.
 - Confidence: high for the boundary-review principles; medium for severity and applicability until the deployment context and threat model are known.
 - Freshness: review when security standards, deployment architecture, threat model, or relevant dependencies materially change.
 
