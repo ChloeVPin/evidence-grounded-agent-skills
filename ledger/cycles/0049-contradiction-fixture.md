@@ -1,7 +1,7 @@
 # Cycle 0049 — Contradiction Fixture
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with contradiction classifier
 
 ## Question
 
@@ -9,16 +9,16 @@ Can contradiction policy distinguish refuted claims, contextual disagreement, in
 
 ## Decision
 
-_To be determined._
+The classifier distinguishes evidence-supported/refuted claims, contextual disagreement, and unresolved conflict.
 
 ## Evidence and provenance
 
-_Record a deterministic claim-comparison fixture and tests._
+Implemented in `scripts/contradiction_policy.py` with four tests in `tests/test_contradiction_policy.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure incomparable contexts are not incorrectly merged and unresolved evidence is not promoted to fact._
+Different contexts and insufficient/equal evidence remain without a winner.
 
 ## Next action
 
-Build a claim-comparison fixture with explicit context, evidence strength, and outcome classification.
+Validation passed locally. Limitation: evidence strength is a supplied ordinal fixture, not an epistemic truth oracle. Next cycle: integrate contradiction outcomes with a durable failure/decision ledger.
