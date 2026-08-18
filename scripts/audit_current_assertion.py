@@ -224,6 +224,7 @@ def _run(root: Path = ROOT) -> int:
             capture_summary.get("diagnostic_refs", []),
             capture_summary.get("graph_provenance_refs", []),
             capture_summary.get("snapshot_provenance_refs", []),
+            capture_summary.get("edge_failure_refs", []),
         ) for path in values if (root / path).exists()},
         {
             "capture_refs": {
@@ -257,6 +258,10 @@ def _run(root: Path = ROOT) -> int:
             "snapshot_provenance_refs": {
                 "ledger/evidence/0130-dependency-state-diagnostics.json",
                 "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+            },
+            "edge_failure_refs": {
+                "ledger/evidence/0162-graph-edge-failure.json",
+                "ledger/evidence/0184-graph-edge-drift-failure.json",
             },
         },
     )
