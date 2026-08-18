@@ -40,6 +40,10 @@
     "ledger/evidence/0189-edge-failure-state-failure.json"
   ],
   "state_failure_refs_sha256": "43cd1db745879c545b0e4b77a2e83ea902faba5e4cc0f628b10f57cca469aac3",
+  "diagnostic_state_failure_refs": [
+    "ledger/evidence/0194-state-failure-state-failure.json"
+  ],
+  "diagnostic_state_failure_refs_sha256": "251fc1efa70e73bf2c3968c71bf83a25546c6ac5f9be5af1facc270baeb6f12f",
   "checks": {
     "bundle": true,
     "chain": true,
