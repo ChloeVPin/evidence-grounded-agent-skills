@@ -1,7 +1,7 @@
 # Cycle 0029 — Dependency Artifact Completion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes record a complete dependency review artifact whose adapter output, po
 
 ## Decision
 
-_To be determined._
+Archive the dependency-review foundation with adapter provenance, policy outcomes, and the live-connector limitation.
 
 ## Evidence and provenance
 
-_Record serialized artifact and full test/review output._
+State artifact: `ledger/state/0029-dependency-foundation.json`. Evidence includes the 65-test suite and adapter-to-generated-review integration.
 
 ## Disconfirming evidence sought
 
-_Do not mark the dependency skill trusted when live lookup availability is unresolved._
+The dependency skill remains `draft`; the completed state is only the validated foundation and does not claim live advisory coverage.
 
 ## Next action
 
-Create a durable cycle state for the validated dependency foundation, explicitly retain the live-connector limitation, and open the next exploration mode.
+Cycle state validates as completed; cycle 0030 records the next exploration.
