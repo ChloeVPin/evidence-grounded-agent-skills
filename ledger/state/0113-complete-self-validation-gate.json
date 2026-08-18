@@ -28,6 +28,11 @@
     "ledger/evidence/0134-snapshot-diagnostic-capture.json"
   ],
   "snapshot_provenance_refs_sha256": "416f5cec25da7449492ead7f508881e4328229d4cce087290aa83f9594aa89db",
+  "edge_failure_refs": [
+    "ledger/evidence/0162-graph-edge-failure.json",
+    "ledger/evidence/0184-graph-edge-drift-failure.json"
+  ],
+  "edge_failure_refs_sha256": "4498170134b27ea115bce5fb0322c29accbd5e1e72d2efb7f7e569523e5f9fef",
   "checks": {
     "bundle": true,
     "chain": true,
