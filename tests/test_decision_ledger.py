@@ -707,6 +707,27 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(json.loads(result.stdout)["error_code"], "AUDIT_GATE_FAILED")
 
+    def test_executable_current_head_audit_rejects_tampered_freshness_state(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            (temp_root / "ledger").mkdir()
+            shutil.copytree(root / "ledger" / "evidence", temp_root / "ledger" / "evidence")
+            shutil.copytree(root / "ledger" / "state", temp_root / "ledger" / "state")
+            state_path = temp_root / "ledger/state/0113-complete-self-validation-gate.json"
+            state = json.loads(state_path.read_text())
+            state["self_validation_output_sha256"] = "0" * 64
+            state_path.write_text(json.dumps(state))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            output = json.loads(result.stdout)
+            self.assertEqual(output["error_code"], "AUDIT_GATE_FAILED")
+            self.assertFalse(output["checks"]["freshness"])
+            self.assertTrue(validate_cli_output(output).valid)
+
     def test_executable_current_head_audit_reports_malformed_json(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
