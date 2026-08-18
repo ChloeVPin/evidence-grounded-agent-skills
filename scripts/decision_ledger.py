@@ -169,6 +169,20 @@ def audit_policy_assertion_chain(assertions: list[dict]) -> ContextAssessment:
     return ContextAssessment(True, "policy assertion chain is continuous")
 
 
+def audit_policy_assertion_references(
+    assertions: list[dict], available_paths: set[str],
+) -> ContextAssessment:
+    """Require every assertion evidence reference to exist in the repository."""
+    for assertion in assertions:
+        validation = validate_policy_audit(assertion)
+        if not validation.valid:
+            return validation
+        missing = [ref for ref in assertion["evidence_refs"] if ref not in available_paths]
+        if missing:
+            return ContextAssessment(False, f"missing policy evidence reference: {missing[0]}")
+    return ContextAssessment(True, "all policy evidence references exist")
+
+
 def compare_policy_audit(audit: dict, evidence: dict) -> ContextAssessment:
     """Compare a persisted policy assertion with a fresh captured result."""
     audit_check = validate_policy_audit(audit)

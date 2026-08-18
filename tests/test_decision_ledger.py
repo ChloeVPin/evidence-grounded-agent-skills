@@ -9,7 +9,8 @@ from scripts.decision_ledger import (
     check_generation_revision, check_source_inventory_digest, validate_entry,
     check_captured_generation_revision, migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
-    audit_policy_assertion_chain, compare_policy_audit, validate_generation_evidence,
+    audit_policy_assertion_chain, audit_policy_assertion_references,
+    compare_policy_audit, validate_generation_evidence,
     validate_migration,
     validate_policy_audit,
     validate_source_file_manifest,
@@ -431,6 +432,20 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(audit_policy_assertion_chain(assertions).valid)
         second_current = dict(assertions[1], audit_id="other-current")
         self.assertFalse(audit_policy_assertion_chain([assertions[1], second_current]).valid)
+
+    def test_policy_assertion_references_are_present(self):
+        assertions = [
+            json.loads(Path("ledger/evidence/0085-generation-policy-audit.json").read_text()),
+            json.loads(Path("ledger/evidence/0087-generation-policy-audit.json").read_text()),
+        ]
+        available = {
+            "ledger/evidence/0083-generation-capture.json",
+            "ledger/evidence/0087-generation-rerun.json",
+            "scripts/decision_ledger.py",
+            "tests/test_decision_ledger.py",
+        }
+        self.assertTrue(audit_policy_assertion_references(assertions, available).valid)
+        self.assertFalse(audit_policy_assertion_references(assertions, set()).valid)
 
 
 if __name__ == "__main__":
