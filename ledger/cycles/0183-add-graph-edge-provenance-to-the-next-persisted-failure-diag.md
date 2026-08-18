@@ -1,7 +1,7 @@
 # Cycle 0183 — Add graph-edge provenance to the next persisted failure diagnostic
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Add graph-edge provenance to the next persisted failure diagnostic
 
 ## Decision
 
-_To be determined from evidence._
+Persisted graph-edge failure evidence now includes the exact edge it represents,
+and the failure validator rejects malformed edge provenance.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: enriched 0162 failure record, validator enforcement, content-digest
+refresh, and executable audit coverage.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The enriched failure record remains valid and the complete audit passes; 183
+tests, compilation, and all four public checks pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add edge provenance to a dedicated failure diagnostic for future graph drift.
