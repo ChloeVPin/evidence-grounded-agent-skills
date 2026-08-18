@@ -16,7 +16,7 @@ from scripts.decision_ledger import (
 )
 
 
-def main(root: Path = ROOT) -> int:
+def _run(root: Path = ROOT) -> int:
     evidence_dir = root / "ledger" / "evidence"
     assertions = [
         json.loads(path.read_text())
@@ -47,6 +47,14 @@ def main(root: Path = ROOT) -> int:
     print(json.dumps({"audit_id": audit["audit_id"], "checks": checks,
                       "result": "passed" if passed else "failed"}, sort_keys=True))
     return 0 if passed else 1
+
+
+def main(root: Path = ROOT) -> int:
+    try:
+        return _run(root)
+    except (OSError, KeyError, TypeError, json.JSONDecodeError) as error:
+        print(json.dumps({"result": "failed", "reason": str(error)}, sort_keys=True))
+        return 1
 
 
 if __name__ == "__main__":

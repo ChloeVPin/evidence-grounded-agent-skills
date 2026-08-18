@@ -1,7 +1,7 @@
 # Cycle 0100 — Harden CLI handling for malformed evidence
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Harden CLI handling for malformed evidence
 
 ## Decision
 
-_To be determined from evidence._
+The audit CLI now catches malformed JSON, missing fields, and filesystem errors,
+returning structured failure output with a nonzero status.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Tests exercise malformed current-assertion JSON, tampered bundles, and an empty
+root; none may produce an unstructured traceback.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The handler reports exception text and does not classify every possible process
+or interpreter failure.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add machine-readable failure reasons and
+stable error codes.

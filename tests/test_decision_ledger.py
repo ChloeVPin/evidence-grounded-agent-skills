@@ -578,6 +578,22 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertEqual(json.loads(result.stdout)["result"], "failed")
 
+    def test_executable_current_head_audit_reports_malformed_json(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            (temp_root / "ledger").mkdir()
+            shutil.copytree(root / "ledger" / "evidence", temp_root / "ledger" / "evidence")
+            (temp_root / "ledger/evidence/0093-generation-policy-audit.json").write_text("{")
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            output = json.loads(result.stdout)
+            self.assertEqual(output["result"], "failed")
+            self.assertNotIn("Traceback", result.stderr)
+
 
 if __name__ == "__main__":
     unittest.main()
