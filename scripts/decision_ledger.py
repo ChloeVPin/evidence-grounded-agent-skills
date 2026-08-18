@@ -179,6 +179,35 @@ def validate_four_check_capture(
     return ContextAssessment(True, "four-check capture is valid")
 
 
+def validate_snapshot_diagnostic_capture(
+    capture: dict, snapshot: dict, available_paths: set[str],
+    history_revisions: set[str],
+) -> ContextAssessment:
+    """Validate a capture that binds a diagnostic snapshot to an audit run."""
+    required = (
+        "capture_id", "command", "revision", "exit_status", "output_sha256",
+        "snapshot_ref", "snapshot_sha256", "audit_result",
+    )
+    missing = [field for field in required if field not in capture]
+    if missing:
+        return ContextAssessment(False, f"snapshot capture missing: {', '.join(missing)}")
+    evidence_check = validate_generation_evidence(
+        capture, "python3 scripts/audit_current_assertion.py", history_revisions,
+    )
+    if not evidence_check.valid:
+        return evidence_check
+    if capture["snapshot_ref"] not in available_paths:
+        return ContextAssessment(False, "snapshot capture reference is unavailable")
+    expected_digest = hashlib.sha256(
+        json.dumps(snapshot, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if capture["snapshot_sha256"] != expected_digest:
+        return ContextAssessment(False, "snapshot capture digest is stale")
+    if capture["audit_result"] != "passed":
+        return ContextAssessment(False, "snapshot capture audit result is not passed")
+    return ContextAssessment(True, "snapshot diagnostic capture is valid")
+
+
 def validate_failure_evidence(record: dict, available_paths: set[str]) -> ContextAssessment:
     """Validate a persisted diagnostic record for a failed audit gate."""
     required = (

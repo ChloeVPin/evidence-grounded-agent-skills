@@ -1,7 +1,7 @@
 # Cycle 0135 — Add a dedicated validator for snapshot-diagnostic captures
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Add a dedicated validator for snapshot-diagnostic captures
 
 ## Decision
 
-_To be determined from evidence._
+Added `validate_snapshot_diagnostic_capture`, enforcing execution provenance,
+snapshot reference availability, canonical snapshot digest, and passing audit
+result. Valid and tampered captures are covered.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0134 capture, its source snapshot, the dedicated validator, and
+the integration test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The validator checks the capture’s binding and digest; it does not independently
+replay failure mutations, which remain a separate executable concern.
 
 ## Next action
 
-_Research, validate, and update this record._
+Use the dedicated validator inside the executable audit path.
