@@ -1,7 +1,7 @@
 # Cycle 0051 — Ledger Cycle Integration
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with cycle/artifact binding
 
 ## Question
 
@@ -9,16 +9,16 @@ Can a contradiction or failure ledger entry be linked to a cycle state, artifact
 
 ## Decision
 
-_To be determined._
+Ledger entries now require a cycle ID and non-empty artifact references in addition to claims, evidence, outcome, and decision.
 
 ## Evidence and provenance
 
-_Record integrated ledger/state tests._
+Integrated schema tests are in `tests/test_decision_ledger.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure unresolved or failed entries cannot complete a cycle without next action or corrective guard._
+Unresolved and failure-specific requirements remain enforced, and missing cycle/artifact links are rejected.
 
 ## Next action
 
-Bind ledger entries to cycle IDs and artifact references, then archive a concrete entry from the fixture work.
+Validation passed locally. Limitation: references are path/ID claims and storage is not append-only. Next cycle: archive a concrete contradiction entry and connect it to a completed cycle state.

@@ -12,12 +12,14 @@ class LedgerAssessment:
 
 
 def validate_entry(entry: dict) -> LedgerAssessment:
-    required = ("entry_id", "claims", "outcome", "evidence", "decision")
+    required = ("entry_id", "cycle_id", "artifacts", "claims", "outcome", "evidence", "decision")
     missing = [field for field in required if field not in entry]
     if missing:
         return LedgerAssessment(False, f"missing fields: {', '.join(missing)}")
     if not isinstance(entry["claims"], list) or not entry["claims"]:
         return LedgerAssessment(False, "claims are required")
+    if not isinstance(entry["artifacts"], list) or not entry["artifacts"]:
+        return LedgerAssessment(False, "artifact references are required")
     if entry["outcome"] not in OUTCOMES:
         return LedgerAssessment(False, "unknown outcome")
     if not entry["evidence"]:
