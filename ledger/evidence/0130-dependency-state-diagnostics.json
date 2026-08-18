@@ -37,6 +37,12 @@
       "failed_check": "freshness",
       "error_code": "AUDIT_GATE_FAILED",
       "reason": "self-validation state snapshot provenance is stale"
+    },
+    {
+      "mutation": "replace graph capture edge_refs",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "graph capture provenance edges are stale"
     }
   ]
 }
