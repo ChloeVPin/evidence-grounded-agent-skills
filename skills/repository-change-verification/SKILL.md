@@ -68,4 +68,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: future test-design, dependency-audit, secure-agent-runtime, and pull-request-review skills. This skill does not override repository-specific policies or required human approvals.
+Related: `regression-test-design`, `dependency-security-audit`, `secure-coding-review`, `safe-git-workflow`, and `differential-patch-review`. This skill does not override repository-specific policies or required human approvals.

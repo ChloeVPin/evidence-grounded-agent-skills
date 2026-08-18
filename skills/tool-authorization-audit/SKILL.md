@@ -67,4 +67,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: repository-change-verification, dependency-security-audit, secure-agent-runtime, and prompt-injection review. This skill does not override platform authorization or human approval requirements.
+Related: `repository-change-verification`, `dependency-security-audit`, `secure-coding-review`, and `prompt-injection-resistance`. This skill does not override platform authorization or human approval requirements.

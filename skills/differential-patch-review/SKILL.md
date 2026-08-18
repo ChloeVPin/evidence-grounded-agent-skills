@@ -64,4 +64,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: repository-change-verification, test-effectiveness-analysis, evidence-attestation, and dependency-security-audit. This skill does not replace domain-specific oracle construction or human review.
+Related: `repository-change-verification`, `test-effectiveness-analysis`, `epistemic-coding`, and `dependency-security-audit`. This skill does not replace domain-specific oracle construction or human review.

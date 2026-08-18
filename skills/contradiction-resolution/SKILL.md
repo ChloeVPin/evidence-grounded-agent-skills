@@ -65,4 +65,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: differential-patch-review, knowledge-maintenance, and repository-change-verification. This skill does not authorize silently weakening governing principles to resolve local disagreement.
+Related: `differential-patch-review`, `knowledge-maintenance`, `repository-change-verification`, and `epistemic-coding`. This skill does not authorize silently weakening governing principles to resolve local disagreement.

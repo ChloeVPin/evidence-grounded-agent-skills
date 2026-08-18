@@ -66,4 +66,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: evidence-attestation, dependency-security-audit, differential-patch-review, and cycle-state. This skill does not authorize silent deletion or override a source owner's deprecation policy.
+Related: `dependency-security-audit`, `differential-patch-review`, `contradiction-resolution`, and `skill-quality-review`. This skill does not authorize silent deletion or override a source owner's deprecation policy.

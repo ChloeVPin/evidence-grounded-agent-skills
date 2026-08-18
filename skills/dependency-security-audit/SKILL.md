@@ -65,4 +65,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: repository-change-verification, secure-agent-runtime, test-design, and license-compliance skills. This skill does not override repository-specific security policies or required human approval.
+Related: `repository-change-verification`, `build-and-ci-integrity`, `secure-coding-review`, `configuration-and-secrets-safety`, and `regression-test-design`. This skill does not override repository-specific security policies or required human approval.

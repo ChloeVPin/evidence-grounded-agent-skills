@@ -65,4 +65,4 @@ For material conclusions, seek disconfirming evidence, distinguish observations 
 
 ## Related skills and conflicts
 
-Related: repository-change-verification, test-design, differential-testing, and dependency-security-audit. This skill does not override project-specific test policy or human review.
+Related: `repository-change-verification`, `regression-test-design`, `differential-patch-review`, and `dependency-security-audit`. This skill does not override project-specific test policy or human review.
