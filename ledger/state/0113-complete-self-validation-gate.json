@@ -13,7 +13,7 @@
   "capture_summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
   "capture_summary_sha256": "570f70608f11df24ccfd1bb50cff0c4c376492820c9d4f6d920ab15ea32acf83",
   "capture_inventory_ref": "ledger/evidence/0154-freshness-capture-inventory.json",
-  "capture_inventory_sha256": "ee015b9f18b808c878129dc2095de6ee6a2788c1681f548617feabad7e51eb69",
+  "capture_inventory_sha256": "a18e4ffe756c1838e90be3a125c4eabbda11e4752ab559006972ba9ad86f2954",
   "diagnostic_refs": [
     "ledger/evidence/0130-dependency-state-diagnostics.json"
   ],
