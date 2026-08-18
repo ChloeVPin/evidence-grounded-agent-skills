@@ -42,6 +42,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/dependency_policy.py`](scripts/dependency_policy.py): distinguishes pass, escalate, and block outcomes for dependency evidence.
 - [`scripts/lookup_adapter.py`](scripts/lookup_adapter.py): normalizes live lookup results with explicit uncertainty and output digests.
 - [`scripts/mutation_review.py`](scripts/mutation_review.py): classifies mutation outcomes without score inflation.
+- [`scripts/tool_policy.py`](scripts/tool_policy.py): evaluates least-privilege tool-call requests and approval gates.
 - [`fixtures/fault_target.py`](fixtures/fault_target.py): minimal boundary-mutation target used by the test-effectiveness fixture.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 

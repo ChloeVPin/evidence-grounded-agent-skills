@@ -1,7 +1,7 @@
 # Cycle 0035 — Validate Tool Authorization
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with deterministic authorization fixture
 
 ## Question
 
@@ -9,16 +9,16 @@ Can tool authorization policy distinguish least-privilege calls from over-broad,
 
 ## Decision
 
-_To be determined._
+The fixture allows scoped reads, requires approval for writes, rejects out-of-scope resources and undeclared parameters, and forbids wildcard authority.
 
 ## Evidence and provenance
 
-_Record a deterministic policy fixture and negative-case tests._
+Implemented in `scripts/tool_policy.py` with six policy tests in `tests/test_tool_policy.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure a valid-looking tool call cannot bypass scope, parameter, approval, or audit requirements._
+Scope, parameter, approval, action, and wildcard bypass attempts are rejected.
 
 ## Next action
 
-Build a small tool-call authorization fixture with read/write/destructive scopes and explicit approval requirements.
+Validation passed locally. Limitation: this evaluator does not enforce permissions in a real tool server or authenticate approvers. Next cycle: bind authorization decisions to durable audit records and test high-impact actions.
