@@ -5,5 +5,9 @@
     "0059-unverified-dependency-failure": {"path": "ledger/decisions/0059-unverified-dependency-failure.json", "sha256": "9d54e84dfb62e32a9ced5027fd90c4ba0fac27f08d9f8e6cbe9ce4822afe1911"},
     "0061-differential-boundary-failure": {"path": "ledger/decisions/0061-differential-boundary-failure.json", "sha256": "d62c4f8c380a4632c0c00aed6a5151b5e0083ee293f7afae63c4e6de374ae468"}
   },
-  "mapping_sha256": "08c3a27d7d3d210707491e63e62df62ca0bd4200213d18b6824ed2ce57fe7e65"
+  "mapping_sha256": "08c3a27d7d3d210707491e63e62df62ca0bd4200213d18b6824ed2ce57fe7e65",
+  "generated_by": {
+    "command": "manual inventory from ledger/decisions/*-failure.json with sha256sum",
+    "revision": "f69090553c4b13fafc7870ff41e452758cc26684"
+  }
 }

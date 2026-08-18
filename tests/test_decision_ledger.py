@@ -350,6 +350,9 @@ class DecisionLedgerTest(unittest.TestCase):
         changed = json.loads(json.dumps(manifest))
         changed["entries"]["0053-boundary-mutant-failure"]["sha256"] = "0" * 64
         self.assertFalse(validate_source_file_manifest(changed).valid)
+        missing_provenance = json.loads(json.dumps(manifest))
+        del missing_provenance["generated_by"]
+        self.assertFalse(validate_source_file_manifest(missing_provenance).valid)
 
 
 if __name__ == "__main__":

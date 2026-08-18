@@ -54,6 +54,9 @@ def source_file_inventory_digest(source_files: dict[str, str]) -> str:
 
 def validate_source_file_manifest(manifest: dict) -> ContextAssessment:
     """Validate source paths, mapping digest, and recorded file contents."""
+    generated_by = manifest.get("generated_by")
+    if not isinstance(generated_by, dict) or not generated_by.get("command") or not generated_by.get("revision"):
+        return ContextAssessment(False, "manifest generation provenance is required")
     entries = manifest.get("entries")
     if not isinstance(entries, dict) or not entries:
         return ContextAssessment(False, "source file entries are required")
