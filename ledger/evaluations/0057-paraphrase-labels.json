@@ -22,5 +22,9 @@
   {
     "query": "unrelated network timeout",
     "expected_ids": []
+  },
+  {
+    "query": "dependency provenance gaps can hide supply chain risk",
+    "expected_ids": ["0059-unverified-dependency-failure"]
   }
 ]

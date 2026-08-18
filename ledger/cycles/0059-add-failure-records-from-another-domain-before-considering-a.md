@@ -1,7 +1,7 @@
 # Cycle 0059 — Add failure records from another domain before considering a threshold change
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,22 @@ Add failure records from another domain before considering a threshold change
 
 ## Decision
 
-_To be determined from evidence._
+Added a dependency/supply-chain failure record and one cross-domain paraphrase
+label; current lookup metrics remain perfect on the expanded fixture, but the
+sample is still too small for a policy change.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The dependency review test rejects an unverified package, and the new labeled
+query recalls `0059-unverified-dependency-failure` without introducing a false
+positive or false negative.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Three failure records and seven labels remain a controlled fixture. Domain
+coverage is improved but not representative of real ledger language.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: review threshold policy only after
+cross-domain metrics remain stable.
