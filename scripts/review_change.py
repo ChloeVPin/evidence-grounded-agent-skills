@@ -10,6 +10,7 @@ from scripts.bind_evidence import verify_attestation
 from scripts.change_review import review_paths
 from scripts.evidence_review import review_evidence
 from scripts.dependency_review import review_dependencies
+from scripts.dependency_evidence import validate_dependency_evidence
 
 
 @dataclass(frozen=True)
@@ -67,7 +68,9 @@ def review_change(record: dict) -> ChangeReview:
         dependency_result = review_dependencies(
             dependency.get("paths", []), dependency.get("packages", {}),
         )
-        dependency_ok = dependency_result.accepted
+        dependency_ok = dependency_result.accepted and not validate_dependency_evidence(
+            dependency.get("evidence", {}), dependency.get("packages", {}),
+        )
     return ChangeReview(
         scope_ok=not paths.out_of_scope,
         evidence_ok=evidence.accepted,

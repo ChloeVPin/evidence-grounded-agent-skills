@@ -26,6 +26,14 @@ def record(diff="diff-v1", criteria=None):
     }
 
 
+def dependency_evidence(name, status="verified"):
+    return {name: {
+        "source": f"https://registry.example/{name}",
+        "looked_up_at": "2026-08-18T12:00:00Z",
+        "status": status,
+    }}
+
+
 class EndToEndReviewTest(unittest.TestCase):
     def test_complete_record_is_accepted(self):
         result = review_change(record())
@@ -55,6 +63,7 @@ class EndToEndReviewTest(unittest.TestCase):
         review["dependency"] = {
             "paths": ["requirements.txt"],
             "packages": {"old-lib": {"provenance_verified": True, "known_vulnerable": True}},
+            "evidence": dependency_evidence("old-lib", "vulnerable"),
         }
         result = review_change(review)
         self.assertFalse(result.accepted)
@@ -65,6 +74,7 @@ class EndToEndReviewTest(unittest.TestCase):
         review["dependency"] = {
             "paths": ["requirements.txt"],
             "packages": {"safe-lib": {"provenance_verified": True, "known_vulnerable": False}},
+            "evidence": dependency_evidence("safe-lib"),
         }
         result = review_change(review)
         self.assertTrue(result.accepted)
