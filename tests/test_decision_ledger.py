@@ -579,6 +579,15 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertIn('"error_code":null', contract)
         self.assertIn('"error_code":"MALFORMED_EVIDENCE"', contract)
 
+    def test_persisted_self_validation_capture_is_successful(self):
+        evidence = json.loads(Path(
+            "ledger/evidence/0108-audit-command-capture.json",
+        ).read_text())
+        self.assertTrue(validate_generation_evidence(
+            evidence, "python3 scripts/audit_current_assertion.py",
+            {evidence["revision"]},
+        ).valid)
+
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
