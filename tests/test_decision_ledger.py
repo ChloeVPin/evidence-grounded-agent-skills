@@ -24,6 +24,7 @@ from scripts.decision_ledger import (
     validate_four_check_capture,
     validate_snapshot_diagnostic_capture,
     validate_graph_state_diagnostic_capture,
+    validate_audit_capture_dependency_summary,
     validate_failure_evidence,
     validate_audit_dependency_manifest,
     validate_dependency_diagnostic_snapshot,
@@ -842,6 +843,25 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_graph_state_diagnostic_capture(
             dict(capture, graph_policy_sha256="0" * 64),
             graph, {capture["graph_ref"]}, {capture["revision"]},
+        ).valid)
+
+    def test_audit_capture_dependency_summary_is_complete(self):
+        summary = json.loads(Path(
+            "ledger/evidence/0146-audit-capture-dependencies.json",
+        ).read_text())
+        expected = {
+            "capture_refs": set(summary["capture_refs"]),
+            "state_refs": set(summary["state_refs"]),
+            "policy_refs": set(summary["policy_refs"]),
+        }
+        available = set().union(*expected.values())
+        self.assertTrue(validate_audit_capture_dependency_summary(
+            summary, available, expected,
+        ).valid)
+        altered = json.loads(json.dumps(summary))
+        altered["capture_refs"].append("ledger/evidence/missing.json")
+        self.assertFalse(validate_audit_capture_dependency_summary(
+            altered, available | {"ledger/evidence/missing.json"}, expected,
         ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):

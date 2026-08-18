@@ -1,0 +1,18 @@
+{
+  "summary_id": "0146-audit-capture-dependencies",
+  "capture_refs": [
+    "ledger/evidence/0093-generation-rerun.json",
+    "ledger/evidence/0108-audit-command-capture.json",
+    "ledger/evidence/0119-four-check-audit-capture.json",
+    "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+    "ledger/evidence/0143-graph-state-diagnostic-capture.json"
+  ],
+  "state_refs": [
+    "ledger/state/0113-complete-self-validation-gate.json"
+  ],
+  "policy_refs": [
+    "ledger/evidence/0125-audit-dependencies.json",
+    "ledger/evidence/0130-dependency-state-diagnostics.json",
+    "ledger/evidence/0137-freshness-dependency-graph.json"
+  ]
+}

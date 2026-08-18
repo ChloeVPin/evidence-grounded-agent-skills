@@ -234,6 +234,21 @@ def validate_graph_state_diagnostic_capture(
     return ContextAssessment(True, "graph state diagnostic capture is valid")
 
 
+def validate_audit_capture_dependency_summary(
+    summary: dict, available_paths: set[str], expected_refs: dict[str, set[str]],
+) -> ContextAssessment:
+    """Validate the complete versioned capture/state/policy reference summary."""
+    if summary.get("summary_id") != "0146-audit-capture-dependencies":
+        return ContextAssessment(False, "audit capture dependency summary ID is invalid")
+    for field, expected in expected_refs.items():
+        values = summary.get(field)
+        if not isinstance(values, list) or set(values) != expected or len(values) != len(expected):
+            return ContextAssessment(False, f"audit capture dependency summary {field} differs")
+        if not set(values) <= available_paths:
+            return ContextAssessment(False, f"audit capture dependency summary {field} is unavailable")
+    return ContextAssessment(True, "audit capture dependency summary is complete")
+
+
 def validate_failure_evidence(record: dict, available_paths: set[str]) -> ContextAssessment:
     """Validate a persisted diagnostic record for a failed audit gate."""
     required = (
