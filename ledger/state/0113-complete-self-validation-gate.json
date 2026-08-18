@@ -33,6 +33,13 @@
     "ledger/evidence/0184-graph-edge-drift-failure.json"
   ],
   "edge_failure_refs_sha256": "4498170134b27ea115bce5fb0322c29accbd5e1e72d2efb7f7e569523e5f9fef",
+  "state_failure_refs": [
+    "ledger/evidence/0169-diagnostic-reference-state-failure.json",
+    "ledger/evidence/0174-graph-provenance-state-failure.json",
+    "ledger/evidence/0179-snapshot-provenance-state-failure.json",
+    "ledger/evidence/0189-edge-failure-state-failure.json"
+  ],
+  "state_failure_refs_sha256": "43cd1db745879c545b0e4b77a2e83ea902faba5e4cc0f628b10f57cca469aac3",
   "checks": {
     "bundle": true,
     "chain": true,
