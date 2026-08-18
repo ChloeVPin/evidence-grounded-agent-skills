@@ -44,6 +44,23 @@ def candidate_metrics(expected_ids: set[str], predicted_ids: set[str]) -> dict[s
     }
 
 
+def evaluate_labeled_queries(
+    entries: list[dict], labels: list[dict], *, min_shared_terms: int = 2,
+) -> dict[str, float | int]:
+    """Aggregate retrieval errors across labeled queries without changing policy."""
+    expected = set()
+    predicted = set()
+    for label in labels:
+        expected.update(label["expected_ids"])
+        predicted.update(
+            entry["entry_id"]
+            for entry in find_paraphrase_candidates(
+                entries, label["query"], min_shared_terms=min_shared_terms,
+            )
+        )
+    return candidate_metrics(expected, predicted)
+
+
 def _terms(text: str) -> set[str]:
     return {term for term in re.findall(r"[a-z0-9]+", text.lower()) if len(term) > 3}
 

@@ -10,5 +10,17 @@
   {
     "query": "database schema migration",
     "expected_ids": []
+  },
+  {
+    "query": "boundary regression can survive incomplete tests",
+    "expected_ids": ["0053-boundary-mutant-failure"]
+  },
+  {
+    "query": "wildcard authority bypasses least privilege scope",
+    "expected_ids": ["0055-wildcard-authority-failure"]
+  },
+  {
+    "query": "unrelated network timeout",
+    "expected_ids": []
   }
 ]

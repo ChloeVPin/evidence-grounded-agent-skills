@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 
 from scripts.decision_ledger import (
-    candidate_metrics, find_matching_entries, find_paraphrase_candidates,
-    validate_entry,
+    candidate_metrics, evaluate_labeled_queries, find_matching_entries,
+    find_paraphrase_candidates, validate_entry,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -107,6 +107,20 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(metrics["false_negative"], 1)
         self.assertEqual(metrics["precision"], 0.5)
         self.assertEqual(metrics["recall"], 0.5)
+
+    def test_expanded_labeled_set_measures_current_lookup(self):
+        entries = [
+            json.loads(path.read_text())
+            for path in sorted(Path("ledger/decisions").glob("*-failure.json"))
+        ]
+        labels = json.loads(Path("ledger/evaluations/0057-paraphrase-labels.json").read_text())
+        metrics = evaluate_labeled_queries(entries, labels)
+        self.assertEqual(len(labels), 6)
+        self.assertEqual(metrics["true_positive"], 2)
+        self.assertEqual(metrics["false_positive"], 0)
+        self.assertEqual(metrics["false_negative"], 0)
+        self.assertEqual(metrics["precision"], 1.0)
+        self.assertEqual(metrics["recall"], 1.0)
 
 
 if __name__ == "__main__":
