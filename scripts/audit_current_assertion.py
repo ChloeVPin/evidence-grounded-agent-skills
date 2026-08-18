@@ -19,6 +19,7 @@ from scripts.decision_ledger import (
     validate_policy_assertion_content,
     validate_self_validation_state,
     validate_four_check_capture,
+    validate_failure_evidence,
     validate_cli_output,
 )
 
@@ -66,11 +67,20 @@ def _run(root: Path = ROOT) -> int:
         four_check_capture, "python3 scripts/audit_current_assertion.py",
         {four_check_capture.get("revision")},
     )
+    failure_evidence = json.loads(
+        (evidence_dir / "0122-capture-schema-failure.json").read_text()
+    )
+    failure_evidence_check = validate_failure_evidence(
+        failure_evidence, {"ledger/evidence/0119-four-check-audit-capture.json"},
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
         "content": content_check.valid,
-        "freshness": freshness_check.valid and capture_schema_check.valid,
+        "freshness": (
+            freshness_check.valid and capture_schema_check.valid
+            and failure_evidence_check.valid
+        ),
     }
     passed = all(checks.values())
     output = {"audit_id": audit["audit_id"], "checks": checks,
@@ -81,6 +91,7 @@ def _run(root: Path = ROOT) -> int:
             assessment.reason for assessment in (
                 bundle_check, result_check, content_check,
                 freshness_check, capture_schema_check,
+                failure_evidence_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)
