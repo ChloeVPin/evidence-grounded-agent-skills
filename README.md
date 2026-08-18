@@ -23,6 +23,8 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 
 Every material conclusion in a skill must distinguish direct observations from hypotheses and recommendations. Authors should seek disconfirming evidence, trace repeated claims to their originating source, record tradeoffs and uncertainty, and state confidence and freshness. Reachable citations are necessary but do not prove that a skill is correct; each skill remains draft until representative use, adversarial review, and applicable verification provide stronger evidence.
 
+`Lifecycle: draft` means the skill is usable guidance under review, not a guarantee of correctness. A future `validated`, `trusted`, `deprecated`, or `superseded` state must be earned and explained by current evidence; lifecycle labels never override repository instructions, user authorization, or specialist review.
+
 ## Using the library
 
 1. Start with [repository exploration](skills/repository-exploration/SKILL.md) and [requirements to acceptance](skills/requirements-to-acceptance/SKILL.md) when the codebase or target is unclear.
