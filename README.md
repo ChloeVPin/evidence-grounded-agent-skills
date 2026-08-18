@@ -26,6 +26,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Epistemic coding](skills/epistemic-coding/SKILL.md) — evidence-first decisions and uncertainty.
 - [Requirements to acceptance](skills/requirements-to-acceptance/SKILL.md) — turn intent into observable criteria.
 - [Skill composition and routing](skills/skill-composition-and-routing/SKILL.md) — select and order applicable skills.
+- [Repository exploration](skills/repository-exploration/SKILL.md) — map code, callers, boundaries, and verification paths.
 
 ### Change and diagnosis
 
