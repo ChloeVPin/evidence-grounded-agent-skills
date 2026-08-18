@@ -30,7 +30,7 @@ Trigger before publishing a new skill, promoting its lifecycle, revising a trust
 4. Trace material claims to authoritative sources, experiments, or observed failures. Check source independence, publication/version context, assumptions, and whether recommendations are being presented as facts.
 5. Seek disconfirming evidence: strongest counterargument, plausible misuse, boundary input, conflicting guidance, outdated source, hidden consumer, and scenario where the procedure creates harm or busywork.
 6. Inspect the procedure for missing decision boundaries, permissions, side effects, failure recovery, uncertainty, and verification evidence. Check that examples demonstrate behavior rather than slogans.
-7. Compare the candidate with existing skills. Classify the relationship as complementary, composable, overlapping, contradictory, or replacement; define routing and handoff if it remains. Confirm the candidate is linked from the repository index and every related-skill reference resolves to an existing skill or is clearly described as future work.
+7. Compare the candidate with existing skills. Classify the relationship as complementary, composable, overlapping, contradictory, or replacement; define routing and handoff if it remains. Confirm the candidate is linked from the repository index and every related-skill reference resolves to an existing skill or is explicitly marked as an external dependency.
 8. Review safety and operational limits: secrets, privacy, security, accessibility, data loss, irreversible actions, resource cost, and required human or specialist review.
 9. Assign a decision: publish draft, revise, accept at current lifecycle, defer for evidence, merge with another skill, or deprecate. Record the evidence, unresolved uncertainty, and next review trigger.
 
@@ -51,6 +51,7 @@ If the skill’s target or evidence is ambiguous, defer publication and ask for 
 ## Validation evidence and provenance
 
 - The governing research requires depth over volume, explicit skill anatomy, adversarial review, source hierarchy and independence, lifecycle management, contradiction handling, and progress measured by usefulness.
+- [Agent Skills specification](https://agentskills.io/specification): `SKILL.md` metadata must identify the skill and when it should be used; format compliance is necessary for interoperability but does not establish procedural quality.
 - Review observations, hypotheses, and recommendations separately. Treat a review decision as a recommendation supported by evidence, not as proof that the skill cannot fail in use.
 - Confidence: high for the review criteria; medium for predicting generalization until the skill is exercised on representative agent tasks.
 - Freshness: review when the skill library, source evidence, agent behavior, risk model, or intended task population changes.

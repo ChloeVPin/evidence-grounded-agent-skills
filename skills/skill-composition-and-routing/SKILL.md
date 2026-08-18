@@ -51,6 +51,7 @@ If no skill clearly applies, use the task’s repository guidance and record the
 ## Validation evidence and provenance
 
 - The governing research recommends composable skills, explicit dependency relationships, dynamic taxonomies, conflict resolution, and depth over volume.
+- [Agent Skills specification](https://agentskills.io/specification): a skill is a directory centered on a `SKILL.md` with required metadata describing what it does and when to use it; portability depends on respecting the format’s boundaries.
 - Routing is treated as a hypothesis about task fit; the agent should revise it when failures, overlap, or contradictory outcomes provide disconfirming evidence.
 - Confidence: medium-high for phase-based routing; medium for any specific ordering when repository constraints or risk requirements differ.
 - Freshness: review when skill triggers, dependencies, conflicts, or the library’s taxonomy materially change.
