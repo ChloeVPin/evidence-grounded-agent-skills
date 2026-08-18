@@ -31,7 +31,7 @@ class Review:
 def review_paths(paths: list[str], allowed_prefixes: tuple[str, ...]) -> Review:
     out_of_scope = tuple(sorted(
         path for path in paths
-        if not any(path == prefix or path.startswith(prefix.rstrip("/") + "/")
+        if not any(prefix == "." or path == prefix or path.startswith(prefix.rstrip("/") + "/")
                    for prefix in allowed_prefixes)
     ))
     sensitive = tuple(sorted(

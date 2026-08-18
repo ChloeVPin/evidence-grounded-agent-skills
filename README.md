@@ -33,6 +33,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/review_change.py`](scripts/review_change.py): composes scope, evidence, and attestation gates.
 - [`scripts/review_record.py`](scripts/review_record.py): validates the versioned durable review-record shape.
 - [`scripts/generate_record.py`](scripts/generate_record.py): generates records only from matching captured evidence.
+- [`scripts/run_review.py`](scripts/run_review.py): captures and reviews the current repository revision as a transient artifact.
 
 ## Running a cycle
 
