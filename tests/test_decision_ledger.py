@@ -2,7 +2,9 @@ import unittest
 import json
 from pathlib import Path
 
-from scripts.decision_ledger import find_matching_entries, validate_entry
+from scripts.decision_ledger import (
+    find_matching_entries, find_paraphrase_candidates, validate_entry,
+)
 from scripts.contradiction_policy import Claim, resolve_claims
 
 
@@ -83,6 +85,19 @@ class DecisionLedgerTest(unittest.TestCase):
         )
         self.assertEqual([item["entry_id"] for item in tool_matches], ["0055-wildcard-authority-failure"])
         self.assertEqual(find_matching_entries(entries, "new failure"), [])
+
+    def test_paraphrase_lookup_returns_candidates_without_merging(self):
+        entries = [
+            {"entry_id": "boundary", "claims": ["happy-path-only tests can miss a boundary regression"]},
+            {"entry_id": "tool", "claims": ["wildcard authority can bypass least-privilege boundaries"]},
+        ]
+        candidates = find_paraphrase_candidates(
+            entries, "missing boundary coverage can let a regression survive",
+        )
+        self.assertEqual([entry["entry_id"] for entry in candidates], ["boundary"])
+        self.assertEqual(
+            find_paraphrase_candidates(entries, "database schema migration"), [],
+        )
 
 
 if __name__ == "__main__":

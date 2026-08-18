@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Validate durable contradiction and failure-learning ledger entries."""
 from dataclasses import dataclass
+import re
 
 OUTCOMES = {"supported_refuted", "contextual", "unresolved", "failure"}
 
@@ -14,6 +15,23 @@ class LedgerAssessment:
 def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
     """Return prior entries whose recorded claims contain the exact claim."""
     return [entry for entry in entries if claim in entry.get("claims", [])]
+
+
+def find_paraphrase_candidates(
+    entries: list[dict], claim: str, *, min_shared_terms: int = 2,
+) -> list[dict]:
+    """Return possible matches for human review; never merge or resolve claims."""
+    query_terms = _terms(claim)
+    candidates = []
+    for entry in entries:
+        recorded_terms = set().union(*(_terms(item) for item in entry.get("claims", [])))
+        if len(query_terms & recorded_terms) >= min_shared_terms:
+            candidates.append(entry)
+    return candidates
+
+
+def _terms(text: str) -> set[str]:
+    return {term for term in re.findall(r"[a-z0-9]+", text.lower()) if len(term) > 3}
 
 
 def validate_entry(entry: dict) -> LedgerAssessment:
