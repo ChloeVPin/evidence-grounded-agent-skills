@@ -1,7 +1,7 @@
 # Cycle 0023 — Unknown Dependency Policy
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with explicit freshness policy
 
 ## Question
 
@@ -9,16 +9,16 @@ When dependency evidence is explicitly unknown or stale, should Hermes block, es
 
 ## Decision
 
-_To be determined._
+Fresh verified evidence passes; vulnerable or malformed evidence blocks; unknown or stale evidence escalates and cannot silently pass.
 
 ## Evidence and provenance
 
-_Record policy choices and tests._
+Implemented in `scripts/dependency_policy.py` with four boundary tests in `tests/test_dependency_policy.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure unknown evidence cannot pass as verified through a missing or malformed field._
+Unknown, stale, vulnerable, and malformed statuses have distinct tested outcomes.
 
 ## Next action
 
-Define freshness and unknown-status decision rules, with explicit escalation for exceptions.
+Validation passed locally. Limitation: the default 90-day freshness window is a policy choice, not a universal truth; it must be adjusted by ecosystem and risk. Next cycle: integrate policy outcomes with complete review and explicit escalation records.

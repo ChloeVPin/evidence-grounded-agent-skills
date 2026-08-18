@@ -39,6 +39,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/cycle_state.py`](scripts/cycle_state.py): validates durable cycle state and terminal transitions.
 - [`scripts/dependency_review.py`](scripts/dependency_review.py): checks provenance, known vulnerability flags, and executable paths.
 - [`scripts/dependency_evidence.py`](scripts/dependency_evidence.py): validates source, lookup time, and explicit dependency status.
+- [`scripts/dependency_policy.py`](scripts/dependency_policy.py): distinguishes pass, escalate, and block outcomes for dependency evidence.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 
 ## Running a cycle
