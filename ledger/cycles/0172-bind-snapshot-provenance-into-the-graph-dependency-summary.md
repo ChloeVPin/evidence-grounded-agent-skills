@@ -1,7 +1,7 @@
 # Cycle 0172 — Bind snapshot provenance into the graph dependency summary
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Bind snapshot provenance into the graph dependency summary
 
 ## Decision
 
-_To be determined from evidence._
+The aggregate dependency summary now explicitly records graph and graph-capture
+provenance together as a validated `graph_provenance_refs` set.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0146 summary, synchronized summary/state capture digests, and
+executable summary validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The expanded summary remains complete; 183 tests, compilation, and the full
+four-check audit pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Expose graph provenance directly in the versioned state inventory.
