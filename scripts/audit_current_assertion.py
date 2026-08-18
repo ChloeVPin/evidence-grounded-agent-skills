@@ -27,6 +27,7 @@ EXPECTED_DEPENDENCIES = {
     "ledger/evidence/0154-freshness-capture-inventory.json",
     "ledger/evidence/0162-graph-edge-failure.json",
     "ledger/evidence/0169-diagnostic-reference-state-failure.json",
+    "ledger/evidence/0174-graph-provenance-state-failure.json",
     "ledger/state/0113-complete-self-validation-gate.json",
 }
 EXPECTED_FRESHNESS_GRAPH_NODES = {
@@ -164,6 +165,15 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0154-freshness-capture-inventory.json",
         },
     )
+    graph_provenance_failure = json.loads(
+        (evidence_dir / "0174-graph-provenance-state-failure.json").read_text()
+    )
+    graph_provenance_failure_check = validate_failure_evidence(
+        graph_provenance_failure, {
+            "ledger/evidence/0151-summary-state-diagnostic-capture.json",
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+        },
+    )
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},
     )
@@ -212,6 +222,7 @@ def _run(root: Path = ROOT) -> int:
                 "ledger/evidence/0122-capture-schema-failure.json",
                 "ledger/evidence/0162-graph-edge-failure.json",
                 "ledger/evidence/0169-diagnostic-reference-state-failure.json",
+                "ledger/evidence/0174-graph-provenance-state-failure.json",
             },
             "diagnostic_refs": {
                 "ledger/evidence/0130-dependency-state-diagnostics.json",
@@ -254,6 +265,7 @@ def _run(root: Path = ROOT) -> int:
             "ledger/evidence/0122-capture-schema-failure.json",
             "ledger/evidence/0162-graph-edge-failure.json",
             "ledger/evidence/0169-diagnostic-reference-state-failure.json",
+            "ledger/evidence/0174-graph-provenance-state-failure.json",
         },
         {"ledger/evidence/0130-dependency-state-diagnostics.json"},
     )
@@ -266,6 +278,7 @@ def _run(root: Path = ROOT) -> int:
             and failure_evidence_check.valid and dependency_check.valid
             and graph_failure_evidence_check.valid
             and diagnostic_reference_failure_check.valid
+            and graph_provenance_failure_check.valid
             and diagnostic_snapshot_check.valid
             and snapshot_capture_check.valid
             and graph_check.valid
@@ -287,6 +300,7 @@ def _run(root: Path = ROOT) -> int:
                 failure_evidence_check, dependency_check,
                 graph_failure_evidence_check,
                 diagnostic_reference_failure_check,
+                graph_provenance_failure_check,
                 diagnostic_snapshot_check,
                 snapshot_capture_check,
                 graph_check,
