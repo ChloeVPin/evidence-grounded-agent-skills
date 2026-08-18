@@ -1,7 +1,7 @@
 # Cycle 0099 — Add tampered-bundle failure coverage
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Add tampered-bundle failure coverage
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now has a tampered-bundle failure test that requires a
+nonzero result and structured failure output.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The test copies the evidence root to a temporary directory, changes the bundle’s
+assertion reference, and verifies the CLI rejects it.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The test covers one tamper shape; malformed JSON and unreadable files remain
+separate failure modes.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: harden CLI handling for malformed evidence
+without emitting an unstructured traceback.

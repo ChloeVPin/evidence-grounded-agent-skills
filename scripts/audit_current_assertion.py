@@ -29,8 +29,9 @@ def main(root: Path = ROOT) -> int:
     audit = head.assertion
     bundle_path = evidence_dir / f"{audit['audit_id'][:4]}-current-assertion-bundle.json"
     bundle = json.loads(bundle_path.read_text())
+    expected_assertion_ref = f"ledger/evidence/{audit['audit_id']}.json"
     available = set(audit["evidence_refs"]) | {
-        bundle["assertion_ref"], bundle["content_digest_ref"],
+        expected_assertion_ref, bundle["content_digest_ref"],
     }
     bundle_check = validate_current_assertion_bundle(bundle, available)
     capture = json.loads((root / bundle["capture_ref"]).read_text())

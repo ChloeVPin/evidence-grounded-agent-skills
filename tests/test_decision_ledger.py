@@ -2,6 +2,8 @@ import unittest
 import json
 from pathlib import Path
 import subprocess
+import shutil
+import tempfile
 
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
@@ -558,6 +560,23 @@ class DecisionLedgerTest(unittest.TestCase):
         )
         self.assertNotEqual(result.returncode, 0)
         self.assertEqual(json.loads(result.stdout)["result"], "failed")
+
+    def test_executable_current_head_audit_rejects_tampered_bundle(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            (temp_root / "ledger").mkdir()
+            shutil.copytree(root / "ledger" / "evidence", temp_root / "ledger" / "evidence")
+            bundle_path = temp_root / "ledger/evidence/0093-current-assertion-bundle.json"
+            bundle = json.loads(bundle_path.read_text())
+            bundle["assertion_ref"] = "ledger/evidence/missing.json"
+            bundle_path.write_text(json.dumps(bundle))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertEqual(json.loads(result.stdout)["result"], "failed")
 
 
 if __name__ == "__main__":
