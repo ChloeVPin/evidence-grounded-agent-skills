@@ -1,7 +1,7 @@
 # Cycle 0133 — Expose diagnostic-snapshot freshness failures as distinct reasons
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Expose diagnostic-snapshot freshness failures as distinct reasons
 
 ## Decision
 
-_To be determined from evidence._
+Executable coverage now preserves distinct reasons for diagnostic snapshot digest
+staleness and invalid snapshot references, alongside the existing dependency
+manifest diagnostics.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `validate_self_validation_state`, the CLI diagnostic aggregation, and
+temporary-root tests for both snapshot mutations.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Stable consumers still use `AUDIT_GATE_FAILED` and the false freshness check;
+diagnostic prose is explanatory rather than a versioned API.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add a versioned snapshot-diagnostic capture record.
