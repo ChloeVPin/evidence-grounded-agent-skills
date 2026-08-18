@@ -296,6 +296,7 @@ def validate_freshness_capture_inventory(
     inventory: dict, available_paths: set[str], expected_captures: set[str],
     expected_failures: set[str] | None = None,
     expected_diagnostics: set[str] | None = None,
+    expected_snapshots: set[str] | None = None,
 ) -> ContextAssessment:
     """Validate the complete inventory of persisted freshness captures."""
     if inventory.get("inventory_id") != "0154-freshness-capture-inventory":
@@ -319,7 +320,14 @@ def validate_freshness_capture_inventory(
             return ContextAssessment(False, "freshness capture inventory diagnostics differ")
     else:
         diagnostics = inventory.get("diagnostic_refs", [])
-    refs = captures + failures + diagnostics + [inventory.get("state_ref"), inventory.get("summary_ref"), inventory.get("graph_ref")]
+    if expected_snapshots is not None:
+        snapshots = inventory.get("snapshot_provenance_refs")
+        if (not isinstance(snapshots, list) or set(snapshots) != expected_snapshots
+                or len(snapshots) != len(expected_snapshots)):
+            return ContextAssessment(False, "freshness capture inventory snapshots differ")
+    else:
+        snapshots = inventory.get("snapshot_provenance_refs", [])
+    refs = captures + failures + diagnostics + snapshots + [inventory.get("state_ref"), inventory.get("summary_ref"), inventory.get("graph_ref")]
     if any(ref not in available_paths for ref in refs):
         return ContextAssessment(False, "freshness capture inventory reference is unavailable")
     payload = dict(inventory)
