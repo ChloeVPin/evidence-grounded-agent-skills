@@ -1,7 +1,7 @@
 # Cycle 0125 — Record the audit’s complete diagnostic dependency set
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Record the audit’s complete diagnostic dependency set
 
 ## Decision
 
-_To be determined from evidence._
+Persisted `ledger/evidence/0125-audit-dependencies.json` enumerates the exact
+assertion, bundle, capture, state, diagnostic, and executable-script inputs.
+Its validator rejects both drift and unavailable references.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the 0125 dependency manifest, `validate_audit_dependency_manifest`,
+and its exact-set integration test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The manifest is not yet an executable gate; until the next binding cycle, the
+CLI’s dependency discovery remains authoritative.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind the dependency manifest into the executable audit.

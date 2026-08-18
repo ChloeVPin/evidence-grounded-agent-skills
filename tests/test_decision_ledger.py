@@ -23,6 +23,7 @@ from scripts.decision_ledger import (
     validate_captured_output,
     validate_four_check_capture,
     validate_failure_evidence,
+    validate_audit_dependency_manifest,
     validate_complete_self_validation_bundle,
     validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
@@ -725,6 +726,17 @@ class DecisionLedgerTest(unittest.TestCase):
         ).valid)
         self.assertFalse(validate_failure_evidence(
             dict(record, reason=""), available,
+        ).valid)
+
+    def test_audit_dependency_manifest_is_exact_and_existing(self):
+        manifest = json.loads(Path(
+            "ledger/evidence/0125-audit-dependencies.json",
+        ).read_text())
+        expected = set(manifest["paths"])
+        self.assertTrue(validate_audit_dependency_manifest(manifest, expected, expected).valid)
+        self.assertFalse(validate_audit_dependency_manifest(
+            dict(manifest, paths=manifest["paths"] + ["ledger/evidence/missing.json"]),
+            expected | {"ledger/evidence/missing.json"}, expected,
         ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):

@@ -195,6 +195,25 @@ def validate_failure_evidence(record: dict, available_paths: set[str]) -> Contex
     return ContextAssessment(True, "failure evidence is valid")
 
 
+def validate_audit_dependency_manifest(
+    manifest: dict, available_paths: set[str], expected_paths: set[str],
+) -> ContextAssessment:
+    """Require an exact, existing dependency set for the executable audit."""
+    if manifest.get("manifest_id") != "0125-audit-dependencies":
+        return ContextAssessment(False, "audit dependency manifest ID is invalid")
+    paths = manifest.get("paths")
+    if not isinstance(paths, list) or any(not isinstance(path, str) for path in paths):
+        return ContextAssessment(False, "audit dependency manifest paths are malformed")
+    recorded = set(paths)
+    if len(recorded) != len(paths):
+        return ContextAssessment(False, "audit dependency manifest has duplicate paths")
+    if recorded != expected_paths:
+        return ContextAssessment(False, "audit dependency manifest differs from expected set")
+    if not recorded <= available_paths:
+        return ContextAssessment(False, "audit dependency manifest references unavailable paths")
+    return ContextAssessment(True, "audit dependency manifest is complete")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")

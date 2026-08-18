@@ -1,0 +1,17 @@
+{
+  "manifest_id": "0125-audit-dependencies",
+  "paths": [
+    "scripts/audit_current_assertion.py",
+    "ledger/evidence/0085-generation-policy-audit.json",
+    "ledger/evidence/0087-generation-policy-audit.json",
+    "ledger/evidence/0093-generation-policy-audit.json",
+    "ledger/evidence/0093-current-assertion-bundle.json",
+    "ledger/evidence/0093-generation-rerun.json",
+    "ledger/evidence/0093-policy-content-digests.json",
+    "ledger/evidence/0108-self-validation-bundle.json",
+    "ledger/evidence/0108-audit-command-capture.json",
+    "ledger/evidence/0119-four-check-audit-capture.json",
+    "ledger/evidence/0122-capture-schema-failure.json",
+    "ledger/state/0113-complete-self-validation-gate.json"
+  ]
+}
