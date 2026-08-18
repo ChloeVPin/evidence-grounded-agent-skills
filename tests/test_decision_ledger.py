@@ -1,6 +1,9 @@
 import unittest
+import json
+from pathlib import Path
 
 from scripts.decision_ledger import validate_entry
+from scripts.contradiction_policy import Claim, resolve_claims
 
 
 class DecisionLedgerTest(unittest.TestCase):
@@ -46,6 +49,17 @@ class DecisionLedgerTest(unittest.TestCase):
             "evidence": ["context"], "decision": "retain",
         })
         self.assertFalse(result.valid)
+
+    def test_archived_contextual_entry_is_valid_and_matches_policy(self):
+        path = Path("ledger/decisions/0052-contextual-contradiction.json")
+        entry = json.loads(path.read_text())
+        result = resolve_claims(
+            Claim("a", "low latency", 1), Claim("b", "high throughput", 1),
+            discriminating_evidence=False,
+        )
+        self.assertEqual(result.outcome, "contextual")
+        self.assertTrue(validate_entry(entry).valid)
+        self.assertEqual(entry["cycle_id"], "0052")
 
 
 if __name__ == "__main__":
