@@ -57,6 +57,8 @@ If idempotence or timeout semantics are unknown, do not add retries; resolve the
 
 - The governing research emphasizes failure recovery, empirical failure analysis, unknown-unknown detection, simplicity, tradeoffs, and reversible decisions.
 - Reliability behavior is workload- and dependency-specific: observed latency, errors, capacity, and side effects are evidence; retry or fallback choices are hypotheses and recommendations until tested.
+- [Google SRE: Handling Overload](https://sre.google/sre-book/handling-overload/): retry budgets, avoiding retry amplification, and differentiated overload responses.
+- [Google SRE: Addressing Cascading Failures](https://sre.google/sre-book/addressing-cascading-failures/): deadlines, cancellation, and retry-driven overload as interacting failure modes.
 - Trace dependency behavior to authoritative contracts and independent operational evidence; repeated retry recipes are not independent proof of safety.
 - Confidence: high for bounded budgets, idempotence, explicit failure classes, and overload protection; medium for parameter values and fallback semantics until measured in the target system.
 - Freshness: review when dependency contracts, load, latency/error distributions, queueing, user impact, or failure modes change.

@@ -52,6 +52,7 @@ If no representative workload or baseline exists, narrow the claim and build mea
 
 - The governing research requires empirical validation, benchmarking, meaningful progress measures, boundary analysis, and tradeoffs over dogma.
 - Benchmark results are observations conditioned on workload and environment; they do not prove universal performance or correctness.
+- [Google SRE: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/): explains why latency distributions and high percentiles can reveal regressions hidden by averages.
 - Treat repeated benchmark claims as one line of evidence when they share the same workload, implementation, environment, or source; seek an independent workload or measurement method before generalizing.
 - Confidence: high for baseline/measurement discipline; medium for optimization choices until profiling and representative results support them.
 - Freshness: review when workload distribution, hardware, runtime, dependencies, architecture, or performance targets change.

@@ -56,6 +56,7 @@ If worktree ownership or scope is unclear, stop mutation and ask. If a destructi
 
 - The governing research prioritizes reversibility, explicit scope, failure recovery, change justification, and truth over confidence.
 - Git state inspection and diffs are direct repository observations; interpretations of ownership or intended history are hypotheses until confirmed; commit/revert strategy is a recommendation constrained by authorization.
+- [Git documentation: reset, restore, and revert](https://git-scm.com/docs/git-reset): distinguishes recovery and history-changing operations that have different safety and collaboration consequences.
 - Trace repository policy and upstream history to their origin; repeated commit messages or copied contribution instructions are not independent confirmation.
 - Confidence: high for inspect-before-mutate and explicit-target principles; medium for conflict and synchronization strategy because repository policy and collaboration model vary.
 - Freshness: review when remote policy, branching model, hosting workflow, or repository contribution rules change.
