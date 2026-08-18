@@ -143,6 +143,17 @@ def validate_generation_evidence(
     return check_generation_revision(evidence["revision"], history_revisions)
 
 
+def validate_captured_output(evidence: dict, output: str) -> ContextAssessment:
+    """Verify a capture's recorded digest against the exact command output."""
+    expected = evidence.get("output_sha256")
+    if not isinstance(expected, str) or len(expected) != 64:
+        return ContextAssessment(False, "captured output digest is malformed")
+    actual = hashlib.sha256(output.encode()).hexdigest()
+    if actual != expected:
+        return ContextAssessment(False, "captured output digest does not match output")
+    return ContextAssessment(True, "captured output digest matches output")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")

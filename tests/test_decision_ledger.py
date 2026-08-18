@@ -20,6 +20,7 @@ from scripts.decision_ledger import (
     validate_policy_assertion_content, validate_current_assertion_bundle,
     validate_self_validation_bundle,
     validate_self_validation_bundle_against_chain,
+    validate_captured_output,
     validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -622,6 +623,13 @@ class DecisionLedgerTest(unittest.TestCase):
             evidence, "python3 scripts/audit_current_assertion.py",
             {evidence["revision"]},
         ).valid)
+        result = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py"],
+            cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, 0)
+        self.assertTrue(validate_captured_output(evidence, result.stdout).valid)
+        self.assertFalse(validate_captured_output(evidence, result.stdout + "tampered").valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]

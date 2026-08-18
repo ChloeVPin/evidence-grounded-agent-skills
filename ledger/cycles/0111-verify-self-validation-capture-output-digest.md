@@ -1,7 +1,7 @@
 # Cycle 0111 — Verify self-validation capture output digest
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,22 @@ Verify self-validation capture output digest
 
 ## Decision
 
-_To be determined from evidence._
+The persisted 0108 capture digest matches fresh successful output exactly:
+`614823990dd2900727863828c6b4e7aae97f2e4fc443ca7233b9026ed92ee119`.
+The comparison is now enforced by `validate_captured_output` and a regression
+test, including a tampered-output rejection.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `ledger/evidence/0108-audit-command-capture.json`, a fresh execution
+of `python3 scripts/audit_current_assertion.py`, and the corresponding test in
+`tests/test_decision_ledger.py`.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The capture revision predates later commits, so this cycle verifies output
+integrity only; it does not rewrite historical provenance.
 
 ## Next action
 
-_Research, validate, and update this record._
+Create a single validator for the complete self-validation bundle.
