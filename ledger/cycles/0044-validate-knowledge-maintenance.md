@@ -1,7 +1,7 @@
 # Cycle 0044 — Validate Knowledge Maintenance
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with lifecycle/freshness fixture
 
 ## Question
 
@@ -9,16 +9,16 @@ Can knowledge-maintenance policy distinguish stable, stale, deprecated, and supe
 
 ## Decision
 
-_To be determined._
+Recent artifacts are `fresh`; old artifacts become `review_due`; explicit `deprecated`, `superseded`, and unknown metadata remain distinct outcomes.
 
 ## Evidence and provenance
 
-_Record a deterministic lifecycle/freshness fixture and tests._
+Implemented in `scripts/freshness_policy.py` with four tests in `tests/test_freshness_policy.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure stale or deprecated artifacts are not silently trusted, while stable artifacts are not needlessly invalidated._
+Review-due, deprecated, superseded, and missing-date cases are distinct and not silently treated as fresh.
 
 ## Next action
 
-Build an artifact-freshness policy fixture with review windows, deprecation, supersession, and uncertainty outcomes.
+Validation passed locally. Limitation: review windows are policy inputs and freshness does not prove factual correctness. Next cycle: integrate freshness outcomes into skill lifecycle and cycle completion decisions.
