@@ -42,6 +42,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Performance regression analysis](skills/performance-regression-analysis/SKILL.md) — measure changes against representative workloads.
 - [Observability and instrumentation](skills/observability-and-instrumentation/SKILL.md) — add useful, safe diagnostic signals.
 - [Release and rollback safety](skills/release-and-rollback-safety/SKILL.md) — stage delivery and recover safely.
+- [Data migration safety](skills/data-migration-safety/SKILL.md) — evolve persisted data with integrity and recovery boundaries.
 
 ### Security and maintenance
 
