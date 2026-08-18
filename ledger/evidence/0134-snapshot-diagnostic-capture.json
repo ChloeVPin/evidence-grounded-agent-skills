@@ -5,6 +5,6 @@
   "exit_status": 0,
   "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
   "snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
-  "snapshot_sha256": "f04caa09ee8f599d0949d9e71a52890edd41a5b1bb62d4a7e1702fd528fa9206",
+  "snapshot_sha256": "a5a30fc26c6560a55d9e7236d9340d8d06f7056db1ff68c04a1fd3f5b6060b34",
   "audit_result": "passed"
 }

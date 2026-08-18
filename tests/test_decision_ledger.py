@@ -790,7 +790,7 @@ class DecisionLedgerTest(unittest.TestCase):
         ).read_text())
         self.assertEqual(snapshot["source_state_ref"],
                          "ledger/state/0113-complete-self-validation-gate.json")
-        self.assertEqual(len(snapshot["cases"]), 2)
+        self.assertEqual(len(snapshot["cases"]), 3)
         for case in snapshot["cases"]:
             self.assertEqual(case["failed_check"], "freshness")
             self.assertEqual(case["error_code"], "AUDIT_GATE_FAILED")

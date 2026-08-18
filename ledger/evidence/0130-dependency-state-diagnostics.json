@@ -13,6 +13,12 @@
       "failed_check": "freshness",
       "error_code": "AUDIT_GATE_FAILED",
       "reason": "self-validation state manifest reference is invalid"
+    },
+    {
+      "mutation": "replace capture_inventory_sha256",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "self-validation state inventory digest is stale"
     }
   ]
 }
