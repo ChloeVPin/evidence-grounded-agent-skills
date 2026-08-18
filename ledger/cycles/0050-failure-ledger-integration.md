@@ -1,7 +1,7 @@
 # Cycle 0050 — Failure Ledger Integration
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with durable decision ledger schema
 
 ## Question
 
@@ -9,16 +9,16 @@ How should contradiction outcomes and failures be persisted so rejected hypothes
 
 ## Decision
 
-_To be determined._
+Versioned ledger entries preserve claims, evidence, outcomes, decisions, unresolved next actions, and failure corrective guards.
 
 ## Evidence and provenance
 
-_Record a versioned failure/decision artifact and tests._
+Implemented in `scripts/decision_ledger.py` with four tests in `tests/test_decision_ledger.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure a later cycle cannot silently erase a rejected hypothesis or claim a failure was resolved without a regression guard._
+Unresolved entries require a next action; failures require mechanism, corrective action, and regression trigger.
 
 ## Next action
 
-Define a durable decision-ledger schema for claims, outcomes, failure mechanisms, corrective actions, and regression triggers.
+Validation passed locally. Limitation: schema validation does not provide append-only storage or prove the evidence itself. Next cycle: connect ledger entries to cycle state and archive a concrete failure/contradiction record.
