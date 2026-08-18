@@ -1,7 +1,7 @@
 # Cycle 0038 — Tool Authorization Completion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes archive the tool-authorization foundation while preserving the limits
 
 ## Decision
 
-_To be determined._
+Archive the tool-authorization and audit foundation without claiming caller authentication, downstream enforcement, or append-only storage.
 
 ## Evidence and provenance
 
-_Use the 82+ test suite and integrated call-review fixture._
+State artifact: `ledger/state/0038-tool-authorization-foundation.json`; evidence includes the 85-test suite and integrated call-review fixture.
 
 ## Disconfirming evidence sought
 
-_Do not claim caller authentication, downstream enforcement, or append-only audit storage that the fixture does not provide._
+Those limitations remain explicit in the state decision; the completed milestone covers only local policy, redaction, and digest behavior.
 
 ## Next action
 
-Create a durable completed state for the tool-authorization foundation, then open the next exploration cycle.
+Cycle state validates as completed; cycle 0039 records the next exploration.
