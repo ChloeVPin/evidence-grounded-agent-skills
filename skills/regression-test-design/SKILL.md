@@ -57,6 +57,8 @@ If the contract is unclear, use `requirements-to-acceptance` before writing the 
 - Confidence: high for behavior-first and boundary-oriented test design; medium for the right test level and tooling in any particular repository.
 - Freshness: review when the project’s test framework, architecture, risk profile, or evaluation strategy changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `test-effectiveness-analysis`, `requirements-to-acceptance`, `evidence-driven-debugging`, `repository-change-verification`, `secure-coding-review`, and `differential-patch-review`. This skill does not authorize deleting failing tests, inflating coverage metrics, or treating green tests as proof of every behavior.

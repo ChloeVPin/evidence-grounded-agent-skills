@@ -57,6 +57,8 @@ If configuration precedence or secret ownership is unclear, stop and resolve it 
 - Confidence: high for secret lifecycle and explicit configuration-contract principles; medium for provider-specific implementation and safe fallback until the environment is known.
 - Freshness: review when secret providers, deployment environments, configuration precedence, rotation policy, or CI/CD tooling changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `secure-coding-review`, `privacy-and-data-handling`, `tool-authorization-audit`, `prompt-injection-resistance`, `release-and-rollback-safety`, `api-contract-compatibility`, and `repository-change-verification`. This skill does not authorize handling real secrets in chat, weakening access controls, or assuming a private repository makes a credential safe.

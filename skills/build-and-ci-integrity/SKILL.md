@@ -57,6 +57,8 @@ If workflow permissions, runner trust, or artifact ownership is unclear, stop pr
 - Confidence: high for explicit inputs, least privilege, artifact identity, and provenance principles; medium for a particular provider or reproducibility guarantee until its runner and build model are verified.
 - Freshness: review when CI provider behavior, runner images, workflow permissions, build tools, dependency policy, artifact consumers, or provenance standards change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `dependency-security-audit`, `configuration-and-secrets-safety`, `release-and-rollback-safety`, `safe-git-workflow`, `secure-coding-review`, `performance-regression-analysis`, and `repository-change-verification`. This skill does not authorize privileged workflow changes, exposing secrets, trusting mutable actions, or calling an artifact verified without provenance evidence.

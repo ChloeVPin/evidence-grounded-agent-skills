@@ -57,6 +57,8 @@ Record confidence and freshness for each advisory or risk conclusion, distinguis
 
 Confidence: medium-high for the audit procedure; medium for prioritization as the next skill. Freshness review: on dependency-policy changes and at least quarterly.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: repository-change-verification, secure-agent-runtime, test-design, and license-compliance skills. This skill does not override repository-specific security policies or required human approval.

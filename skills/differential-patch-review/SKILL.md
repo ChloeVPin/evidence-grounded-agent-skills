@@ -56,6 +56,8 @@ Record confidence and freshness for each review conclusion; distinguish observed
 
 Confidence: medium-high for the need; medium for generalization across languages and test environments. Freshness review: after material changes to evaluation methods.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: repository-change-verification, test-effectiveness-analysis, evidence-attestation, and dependency-security-audit. This skill does not replace domain-specific oracle construction or human review.

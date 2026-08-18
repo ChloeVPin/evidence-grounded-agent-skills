@@ -57,6 +57,8 @@ Record confidence and freshness for coverage and risk conclusions, distinguish o
 
 Confidence: medium. Freshness review: annually and after material changes to testing tools or benchmark methodology.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: repository-change-verification, test-design, differential-testing, and dependency-security-audit. This skill does not override project-specific test policy or human review.

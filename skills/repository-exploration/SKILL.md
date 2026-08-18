@@ -56,6 +56,8 @@ If no clear owner or execution path exists, narrow the request and ask rather th
 - Confidence: high for direct repository observations; medium for inferred runtime behavior when dynamic loading, external consumers, or unavailable environments limit inspection.
 - Freshness: re-explore when branch/revision, build system, generated artifacts, ownership, architecture, or task scope changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `requirements-to-acceptance`, `epistemic-coding`, `behavior-preserving-refactoring`, `evidence-driven-debugging`, `skill-composition-and-routing`, `repository-change-verification`, and `api-contract-compatibility`. This skill does not authorize reading unrelated secrets, modifying files during exploration, or claiming complete understanding from a shallow search.

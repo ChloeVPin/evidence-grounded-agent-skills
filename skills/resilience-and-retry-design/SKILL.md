@@ -63,6 +63,8 @@ If idempotence or timeout semantics are unknown, do not add retries; resolve the
 - Confidence: high for bounded budgets, idempotence, explicit failure classes, and overload protection; medium for parameter values and fallback semantics until measured in the target system.
 - Freshness: review when dependency contracts, load, latency/error distributions, queueing, user impact, or failure modes change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `concurrency-and-shared-state`, `evidence-driven-debugging`, `observability-and-instrumentation`, `performance-regression-analysis`, `api-contract-compatibility`, `secure-coding-review`, `release-and-rollback-safety`, and `repository-change-verification`. This skill does not authorize infinite retries, hiding failures, duplicating side effects, or weakening correctness for apparent availability.

@@ -61,6 +61,8 @@ If supported locales or terminology are unknown, narrow the claim and ask the pr
 - Confidence: high for canonical-data and locale-data principles; medium for language-specific wording, cultural fit, and coverage until qualified review and representative users are involved.
 - Freshness: review when Unicode/CLDR data, supported locales, formatting libraries, terminology, translation resources, or user populations change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `accessibility-review`, `api-contract-compatibility`, `privacy-and-data-handling`, `requirements-to-acceptance`, `regression-test-design`, `observability-and-instrumentation`, and `knowledge-maintenance`. This skill does not authorize hard-coded locale assumptions, exposing personal data for localization, or claiming translation quality from automated output alone.

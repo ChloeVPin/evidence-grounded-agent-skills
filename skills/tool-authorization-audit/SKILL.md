@@ -59,6 +59,8 @@ Record confidence and freshness for each authorization conclusion, separate obse
 
 Confidence: medium. Freshness review: after tool, identity, or permission-model changes and at least quarterly.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: repository-change-verification, dependency-security-audit, secure-agent-runtime, and prompt-injection review. This skill does not override platform authorization or human approval requirements.

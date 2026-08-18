@@ -58,6 +58,8 @@ Record confidence and freshness for retained knowledge, label observations, hypo
 
 Confidence: medium-high for lifecycle principles; medium for default review windows, which are domain- and risk-dependent.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: evidence-attestation, dependency-security-audit, differential-patch-review, and cycle-state. This skill does not authorize silent deletion or override a source owner's deprecation policy.

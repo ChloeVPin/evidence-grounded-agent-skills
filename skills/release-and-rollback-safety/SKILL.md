@@ -58,6 +58,8 @@ If rollback is unsafe or unknown, stop the rollout and design forward recovery o
 - Confidence: medium-high for staged exposure, explicit health signals, and recovery planning; medium for a particular rollout strategy until system topology and irreversibility are known.
 - Freshness: review when deployment topology, release tooling, data lifecycle, ownership, or incident policy changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `api-contract-compatibility`, `observability-and-instrumentation`, `secure-coding-review`, `dependency-security-audit`, `performance-regression-analysis`, `knowledge-maintenance`, and `repository-change-verification`. This skill does not authorize production changes, bypass approvals, or claim rollback safety without checking data and external side effects.

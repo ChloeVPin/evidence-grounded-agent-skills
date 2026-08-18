@@ -58,6 +58,8 @@ If consumers are unknown, treat compatibility as uncertain and use telemetry, re
 - Confidence: medium-high for explicit contract and staged-evolution principles; medium for a particular compatibility classification until actual consumers and deployment constraints are known.
 - Freshness: review when consumers, version policy, serialization standards, deployment topology, or migration tooling changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `requirements-to-acceptance`, `behavior-preserving-refactoring`, `secure-coding-review`, `performance-regression-analysis`, `regression-test-design`, `knowledge-maintenance`, and `repository-change-verification`. This skill does not authorize breaking unknown consumers, exposing data, or treating a version number as a substitute for migration evidence.

@@ -59,6 +59,8 @@ If data ownership, invariants, or restore capability is unknown, stop and resolv
 - Confidence: medium-high for additive, measured, resumable migration principles; medium for a particular strategy until database behavior, workload, and recovery capabilities are known.
 - Freshness: review when schema, storage engine, volume, deployment overlap, backup/restore, or data-governance policy changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `api-contract-compatibility`, `release-and-rollback-safety`, `secure-coding-review`, `performance-regression-analysis`, `observability-and-instrumentation`, `regression-test-design`, and `knowledge-maintenance`. This skill does not authorize destructive data changes, bypassing ownership approval, or calling a migration reversible without testing recovery.

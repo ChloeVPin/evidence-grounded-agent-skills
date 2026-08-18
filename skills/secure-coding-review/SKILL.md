@@ -62,6 +62,8 @@ If the trust boundary or deployment context is unknown, narrow the review and es
 - Confidence: high for the boundary-review principles; medium for severity and applicability until the deployment context and threat model are known.
 - Freshness: review when security standards, deployment architecture, threat model, or relevant dependencies materially change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `dependency-security-audit`, `tool-authorization-audit`, `repository-change-verification`, `requirements-to-acceptance`, `evidence-driven-debugging`, and `test-effectiveness-analysis`. This skill does not authorize bypassing security policy, exposing secrets for diagnosis, or substituting a checklist for specialist review of high-risk systems.

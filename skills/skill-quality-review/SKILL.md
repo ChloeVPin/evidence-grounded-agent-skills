@@ -55,6 +55,8 @@ If the skill’s target or evidence is ambiguous, defer publication and ask for 
 - Confidence: high for the review criteria; medium for predicting generalization until the skill is exercised on representative agent tasks.
 - Freshness: review when the skill library, source evidence, agent behavior, risk model, or intended task population changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `skill-composition-and-routing`, `epistemic-coding`, `requirements-to-acceptance`, `knowledge-maintenance`, `contradiction-resolution`, and every skill being reviewed. This skill does not authorize rejecting a skill solely because it is unfamiliar, promoting a skill without evidence, or overriding user and repository instructions.

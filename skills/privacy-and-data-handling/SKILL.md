@@ -58,6 +58,8 @@ If purpose, data classification, recipients, or retention is unknown, pause the 
 - Confidence: medium-high for purpose, minimization, lifecycle, and impact analysis; medium for risk severity and control sufficiency until jurisdiction, threat model, scale, and owner review are known.
 - Freshness: review when data flows, models/tools, recipients, jurisdictions, retention policy, security controls, or privacy guidance changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `secure-coding-review`, `tool-authorization-audit`, `observability-and-instrumentation`, `data-migration-safety`, `api-contract-compatibility`, `requirements-to-acceptance`, and `knowledge-maintenance`. This skill does not authorize collecting data, making legal compliance claims, weakening access controls, or exposing sensitive records for convenience.

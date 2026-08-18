@@ -56,6 +56,8 @@ If requirements or quality attributes conflict, use `requirements-to-acceptance`
 - Confidence: medium-high for explicit alternatives, criteria, tradeoffs, and reversible seams; medium for predicted long-term outcomes until the design is exercised in the target workload and organization.
 - Freshness: review when requirements, workload, ownership, dependencies, deployment, failure model, or quality targets change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `requirements-to-acceptance`, `repository-exploration`, `implementation-planning`, `api-contract-compatibility`, `concurrency-and-shared-state`, `data-migration-safety`, `performance-regression-analysis`, `secure-coding-review`, and `skill-quality-review`. This skill does not authorize architecture changes without owner approval, confuse a pattern with evidence, or preserve a failed decision for consistency’s sake.

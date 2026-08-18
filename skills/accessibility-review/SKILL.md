@@ -59,6 +59,8 @@ If the platform, users, or conformance target is unknown, narrow the claim and a
 - Confidence: medium-high for the review principles; medium for any conformance or barrier conclusion until the target platform, assistive technology coverage, and affected-user testing are known.
 - Freshness: review when WCAG/platform guidance, supported devices, interaction patterns, or accessibility policy changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `api-contract-compatibility`, `requirements-to-acceptance`, `secure-coding-review`, `regression-test-design`, `observability-and-instrumentation`, `performance-regression-analysis`, and `repository-change-verification`. This skill does not authorize claiming legal conformance, replacing disabled-user evaluation with automation, or weakening accessibility to satisfy a visual or performance target.

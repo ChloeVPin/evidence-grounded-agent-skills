@@ -57,6 +57,8 @@ Separate observations from hypotheses and recommendations; record confidence and
 
 Confidence: medium. Freshness review: after material failures, contradictory evidence, or methodology changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: differential-patch-review, knowledge-maintenance, and repository-change-verification. This skill does not authorize silently weakening governing principles to resolve local disagreement.

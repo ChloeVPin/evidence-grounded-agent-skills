@@ -60,6 +60,8 @@ Record confidence and freshness for every verification claim, distinguish observ
 
 Confidence: medium-high. Freshness review: annually, and immediately after material changes to agent tooling, CI policy, or supply-chain guidance.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: future test-design, dependency-audit, secure-agent-runtime, and pull-request-review skills. This skill does not override repository-specific policies or required human approvals.

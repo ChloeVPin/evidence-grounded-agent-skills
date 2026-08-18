@@ -53,7 +53,7 @@ If the evidence is contradictory, preserve the competing explanations and use th
 
 Source independence is a required check for material claims: repeated summaries do not become independent evidence merely because they appear in different places.
 
-Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Review when the governing principles or source evidence changes.
+Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Freshness review: when the governing principles or source evidence changes.
 
 ## Related skills and conflicts
 

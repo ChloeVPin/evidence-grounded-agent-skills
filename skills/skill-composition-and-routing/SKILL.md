@@ -55,6 +55,8 @@ If no skill clearly applies, use the task’s repository guidance and record the
 - Confidence: medium-high for phase-based routing; medium for any specific ordering when repository constraints or risk requirements differ.
 - Freshness: review when skill triggers, dependencies, conflicts, or the library’s taxonomy materially change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: every task skill in this library, especially `requirements-to-acceptance`, `epistemic-coding`, `repository-change-verification`, `contradiction-resolution`, and `knowledge-maintenance`. This skill does not override a selected skill’s safety boundary or authorize skipping a required phase to reduce context.

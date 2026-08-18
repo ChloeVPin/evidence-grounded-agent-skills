@@ -61,6 +61,8 @@ If worktree ownership or scope is unclear, stop mutation and ask. If a destructi
 - Confidence: high for inspect-before-mutate and explicit-target principles; medium for conflict and synchronization strategy because repository policy and collaboration model vary.
 - Freshness: review when remote policy, branching model, hosting workflow, or repository contribution rules change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `repository-exploration`, `repository-change-verification`, `behavior-preserving-refactoring`, `requirements-to-acceptance`, `release-and-rollback-safety`, `prompt-injection-resistance`, and `skill-quality-review`. This skill does not authorize destroying user work, rewriting shared history, exposing secrets, or claiming a clean tree without checking it.

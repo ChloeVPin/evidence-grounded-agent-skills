@@ -55,6 +55,8 @@ If acceptance criteria are unstable, pause planning and clarify them. If depende
 - Confidence: high for bounded decomposition and evidence-driven sequencing; medium for a plan’s predicted effort and risk until discovery and experiments run.
 - Freshness: replan when requirements, repository structure, dependencies, risk, environment, or verification results change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `requirements-to-acceptance`, `repository-exploration`, `skill-composition-and-routing`, `epistemic-coding`, `repository-change-verification`, `safe-git-workflow`, and `skill-quality-review`. This skill does not authorize scope expansion, irreversible actions without approval, or claiming completion because a plan was written.

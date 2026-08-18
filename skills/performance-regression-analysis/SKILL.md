@@ -57,6 +57,8 @@ If no representative workload or baseline exists, narrow the claim and build mea
 - Confidence: high for baseline/measurement discipline; medium for optimization choices until profiling and representative results support them.
 - Freshness: review when workload distribution, hardware, runtime, dependencies, architecture, or performance targets change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `evidence-driven-debugging`, `observability-and-instrumentation`, `behavior-preserving-refactoring`, `differential-patch-review`, `regression-test-design`, `secure-coding-review`, and `repository-change-verification`. This skill does not authorize weakening correctness, security, or reliability to obtain a benchmark improvement.

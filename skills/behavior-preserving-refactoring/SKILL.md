@@ -61,6 +61,8 @@ If the preservation contract is unclear, use `requirements-to-acceptance` or ask
 - Confidence: high for incremental, boundary-based refactoring practice; medium for equivalence claims when coverage, consumers, or runtime environments are incomplete.
 - Freshness: review when interfaces, architecture, test strategy, or compatibility policy changes.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `repository-change-verification`, `differential-patch-review`, `requirements-to-acceptance`, `regression-test-design`, `evidence-driven-debugging`, and `knowledge-maintenance`. This skill does not authorize breaking public behavior, deleting compatibility paths, or treating a refactor label as permission to skip review.

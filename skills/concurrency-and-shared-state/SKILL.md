@@ -56,6 +56,8 @@ If the memory or transaction model is unknown, stop and resolve it before reason
 - Confidence: medium-high for ownership, invariant, interleaving, liveness, and idempotence principles; medium for any implementation strategy until its model and schedules are tested.
 - Freshness: review when language/runtime memory semantics, workload, synchronization primitives, failure model, or external side effects change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `evidence-driven-debugging`, `regression-test-design`, `test-effectiveness-analysis`, `performance-regression-analysis`, `observability-and-instrumentation`, `secure-coding-review`, `data-migration-safety`, and `repository-change-verification`. This skill does not authorize weakening synchronization, hiding races with sleeps, or claiming concurrency safety from a single stress run.

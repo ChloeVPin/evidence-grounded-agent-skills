@@ -58,6 +58,8 @@ If no operational question exists, do not add speculative telemetry. If signals 
 - Confidence: high for the question-first and signal-boundary principles; medium for thresholds, sampling, retention, and ownership because they depend on system risk and operations.
 - Freshness: review when telemetry standards, topology, privacy policy, cost limits, or operational failure modes change.
 
+For material conclusions, seek disconfirming evidence, distinguish observations from hypotheses and recommendations, record tradeoffs and uncertainty, and note confidence, freshness, and source independence.
+
 ## Related skills and conflicts
 
 Related: `evidence-driven-debugging`, `secure-coding-review`, `requirements-to-acceptance`, `knowledge-maintenance`, `dependency-security-audit`, and `repository-change-verification`. This skill does not authorize logging sensitive data, treating telemetry as proof of correctness, or adding alerts without an actionable response.
