@@ -182,6 +182,7 @@ def _run(root: Path = ROOT) -> int:
         graph_capture, dependency_graph,
         {"ledger/evidence/0137-freshness-dependency-graph.json"},
         {graph_capture.get("revision")},
+        diagnostic_snapshot,
     )
     capture_summary_check = validate_audit_capture_dependency_summary(
         capture_summary,

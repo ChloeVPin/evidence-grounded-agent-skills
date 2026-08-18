@@ -210,7 +210,7 @@ def validate_snapshot_diagnostic_capture(
 
 def validate_graph_state_diagnostic_capture(
     capture: dict, graph: dict, available_paths: set[str],
-    history_revisions: set[str],
+    history_revisions: set[str], snapshot: dict | None = None,
 ) -> ContextAssessment:
     """Validate a capture that binds graph policy to a successful audit run."""
     required = (
@@ -229,6 +229,14 @@ def validate_graph_state_diagnostic_capture(
         return ContextAssessment(False, "graph capture reference is unavailable")
     if capture["graph_policy_sha256"] != graph.get("policy_sha256"):
         return ContextAssessment(False, "graph capture policy digest is stale")
+    if snapshot is not None:
+        if capture.get("snapshot_ref") != "ledger/evidence/0130-dependency-state-diagnostics.json":
+            return ContextAssessment(False, "graph capture snapshot reference is invalid")
+        expected_digest = hashlib.sha256(
+            json.dumps(snapshot, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        if capture.get("snapshot_sha256") != expected_digest:
+            return ContextAssessment(False, "graph capture snapshot digest is stale")
     if capture["audit_result"] != "passed":
         return ContextAssessment(False, "graph capture audit result is not passed")
     return ContextAssessment(True, "graph state diagnostic capture is valid")

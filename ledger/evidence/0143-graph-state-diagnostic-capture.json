@@ -6,5 +6,7 @@
   "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
   "graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",
   "graph_policy_sha256": "a6878508810c9657d170a7e85181935dc696bd2384b80d51dde47845c2872101",
+  "snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
+  "snapshot_sha256": "19ee6f6a5e5f2f87fe08ecac574016212c371cd5679531a986c8acd00fc11a38",
   "audit_result": "passed"
 }

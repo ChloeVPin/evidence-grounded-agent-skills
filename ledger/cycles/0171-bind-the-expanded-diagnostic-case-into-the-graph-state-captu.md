@@ -1,7 +1,7 @@
 # Cycle 0171 — Bind the expanded diagnostic case into the graph-state capture provenance
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Bind the expanded diagnostic case into the graph-state capture provenance
 
 ## Decision
 
-_To be determined from evidence._
+Graph-state diagnostic capture now binds the expanded dependency snapshot by
+reference and canonical digest, and rejects stale snapshot provenance.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0143 graph capture, validator support, content-digest refresh,
+and executable graph provenance validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The graph capture remains valid and the complete audit passes; 183 tests,
+compilation, and all four public checks pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind snapshot provenance into the graph dependency summary.
