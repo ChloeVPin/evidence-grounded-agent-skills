@@ -1,7 +1,7 @@
 # Cycle 0036 — Tool Audit Records
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with redacted audit records
 
 ## Question
 
@@ -9,16 +9,16 @@ What durable evidence should accompany each tool authorization decision and call
 
 ## Decision
 
-_To be determined._
+Audit records bind caller, tool, action, resource, parameters, decision, approval, timestamp, and output digest; credential-like parameter keys are recursively redacted.
 
 ## Evidence and provenance
 
-_Record audit schema and tamper/boundary tests._
+Implemented in `scripts/tool_audit.py` with three tests in `tests/test_tool_audit.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure an authorization decision cannot be detached from caller, tool, resource, parameters, approval, or time._
+Required identity/decision fields and timestamp syntax are enforced; output is digest-bound and secrets are not retained in parameters.
 
 ## Next action
 
-Define an audit record with redacted parameters, caller/tool identity, decision, resource, timestamp, and output digest.
+Validation passed locally. Limitation: a local digest does not authenticate the caller or prevent a privileged operator from rewriting records. Next cycle: connect audit records to authorization decisions and test denied, approved, and tampered-call paths.
