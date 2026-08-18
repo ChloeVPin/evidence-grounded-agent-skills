@@ -4,7 +4,8 @@ from pathlib import Path
 
 from scripts.decision_ledger import (
     PARAPHRASE_MIN_SHARED_TERMS, candidate_metrics, evaluate_labeled_queries,
-    find_matching_entries, find_paraphrase_candidates, validate_entry,
+    find_matching_entries, find_paraphrase_candidates, validate_contexts,
+    validate_entry,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -214,6 +215,19 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(metrics["true_positive"], 2)
         self.assertEqual(metrics["false_negative"], 0)
         self.assertEqual(metrics["recall"], 1.0)
+
+    def test_malformed_context_declarations_are_rejected(self):
+        self.assertFalse(validate_contexts([]).valid)
+        self.assertFalse(validate_contexts(["tool", "tool"]).valid)
+        self.assertFalse(validate_contexts(["*"]).valid)
+        self.assertFalse(validate_contexts(["tool", 3]).valid)
+        self.assertTrue(validate_contexts(["tool", "security"]).valid)
+
+    def test_evaluation_fails_closed_on_malformed_contexts(self):
+        with self.assertRaisesRegex(ValueError, "wildcard"):
+            evaluate_labeled_queries(
+                [], [{"query": "anything", "expected_ids": [], "contexts": ["*"]}],
+            )
 
 
 if __name__ == "__main__":

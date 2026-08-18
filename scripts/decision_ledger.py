@@ -17,6 +17,25 @@ class LedgerAssessment:
     reason: str
 
 
+@dataclass(frozen=True)
+class ContextAssessment:
+    valid: bool
+    reason: str
+
+
+def validate_contexts(contexts: object) -> ContextAssessment:
+    """Validate explicit context scope before it can constrain a review."""
+    if not isinstance(contexts, list) or not contexts:
+        return ContextAssessment(False, "contexts must be a non-empty list")
+    if any(not isinstance(value, str) or not value.strip() for value in contexts):
+        return ContextAssessment(False, "contexts must contain non-empty strings")
+    if any(value == "*" for value in contexts):
+        return ContextAssessment(False, "wildcard context is forbidden")
+    if len(set(contexts)) != len(contexts):
+        return ContextAssessment(False, "duplicate contexts are ambiguous")
+    return ContextAssessment(True, "valid context declaration")
+
+
 def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
     """Return prior entries whose recorded claims contain the exact claim."""
     return [entry for entry in entries if claim in entry.get("claims", [])]
@@ -63,6 +82,14 @@ def evaluate_labeled_queries(
     """Aggregate retrieval errors across labeled queries without changing policy."""
     totals = {"true_positive": 0, "false_positive": 0, "false_negative": 0}
     for label in labels:
+        if "contexts" in label:
+            context_assessment = validate_contexts(label["contexts"])
+            if not context_assessment.valid:
+                raise ValueError(context_assessment.reason)
+        elif "context" in label:
+            context_assessment = validate_contexts([label["context"]])
+            if not context_assessment.valid:
+                raise ValueError(context_assessment.reason)
         predicted = {
             entry["entry_id"]
             for entry in find_paraphrase_candidates(
