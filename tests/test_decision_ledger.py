@@ -22,6 +22,7 @@ from scripts.decision_ledger import (
     validate_self_validation_bundle_against_chain,
     validate_captured_output,
     validate_four_check_capture,
+    validate_failure_evidence,
     validate_complete_self_validation_bundle,
     validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
@@ -711,6 +712,19 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_four_check_capture(
             dict(capture, result="failed"),
             "python3 scripts/audit_current_assertion.py", {capture["revision"]},
+        ).valid)
+
+    def test_persisted_failure_evidence_is_machine_readable(self):
+        record = json.loads(Path(
+            "ledger/evidence/0122-capture-schema-failure.json",
+        ).read_text())
+        available = {record["source_capture_ref"]}
+        self.assertTrue(validate_failure_evidence(record, available).valid)
+        self.assertFalse(validate_failure_evidence(
+            dict(record, source_capture_ref="ledger/evidence/missing.json"), available,
+        ).valid)
+        self.assertFalse(validate_failure_evidence(
+            dict(record, reason=""), available,
         ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):

@@ -179,6 +179,22 @@ def validate_four_check_capture(
     return ContextAssessment(True, "four-check capture is valid")
 
 
+def validate_failure_evidence(record: dict, available_paths: set[str]) -> ContextAssessment:
+    """Validate a persisted diagnostic record for a failed audit gate."""
+    required = (
+        "evidence_id", "source_capture_ref", "mutation", "failed_check",
+        "error_code", "reason",
+    )
+    missing = [field for field in required if field not in record]
+    if missing:
+        return ContextAssessment(False, f"failure evidence missing: {', '.join(missing)}")
+    if record["source_capture_ref"] not in available_paths:
+        return ContextAssessment(False, "failure evidence source is unavailable")
+    if record["error_code"] not in CLI_ERROR_CODES or not record["reason"].strip():
+        return ContextAssessment(False, "failure evidence diagnostic fields are malformed")
+    return ContextAssessment(True, "failure evidence is valid")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")
