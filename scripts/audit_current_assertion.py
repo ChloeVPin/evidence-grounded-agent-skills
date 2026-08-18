@@ -49,6 +49,7 @@ from scripts.decision_ledger import (
     validate_graph_state_diagnostic_capture,
     validate_audit_capture_dependency_summary,
     validate_summary_state_diagnostic_capture,
+    validate_freshness_capture_inventory,
     validate_cli_output,
 )
 
@@ -184,6 +185,26 @@ def _run(root: Path = ROOT) -> int:
         {"ledger/evidence/0146-audit-capture-dependencies.json"},
         {summary_capture.get("revision")},
     )
+    capture_inventory = json.loads(
+        (evidence_dir / "0154-freshness-capture-inventory.json").read_text()
+    )
+    inventory_expected = {
+        "ledger/evidence/0093-generation-rerun.json",
+        "ledger/evidence/0108-audit-command-capture.json",
+        "ledger/evidence/0119-four-check-audit-capture.json",
+        "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+        "ledger/evidence/0143-graph-state-diagnostic-capture.json",
+        "ledger/evidence/0151-summary-state-diagnostic-capture.json",
+    }
+    inventory_available = {
+        path for values in (
+            capture_inventory.get("capture_refs", []),
+            [capture_inventory.get("state_ref"), capture_inventory.get("summary_ref"), capture_inventory.get("graph_ref")],
+        ) for path in values if path and (root / path).exists()
+    }
+    inventory_check = validate_freshness_capture_inventory(
+        capture_inventory, inventory_available, inventory_expected,
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
@@ -197,6 +218,7 @@ def _run(root: Path = ROOT) -> int:
             and graph_capture_check.valid
             and capture_summary_check.valid
             and summary_capture_check.valid
+            and inventory_check.valid
         ),
     }
     passed = all(checks.values())
@@ -215,6 +237,7 @@ def _run(root: Path = ROOT) -> int:
                 graph_capture_check,
                 capture_summary_check,
                 summary_capture_check,
+                inventory_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)
