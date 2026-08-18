@@ -19,6 +19,15 @@ The deliverables are the directories under [`skills/`](skills/). Each contains a
 
 Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.
 
+## Using the library
+
+1. Start with [repository exploration](skills/repository-exploration/SKILL.md) and [requirements to acceptance](skills/requirements-to-acceptance/SKILL.md) when the codebase or target is unclear.
+2. Use [skill composition and routing](skills/skill-composition-and-routing/SKILL.md) to select the smallest relevant set; do not load every skill for every task.
+3. Follow the selected skill’s triggers and prerequisites, then pass its outputs to the next applicable skill.
+4. Finish with the relevant verification, security, performance, accessibility, release, or maintenance skill, and report evidence limits honestly.
+
+Skills are guidance, not guarantees. Repository instructions, user authorization, specialist review, and applicable standards remain authoritative.
+
 ## Skill index
 
 ### Foundation and routing
