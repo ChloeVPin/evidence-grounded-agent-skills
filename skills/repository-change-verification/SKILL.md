@@ -1,6 +1,6 @@
 # Repository Change Verification
 
-Lifecycle: `draft`
+Lifecycle: `validated`
 
 ## Purpose and scope
 
