@@ -1,4 +1,4 @@
-# Hermes Epistemic Constitution
+# Evidence-Grounded Agent Skills: Governing Principles
 
 ## Mission
 

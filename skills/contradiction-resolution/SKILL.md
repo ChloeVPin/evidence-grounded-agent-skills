@@ -38,7 +38,7 @@ If evidence is incomparable, split the claims by context instead of choosing a w
 
 ## Validation evidence and provenance
 
-- Referenced Hermes research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and a knowledge ledger are institutional requirements.
+- Governing research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and a knowledge ledger improve agent reliability.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident/error tracking, after-action assessment, and continual improvement guidance.
 
 Confidence: medium. Freshness review: after material failures, contradictory evidence, or methodology changes.

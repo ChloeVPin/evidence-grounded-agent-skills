@@ -1,6 +1,6 @@
-# Hermes: Epistemic Institution
+# Evidence-Grounded Agent Skills
 
-Hermes is an executable research institution for building, validating, and maintaining evidence-grounded skills for AI coding agents.
+This repository builds practical, evidence-grounded skills for AI coding agents and other software-development agents.
 
 Its objective is not to produce files indefinitely. Its objective is to make the skill ecosystem more correct, useful, composable, current, and auditable.
 
@@ -14,7 +14,7 @@ Its objective is not to produce files indefinitely. Its objective is to make the
 6. Validation tests usefulness, correctness, safety, and maintainability.
 7. Maintenance detects decay, contradictions, and regressions.
 
-The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`](ledger/cycles/0001-institutional-bootstrap.md).
+The initial research and design history is preserved in [`ledger/`](ledger/).
 
 ## Repository map
 

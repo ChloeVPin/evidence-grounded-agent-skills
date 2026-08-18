@@ -1,6 +1,6 @@
 ---
 name: epistemic-coding
-description: Apply Hermes' evidence-first philosophy while investigating, changing, or explaining a software repository. Use when correctness, uncertainty, scope, or the evidence behind a coding decision matters.
+description: Apply an evidence-first philosophy while investigating, changing, or explaining a software repository. Use when correctness, uncertainty, scope, or the evidence behind a coding decision matters.
 ---
 
 # Evidence-First Coding
@@ -42,7 +42,7 @@ If the evidence is contradictory, preserve the competing explanations and use th
 - `CONSTITUTION.md`: truth over confidence, evidence over convention, verification over assertion, tradeoffs, simplicity, reversibility, and explicit disconfirmation.
 - `RESEARCH_PROTOCOL.md`: reconnaissance, evidence evaluation, adversarial review, validation, and maintenance.
 - `QUALITY_RUBRIC.md`: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.
-- Referenced Hermes research report: an executable epistemology must distinguish knowledge types, seek disconfirming evidence, preserve uncertainty, and measure substantive improvement rather than activity.
+- Governing research report: an evidence-first agent must distinguish knowledge types, seek disconfirming evidence, preserve uncertainty, and measure substantive improvement rather than activity.
 
 Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Review when the constitution, research protocol, or quality rubric changes.
 
