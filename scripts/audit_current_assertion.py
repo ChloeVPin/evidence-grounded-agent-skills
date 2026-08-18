@@ -108,6 +108,9 @@ def _run(root: Path = ROOT) -> int:
     diagnostic_snapshot = json.loads(
         (evidence_dir / "0130-dependency-state-diagnostics.json").read_text()
     )
+    capture_summary = json.loads(
+        (evidence_dir / "0146-audit-capture-dependencies.json").read_text()
+    )
     state_path = root / "ledger/state/0113-complete-self-validation-gate.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {}
     freshness_check = validate_self_validation_state(
@@ -115,6 +118,7 @@ def _run(root: Path = ROOT) -> int:
         dependency_manifest,
         diagnostic_snapshot,
         dependency_graph,
+        capture_summary,
     )
     four_check_capture = json.loads(
         (evidence_dir / "0119-four-check-audit-capture.json").read_text()
@@ -147,9 +151,6 @@ def _run(root: Path = ROOT) -> int:
         graph_capture, dependency_graph,
         {"ledger/evidence/0137-freshness-dependency-graph.json"},
         {graph_capture.get("revision")},
-    )
-    capture_summary = json.loads(
-        (evidence_dir / "0146-audit-capture-dependencies.json").read_text()
     )
     capture_summary_check = validate_audit_capture_dependency_summary(
         capture_summary,

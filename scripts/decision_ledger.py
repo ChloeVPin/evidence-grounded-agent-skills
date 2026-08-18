@@ -556,6 +556,7 @@ def validate_complete_self_validation_bundle(
 def validate_self_validation_state(
     state: dict, bundle_ref: str, self_capture: dict, manifest: dict | None = None,
     diagnostic_snapshot: dict | None = None, dependency_graph: dict | None = None,
+    capture_summary: dict | None = None,
 ) -> ContextAssessment:
     """Validate the persisted result of the complete self-validation gate."""
     required = (
@@ -563,7 +564,8 @@ def validate_self_validation_state(
         "self_validation_output_sha256", "dependency_manifest_ref",
         "dependency_paths_sha256", "diagnostic_snapshot_ref",
         "diagnostic_snapshot_sha256", "dependency_graph_ref",
-        "dependency_graph_policy_sha256",
+        "dependency_graph_policy_sha256", "capture_summary_ref",
+        "capture_summary_sha256",
     )
     missing = [field for field in required if field not in state]
     if missing:
@@ -595,6 +597,11 @@ def validate_self_validation_state(
             return ContextAssessment(False, "self-validation state graph reference is invalid")
         if state["dependency_graph_policy_sha256"] != dependency_graph.get("policy_sha256"):
             return ContextAssessment(False, "self-validation state graph policy digest is stale")
+    if capture_summary is not None:
+        if state["capture_summary_ref"] != "ledger/evidence/0146-audit-capture-dependencies.json":
+            return ContextAssessment(False, "self-validation state summary reference is invalid")
+        if state["capture_summary_sha256"] != capture_summary.get("summary_sha256"):
+            return ContextAssessment(False, "self-validation state summary digest is stale")
     if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
         return ContextAssessment(False, "self-validation state bundle or checks are malformed")
     if set(checks) != expected_checks or any(value is not True for value in checks.values()):
