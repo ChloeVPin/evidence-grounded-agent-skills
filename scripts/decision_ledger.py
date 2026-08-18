@@ -16,6 +16,7 @@ CONTEXT_ARTIFACT_HINTS = {
     "differential-review": ("differential",),
     "behavioral-differential": ("differential",),
 }
+CONTEXT_RENAMES = {"differential-review": "behavioral-differential"}
 
 
 @dataclass(frozen=True)
@@ -79,6 +80,19 @@ def validate_context_artifacts(entry: dict) -> ContextAssessment:
         if not any(any(hint in artifact for hint in hints) for artifact in artifacts):
             return ContextAssessment(False, f"context is not bound to artifacts: {context}")
     return ContextAssessment(True, "contexts are bound to artifacts")
+
+
+def audit_context_names(entries: list[dict]) -> ContextAssessment:
+    """Audit current and legacy names without rewriting historical entries."""
+    known = set(CONTEXT_ARTIFACT_HINTS) | set(CONTEXT_RENAMES)
+    for entry in entries:
+        assessment = validate_context_artifacts(entry)
+        if not assessment.valid:
+            return assessment
+        for context in entry.get("contexts", []):
+            if context not in known:
+                return ContextAssessment(False, f"unregistered legacy context: {context}")
+    return ContextAssessment(True, "all context names are registered")
 
 
 def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
