@@ -48,6 +48,7 @@ from scripts.decision_ledger import (
     validate_freshness_dependency_graph,
     validate_graph_state_diagnostic_capture,
     validate_audit_capture_dependency_summary,
+    validate_summary_state_diagnostic_capture,
     validate_cli_output,
 )
 
@@ -175,6 +176,14 @@ def _run(root: Path = ROOT) -> int:
             },
         },
     )
+    summary_capture = json.loads(
+        (evidence_dir / "0151-summary-state-diagnostic-capture.json").read_text()
+    )
+    summary_capture_check = validate_summary_state_diagnostic_capture(
+        summary_capture, capture_summary,
+        {"ledger/evidence/0146-audit-capture-dependencies.json"},
+        {summary_capture.get("revision")},
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
@@ -187,6 +196,7 @@ def _run(root: Path = ROOT) -> int:
             and graph_check.valid
             and graph_capture_check.valid
             and capture_summary_check.valid
+            and summary_capture_check.valid
         ),
     }
     passed = all(checks.values())
@@ -204,6 +214,7 @@ def _run(root: Path = ROOT) -> int:
                 graph_check,
                 graph_capture_check,
                 capture_summary_check,
+                summary_capture_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)

@@ -1172,6 +1172,27 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertFalse(output["checks"]["freshness"])
             self.assertIn("audit capture dependency summary capture_refs differs", output["reason"])
 
+    def test_executable_current_head_audit_rejects_tampered_summary_capture(self):
+        root = Path(__file__).resolve().parents[1]
+        with tempfile.TemporaryDirectory() as directory:
+            temp_root = Path(directory)
+            (temp_root / "ledger").mkdir()
+            shutil.copytree(root / "ledger" / "evidence", temp_root / "ledger" / "evidence")
+            shutil.copytree(root / "ledger" / "state", temp_root / "ledger" / "state")
+            capture_path = temp_root / "ledger/evidence/0151-summary-state-diagnostic-capture.json"
+            capture = json.loads(capture_path.read_text())
+            capture["summary_sha256"] = "0" * 64
+            capture_path.write_text(json.dumps(capture))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            output = json.loads(result.stdout)
+            self.assertEqual(output["error_code"], "AUDIT_GATE_FAILED")
+            self.assertFalse(output["checks"]["freshness"])
+            self.assertIn("summary capture digest is stale", output["reason"])
+
     def test_executable_current_head_audit_reports_malformed_json(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:

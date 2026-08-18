@@ -1,7 +1,7 @@
 # Cycle 0153 — Use the dedicated validator in the executable summary-state path
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Use the dedicated validator in the executable summary-state path
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now validates the 0151 summary-state capture as part of
+freshness. Tampering its summary digest fails with `AUDIT_GATE_FAILED` and the
+dedicated validator reason.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: validator binding in `scripts/audit_current_assertion.py`, the 0151
+capture, and temporary-root tamper coverage.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The public output remains four checks; capture validation is composed into
+freshness with the other dependency layers.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a complete freshness capture inventory.
