@@ -7,7 +7,7 @@
   "dependency_manifest_ref": "ledger/evidence/0125-audit-dependencies.json",
   "dependency_paths_sha256": "7c22c1578b848edf461ca656fd5483a69280a1b5893e05c24bb7db8255a538b7",
   "diagnostic_snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
-  "diagnostic_snapshot_sha256": "baf755ffa79794a560f724e334f669cb9a827ea3f39543dc1d654464bd206580",
+  "diagnostic_snapshot_sha256": "71f84d25706639a360e267d538e417c98c6b2f9cb9d45d86b742b88df2faccc0",
   "dependency_graph_ref": "ledger/evidence/0137-freshness-dependency-graph.json",
   "dependency_graph_policy_sha256": "a6878508810c9657d170a7e85181935dc696bd2384b80d51dde47845c2872101",
   "capture_summary_ref": "ledger/evidence/0146-audit-capture-dependencies.json",
