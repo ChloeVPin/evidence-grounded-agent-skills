@@ -29,6 +29,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/change_review.py`](scripts/change_review.py): deterministic pre-review gate for scope and sensitive paths.
 - [`scripts/evidence_review.py`](scripts/evidence_review.py): checks that review records contain minimum test evidence.
 - [`scripts/capture_evidence.py`](scripts/capture_evidence.py): captures command status, repository revision, and output digest.
+- [`scripts/bind_evidence.py`](scripts/bind_evidence.py): binds evidence to diff and acceptance-criteria hashes.
 
 ## Running a cycle
 
