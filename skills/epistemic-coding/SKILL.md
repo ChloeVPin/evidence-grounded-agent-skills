@@ -29,7 +29,7 @@ Label material claims as facts, observations, heuristics, conventions, recommend
 2. Inspect the relevant code, its callers, tests, and repository instructions. Separate facts observed in the repository from assumptions, conventions, recommendations, hypotheses, and speculation.
 3. State the smallest change that could satisfy the outcome. Prefer reversible decisions when evidence is incomplete; do not add features for imagined future needs.
 4. Seek disconfirming evidence: ask, “What would make this conclusion wrong?” Check boundary inputs, failure paths, security effects, unrelated behavior, and the strongest plausible alternative explanation.
-5. Implement only the justified change. Preserve unrelated behavior and record meaningful tradeoffs rather than presenting one context-dependent choice as universal.
+5. Implement only the justified change. Preserve unrelated behavior and record material tradeoffs rather than presenting one context-dependent choice as universal.
 6. Verify the outcome with the narrowest relevant reproduction or test, then run broader checks when the change warrants them. Read the actual results.
 7. Report what is proven, what remains uncertain, and the next review trigger. Never call a change correct merely because it looks plausible or a test happens to pass.
 

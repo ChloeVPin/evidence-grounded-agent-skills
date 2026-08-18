@@ -29,7 +29,7 @@ Trigger when adding or changing retries, timeouts, polling, backoff, circuit bre
 3. Set an end-to-end deadline and budget across callers, retries, backoff, connection, and downstream work. Do not let nested defaults exceed the user or system budget.
 4. Make repeated operations safe through idempotency keys, deduplication, transactions, conditional writes, or an explicit non-retry policy. Define what happens when the outcome is unknown after a timeout.
 5. Choose backoff, jitter, retry count, circuit behavior, rate limits, bulkheads, queue limits, and fallback semantics from observed latency, error, and capacity evidence—not folklore.
-6. Preserve meaningful errors and cancellation. Avoid retrying validation, authorization, deterministic failures, or caller cancellation; avoid fallback data that violates freshness, privacy, or correctness requirements.
+6. Preserve actionable errors and cancellation. Avoid retrying validation, authorization, deterministic failures, or caller cancellation; avoid fallback data that violates freshness, privacy, or correctness requirements.
 7. Instrument attempts, reasons, delays, outcomes, deadlines, saturation, queue age, circuit state, and fallback use without logging secrets or creating unbounded metrics.
 8. Test transient/permanent failures, timeouts, slow responses, duplicate delivery, partial side effects, cancellation, overload, recovery, retry storms, concurrent callers, and exhausted budgets.
 9. Compare load and dependency impact before and after the change. Verify that the system recovers without exceeding downstream limits and that users receive an honest result.

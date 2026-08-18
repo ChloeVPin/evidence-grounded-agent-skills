@@ -17,9 +17,9 @@ Trigger when failures are difficult to reproduce, behavior crosses process or qu
 
 ## Decision criteria
 
-- Start with a question the signal must answer; do not instrument merely because data might be useful.
+- Start with a question the signal must answer; do not instrument merely because data might be interesting to collect.
 - Logs describe discrete events, metrics summarize comparable measurements, and traces connect work across boundaries; choose the least expensive signal that answers the question.
-- A signal is useful only when it has sufficient context, stable semantics, actionable thresholds, and a known owner or response.
+- A signal is decision-relevant only when it has sufficient context, stable semantics, actionable thresholds, and a known owner or response.
 - Diagnostic value must be balanced against privacy, cardinality, storage, latency, cost, and attack surface.
 
 ## Procedure

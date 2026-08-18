@@ -1,6 +1,6 @@
 ---
 name: test-effectiveness-analysis
-description: Evaluate whether tests detect meaningful behavioral faults using boundaries, negative cases, differential checks, and mutation-oriented diagnostics. Use when tests are added, changed, weak, or contradicted by regressions.
+description: Evaluate whether tests detect acceptance-relevant behavioral faults using boundaries, negative cases, differential checks, and mutation-oriented diagnostics. Use when tests are added, changed, weak, or contradicted by regressions.
 ---
 
 # Test-Effectiveness Analysis
@@ -9,7 +9,7 @@ Lifecycle: `draft`
 
 ## Purpose and scope
 
-Use this skill to evaluate whether tests detect meaningful behavioral faults, especially in AI-generated changes. It supplements ordinary test execution with boundary cases, negative cases, differential checks, and mutation-oriented diagnostics. It does not claim that mutation score proves correctness or prescribe one universal threshold.
+Use this skill to evaluate whether tests detect acceptance-relevant behavioral faults, especially in AI-generated changes. It supplements ordinary test execution with boundary cases, negative cases, differential checks, and mutation-oriented diagnostics. It does not claim that mutation score proves correctness or prescribe one universal threshold.
 
 ## Triggers and prerequisites
 
@@ -17,13 +17,13 @@ Trigger when a change adds or modifies behavior, when tests are newly generated,
 
 ## Decision criteria
 
-Treat a test as effective when it fails for a plausible incorrect behavior relevant to the acceptance criteria and remains meaningful at boundaries and negative paths. Do not accept a score or passing suite as sufficient when representative faults survive unexplored.
+Treat a test as effective when it fails for a plausible incorrect behavior relevant to the acceptance criteria and remains behavior-specific at boundaries and negative paths. Do not accept a score or passing suite as sufficient when representative faults survive unexplored.
 
 ## Procedure
 
 1. Translate the requested behavior into observable positive, negative, boundary, and invariant cases.
 2. Run the baseline tests and record their revision, command, exit status, and output digest.
-3. Inspect whether tests assert externally meaningful behavior rather than only execution, non-null values, or implementation details.
+3. Inspect whether tests assert externally observable behavior rather than only execution, non-null values, or implementation details.
 4. Introduce representative fault mutations near the changed behavior: operator/branch changes, boundary shifts, omitted calls, altered errors, and incorrect side effects where applicable.
 5. Run the test suite against each mutation and classify killed, surviving, equivalent, invalid, or unexecuted mutations. Do not count invalid mutants as surviving evidence.
 6. Investigate surviving mutations. Add the smallest test that distinguishes the intended behavior when the mutation represents a plausible fault.
@@ -34,7 +34,7 @@ Treat a test as effective when it fails for a plausible incorrect behavior relev
 
 - [ ] Acceptance criteria include positive, negative, boundary, or invariant cases as applicable.
 - [ ] Baseline and focused tests were run with captured evidence.
-- [ ] Assertions check meaningful behavior and side effects.
+- [ ] Assertions check externally observable behavior and side effects.
 - [ ] Representative mutations were selected and classified.
 - [ ] Surviving plausible mutations were investigated or explicitly accepted with rationale.
 - [ ] Regression behavior outside the changed path was checked.

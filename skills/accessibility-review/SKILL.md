@@ -25,7 +25,7 @@ Trigger when changing user interfaces, interaction flows, forms, navigation, med
 ## Procedure
 
 1. Identify affected tasks, users, content, input modes, output modes, and failure states. Define the applicable platform guidance and target conformance level without overstating it.
-2. Inspect structure and semantics: headings, landmarks, labels, names/roles/states, language, reading order, relationships, tables, alternatives for non-text content, and meaningful document structure.
+2. Inspect structure and semantics: headings, landmarks, labels, names/roles/states, language, reading order, relationships, tables, alternatives for non-text content, and task-relevant document structure.
 3. Exercise the task without a mouse or pointer. Check focus visibility and order, keyboard operability, shortcuts, traps, drag alternatives, target size, timing, cancellation, and touch or switch input where relevant.
 4. Check presentation and perception: contrast, text resizing/reflow, zoom, motion, color independence, captions/transcripts, audio control, and state/error information that is not conveyed by color alone.
 5. Check forms and dynamic behavior: instructions, required fields, input purpose, validation, error identification, recovery, status announcements, focus movement, dialogs, loading, and content changes for assistive technologies.
@@ -41,7 +41,7 @@ Good: A custom dialog has a programmatic name, correct focus entry and return, k
 
 Bad: Add an ARIA role to a clickable `div` and call the dialog accessible without implementing focus, keyboard, state, and announcement behavior.
 
-Good: A chart provides a meaningful text summary or data table and does not rely on color alone to communicate trends.
+Good: A chart provides a task-relevant text summary or data table and does not rely on color alone to communicate trends.
 
 Bad: Increase contrast in a screenshot while leaving the chart’s data inaccessible to screen readers or keyboard users.
 

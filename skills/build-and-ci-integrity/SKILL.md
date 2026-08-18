@@ -1,6 +1,6 @@
 ---
 name: build-and-ci-integrity
-description: Review and improve build systems and CI workflows for reproducibility, least privilege, trustworthy artifacts, controlled inputs, and useful verification. Use when an AI coding agent changes build commands, workflow files, runners, artifact publication, release checks, or provenance.
+description: Review and improve build systems and CI workflows for reproducibility, least privilege, trustworthy artifacts, controlled inputs, and repeatable verification. Use when an AI coding agent changes build commands, workflow files, runners, artifact publication, release checks, or provenance.
 ---
 
 Lifecycle: `draft`
@@ -9,7 +9,7 @@ Lifecycle: `draft`
 
 ## Purpose and scope
 
-Ensure that build and CI results are meaningful, repeatable, and protected from unintended workflow or artifact tampering. This skill covers workflow behavior, build inputs, permissions, caching, artifacts, and provenance; it does not replace dependency security, release approval, or provider-specific operations guidance.
+Ensure that build and CI results are reproducible, interpretable, and protected from unintended workflow or artifact tampering. This skill covers workflow behavior, build inputs, permissions, caching, artifacts, and provenance; it does not replace dependency security, release approval, or provider-specific operations guidance.
 
 ## Triggers and prerequisites
 
@@ -28,8 +28,8 @@ Trigger when changing CI workflows, build scripts, runners, containers, caches, 
 2. Define the build contract: canonical source revision, commands, toolchain/runtime, dependency lock state, configuration, expected artifacts, checks, retention, and consumer verification.
 3. Trace trust boundaries for pull requests, forks, branches, tags, release events, generated code, cache restore/save, artifact upload/download, and deployment or signing steps.
 4. Minimize permissions and secret exposure. Pin third-party actions or equivalent inputs immutably where policy requires, verify ownership, separate untrusted validation from privileged publication, and prevent logs/artifacts from containing secrets.
-5. Make inputs explicit and stable: lock dependencies, identify toolchains, control locale/time/randomness where relevant, avoid mutable downloads, isolate caches, and distinguish generated artifacts from source.
-6. Verify that required checks assert meaningful behavior and cannot be bypassed by skipped, conditional, empty, or untrusted jobs. Inspect failure, cancellation, timeout, and partial-artifact behavior.
+5. Make inputs explicit and stable: lock dependencies, identify toolchains, control locale/time/randomness where they affect results, avoid mutable downloads, isolate caches, and distinguish generated artifacts from source.
+6. Verify that required checks assert the intended behavior and cannot be bypassed by skipped, conditional, empty, or untrusted jobs. Inspect failure, cancellation, timeout, and partial-artifact behavior.
 7. Produce or verify artifact identity and provenance: source revision, builder, process, inputs, digest, and signing/attestation where the system requires it. Do not claim provenance that the workflow does not generate or verify.
 8. Exercise changed workflows with normal, fork/untrusted, failed, retried, canceled, cache-hit/miss, and release paths. Check permissions, artifact contents, logs, timing, and reproducibility limits.
 9. Compare behavior and access against the baseline. Record residual risk, provider assumptions, required human approvals, recovery path, review trigger, and evidence that supports the lifecycle status.

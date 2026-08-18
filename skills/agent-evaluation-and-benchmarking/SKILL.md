@@ -17,7 +17,7 @@ Trigger when comparing agents, models, prompts, skills, tools, workflows, or ver
 
 ## Decision criteria
 
-- Define success across correctness, completeness, relevance, actionability, robustness, safety, maintainability, and cost/time as appropriate; do not reduce quality to completion or pass rate.
+- Define success across correctness, completeness, relevance, actionability, robustness, safety, maintainability, and cost/time according to the task’s risk and objective; do not reduce quality to completion or pass rate.
 - The evaluation population and sampling process determine what the result supports. A benchmark does not establish performance outside its distribution.
 - Separate agent behavior from evaluator behavior, environment failures, flaky tasks, invalid tasks, and unobservable outcomes.
 - Prefer independent or held-out tasks and evaluators; repeated attempts or leaked reference answers can inflate results.

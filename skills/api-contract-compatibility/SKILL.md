@@ -20,7 +20,7 @@ Trigger when adding or changing endpoints, function signatures, commands, schema
 - An interface includes successful results, errors, validation, defaults, ordering, side effects, permissions, limits, timing expectations, and serialization—not only a method name or URL.
 - Compatibility is relative to identified consumers and versions; “backward compatible” without a consumer set is an unsupported claim.
 - Prefer additive, tolerant, and reversible evolution when consumers cannot migrate atomically; reject ambiguity rather than silently reinterpret data.
-- A deprecation or version signal is useful only with an effective boundary, migration path, and owner.
+- A deprecation or version signal is actionable only with an effective boundary, migration path, and owner.
 
 ## Procedure
 

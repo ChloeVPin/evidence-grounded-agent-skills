@@ -46,7 +46,7 @@ Bad: Deploy to all users and decide whether it worked from the absence of an imm
 
 ## Failure modes and recovery
 
-If rollback is unsafe or unknown, stop the rollout and design forward recovery or a compatible transition before exposure increases. If health signals are missing, keep the change below trusted release status and add the minimum useful observability. If an external side effect cannot be undone, contain further effects, record the irreversibility, and escalate. If a release partially succeeds, preserve the exact state and versions before attempting repair.
+If rollback is unsafe or unknown, stop the rollout and design forward recovery or a compatible transition before exposure increases. If health signals are missing, keep the change below trusted release status and add the minimum decision-relevant observability. If an external side effect cannot be undone, contain further effects, record the irreversibility, and escalate. If a release partially succeeds, preserve the exact state and versions before attempting repair.
 
 ## Validation evidence and provenance
 

@@ -9,7 +9,7 @@ Lifecycle: `draft`
 
 ## Purpose and scope
 
-Improve code safety and maintainability through meaningful static checks without confusing tool output with complete correctness. This skill covers selecting, interpreting, configuring, and responding to static analysis; it does not replace runtime tests, security review, formal verification, or domain-specific reasoning.
+Improve code safety and maintainability through targeted static checks without confusing tool output with complete correctness. This skill covers selecting, interpreting, configuring, and responding to static analysis; it does not replace runtime tests, security review, formal verification, or domain-specific reasoning.
 
 ## Triggers and prerequisites
 

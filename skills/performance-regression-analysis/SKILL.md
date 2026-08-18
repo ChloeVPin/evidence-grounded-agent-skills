@@ -50,7 +50,7 @@ If no representative workload or baseline exists, narrow the claim and build mea
 
 ## Validation evidence and provenance
 
-- The governing research requires empirical validation, benchmarking, meaningful progress measures, boundary analysis, and tradeoffs over dogma.
+- The governing research requires empirical validation, benchmarking, substantive progress measures, boundary analysis, and tradeoffs over dogma.
 - Benchmark results are observations conditioned on workload and environment; they do not prove universal performance or correctness.
 - [Google SRE: Service Level Objectives](https://sre.google/sre-book/service-level-objectives/): explains why latency distributions and high percentiles can reveal regressions hidden by averages.
 - Treat repeated benchmark claims as one line of evidence when they share the same workload, implementation, environment, or source; seek an independent workload or measurement method before generalizing.

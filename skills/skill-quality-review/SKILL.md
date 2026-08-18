@@ -1,6 +1,6 @@
 ---
 name: skill-quality-review
-description: Review a proposed or existing SKILL.md before publication for useful scope, precise triggers, evidence quality, counterexamples, safety, overlap, composability, and honest lifecycle status. Use when creating, revising, promoting, deprecating, or merging agent skills.
+description: Review a proposed or existing SKILL.md before publication for practical scope, precise triggers, evidence quality, counterexamples, safety, overlap, composability, and honest lifecycle status. Use when creating, revising, promoting, deprecating, or merging agent skills.
 ---
 
 Lifecycle: `draft`
@@ -36,9 +36,9 @@ Trigger before publishing a new skill, promoting its lifecycle, revising a trust
 
 ## Examples and counterexamples
 
-Good: Reject a proposed “better coding” skill because its procedure duplicates repository verification; ask the author to narrow it to a distinct failure mode or merge the useful guidance.
+Good: Reject a proposed “better coding” skill because its procedure duplicates repository verification; ask the author to narrow it to a distinct failure mode or merge the relevant guidance.
 
-Bad: Publish every useful paragraph as a separate skill because more files look like progress.
+Bad: Publish every relevant paragraph as a separate skill because more files look like progress.
 
 Good: Keep a security skill at draft status when its sources are general and no representative threat model or evaluation exists; state exactly what evidence would support promotion.
 

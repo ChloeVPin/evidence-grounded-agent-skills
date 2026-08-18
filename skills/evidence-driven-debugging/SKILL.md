@@ -18,7 +18,7 @@ Trigger when behavior is broken, surprising, flaky, slower than required, or con
 ## Decision criteria
 
 - An **observation** is directly reproduced or measured; a **hypothesis** explains it but remains unverified.
-- A useful experiment changes one relevant variable and produces outcomes that distinguish competing hypotheses.
+- A discriminating experiment changes one relevant variable and produces outcomes that distinguish competing hypotheses.
 - A fix is not validated by making one symptom disappear if the root cause, boundary behavior, and regression risk remain unknown.
 - Prefer the smallest reversible experiment and the smallest change that explains all observed evidence.
 

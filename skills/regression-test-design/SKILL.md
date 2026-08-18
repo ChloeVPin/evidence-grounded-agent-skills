@@ -17,7 +17,7 @@ Trigger when a defect is fixed, behavior changes, a test is added or rewritten, 
 
 ## Decision criteria
 
-- Test externally meaningful behavior: outputs, errors, state, permissions, side effects, ordering, and relevant resource limits.
+- Test externally observable behavior: outputs, errors, state, permissions, side effects, ordering, and relevant resource limits.
 - A regression test should fail for the original bug or a representative mutation and pass for the intended behavior.
 - Prefer a small deterministic test with one reason to fail; use broader tests when the contract is inherently cross-component.
 - Test selection follows risk and boundary coverage, not a fixed count or coverage percentage.

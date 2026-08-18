@@ -50,7 +50,7 @@ Bad: Mirror the entire interface or reverse strings without checking semantic or
 
 ## Failure modes and recovery
 
-If supported locales or terminology are unknown, narrow the claim and ask the product or language owner. If a library lacks required locale data, do not silently approximate culturally meaningful output; document the limitation or choose a supported fallback. If parsing is ambiguous, reject or request clarification rather than guessing. If a translation changes meaning, pause release of the affected content and obtain qualified review.
+If supported locales or terminology are unknown, narrow the claim and ask the product or language owner. If a library lacks required locale data, do not silently approximate output whose cultural or legal meaning may change; document the limitation or choose a supported fallback. If parsing is ambiguous, reject or request clarification rather than guessing. If a translation changes meaning, pause release of the affected content and obtain qualified review.
 
 ## Validation evidence and provenance
 
