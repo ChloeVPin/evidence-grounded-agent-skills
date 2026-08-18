@@ -25,12 +25,12 @@ Trigger before publishing a new skill, promoting its lifecycle, revising a trust
 ## Procedure
 
 1. Identify the task, user benefit, failure mode, and expected output. State why an existing skill cannot cover it without unacceptable ambiguity or overload.
-2. Inspect frontmatter name/description, purpose, triggers, prerequisites, decision criteria, procedure, examples, counterexamples, failure recovery, provenance, confidence, freshness, lifecycle, related skills, and conflicts.
+2. Inspect frontmatter name/description, purpose, triggers, prerequisites, decision criteria, procedure, examples, counterexamples, failure recovery, provenance, confidence, freshness, lifecycle, related skills, and conflicts. Confirm the name matches its directory, the file is a standalone `SKILL.md`, and no application code, runtime, test suite, or audit machinery is bundled.
 3. Test trigger precision with positive, negative, and neighboring-task examples. Check whether an agent could know when to activate, defer, or stop the skill.
 4. Trace material claims to authoritative sources, experiments, or observed failures. Check source independence, publication/version context, assumptions, and whether recommendations are being presented as facts.
 5. Seek disconfirming evidence: strongest counterargument, plausible misuse, boundary input, conflicting guidance, outdated source, hidden consumer, and scenario where the procedure creates harm or busywork.
 6. Inspect the procedure for missing decision boundaries, permissions, side effects, failure recovery, uncertainty, and verification evidence. Check that examples demonstrate behavior rather than slogans.
-7. Compare the candidate with existing skills. Classify the relationship as complementary, composable, overlapping, contradictory, or replacement; define routing and handoff if it remains.
+7. Compare the candidate with existing skills. Classify the relationship as complementary, composable, overlapping, contradictory, or replacement; define routing and handoff if it remains. Confirm the candidate is linked from the repository index and every related-skill reference resolves to an existing skill or is clearly described as future work.
 8. Review safety and operational limits: secrets, privacy, security, accessibility, data loss, irreversible actions, resource cost, and required human or specialist review.
 9. Assign a decision: publish draft, revise, accept at current lifecycle, defer for evidence, merge with another skill, or deprecate. Record the evidence, unresolved uncertainty, and next review trigger.
 
