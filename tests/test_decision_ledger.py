@@ -429,10 +429,11 @@ class DecisionLedgerTest(unittest.TestCase):
         assertions = [
             json.loads(Path("ledger/evidence/0085-generation-policy-audit.json").read_text()),
             json.loads(Path("ledger/evidence/0087-generation-policy-audit.json").read_text()),
+            json.loads(Path("ledger/evidence/0093-generation-policy-audit.json").read_text()),
         ]
         self.assertTrue(audit_policy_assertion_chain(assertions).valid)
-        second_current = dict(assertions[1], audit_id="other-current")
-        self.assertFalse(audit_policy_assertion_chain([assertions[1], second_current]).valid)
+        second_current = dict(assertions[2], audit_id="other-current")
+        self.assertFalse(audit_policy_assertion_chain([assertions[2], second_current]).valid)
 
     def test_policy_assertion_references_are_present(self):
         assertions = [
@@ -450,10 +451,10 @@ class DecisionLedgerTest(unittest.TestCase):
 
     def test_combined_policy_audit_bundle_requires_all_gates(self):
         audit = json.loads(Path(
-            "ledger/evidence/0087-generation-policy-audit.json",
+            "ledger/evidence/0093-generation-policy-audit.json",
         ).read_text())
         evidence = json.loads(Path(
-            "ledger/evidence/0087-generation-rerun.json",
+            "ledger/evidence/0093-generation-rerun.json",
         ).read_text())
         paths = set(audit["evidence_refs"])
         self.assertTrue(validate_policy_audit_bundle(audit, evidence, paths).valid)
@@ -484,6 +485,14 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(validate_current_assertion_bundle(bundle, paths - {
             bundle["content_digest_ref"],
         }).valid)
+
+    def test_current_revision_bundle_is_complete(self):
+        audit = json.loads(Path("ledger/evidence/0093-generation-policy-audit.json").read_text())
+        evidence = json.loads(Path("ledger/evidence/0093-generation-rerun.json").read_text())
+        bundle = json.loads(Path("ledger/evidence/0093-current-assertion-bundle.json").read_text())
+        paths = set(audit["evidence_refs"]) | {bundle["assertion_ref"], bundle["content_digest_ref"]}
+        self.assertTrue(validate_current_assertion_bundle(bundle, paths).valid)
+        self.assertTrue(compare_policy_audit(audit, evidence).valid)
 
 
 if __name__ == "__main__":

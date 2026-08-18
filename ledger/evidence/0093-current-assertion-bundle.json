@@ -1,0 +1,6 @@
+{
+  "bundle_id": "0093-current-assertion-bundle",
+  "assertion_ref": "ledger/evidence/0093-generation-policy-audit.json",
+  "capture_ref": "ledger/evidence/0093-generation-rerun.json",
+  "content_digest_ref": "ledger/evidence/0093-policy-content-digests.json"
+}

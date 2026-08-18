@@ -1,0 +1,12 @@
+{
+  "audit_id": "0093-generation-policy-audit",
+  "status": "current",
+  "supersedes": "0087-generation-policy-audit",
+  "policy": "python3 -m unittest discover -s tests",
+  "result": "passed",
+  "evidence_refs": [
+    "ledger/evidence/0093-generation-rerun.json",
+    "scripts/decision_ledger.py",
+    "tests/test_decision_ledger.py"
+  ]
+}

@@ -1,7 +1,7 @@
 # Cycle 0093 — Rerun complete bundle audit at current revision
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Rerun complete bundle audit at current revision
 
 ## Decision
 
-_To be determined from evidence._
+Reran the complete policy bundle at the current repository revision and created
+version 0093 as the new current assertion, superseding 0087.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The 0093 capture, assertion, content-digest manifest, and bundle all validate;
+the full suite passed at the captured current revision.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The assertion remains a point-in-time result and does not guarantee future
+revisions without another capture.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: audit the expanded assertion chain and
+refresh content digests for the new bundle.
