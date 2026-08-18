@@ -1,7 +1,7 @@
 # Cycle 0167 — Expose diagnostic references directly in the freshness inventory
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Expose diagnostic references directly in the freshness inventory
 
 ## Decision
 
-_To be determined from evidence._
+The freshness inventory now explicitly records diagnostic snapshot references
+alongside captures, failures, state, summary, and graph artifacts.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated inventory and state digest, validator enforcement, and
+executable inventory regression coverage.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The expanded inventory remains complete; 183 tests, compilation, and the full
+four-check audit pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind diagnostic references into the versioned self-validation state schema.

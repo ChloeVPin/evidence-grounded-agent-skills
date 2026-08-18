@@ -912,9 +912,10 @@ class DecisionLedgerTest(unittest.TestCase):
         expected = set(inventory["capture_refs"])
         available = expected | {
             inventory["state_ref"], inventory["summary_ref"], inventory["graph_ref"],
-        } | set(inventory["failure_refs"])
+        } | set(inventory["failure_refs"]) | set(inventory["diagnostic_refs"])
         self.assertTrue(validate_freshness_capture_inventory(
             inventory, available, expected, set(inventory["failure_refs"]),
+            set(inventory["diagnostic_refs"]),
         ).valid)
         altered = json.loads(json.dumps(inventory))
         altered["capture_refs"].pop()
