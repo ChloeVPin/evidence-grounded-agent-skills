@@ -36,6 +36,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [API contract and compatibility](skills/api-contract-compatibility/SKILL.md) — evolve interfaces without hidden consumer breakage.
 - [Differential patch review](skills/differential-patch-review/SKILL.md) — compare candidate and trusted behavior.
 - [Repository change verification](skills/repository-change-verification/SKILL.md) — assess a complete patch before acceptance.
+- [Safe Git workflow](skills/safe-git-workflow/SKILL.md) — preserve work and history while changing repositories.
 
 ### Testing and performance
 
