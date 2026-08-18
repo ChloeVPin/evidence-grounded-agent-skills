@@ -1,0 +1,54 @@
+import unittest
+
+from scripts.bind_evidence import create_attestation
+from scripts.review_change import review_change
+
+
+def record(diff="diff-v1", criteria=None):
+    criteria = criteria or ["requested behavior works"]
+    evidence = {
+        "revision": "a" * 40,
+        "output_sha256": "b" * 64,
+    }
+    return {
+        "paths": ["skills/example/SKILL.md"],
+        "allowed_prefixes": ["skills/"],
+        "acceptance_criteria": criteria,
+        "diff": diff,
+        "evidence": {
+            "acceptance_criteria": criteria,
+            "tests": [
+                {"name": "focused", "kind": "focused", "status": "passed"},
+                {"name": "boundary", "kind": "boundary", "status": "passed"},
+            ],
+        },
+        "attestation": create_attestation(diff, criteria, evidence).__dict__,
+    }
+
+
+class EndToEndReviewTest(unittest.TestCase):
+    def test_complete_record_is_accepted(self):
+        result = review_change(record())
+        self.assertTrue(result.accepted)
+        self.assertTrue(result.scope_ok)
+        self.assertTrue(result.evidence_ok)
+        self.assertTrue(result.attestation_ok)
+
+    def test_changed_diff_rejects_stale_record(self):
+        review = record()
+        review["diff"] = "diff-v2"
+        result = review_change(review)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.attestation_ok)
+
+    def test_sensitive_path_rejects_without_escalation(self):
+        review = record()
+        review["paths"] = [".github/workflows/ci.yml"]
+        review["allowed_prefixes"] = [".github/workflows/"]
+        result = review_change(review)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.scope_ok)
+
+
+if __name__ == "__main__":
+    unittest.main()

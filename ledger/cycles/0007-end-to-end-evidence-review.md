@@ -1,7 +1,7 @@
 # Cycle 0007 — End-to-End Evidence Review
 
 Date: 2026-08-18
-Status: in progress
+Status: validated end to end
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes produce one review record that combines scope, test evidence, executi
 
 ## Decision
 
-_To be determined._
+Compose path scope, evidence completeness, and diff/criteria attestation into one review decision.
 
 ## Evidence and provenance
 
-_Record an end-to-end fixture and command output._
+Implemented in `scripts/review_change.py` with three end-to-end tests in `tests/test_review_change.py`.
 
 ## Disconfirming evidence sought
 
-_Change one input after capture and confirm the complete review rejects the record._
+The complete record is accepted; changing the diff rejects the stale attestation; a sensitive workflow path is rejected without separate escalation handling.
 
 ## Next action
 
-Compose the existing gates into one deterministic review flow and test both acceptance and stale-evidence rejection.
+Validation passed locally. Limitation: this remains a local policy evaluator and does not provide trusted human approval or semantic correctness. Next cycle: add review decision artifacts and explicit handling for escalated sensitive changes.
