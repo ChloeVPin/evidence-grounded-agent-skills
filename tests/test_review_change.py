@@ -50,6 +50,26 @@ class EndToEndReviewTest(unittest.TestCase):
         self.assertTrue(result.scope_ok)
         self.assertFalse(result.escalation_ok)
 
+    def test_vulnerable_dependency_blocks_complete_review(self):
+        review = record()
+        review["dependency"] = {
+            "paths": ["requirements.txt"],
+            "packages": {"old-lib": {"provenance_verified": True, "known_vulnerable": True}},
+        }
+        result = review_change(review)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.dependency_ok)
+
+    def test_verified_dependency_can_pass_complete_review(self):
+        review = record()
+        review["dependency"] = {
+            "paths": ["requirements.txt"],
+            "packages": {"safe-lib": {"provenance_verified": True, "known_vulnerable": False}},
+        }
+        result = review_change(review)
+        self.assertTrue(result.accepted)
+        self.assertTrue(result.dependency_ok)
+
     def test_sensitive_path_accepts_valid_explicit_review(self):
         review = record()
         review["paths"] = [".github/workflows/ci.yml"]

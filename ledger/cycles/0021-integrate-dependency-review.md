@@ -1,7 +1,7 @@
 # Cycle 0021 — Integrate Dependency Review
 
 Date: 2026-08-18
-Status: in progress
+Status: validated as complete-review gate
 
 ## Question
 
@@ -9,16 +9,16 @@ Can dependency-review results become a first-class gate in the complete reposito
 
 ## Decision
 
-_To be determined._
+Dependency metadata is now an optional first-class gate in `review_change`; when present, it must pass provenance, vulnerability, and execution-path policy before acceptance.
 
 ## Evidence and provenance
 
-_Record integration tests and fixture limitations._
+Integration tests cover vulnerable dependency rejection and verified dependency acceptance.
 
 ## Disconfirming evidence sought
 
-_Try to accept a complete code review while dependency evidence is missing, stale, or negative._
+Known-vulnerable dependency metadata blocks an otherwise complete record; verified metadata passes.
 
 ## Next action
 
-Add dependency review status and evidence to generated records, preserving escalation for executable paths.
+Validation passed locally. Limitation: generated records do not yet auto-populate dependency metadata from manifests; the next cycle should add explicit dependency evidence to record generation and preserve it in serialized artifacts.

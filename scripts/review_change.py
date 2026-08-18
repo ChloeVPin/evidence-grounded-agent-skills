@@ -9,6 +9,7 @@ from datetime import datetime
 from scripts.bind_evidence import verify_attestation
 from scripts.change_review import review_paths
 from scripts.evidence_review import review_evidence
+from scripts.dependency_review import review_dependencies
 
 
 @dataclass(frozen=True)
@@ -17,10 +18,14 @@ class ChangeReview:
     evidence_ok: bool
     attestation_ok: bool
     escalation_ok: bool
+    dependency_ok: bool
 
     @property
     def accepted(self) -> bool:
-        return self.scope_ok and self.evidence_ok and self.attestation_ok and self.escalation_ok
+        return (
+            self.scope_ok and self.evidence_ok and self.attestation_ok
+            and self.escalation_ok and self.dependency_ok
+        )
 
 
 def valid_escalation(escalation: dict | None, attestation: dict) -> bool:
@@ -56,11 +61,19 @@ def review_change(record: dict) -> ChangeReview:
         attestation_ok
         and valid_escalation(record.get("escalation"), record["attestation"])
     )
+    dependency = record.get("dependency")
+    dependency_ok = True
+    if dependency is not None:
+        dependency_result = review_dependencies(
+            dependency.get("paths", []), dependency.get("packages", {}),
+        )
+        dependency_ok = dependency_result.accepted
     return ChangeReview(
         scope_ok=not paths.out_of_scope,
         evidence_ok=evidence.accepted,
         attestation_ok=attestation_ok,
         escalation_ok=escalation_ok,
+        dependency_ok=dependency_ok,
     )
 
 
@@ -75,6 +88,7 @@ def main() -> None:
         "evidence_ok": result.evidence_ok,
         "attestation_ok": result.attestation_ok,
         "escalation_ok": result.escalation_ok,
+        "dependency_ok": result.dependency_ok,
     }, indent=2))
 
 

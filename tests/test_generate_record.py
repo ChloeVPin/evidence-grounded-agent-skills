@@ -33,6 +33,7 @@ class GenerateRecordTest(unittest.TestCase):
         self.assertEqual(record["attestation"]["revision"], REVISION)
         result = review_change(record)
         self.assertTrue(result.accepted)
+        self.assertTrue(result.dependency_ok)
 
     def test_mutated_generated_diff_is_rejected_by_complete_review(self):
         record = generate_record(
