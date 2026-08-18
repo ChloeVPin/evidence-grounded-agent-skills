@@ -41,6 +41,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/dependency_evidence.py`](scripts/dependency_evidence.py): validates source, lookup time, and explicit dependency status.
 - [`scripts/dependency_policy.py`](scripts/dependency_policy.py): distinguishes pass, escalate, and block outcomes for dependency evidence.
 - [`scripts/lookup_adapter.py`](scripts/lookup_adapter.py): normalizes live lookup results with explicit uncertainty and output digests.
+- [`scripts/mutation_review.py`](scripts/mutation_review.py): classifies mutation outcomes without score inflation.
 - [`ledger/state/`](ledger/state/): durable cycle-state artifacts and completion evidence.
 
 ## Running a cycle

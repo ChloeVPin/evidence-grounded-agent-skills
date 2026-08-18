@@ -1,7 +1,7 @@
 # Cycle 0031 — Validate Test Effectiveness
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with mutation-classification fixture
 
 ## Question
 
@@ -9,16 +9,16 @@ Can test-effectiveness analysis produce a small executable fixture that distingu
 
 ## Decision
 
-_To be determined._
+The fixture distinguishes killed, survived, equivalent, invalid, and unexecuted mutations; score denominator includes only killed and survived cases.
 
 ## Evidence and provenance
 
-_Record mutation fixture and tests._
+Implemented in `scripts/mutation_review.py` with four tests in `tests/test_mutation_review.py`.
 
 ## Disconfirming evidence sought
 
-_Ensure mutation score cannot be inflated by invalid or equivalent mutants._
+Equivalent, invalid, and unexecuted cases are excluded from the score; unknown statuses are rejected.
 
 ## Next action
 
-Build a deterministic mutation-classification fixture with explicit limitations and no universal score threshold.
+Validation passed locally. Limitation: the fixture classifies supplied outcomes but does not mutate or execute source code. Next cycle: connect mutation classification to a small real fault-injection fixture and test assertion sensitivity.
