@@ -115,12 +115,20 @@ class DecisionLedgerTest(unittest.TestCase):
         ]
         labels = json.loads(Path("ledger/evaluations/0057-paraphrase-labels.json").read_text())
         metrics = evaluate_labeled_queries(entries, labels)
-        self.assertEqual(len(labels), 8)
+        self.assertEqual(len(labels), 9)
         self.assertEqual(metrics["true_positive"], 7)
-        self.assertEqual(metrics["false_positive"], 0)
+        self.assertEqual(metrics["false_positive"], 1)
         self.assertEqual(metrics["false_negative"], 0)
-        self.assertEqual(metrics["precision"], 1.0)
+        self.assertAlmostEqual(metrics["precision"], 7 / 8)
         self.assertEqual(metrics["recall"], 1.0)
+
+    def test_adversarial_alias_query_is_only_a_review_candidate(self):
+        entries = [{
+            "entry_id": "tool",
+            "claims": ["wildcard authority can bypass least-privilege boundaries"],
+        }]
+        candidates = find_paraphrase_candidates(entries, "unrestricted authority decisions")
+        self.assertEqual([entry["entry_id"] for entry in candidates], ["tool"])
 
     def test_threshold_is_explicit_and_conservative(self):
         self.assertEqual(PARAPHRASE_MIN_SHARED_TERMS, 2)
