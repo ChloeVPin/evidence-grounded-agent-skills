@@ -1,7 +1,7 @@
 # Cycle 0066 — Measure context-filter recall on cross-domain queries
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,22 @@ Measure context-filter recall on cross-domain queries
 
 ## Decision
 
-_To be determined from evidence._
+Context filtering preserves single-domain matches but loses a cross-domain
+match when the query is scoped to only one context. It is therefore a precision
+control with an explicit recall cost, not a safe default for every query.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The labeled context test reports four true positives, zero false positives, and
+one false negative: 0.8 recall. The missed entry is the test-effectiveness
+failure in a differential-review-scoped query.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The cross-domain label is synthetic and the sample has four records; broader
+context ontologies may reduce or increase this tradeoff.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: define an explicit cross-domain context
+policy before making context filtering automatic.

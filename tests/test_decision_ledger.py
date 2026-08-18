@@ -171,6 +171,33 @@ class DecisionLedgerTest(unittest.TestCase):
         )
         self.assertEqual([entry["entry_id"] for entry in candidates], ["tool"])
 
+    def test_context_filter_recall_exposes_cross_domain_loss(self):
+        entries = [
+            {"entry_id": "boundary", "contexts": ["test-effectiveness"],
+             "claims": ["happy-path-only tests can miss a boundary regression"]},
+            {"entry_id": "tool", "contexts": ["tool-authorization"],
+             "claims": ["wildcard authority can bypass least-privilege boundaries"]},
+            {"entry_id": "dependency", "contexts": ["dependency-security"],
+             "claims": ["unverified dependency evidence can conceal supply-chain risk"]},
+            {"entry_id": "differential", "contexts": ["differential-review"],
+             "claims": ["happy-path equivalence can hide boundary divergence"]},
+        ]
+        labels = [
+            {"query": "boundary regression incomplete tests", "expected_ids": ["boundary"],
+             "context": "test-effectiveness"},
+            {"query": "wildcard authority bypass", "expected_ids": ["tool"],
+             "context": "tool-authorization"},
+            {"query": "dependency provenance supply chain risk", "expected_ids": ["dependency"],
+             "context": "dependency-security"},
+            {"query": "happy path equivalence boundary divergence",
+             "expected_ids": ["boundary", "differential"], "context": "differential-review"},
+        ]
+        metrics = evaluate_labeled_queries(entries, labels)
+        self.assertEqual(metrics["true_positive"], 4)
+        self.assertEqual(metrics["false_positive"], 0)
+        self.assertEqual(metrics["false_negative"], 1)
+        self.assertAlmostEqual(metrics["recall"], 4 / 5)
+
 
 if __name__ == "__main__":
     unittest.main()
