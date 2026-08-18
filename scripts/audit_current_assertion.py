@@ -12,6 +12,21 @@ NO_CURRENT_ASSERTION = "NO_CURRENT_ASSERTION"
 MALFORMED_EVIDENCE = "MALFORMED_EVIDENCE"
 AUDIT_GATE_FAILED = "AUDIT_GATE_FAILED"
 
+EXPECTED_DEPENDENCIES = {
+    "scripts/audit_current_assertion.py",
+    "ledger/evidence/0085-generation-policy-audit.json",
+    "ledger/evidence/0087-generation-policy-audit.json",
+    "ledger/evidence/0093-generation-policy-audit.json",
+    "ledger/evidence/0093-current-assertion-bundle.json",
+    "ledger/evidence/0093-generation-rerun.json",
+    "ledger/evidence/0093-policy-content-digests.json",
+    "ledger/evidence/0108-self-validation-bundle.json",
+    "ledger/evidence/0108-audit-command-capture.json",
+    "ledger/evidence/0119-four-check-audit-capture.json",
+    "ledger/evidence/0122-capture-schema-failure.json",
+    "ledger/state/0113-complete-self-validation-gate.json",
+}
+
 from scripts.decision_ledger import (
     compare_policy_audit,
     discover_current_assertion,
@@ -20,6 +35,7 @@ from scripts.decision_ledger import (
     validate_self_validation_state,
     validate_four_check_capture,
     validate_failure_evidence,
+    validate_audit_dependency_manifest,
     validate_cli_output,
 )
 
@@ -41,6 +57,17 @@ def _run(root: Path = ROOT) -> int:
         _emit({"error_code": NO_CURRENT_ASSERTION,
                "result": "failed", "reason": head.reason})
         return 1
+    dependency_manifest = json.loads(
+        (evidence_dir / "0125-audit-dependencies.json").read_text()
+    )
+    dependency_available = {
+        path for path in EXPECTED_DEPENDENCIES
+        if (root / path).exists()
+        or (path == "scripts/audit_current_assertion.py" and Path(__file__).exists())
+    }
+    dependency_check = validate_audit_dependency_manifest(
+        dependency_manifest, dependency_available, EXPECTED_DEPENDENCIES,
+    )
     audit = head.assertion
     bundle_path = evidence_dir / f"{audit['audit_id'][:4]}-current-assertion-bundle.json"
     bundle = json.loads(bundle_path.read_text())
@@ -79,7 +106,7 @@ def _run(root: Path = ROOT) -> int:
         "content": content_check.valid,
         "freshness": (
             freshness_check.valid and capture_schema_check.valid
-            and failure_evidence_check.valid
+            and failure_evidence_check.valid and dependency_check.valid
         ),
     }
     passed = all(checks.values())
@@ -91,7 +118,7 @@ def _run(root: Path = ROOT) -> int:
             assessment.reason for assessment in (
                 bundle_check, result_check, content_check,
                 freshness_check, capture_schema_check,
-                failure_evidence_check,
+                failure_evidence_check, dependency_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)
