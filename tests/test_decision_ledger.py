@@ -1048,6 +1048,26 @@ class DecisionLedgerTest(unittest.TestCase):
             output = json.loads(result.stdout)
             self.assertIn("self-validation state summary reference is invalid", output["reason"])
 
+            state["capture_summary_ref"] = baseline["capture_summary_ref"]
+            state["capture_inventory_sha256"] = "0" * 64
+            state_path.write_text(json.dumps(state))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            output = json.loads(result.stdout)
+            self.assertIn("self-validation state inventory digest is stale", output["reason"])
+
+            state["capture_inventory_sha256"] = baseline["capture_inventory_sha256"]
+            state["capture_inventory_ref"] = "ledger/evidence/missing.json"
+            state_path.write_text(json.dumps(state))
+            result = subprocess.run(
+                ["python3", "scripts/audit_current_assertion.py", "--root", str(temp_root)],
+                cwd=root, capture_output=True, text=True,
+            )
+            output = json.loads(result.stdout)
+            self.assertIn("self-validation state inventory reference is invalid", output["reason"])
+
     def test_executable_current_head_audit_rejects_malformed_versioned_capture(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
