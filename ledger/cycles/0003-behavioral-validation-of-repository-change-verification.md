@@ -1,7 +1,7 @@
 # Cycle 0003 — Behavioral Validation of Repository Change Verification
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with bounded behavioral fixture
 
 ## Question
 
@@ -9,16 +9,18 @@ Can the first skill's acceptance gates be made observable and tested on represen
 
 ## Decision
 
-_To be determined from a fixture and executable checks._
+Implement a deterministic path-review gate that makes two skill gates observable: scope control and sensitive-file escalation.
 
 ## Evidence and provenance
 
-_Record fixture cases, commands, and results here._
+Fixture implemented in `scripts/change_review.py` with three executable tests in `tests/test_change_review.py`.
 
 ## Disconfirming evidence sought
 
-_Try changes that pass ordinary tests but violate scope, alter sensitive automation, or omit a boundary case._
+The fixture intentionally does not inspect file contents or run project tests. A path-only gate cannot prove behavioral correctness; it can only prevent silent scope expansion and ensure sensitive paths are escalated.
 
 ## Next action
 
-Build the smallest fixture that distinguishes an adequately verified change from a merely plausible one.
+Validation passed: `python3 -m unittest discover -s tests -v` ran 5 tests. The CLI correctly escalated a workflow path and rejected an unrelated README change. This validates scope and sensitive-path gates only; it does not validate semantic behavior or test adequacy.
+
+Next action: add diff-content and test-evidence checks, or record why a separate skill is needed before expanding this one.

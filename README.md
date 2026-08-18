@@ -26,6 +26,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`skills/`](skills/): validated and experimental skills.
 - [`ledger/`](ledger/): cycle records, rejected hypotheses, and change history.
 - [`scripts/cycle.py`](scripts/cycle.py): creates the next cycle workspace without pretending work is complete.
+- [`scripts/change_review.py`](scripts/change_review.py): deterministic pre-review gate for scope and sensitive paths.
 
 ## Running a cycle
 
