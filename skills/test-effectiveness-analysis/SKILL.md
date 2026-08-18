@@ -48,6 +48,8 @@ If mutation tooling cannot run, record the exact blocker and use manually design
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for coverage and risk conclusions, distinguish observed test behavior from hypotheses and recommendations, and check whether evidence sources are independent.
+
 - [Petrović et al., Long Term Effects of Mutation Testing](https://research.google/pubs/long-term-effects-of-mutation-testing/): longitudinal analysis of approximately 15 million mutants and their relation to test-suite improvement and historical faults.
 - [Roman and Mnich, TDD with mutation testing](https://link.springer.com/article/10.1007/s11219-020-09534-x): controlled experimental evidence with stated sample and coverage limitations.
 - Check whether reported mutation or coverage findings come from independent datasets and methods; repeated results from one benchmark do not establish general effectiveness.

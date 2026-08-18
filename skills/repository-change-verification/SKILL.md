@@ -49,6 +49,8 @@ If tests cannot run, record the exact command and blocker; do not claim validati
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for every verification claim, distinguish observed results from hypotheses and recommendations, and do not count copied outputs as independent evidence.
+
 - Jimenez et al., [SWE-bench](https://arxiv.org/abs/2310.06770), 2023.
 - Wang, Pradel, and Liu, [Are “Solved Issues” in SWE-bench Really Solved Correctly?](https://arxiv.org/abs/2503.15223), 2025/2026 publication record.
 - [GitHub: About pull requests](https://docs.github.com/en/pull-requests/get-started/about-pull-requests).

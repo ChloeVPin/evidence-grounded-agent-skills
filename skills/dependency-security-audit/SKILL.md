@@ -48,6 +48,8 @@ If a package cannot be resolved from an authoritative source, stop and reject or
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for each advisory or risk conclusion, distinguish observed facts from hypotheses and recommendations, and verify that corroborating sources are independent.
+
 - [GitHub dependency review documentation](https://docs.github.com/en/code-security/concepts/supply-chain-security/dependency-review): dependency diffs can be scanned and enforced in pull requests.
 - [OWASP Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html): hallucinated dependencies, outdated CVEs, and AI-modified build/deploy paths are explicit risks.
 - [NIST AI RMF: Generative AI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): lifecycle risk-management guidance for generative AI systems.

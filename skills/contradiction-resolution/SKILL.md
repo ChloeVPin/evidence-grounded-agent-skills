@@ -49,6 +49,8 @@ If evidence is incomparable, split the claims by context instead of choosing a w
 
 ## Validation evidence and provenance
 
+Separate observations from hypotheses and recommendations; record confidence and freshness for each material conclusion. Check whether apparently independent sources share an origin.
+
 - Governing research report: contradiction hunting, adversarial review, preserved rejected hypotheses, failure recovery, and provenance notes improve agent reliability.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident/error tracking, after-action assessment, and continual improvement guidance.
 - Label observed conflicts separately from explanatory hypotheses and recommended resolutions; preserve uncertainty when the evidence does not decide between them.

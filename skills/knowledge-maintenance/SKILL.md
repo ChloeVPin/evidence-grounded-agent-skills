@@ -49,6 +49,8 @@ If freshness cannot be determined, label it unknown and keep the artifact below 
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for retained knowledge, label observations, hypotheses, and recommendations separately, and trace corroboration to independent origins.
+
 - [RFC 9745: Deprecation HTTP Response Header Field](https://www.rfc-editor.org/rfc/rfc9745.html): deprecation signaling and documentation/migration links.
 - [RFC 8594: Sunset HTTP Header Field](https://www.rfc-editor.org/info/rfc8594/): sunset signaling and its status as a hint rather than a guarantee.
 - [NIST AI RMF GenAI Profile](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf): monitoring, incident tracking, and measurable continual improvement.

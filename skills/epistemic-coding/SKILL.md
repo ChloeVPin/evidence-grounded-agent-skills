@@ -51,6 +51,8 @@ If the evidence is contradictory, preserve the competing explanations and use th
 - Quality standard: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.
 - Governing research report: an evidence-first agent must distinguish knowledge types, seek disconfirming evidence, preserve uncertainty, and measure substantive improvement rather than activity.
 
+Source independence is a required check for material claims: repeated summaries do not become independent evidence merely because they appear in different places.
+
 Confidence: high for the governing principles; medium for any domain-specific conclusion reached while applying them. Review when the governing principles or source evidence changes.
 
 ## Related skills and conflicts

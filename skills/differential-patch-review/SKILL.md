@@ -48,6 +48,8 @@ If no trusted comparison exists, narrow the claim to specification-based testing
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for each review conclusion; distinguish observed behavior from hypotheses and recommendations, and do not treat copied reports as independent evidence.
+
 - [Wang, Pradel, and Liu, Are “Solved Issues” in SWE-bench Really Solved Correctly?](https://arxiv.org/abs/2503.15223): differential tests exposed behavioral discrepancies in plausible patches that passed benchmark validation.
 - [GitHub: About pull requests](https://docs.github.com/en/pull-requests/get-started/about-pull-requests): reviewable diffs, discussion, and checks form the change-validation boundary.
 - Label observed divergences separately from hypotheses about their cause and recommendations about acceptability; a difference is not automatically a defect.

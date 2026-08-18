@@ -50,6 +50,8 @@ If the required authority cannot be distinguished from the granted authority, st
 
 ## Validation evidence and provenance
 
+Record confidence and freshness for each authorization conclusion, separate observations from hypotheses and recommendations, and verify the independence of corroborating evidence.
+
 - [OWASP AI Agent Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/AI_Agent_Security_Cheat_Sheet.html): tool security, least privilege, explicit authorization, and high-impact action controls.
 - [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative): agent authentication and identity infrastructure research priorities.
 - [OWASP MCP Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html): minimum permissions, strict parameter schemas, and server isolation guidance.
