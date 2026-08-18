@@ -494,6 +494,22 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(validate_current_assertion_bundle(bundle, paths).valid)
         self.assertTrue(compare_policy_audit(audit, evidence).valid)
 
+    def test_expanded_assertion_chain_and_current_content_both_pass(self):
+        assertions = [
+            json.loads(Path(f"ledger/evidence/{name}").read_text())
+            for name in (
+                "0085-generation-policy-audit.json",
+                "0087-generation-policy-audit.json",
+                "0093-generation-policy-audit.json",
+            )
+        ]
+        self.assertTrue(audit_policy_assertion_chain(assertions).valid)
+        current = assertions[-1]
+        digests = json.loads(Path(
+            "ledger/evidence/0093-policy-content-digests.json",
+        ).read_text())
+        self.assertTrue(validate_policy_assertion_content(current, digests).valid)
+
 
 if __name__ == "__main__":
     unittest.main()
