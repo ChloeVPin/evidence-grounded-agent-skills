@@ -1,7 +1,7 @@
 # Cycle 0115 — Add explicit failure-semantics coverage to persisted-state audit
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,21 @@ Add explicit failure-semantics coverage to persisted-state audit
 
 ## Decision
 
-_To be determined from evidence._
+The persisted-state validator now rejects four independent failure classes:
+failed status, a false check, digest mismatch, and unexpected check keys. The
+CLI tests separately retain `AUDIT_GATE_FAILED` and `MALFORMED_EVIDENCE`.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the expanded state-validation test in `tests/test_decision_ledger.py`,
+`validate_self_validation_state` in `scripts/decision_ledger.py`, and the
+existing executable CLI failure tests.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+A passing state artifact can still become stale after later repository changes;
+these checks validate its shape and bindings, not continuous freshness.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add freshness metadata to the persisted self-validation state.

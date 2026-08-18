@@ -581,6 +581,14 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(state, checks=dict(state["checks"], content=False)),
             state["bundle_ref"], self_capture,
         ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, self_validation_output_sha256="0" * 64),
+            state["bundle_ref"], self_capture,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, checks=dict(state["checks"], unexpected=True)),
+            state["bundle_ref"], self_capture,
+        ).valid)
 
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [
