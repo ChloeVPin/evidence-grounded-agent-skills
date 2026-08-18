@@ -49,17 +49,25 @@ def evaluate_labeled_queries(
     entries: list[dict], labels: list[dict], *, min_shared_terms: int = PARAPHRASE_MIN_SHARED_TERMS,
 ) -> dict[str, float | int]:
     """Aggregate retrieval errors across labeled queries without changing policy."""
-    expected = set()
-    predicted = set()
+    totals = {"true_positive": 0, "false_positive": 0, "false_negative": 0}
     for label in labels:
-        expected.update(label["expected_ids"])
-        predicted.update(
+        predicted = {
             entry["entry_id"]
             for entry in find_paraphrase_candidates(
                 entries, label["query"], min_shared_terms=min_shared_terms,
             )
-        )
-    return candidate_metrics(expected, predicted)
+        }
+        metrics = candidate_metrics(set(label["expected_ids"]), predicted)
+        for key in totals:
+            totals[key] += metrics[key]
+    true_positive = totals["true_positive"]
+    predicted_count = true_positive + totals["false_positive"]
+    expected_count = true_positive + totals["false_negative"]
+    return {
+        **totals,
+        "precision": true_positive / predicted_count if predicted_count else 0.0,
+        "recall": true_positive / expected_count if expected_count else 0.0,
+    }
 
 
 def _terms(text: str) -> set[str]:

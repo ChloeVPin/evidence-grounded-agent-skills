@@ -116,11 +116,11 @@ class DecisionLedgerTest(unittest.TestCase):
         labels = json.loads(Path("ledger/evaluations/0057-paraphrase-labels.json").read_text())
         metrics = evaluate_labeled_queries(entries, labels)
         self.assertEqual(len(labels), 8)
-        self.assertEqual(metrics["true_positive"], 4)
-        self.assertEqual(metrics["false_positive"], 0)
-        self.assertEqual(metrics["false_negative"], 0)
-        self.assertEqual(metrics["precision"], 1.0)
-        self.assertEqual(metrics["recall"], 1.0)
+        self.assertEqual(metrics["true_positive"], 5)
+        self.assertEqual(metrics["false_positive"], 1)
+        self.assertEqual(metrics["false_negative"], 1)
+        self.assertAlmostEqual(metrics["precision"], 5 / 6)
+        self.assertAlmostEqual(metrics["recall"], 5 / 6)
 
     def test_threshold_is_explicit_and_conservative(self):
         self.assertEqual(PARAPHRASE_MIN_SHARED_TERMS, 2)
@@ -129,6 +129,18 @@ class DecisionLedgerTest(unittest.TestCase):
             [entry["entry_id"] for entry in find_paraphrase_candidates(entries, "boundary regression")],
             ["one"],
         )
+
+    def test_labeled_metrics_do_not_hide_cross_query_false_positive(self):
+        entries = [{"entry_id": "one", "claims": ["boundary regression"]}]
+        labels = [
+            {"query": "boundary regression", "expected_ids": ["one"]},
+            {"query": "boundary regression again", "expected_ids": []},
+        ]
+        metrics = evaluate_labeled_queries(entries, labels)
+        self.assertEqual(metrics["true_positive"], 1)
+        self.assertEqual(metrics["false_positive"], 1)
+        self.assertEqual(metrics["false_negative"], 0)
+        self.assertEqual(metrics["precision"], 0.5)
 
 
 if __name__ == "__main__":
