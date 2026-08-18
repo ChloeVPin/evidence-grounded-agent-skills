@@ -38,6 +38,7 @@ from scripts.decision_ledger import (
     validate_audit_dependency_manifest,
     validate_dependency_diagnostic_snapshot,
     validate_snapshot_diagnostic_capture,
+    validate_freshness_dependency_graph,
     validate_cli_output,
 )
 
@@ -69,6 +70,17 @@ def _run(root: Path = ROOT) -> int:
     }
     dependency_check = validate_audit_dependency_manifest(
         dependency_manifest, dependency_available, EXPECTED_DEPENDENCIES,
+    )
+    dependency_graph = json.loads(
+        (evidence_dir / "0137-freshness-dependency-graph.json").read_text()
+    )
+    graph_available = {
+        path for path in dependency_graph.get("nodes", [])
+        if (root / path).exists()
+        or (path == "scripts/audit_current_assertion.py" and Path(__file__).exists())
+    }
+    graph_check = validate_freshness_dependency_graph(
+        dependency_graph, set(dependency_graph.get("nodes", [])), graph_available,
     )
     audit = head.assertion
     bundle_path = evidence_dir / f"{audit['audit_id'][:4]}-current-assertion-bundle.json"
@@ -127,6 +139,7 @@ def _run(root: Path = ROOT) -> int:
             and failure_evidence_check.valid and dependency_check.valid
             and diagnostic_snapshot_check.valid
             and snapshot_capture_check.valid
+            and graph_check.valid
         ),
     }
     passed = all(checks.values())
@@ -141,6 +154,7 @@ def _run(root: Path = ROOT) -> int:
                 failure_evidence_check, dependency_check,
                 diagnostic_snapshot_check,
                 snapshot_capture_check,
+                graph_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)
