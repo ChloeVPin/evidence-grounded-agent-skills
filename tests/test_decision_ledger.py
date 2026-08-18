@@ -22,6 +22,7 @@ from scripts.decision_ledger import (
     validate_self_validation_bundle_against_chain,
     validate_captured_output,
     validate_complete_self_validation_bundle,
+    validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -570,6 +571,16 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(state["bundle_ref"], "ledger/evidence/0108-self-validation-bundle.json")
         self.assertTrue(all(state["checks"].values()))
         self.assertEqual(state["self_validation_output_sha256"], self_capture["output_sha256"])
+        self.assertTrue(validate_self_validation_state(
+            state, "ledger/evidence/0108-self-validation-bundle.json", self_capture,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, status="failed"), state["bundle_ref"], self_capture,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
+            dict(state, checks=dict(state["checks"], content=False)),
+            state["bundle_ref"], self_capture,
+        ).valid)
 
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [

@@ -356,6 +356,33 @@ def validate_complete_self_validation_bundle(
     return ContextAssessment(True, "complete self-validation bundle is valid")
 
 
+def validate_self_validation_state(
+    state: dict, bundle_ref: str, self_capture: dict,
+) -> ContextAssessment:
+    """Validate the persisted result of the complete self-validation gate."""
+    required = (
+        "schema_version", "cycle_id", "status", "bundle_ref", "checks",
+        "self_validation_output_sha256",
+    )
+    missing = [field for field in required if field not in state]
+    if missing:
+        return ContextAssessment(False, f"self-validation state missing: {', '.join(missing)}")
+    expected_checks = {
+        "bundle", "chain", "assertion", "test_result", "content",
+        "self_capture", "self_output_digest",
+    }
+    checks = state["checks"]
+    if state["schema_version"] != 1 or state["status"] != "passed":
+        return ContextAssessment(False, "self-validation state is not a passing schema version 1 result")
+    if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
+        return ContextAssessment(False, "self-validation state bundle or checks are malformed")
+    if set(checks) != expected_checks or any(value is not True for value in checks.values()):
+        return ContextAssessment(False, "self-validation state checks are incomplete")
+    if state["self_validation_output_sha256"] != self_capture.get("output_sha256"):
+        return ContextAssessment(False, "self-validation state digest differs from capture")
+    return ContextAssessment(True, "self-validation state is a complete passing result")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
