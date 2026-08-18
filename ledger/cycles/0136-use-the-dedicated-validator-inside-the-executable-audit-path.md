@@ -1,7 +1,7 @@
 # Cycle 0136 — Use the dedicated validator inside the executable audit path
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Use the dedicated validator inside the executable audit path
 
 ## Decision
 
-_To be determined from evidence._
+The executable audit now validates the 0134 snapshot-diagnostic capture as part
+of freshness. Tampering its snapshot digest fails with `AUDIT_GATE_FAILED` and
+the dedicated diagnostic reason.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: the capture-validator binding in `scripts/audit_current_assertion.py`
+and the temporary-root tamper test.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The public contract remains four checks; capture validation is composed into
+freshness with the other diagnostic dependencies.
 
 ## Next action
 
-_Research, validate, and update this record._
+Persist a complete freshness dependency graph.

@@ -37,6 +37,7 @@ from scripts.decision_ledger import (
     validate_failure_evidence,
     validate_audit_dependency_manifest,
     validate_dependency_diagnostic_snapshot,
+    validate_snapshot_diagnostic_capture,
     validate_cli_output,
 )
 
@@ -109,6 +110,14 @@ def _run(root: Path = ROOT) -> int:
     diagnostic_snapshot_check = validate_dependency_diagnostic_snapshot(
         diagnostic_snapshot, {"ledger/state/0113-complete-self-validation-gate.json"},
     )
+    snapshot_capture = json.loads(
+        (evidence_dir / "0134-snapshot-diagnostic-capture.json").read_text()
+    )
+    snapshot_capture_check = validate_snapshot_diagnostic_capture(
+        snapshot_capture, diagnostic_snapshot,
+        {"ledger/evidence/0130-dependency-state-diagnostics.json"},
+        {snapshot_capture.get("revision")},
+    )
     checks = {
         "bundle": bundle_check.valid,
         "result": result_check.valid,
@@ -117,6 +126,7 @@ def _run(root: Path = ROOT) -> int:
             freshness_check.valid and capture_schema_check.valid
             and failure_evidence_check.valid and dependency_check.valid
             and diagnostic_snapshot_check.valid
+            and snapshot_capture_check.valid
         ),
     }
     passed = all(checks.values())
@@ -130,6 +140,7 @@ def _run(root: Path = ROOT) -> int:
                 freshness_check, capture_schema_check,
                 failure_evidence_check, dependency_check,
                 diagnostic_snapshot_check,
+                snapshot_capture_check,
             ) if not assessment.valid
         ]
         output["reason"] = "; ".join(failed_reasons)
