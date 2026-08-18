@@ -219,6 +219,33 @@ def validate_audit_dependency_manifest(
     return ContextAssessment(True, "audit dependency manifest is complete")
 
 
+def validate_dependency_diagnostic_snapshot(
+    snapshot: dict, available_paths: set[str],
+) -> ContextAssessment:
+    """Validate the versioned expectations for dependency-state diagnostics."""
+    if snapshot.get("snapshot_id") != "0130-dependency-state-diagnostics":
+        return ContextAssessment(False, "dependency diagnostic snapshot ID is invalid")
+    if snapshot.get("source_state_ref") not in available_paths:
+        return ContextAssessment(False, "dependency diagnostic snapshot source is unavailable")
+    cases = snapshot.get("cases")
+    if not isinstance(cases, list) or len(cases) != 2:
+        return ContextAssessment(False, "dependency diagnostic snapshot cases are incomplete")
+    expected_reasons = {
+        "self-validation state dependency digest differs from manifest",
+        "self-validation state manifest reference is invalid",
+    }
+    reasons = set()
+    for case in cases:
+        if not isinstance(case, dict):
+            return ContextAssessment(False, "dependency diagnostic snapshot case is malformed")
+        if case.get("failed_check") != "freshness" or case.get("error_code") != "AUDIT_GATE_FAILED":
+            return ContextAssessment(False, "dependency diagnostic snapshot case contract is invalid")
+        reasons.add(case.get("reason"))
+    if reasons != expected_reasons:
+        return ContextAssessment(False, "dependency diagnostic snapshot reasons differ")
+    return ContextAssessment(True, "dependency diagnostic snapshot is valid")
+
+
 def validate_policy_audit(audit: dict) -> ContextAssessment:
     """Validate a persisted result of generation-evidence policy review."""
     required = ("audit_id", "policy", "result", "evidence_refs")

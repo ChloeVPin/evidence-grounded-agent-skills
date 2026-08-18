@@ -24,6 +24,7 @@ from scripts.decision_ledger import (
     validate_four_check_capture,
     validate_failure_evidence,
     validate_audit_dependency_manifest,
+    validate_dependency_diagnostic_snapshot,
     validate_complete_self_validation_bundle,
     validate_self_validation_state,
     validate_cli_output, validate_source_file_manifest,
@@ -763,6 +764,14 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertEqual(case["failed_check"], "freshness")
             self.assertEqual(case["error_code"], "AUDIT_GATE_FAILED")
             self.assertTrue(case["reason"])
+        self.assertTrue(validate_dependency_diagnostic_snapshot(
+            snapshot, {snapshot["source_state_ref"]},
+        ).valid)
+        altered = json.loads(json.dumps(snapshot))
+        altered["cases"][0]["reason"] = "unexpected"
+        self.assertFalse(validate_dependency_diagnostic_snapshot(
+            altered, {snapshot["source_state_ref"]},
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
