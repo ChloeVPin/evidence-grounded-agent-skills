@@ -1,7 +1,7 @@
 # Cycle 0184 — Add edge provenance to a dedicated failure diagnostic for future graph drift
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Add edge provenance to a dedicated failure diagnostic for future graph drift
 
 ## Decision
 
-_To be determined from evidence._
+Added a dedicated graph-edge drift failure record carrying exact edge provenance,
+and bound it through the executable audit, manifest, summary, and inventory.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: new 0184 failure artifact, synchronized dependency/summary/inventory
+digests, edge validation, and complete audit output.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The dedicated record validates and the normal audit remains fully passing; 183
+tests, compilation, and all four public checks pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Record dedicated graph-edge drift in the next diagnostic snapshot.
