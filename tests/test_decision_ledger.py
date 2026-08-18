@@ -565,6 +565,9 @@ class DecisionLedgerTest(unittest.TestCase):
         output = json.loads(result.stdout)
         self.assertEqual(output["result"], "failed")
         self.assertEqual(output["error_code"], "NO_CURRENT_ASSERTION")
+        self.assertIn(output["error_code"], {
+            "NO_CURRENT_ASSERTION", "MALFORMED_EVIDENCE", "AUDIT_GATE_FAILED",
+        })
 
     def test_audit_cli_contract_documents_stable_codes(self):
         contract = Path("AUDIT_CLI.md").read_text()
