@@ -211,6 +211,7 @@ def validate_snapshot_diagnostic_capture(
 def validate_graph_state_diagnostic_capture(
     capture: dict, graph: dict, available_paths: set[str],
     history_revisions: set[str], snapshot: dict | None = None,
+    capture_inventory: dict | None = None,
 ) -> ContextAssessment:
     """Validate a capture that binds graph policy to a successful audit run."""
     required = (
@@ -242,6 +243,13 @@ def validate_graph_state_diagnostic_capture(
             "ledger/evidence/0134-snapshot-diagnostic-capture.json",
         ]]:
             return ContextAssessment(False, "graph capture provenance edges are stale")
+    if capture_inventory is not None:
+        expected_cases = capture_inventory.get("diagnostic_case_refs")
+        if (capture.get("diagnostic_case_refs") != expected_cases
+                or capture.get("diagnostic_case_refs_sha256") != hashlib.sha256(
+                    json.dumps(sorted(expected_cases), separators=(",", ":")).encode("utf-8")
+                ).hexdigest()):
+            return ContextAssessment(False, "graph capture diagnostic case provenance is stale")
     if capture["audit_result"] != "passed":
         return ContextAssessment(False, "graph capture audit result is not passed")
     return ContextAssessment(True, "graph state diagnostic capture is valid")

@@ -238,11 +238,15 @@ def _run(root: Path = ROOT) -> int:
     graph_capture = json.loads(
         (evidence_dir / "0143-graph-state-diagnostic-capture.json").read_text()
     )
+    capture_inventory = json.loads(
+        (evidence_dir / "0154-freshness-capture-inventory.json").read_text()
+    )
     graph_capture_check = validate_graph_state_diagnostic_capture(
         graph_capture, dependency_graph,
         {"ledger/evidence/0137-freshness-dependency-graph.json"},
         {graph_capture.get("revision")},
         diagnostic_snapshot,
+        capture_inventory,
     )
     capture_summary_check = validate_audit_capture_dependency_summary(
         capture_summary,
@@ -322,9 +326,6 @@ def _run(root: Path = ROOT) -> int:
         summary_capture, capture_summary,
         {"ledger/evidence/0146-audit-capture-dependencies.json"},
         {summary_capture.get("revision")},
-    )
-    capture_inventory = json.loads(
-        (evidence_dir / "0154-freshness-capture-inventory.json").read_text()
     )
     inventory_expected = {
         "ledger/evidence/0093-generation-rerun.json",

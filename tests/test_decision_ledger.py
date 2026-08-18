@@ -859,12 +859,17 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(validate_captured_output(capture, result.stdout).valid)
         self.assertEqual(json.loads(result.stdout)["result"], capture["audit_result"])
         graph = json.loads((root / capture["graph_ref"]).read_text())
+        inventory = json.loads((root / "ledger/evidence/0154-freshness-capture-inventory.json").read_text())
         self.assertTrue(validate_graph_state_diagnostic_capture(
-            capture, graph, {capture["graph_ref"]}, {capture["revision"]},
+            capture, graph, {capture["graph_ref"]}, {capture["revision"]}, None, inventory,
         ).valid)
         self.assertFalse(validate_graph_state_diagnostic_capture(
-            dict(capture, graph_policy_sha256="0" * 64),
-            graph, {capture["graph_ref"]}, {capture["revision"]},
+            dict(capture, graph_policy_sha256="0" * 64), graph,
+            {capture["graph_ref"]}, {capture["revision"]}, None, inventory,
+        ).valid)
+        self.assertFalse(validate_graph_state_diagnostic_capture(
+            dict(capture, diagnostic_case_refs_sha256="0" * 64), graph,
+            {capture["graph_ref"]}, {capture["revision"]}, None, inventory,
         ).valid)
 
     def test_audit_capture_dependency_summary_is_complete(self):
