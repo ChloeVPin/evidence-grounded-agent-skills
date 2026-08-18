@@ -24,18 +24,23 @@ def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
 
 def find_paraphrase_candidates(
     entries: list[dict], claim: str, *, min_shared_terms: int = PARAPHRASE_MIN_SHARED_TERMS,
-    context: str | None = None,
+    context: str | set[str] | None = None,
 ) -> list[dict]:
     """Return possible matches for human review; never merge or resolve claims."""
     query_terms = _terms(claim)
     candidates = []
     for entry in entries:
-        if context is not None and context not in entry.get("contexts", []):
+        if context is not None and not _context_matches(entry, context):
             continue
         recorded_terms = set().union(*(_terms(item) for item in entry.get("claims", [])))
         if len(query_terms & recorded_terms) >= min_shared_terms:
             candidates.append(entry)
     return candidates
+
+
+def _context_matches(entry: dict, context: str | set[str]) -> bool:
+    requested = {context} if isinstance(context, str) else context
+    return bool(requested & set(entry.get("contexts", [])))
 
 
 def candidate_metrics(expected_ids: set[str], predicted_ids: set[str]) -> dict[str, float | int]:
@@ -62,7 +67,10 @@ def evaluate_labeled_queries(
             entry["entry_id"]
             for entry in find_paraphrase_candidates(
                 entries, label["query"], min_shared_terms=min_shared_terms,
-                context=label.get("context"),
+                context=(
+                    set(label["contexts"])
+                    if "contexts" in label else label.get("context")
+                ),
             )
         }
         metrics = candidate_metrics(set(label["expected_ids"]), predicted)

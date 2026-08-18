@@ -198,6 +198,23 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertEqual(metrics["false_negative"], 1)
         self.assertAlmostEqual(metrics["recall"], 4 / 5)
 
+    def test_multiple_contexts_restore_explicit_cross_domain_recall(self):
+        entries = [
+            {"entry_id": "boundary", "contexts": ["test-effectiveness"],
+             "claims": ["happy-path-only tests can miss a boundary regression"]},
+            {"entry_id": "differential", "contexts": ["differential-review"],
+             "claims": ["happy-path equivalence can hide boundary divergence"]},
+        ]
+        labels = [{
+            "query": "happy path equivalence boundary divergence",
+            "expected_ids": ["boundary", "differential"],
+            "contexts": ["test-effectiveness", "differential-review"],
+        }]
+        metrics = evaluate_labeled_queries(entries, labels)
+        self.assertEqual(metrics["true_positive"], 2)
+        self.assertEqual(metrics["false_negative"], 0)
+        self.assertEqual(metrics["recall"], 1.0)
+
 
 if __name__ == "__main__":
     unittest.main()

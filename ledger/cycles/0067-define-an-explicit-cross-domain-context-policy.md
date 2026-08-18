@@ -1,7 +1,7 @@
 # Cycle 0067 — Define an explicit cross-domain context policy
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,22 @@ Define an explicit cross-domain context policy
 
 ## Decision
 
-_To be determined from evidence._
+Context policy is explicit: no context performs unfiltered review, one context
+narrows candidates, and multiple declared contexts form an explicit union for
+cross-domain review.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The new test restores the previously missed cross-domain entry when both
+contexts are declared, while single-context evaluation retains the measured
+0.8 recall tradeoff.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Context declarations are still claims supplied by the caller and may be wrong;
+the policy does not infer cross-domain scope from text.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: add a durable context-policy schema and
+validate malformed or ambiguous context declarations.
