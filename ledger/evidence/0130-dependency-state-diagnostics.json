@@ -1,0 +1,18 @@
+{
+  "snapshot_id": "0130-dependency-state-diagnostics",
+  "source_state_ref": "ledger/state/0113-complete-self-validation-gate.json",
+  "cases": [
+    {
+      "mutation": "replace dependency_paths_sha256",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "self-validation state dependency digest differs from manifest"
+    },
+    {
+      "mutation": "replace dependency_manifest_ref",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "self-validation state manifest reference is invalid"
+    }
+  ]
+}

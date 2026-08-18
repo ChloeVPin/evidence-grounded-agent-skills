@@ -752,6 +752,18 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(manifest, paths_sha256="0" * 64), expected, expected,
         ).valid)
 
+    def test_dependency_state_diagnostic_snapshot_is_versioned(self):
+        snapshot = json.loads(Path(
+            "ledger/evidence/0130-dependency-state-diagnostics.json",
+        ).read_text())
+        self.assertEqual(snapshot["source_state_ref"],
+                         "ledger/state/0113-complete-self-validation-gate.json")
+        self.assertEqual(len(snapshot["cases"]), 2)
+        for case in snapshot["cases"]:
+            self.assertEqual(case["failed_check"], "freshness")
+            self.assertEqual(case["error_code"], "AUDIT_GATE_FAILED")
+            self.assertTrue(case["reason"])
+
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
