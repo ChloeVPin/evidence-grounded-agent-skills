@@ -8,6 +8,20 @@ from scripts.review_change import review_change
 REVISION = "a" * 40
 
 
+def dependency(status="verified", vulnerable=False):
+    return {
+        "paths": ["requirements.txt"],
+        "packages": {"sample-lib": {
+            "provenance_verified": True, "known_vulnerable": vulnerable,
+        }},
+        "evidence": {"sample-lib": {
+            "source": "https://registry.example/sample-lib",
+            "looked_up_at": "2026-08-18T12:00:00Z",
+            "status": status,
+        }},
+    }
+
+
 def evidence():
     return {
         "command": "python3 -m unittest",
@@ -82,6 +96,40 @@ class GenerateRecordTest(unittest.TestCase):
             diff="diff", evidence=evidence(), dependency=dependency,
         )
         self.assertEqual(record["dependency"], dependency)
+
+    def test_generated_fresh_verified_dependency_passes_review(self):
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"], allowed_prefixes=["."],
+            criteria=["behavior works"], diff="diff", evidence=evidence(),
+            dependency=dependency(),
+        )
+        self.assertTrue(review_change(record).accepted)
+
+    def test_generated_vulnerable_dependency_is_blocked(self):
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"], allowed_prefixes=["."],
+            criteria=["behavior works"], diff="diff", evidence=evidence(),
+            dependency=dependency("vulnerable", vulnerable=True),
+        )
+        result = review_change(record)
+        self.assertFalse(result.accepted)
+        self.assertFalse(result.dependency_ok)
+
+    def test_generated_unknown_dependency_needs_bound_escalation(self):
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"], allowed_prefixes=["."],
+            criteria=["behavior works"], diff="diff", evidence=evidence(),
+            dependency=dependency("unknown"),
+        )
+        self.assertFalse(review_change(record).accepted)
+        record["escalation"] = {
+            "reviewer": "reviewer@example.test", "decision": "accept",
+            "rationale": "Unknown status accepted as a documented exception.",
+            "timestamp": "2026-08-18T12:00:00Z",
+            **{key: record["attestation"][key] for key in
+               ("revision", "diff_sha256", "criteria_sha256")},
+        }
+        self.assertTrue(review_change(record).accepted)
 
     def test_dependency_metadata_without_provenance_is_rejected(self):
         dependency = {

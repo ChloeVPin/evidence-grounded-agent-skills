@@ -1,7 +1,7 @@
 # Cycle 0026 — Generated Policy Outcomes
 
 Date: 2026-08-18
-Status: in progress
+Status: validated across generated outcomes
 
 ## Question
 
@@ -9,16 +9,16 @@ Do generated dependency-bearing records produce the correct complete-review outc
 
 ## Decision
 
-_To be determined._
+Generated dependency-bearing records pass fresh verified evidence, block vulnerable evidence, and require bound escalation for unknown evidence.
 
 ## Evidence and provenance
 
-_Record end-to-end generator/reviewer tests._
+End-to-end generator/reviewer tests are in `tests/test_generate_record.py`.
 
 ## Disconfirming evidence sought
 
-_Attempt to accept a generated unknown or vulnerable dependency without bound approval or remediation._
+Generated vulnerable records are blocked; generated unknown records fail without escalation and pass only after attestation-bound approval.
 
 ## Next action
 
-Add end-to-end tests for generated dependency records across pass, block, and escalation paths.
+Validation passed locally. Limitation: fixture provenance and vulnerability flags are not live registry/advisory queries. Next cycle: build a live lookup adapter with explicit source and freshness capture, or document the external connector boundary.
