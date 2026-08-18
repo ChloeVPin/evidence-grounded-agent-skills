@@ -2,6 +2,7 @@
   "schema_version": 1,
   "cycle_id": "0113",
   "status": "passed",
+  "validated_revision": "c7a3704298749012f725e3b72c46e2e754ff1037",
   "bundle_ref": "ledger/evidence/0108-self-validation-bundle.json",
   "checks": {
     "bundle": true,

@@ -586,6 +586,9 @@ class DecisionLedgerTest(unittest.TestCase):
             state["bundle_ref"], self_capture,
         ).valid)
         self.assertFalse(validate_self_validation_state(
+            dict(state, validated_revision="0" * 40), state["bundle_ref"], self_capture,
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
             dict(state, checks=dict(state["checks"], unexpected=True)),
             state["bundle_ref"], self_capture,
         ).valid)

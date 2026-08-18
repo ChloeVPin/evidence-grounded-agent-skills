@@ -361,7 +361,7 @@ def validate_self_validation_state(
 ) -> ContextAssessment:
     """Validate the persisted result of the complete self-validation gate."""
     required = (
-        "schema_version", "cycle_id", "status", "bundle_ref", "checks",
+        "schema_version", "cycle_id", "status", "validated_revision", "bundle_ref", "checks",
         "self_validation_output_sha256",
     )
     missing = [field for field in required if field not in state]
@@ -374,6 +374,8 @@ def validate_self_validation_state(
     checks = state["checks"]
     if state["schema_version"] != 1 or state["status"] != "passed":
         return ContextAssessment(False, "self-validation state is not a passing schema version 1 result")
+    if state["validated_revision"] != self_capture.get("revision"):
+        return ContextAssessment(False, "self-validation state revision differs from capture")
     if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
         return ContextAssessment(False, "self-validation state bundle or checks are malformed")
     if set(checks) != expected_checks or any(value is not True for value in checks.values()):
