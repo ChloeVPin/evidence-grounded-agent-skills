@@ -413,6 +413,15 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(audit, result="failed"), evidence,
         ).valid)
 
+    def test_current_versioned_policy_assertion_is_valid(self):
+        audit = json.loads(Path(
+            "ledger/evidence/0087-generation-policy-audit.json",
+        ).read_text())
+        evidence = json.loads(Path(
+            "ledger/evidence/0087-generation-rerun.json",
+        ).read_text())
+        self.assertTrue(compare_policy_audit(audit, evidence).valid)
+
 
 if __name__ == "__main__":
     unittest.main()

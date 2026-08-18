@@ -1,7 +1,7 @@
 # Cycle 0087 — Record current passing audit as a versioned assertion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Record current passing audit as a versioned assertion
 
 ## Decision
 
-_To be determined from evidence._
+Recorded a new passing policy assertion for the current repository revision,
+without replacing earlier evidence.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The 0087 capture and assertion are linked and pass comparison validation; the
+full test suite remains the command under policy.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The assertion is valid only for its captured revision and command output; it is
+not a permanent guarantee about future repository state.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: audit versioned assertions for continuity
+and supersession rules.
