@@ -1,5 +1,6 @@
 {
   "manifest_id": "0125-audit-dependencies",
+  "paths_sha256": "5af86d1039436573299b673cb12087e092d4143da9d078f638484bd2ee7fd095",
   "paths": [
     "scripts/audit_current_assertion.py",
     "ledger/evidence/0085-generation-policy-audit.json",

@@ -1,7 +1,7 @@
 # Cycle 0127 — Persist a dependency-manifest digest for tamper-evident provenance
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Persist a dependency-manifest digest for tamper-evident provenance
 
 ## Decision
 
-_To be determined from evidence._
+Added a canonical SHA-256 over the sorted dependency paths and required it in
+the manifest validator. Both path-set drift and digest tampering are rejected.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: `ledger/evidence/0125-audit-dependencies.json`, the digest gate in
+`scripts/decision_ledger.py`, and its mutation tests.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The digest authenticates the manifest’s path set, not the contents of each
+referenced file; existing content-digest manifests cover those file contents.
 
 ## Next action
 
-_Research, validate, and update this record._
+Bind the dependency digest into a versioned audit state record.

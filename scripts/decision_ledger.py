@@ -211,6 +211,11 @@ def validate_audit_dependency_manifest(
         return ContextAssessment(False, "audit dependency manifest differs from expected set")
     if not recorded <= available_paths:
         return ContextAssessment(False, "audit dependency manifest references unavailable paths")
+    expected_digest = hashlib.sha256(
+        json.dumps(sorted(recorded), separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if manifest.get("paths_sha256") != expected_digest:
+        return ContextAssessment(False, "audit dependency manifest digest is stale")
     return ContextAssessment(True, "audit dependency manifest is complete")
 
 

@@ -738,6 +738,9 @@ class DecisionLedgerTest(unittest.TestCase):
             dict(manifest, paths=manifest["paths"] + ["ledger/evidence/missing.json"]),
             expected | {"ledger/evidence/missing.json"}, expected,
         ).valid)
+        self.assertFalse(validate_audit_dependency_manifest(
+            dict(manifest, paths_sha256="0" * 64), expected, expected,
+        ).valid)
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
