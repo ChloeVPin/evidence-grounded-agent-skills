@@ -53,6 +53,7 @@ If purpose, data classification, recipients, or retention is unknown, pause the 
 - The governing research requires explicit uncertainty, source hierarchy, failure recovery, safety evaluation, provenance, and maintenance across an artifact’s lifecycle.
 - [NIST Privacy Framework](https://www.nist.gov/privacy-framework): a voluntary risk-management framework for identifying and managing privacy risk across data processing and its ecosystem.
 - [NIST Privacy Framework: Getting Started](https://www.nist.gov/privacy-framework/getting-started-0): privacy problems can arise throughout the lifecycle from collection through disposal and can affect individuals and groups.
+- Trace privacy claims to the originating framework, policy, or user-impact evidence; copied compliance summaries do not independently establish safety or legality.
 - Confidence: medium-high for purpose, minimization, lifecycle, and impact analysis; medium for risk severity and control sufficiency until jurisdiction, threat model, scale, and owner review are known.
 - Freshness: review when data flows, models/tools, recipients, jurisdictions, retention policy, security controls, or privacy guidance changes.
 

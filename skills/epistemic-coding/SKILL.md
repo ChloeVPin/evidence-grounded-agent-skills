@@ -43,6 +43,7 @@ If the evidence is contradictory, preserve the competing explanations and use th
 
 - Governing principles: truth over confidence, evidence over convention, verification over assertion, tradeoffs, simplicity, reversibility, and explicit disconfirmation.
 - Research basis: distinguish facts from advice, trace important claims to authoritative sources, review adversarially, validate with examples and counterexamples, and maintain skills when evidence changes.
+- Check source independence: trace repeated claims to their origin and do not count copied summaries as separate confirmation.
 - Quality standard: correctness, completeness, usefulness, robustness, maintainability, safety, and provenance.
 - Governing research report: an evidence-first agent must distinguish knowledge types, seek disconfirming evidence, preserve uncertainty, and measure substantive improvement rather than activity.
 

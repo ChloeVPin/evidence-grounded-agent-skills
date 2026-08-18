@@ -54,6 +54,7 @@ If no operational question exists, do not add speculative telemetry. If signals 
 - [OpenTelemetry documentation](https://opentelemetry.io/docs/concepts/observability-primer/): logs, metrics, and traces as complementary signals for understanding system behavior.
 - [OpenTelemetry Semantic Conventions](https://opentelemetry.io/docs/concepts/semantic-conventions/): stable names and attributes improve interoperability and analysis.
 - [Google SRE book: Monitoring Distributed Systems](https://sre.google/sre-book/monitoring-distributed-systems/): monitoring should support actionable operational questions and distinguish signal from noise.
+- Check whether telemetry conventions and observed signals are independently supported; multiple dashboards built from one instrument are not independent evidence.
 - Confidence: high for the question-first and signal-boundary principles; medium for thresholds, sampling, retention, and ownership because they depend on system risk and operations.
 - Freshness: review when telemetry standards, topology, privacy policy, cost limits, or operational failure modes change.
 

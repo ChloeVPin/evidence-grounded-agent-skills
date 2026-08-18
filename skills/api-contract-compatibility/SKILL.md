@@ -54,6 +54,7 @@ If consumers are unknown, treat compatibility as uncertain and use telemetry, re
 - [RFC 9110 HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110): standardized method, status, representation, and compatibility semantics for HTTP interfaces.
 - [Semantic Versioning 2.0.0](https://semver.org/): a public contract for communicating incompatible, additive, and patch-level changes, subject to its stated assumptions.
 - [Google API Design Guide](https://cloud.google.com/apis/design): resource-oriented API design, compatibility, versioning, and evolution guidance.
+- Trace compatibility claims to their originating specification or consumer evidence; repeated recommendations copied across guides are not independent confirmation.
 - Confidence: medium-high for explicit contract and staged-evolution principles; medium for a particular compatibility classification until actual consumers and deployment constraints are known.
 - Freshness: review when consumers, version policy, serialization standards, deployment topology, or migration tooling changes.
 

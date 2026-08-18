@@ -55,6 +55,7 @@ If data ownership, invariants, or restore capability is unknown, stop and resolv
 - [Martin Fowler: Evolutionary Database Design](https://martinfowler.com/articles/evodb.html): incremental schema evolution and compatibility patterns for continuously delivered systems.
 - [Google SRE: Data Integrity](https://sre.google/sre-book/data-integrity/): protecting, detecting, and recovering from data loss or corruption.
 - [PostgreSQL documentation: SQL ALTER TABLE](https://www.postgresql.org/docs/current/sql-altertable.html): operation-specific locking and rewrite behavior must be checked rather than assumed.
+- Trace migration claims to the storage engine’s authoritative behavior and independent workload evidence; repeated blog or tool recommendations are not independent proof.
 - Confidence: medium-high for additive, measured, resumable migration principles; medium for a particular strategy until database behavior, workload, and recovery capabilities are known.
 - Freshness: review when schema, storage engine, volume, deployment overlap, backup/restore, or data-governance policy changes.
 

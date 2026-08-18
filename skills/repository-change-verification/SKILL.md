@@ -53,6 +53,7 @@ If tests cannot run, record the exact command and blocker; do not claim validati
 - Wang, Pradel, and Liu, [Are “Solved Issues” in SWE-bench Really Solved Correctly?](https://arxiv.org/abs/2503.15223), 2025/2026 publication record.
 - [GitHub: About pull requests](https://docs.github.com/en/pull-requests/get-started/about-pull-requests).
 - [OWASP: Secure Coding with AI](https://cheatsheetseries.owasp.org/cheatsheets/Secure_Coding_with_AI_Cheat_Sheet.html).
+- Trace important claims to primary evidence and assess source independence; multiple summaries of one benchmark or policy are not multiple confirmations.
 
 Confidence: medium-high. Freshness review: annually, and immediately after material changes to agent tooling, CI policy, or supply-chain guidance.
 

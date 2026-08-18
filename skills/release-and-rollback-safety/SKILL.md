@@ -54,6 +54,7 @@ If rollback is unsafe or unknown, stop the rollout and design forward recovery o
 - [Google SRE: Release Engineering](https://sre.google/sre-book/release-engineering/): reproducible releases, automation, and controlled delivery reduce operational risk.
 - [Google SRE: Managing Incidents](https://sre.google/sre-book/managing-incidents/): clear roles, communication, mitigation, and learning during failures.
 - [DORA: Continuous Delivery](https://dora.dev/capabilities/continuous-delivery/): small batches, automation, and reliable delivery practices, subject to organizational context.
+- Check whether release guidance and health signals come from independent evidence; repeated deployment advice or metrics derived from one source do not confirm safety by themselves.
 - Confidence: medium-high for staged exposure, explicit health signals, and recovery planning; medium for a particular rollout strategy until system topology and irreversibility are known.
 - Freshness: review when deployment topology, release tooling, data lifecycle, ownership, or incident policy changes.
 
