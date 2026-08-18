@@ -18,7 +18,7 @@ from scripts.decision_ledger import (
     validate_migration,
     validate_policy_audit, validate_policy_audit_bundle,
     validate_policy_assertion_content, validate_current_assertion_bundle,
-    validate_source_file_manifest,
+    validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -554,6 +554,7 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(all(output["checks"].values()))
         self.assertIsNone(output["error_code"])
         self.assertEqual(output["result"], "passed")
+        self.assertTrue(validate_cli_output(output).valid)
 
     def test_executable_current_head_audit_fails_without_evidence_root(self):
         root = Path(__file__).resolve().parents[1]
@@ -565,6 +566,7 @@ class DecisionLedgerTest(unittest.TestCase):
         output = json.loads(result.stdout)
         self.assertEqual(output["result"], "failed")
         self.assertEqual(output["error_code"], "NO_CURRENT_ASSERTION")
+        self.assertTrue(validate_cli_output(output).valid)
         self.assertIn(output["error_code"], {
             "NO_CURRENT_ASSERTION", "MALFORMED_EVIDENCE", "AUDIT_GATE_FAILED",
         })
@@ -609,6 +611,7 @@ class DecisionLedgerTest(unittest.TestCase):
             output = json.loads(result.stdout)
             self.assertEqual(output["result"], "failed")
             self.assertEqual(output["error_code"], "MALFORMED_EVIDENCE")
+            self.assertTrue(validate_cli_output(output).valid)
             self.assertNotIn("Traceback", result.stderr)
 
 

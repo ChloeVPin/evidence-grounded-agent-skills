@@ -6,6 +6,7 @@ import json
 import re
 
 OUTCOMES = {"supported_refuted", "contextual", "unresolved", "failure"}
+CLI_ERROR_CODES = {"NO_CURRENT_ASSERTION", "MALFORMED_EVIDENCE", "AUDIT_GATE_FAILED"}
 PARAPHRASE_MIN_SHARED_TERMS = 2
 TERM_ALIASES = {
     "authorization": "authority",
@@ -153,6 +154,22 @@ def validate_policy_audit(audit: dict) -> ContextAssessment:
     if not isinstance(audit["evidence_refs"], list) or not audit["evidence_refs"]:
         return ContextAssessment(False, "policy audit evidence references are required")
     return ContextAssessment(True, "valid policy audit")
+
+
+def validate_cli_output(output: dict) -> ContextAssessment:
+    """Validate the documented success or failure JSON output contract."""
+    if output.get("result") == "passed":
+        if not isinstance(output.get("audit_id"), str):
+            return ContextAssessment(False, "successful CLI output needs audit_id")
+        checks = output.get("checks")
+        if checks != {"bundle": True, "content": True, "result": True}:
+            return ContextAssessment(False, "successful CLI checks are incomplete")
+        if output.get("error_code") is not None:
+            return ContextAssessment(False, "successful CLI output must have null error code")
+        return ContextAssessment(True, "valid successful CLI output")
+    if output.get("result") == "failed" and output.get("error_code") in CLI_ERROR_CODES:
+        return ContextAssessment(True, "valid failed CLI output")
+    return ContextAssessment(False, "invalid CLI output contract")
 
 
 def audit_policy_assertion_chain(assertions: list[dict]) -> ContextAssessment:

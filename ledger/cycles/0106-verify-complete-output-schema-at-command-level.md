@@ -1,7 +1,7 @@
 # Cycle 0106 — Verify complete output schema at command level
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Verify complete output schema at command level
 
 ## Decision
 
-_To be determined from evidence._
+The documented success and failure JSON branches now have an executable schema
+validator covering IDs, checks, null success code, result, and stable failures.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Live command tests pass their parsed outputs through `validate_cli_output` for
+both successful and failure executions.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Schema validation cannot guarantee that a syntactically valid output reflects
+truthful underlying evidence.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: bind CLI output validation into the audit
+command itself.
