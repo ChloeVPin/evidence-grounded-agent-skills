@@ -1,7 +1,7 @@
 # Cycle 0086 — Rerun audit and compare with persisted assertion
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,21 @@ Rerun audit and compare with persisted assertion
 
 ## Decision
 
-_To be determined from evidence._
+The persisted policy assertion matches a fresh successful rerun of the exact
+command; the current revision changed, but both results remain auditable.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+`ledger/evidence/0086-generation-rerun.json` captures the current revision,
+success status, and output digest. Comparison tests reject a contradictory
+persisted result.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The comparison verifies command/result agreement, not semantic sufficiency of
+the test suite or external provenance of the process.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: record the current passing audit as a new
+versioned policy assertion.

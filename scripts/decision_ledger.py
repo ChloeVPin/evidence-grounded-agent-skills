@@ -148,6 +148,21 @@ def validate_policy_audit(audit: dict) -> ContextAssessment:
     return ContextAssessment(True, "valid policy audit")
 
 
+def compare_policy_audit(audit: dict, evidence: dict) -> ContextAssessment:
+    """Compare a persisted policy assertion with a fresh captured result."""
+    audit_check = validate_policy_audit(audit)
+    if not audit_check.valid:
+        return audit_check
+    if audit["policy"] != evidence.get("command"):
+        return ContextAssessment(False, "fresh evidence command differs from policy")
+    expected_result = "passed" if evidence.get("exit_status") == 0 else "failed"
+    if audit["result"] != expected_result:
+        return ContextAssessment(False, "persisted policy result differs from fresh evidence")
+    if evidence.get("output_sha256") in (None, ""):
+        return ContextAssessment(False, "fresh evidence output digest is missing")
+    return ContextAssessment(True, "persisted policy assertion matches fresh evidence")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

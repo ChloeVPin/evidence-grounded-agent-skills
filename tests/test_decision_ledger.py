@@ -9,7 +9,8 @@ from scripts.decision_ledger import (
     check_generation_revision, check_source_inventory_digest, validate_entry,
     check_captured_generation_revision, migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
-    validate_generation_evidence, validate_migration, validate_policy_audit,
+    compare_policy_audit, validate_generation_evidence, validate_migration,
+    validate_policy_audit,
     validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -399,6 +400,18 @@ class DecisionLedgerTest(unittest.TestCase):
         ).read_text())
         self.assertTrue(validate_policy_audit(audit).valid)
         self.assertFalse(validate_policy_audit(dict(audit, evidence_refs=[])).valid)
+
+    def test_persisted_policy_audit_matches_fresh_rerun(self):
+        audit = json.loads(Path(
+            "ledger/evidence/0085-generation-policy-audit.json",
+        ).read_text())
+        evidence = json.loads(Path(
+            "ledger/evidence/0086-generation-rerun.json",
+        ).read_text())
+        self.assertTrue(compare_policy_audit(audit, evidence).valid)
+        self.assertFalse(compare_policy_audit(
+            dict(audit, result="failed"), evidence,
+        ).valid)
 
 
 if __name__ == "__main__":
