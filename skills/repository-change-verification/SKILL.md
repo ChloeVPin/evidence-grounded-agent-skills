@@ -32,6 +32,12 @@ Trigger when an agent proposes a patch, commit, or pull request. Prerequisites: 
 - [ ] No unverified dependency, download, secret exposure, or mutable action reference was introduced.
 - [ ] Remaining uncertainty and the next review trigger are recorded.
 
+## Examples and counterexamples
+
+Good: A patch passes tests but changes an authorization branch; inspect the interface behavior and reject or revise the out-of-scope change.
+
+Bad: Accept a green patch without checking what the tests do not cover.
+
 ## Failure modes and recovery
 
 If tests cannot run, record the exact command and blocker; do not claim validation. If the specification is ambiguous, pause for clarification or narrow the decision explicitly. If the patch passes tests but changes undocumented behavior, compare against the request and baseline, add a regression test, and revise or reject it.

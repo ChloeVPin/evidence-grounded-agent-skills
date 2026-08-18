@@ -32,6 +32,12 @@ Trigger when two claims conflict, a validation result contradicts a trusted skil
 - [ ] Rejected hypotheses and failure mechanisms are preserved.
 - [ ] Corrective action has a regression or review trigger.
 
+## Examples and counterexamples
+
+Good: Two sources disagree because one describes a newer version; compare versions and scope, preserve the older boundary, and record which claim applies when.
+
+Bad: Choose the source with the larger audience or average incompatible claims without checking provenance.
+
 ## Failure modes and recovery
 
 If evidence is incomparable, split the claims by context instead of choosing a winner. If evidence is insufficient, keep the contradiction open and lower confidence. If a failure has no reproducible mechanism, record the uncertainty and prioritize instrumentation or reproduction before changing foundational guidance.

@@ -31,6 +31,12 @@ Trigger on changes to manifest files, lockfiles, package scripts, build configur
 - [ ] Integrity, audit, and relevant regression checks passed with captured evidence.
 - [ ] Exceptions, residual risk, and review trigger are recorded.
 
+## Examples and counterexamples
+
+Good: A lockfile adds a transitive package; trace its origin, integrity, scripts, advisory status, and reachability before accepting it.
+
+Bad: Approve the package because installation succeeds or because it is popular.
+
 ## Failure modes and recovery
 
 If a package cannot be resolved from an authoritative source, stop and reject or escalate; do not guess. If advisory data is unavailable or stale, record the limitation and keep the change below trusted status. If a lockfile changes without an understandable graph explanation, regenerate from a clean baseline and review the full diff.

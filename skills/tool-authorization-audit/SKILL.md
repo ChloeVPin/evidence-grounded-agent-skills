@@ -33,6 +33,12 @@ Trigger when tools, MCP servers, credentials, scopes, command allowlists, parame
 - [ ] Authorization and tool-call audit records are defined with redaction.
 - [ ] Negative and prompt-injection cases were tested or recorded as limitations.
 
+## Examples and counterexamples
+
+Good: A tool request needs one repository file, so the review rejects unrestricted filesystem access and checks an out-of-scope path.
+
+Bad: Approve broad shell or wildcard access because the current prompt appears harmless.
+
 ## Failure modes and recovery
 
 If the required authority cannot be distinguished from the granted authority, stop and escalate. If a tool exposes unrestricted shell or wildcard resources, constrain it or keep it untrusted. If approval identity or expiry cannot be verified, do not execute high-impact actions. If logs contain secrets, revoke and rotate affected credentials and repair the logging boundary.

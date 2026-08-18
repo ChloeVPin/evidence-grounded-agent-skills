@@ -31,6 +31,12 @@ Trigger when a patch changes multiple behaviors, passes a narrow test suite, has
 - [ ] Out-of-scope behavior and security-sensitive side effects were checked.
 - [ ] Residual uncertainty and review trigger are recorded.
 
+## Examples and counterexamples
+
+Good: A candidate and baseline return the same result on ordinary inputs but differ on malformed input; classify the difference against the contract instead of ignoring it.
+
+Bad: Treat textual similarity or matching happy-path output as proof of equivalence.
+
 ## Failure modes and recovery
 
 If no trusted comparison exists, narrow the claim to specification-based testing and label it accordingly. If the environment cannot run both versions, do not call the comparison validated. If versions legitimately differ under the contract, record the allowed difference rather than forcing textual convergence.

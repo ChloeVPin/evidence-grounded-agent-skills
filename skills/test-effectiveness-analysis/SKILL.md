@@ -31,6 +31,12 @@ Trigger when a change adds or modifies behavior, when tests are newly generated,
 - [ ] Regression behavior outside the changed path was checked.
 - [ ] Mutation limitations, equivalent mutants, and residual uncertainty are recorded.
 
+## Examples and counterexamples
+
+Good: A mutation removes a required authorization check and the relevant negative test fails, showing that the test detects the security behavior.
+
+Bad: Count invalid or equivalent mutants as evidence that the suite is weak, or treat a mutation score as correctness proof.
+
 ## Failure modes and recovery
 
 If mutation tooling cannot run, record the exact blocker and use manually designed fault injections only as limited evidence. If a mutation is equivalent, document why rather than weakening the test. If mutation score improves while behavior coverage worsens, reject the metric as misleading and inspect the test assertions.

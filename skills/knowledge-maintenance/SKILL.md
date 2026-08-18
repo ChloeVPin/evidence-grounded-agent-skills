@@ -32,6 +32,12 @@ Trigger when a review date arrives, a dependency/tool/version changes, a source 
 - [ ] Stale, contradictory, or unavailable evidence lowers confidence or blocks trust.
 - [ ] Maintenance result and next trigger are auditable.
 
+## Examples and counterexamples
+
+Good: A tool version changes a documented API; preserve the old skill, record the affected boundary, revalidate dependents, and supersede it only after evidence.
+
+Bad: Update the wording silently because the new version is assumed to be compatible.
+
 ## Failure modes and recovery
 
 If freshness cannot be determined, label it unknown and keep the artifact below trusted status. If a source disappears, preserve the last evidence and seek an independent replacement. If evidence conflicts, do not average or silently choose; open a contradiction-resolution cycle. If a replacement is not equivalent, record the decision boundary rather than treating it as a drop-in successor.
