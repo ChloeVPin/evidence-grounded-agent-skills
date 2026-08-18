@@ -55,6 +55,7 @@ Each skill should state its purpose, triggers, procedure, examples, failure reco
 - [Secure coding review](skills/secure-coding-review/SKILL.md) — inspect application trust boundaries and abuse cases.
 - [Privacy and data handling](skills/privacy-and-data-handling/SKILL.md) — minimize and govern sensitive data across its lifecycle.
 - [Configuration and secrets safety](skills/configuration-and-secrets-safety/SKILL.md) — manage environment settings and credentials safely.
+- [Build and CI integrity](skills/build-and-ci-integrity/SKILL.md) — protect workflows, artifacts, and build provenance.
 - [Dependency security audit](skills/dependency-security-audit/SKILL.md) — review dependency and supply-chain changes.
 - [Tool authorization audit](skills/tool-authorization-audit/SKILL.md) — review agent permissions and high-impact calls.
 - [Prompt-injection resistance](skills/prompt-injection-resistance/SKILL.md) — separate untrusted content from authority and actions.
