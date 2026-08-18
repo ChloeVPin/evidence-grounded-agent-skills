@@ -1,7 +1,7 @@
 # Cycle 0163 — Record graph-failure evidence in the aggregate capture summary
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Record graph-failure evidence in the aggregate capture summary
 
 ## Decision
 
-_To be determined from evidence._
+The aggregate capture summary now records both persisted failure-evidence
+artifacts in a validated `failure_refs` set.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0146 summary, synchronized state and summary capture digests,
+and executable summary validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The summary remains complete and available; 183 tests and the full four-check
+audit pass after adding the failure references.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add failure references to the freshness capture inventory.
