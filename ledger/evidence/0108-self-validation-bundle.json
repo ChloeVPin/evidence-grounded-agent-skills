@@ -1,0 +1,6 @@
+{
+  "bundle_id": "0108-self-validation-bundle",
+  "assertion_ref": "ledger/evidence/0093-generation-policy-audit.json",
+  "test_capture_ref": "ledger/evidence/0093-generation-rerun.json",
+  "self_validation_capture_ref": "ledger/evidence/0108-audit-command-capture.json"
+}

@@ -18,6 +18,7 @@ from scripts.decision_ledger import (
     validate_migration,
     validate_policy_audit, validate_policy_audit_bundle,
     validate_policy_assertion_content, validate_current_assertion_bundle,
+    validate_self_validation_bundle,
     validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -497,6 +498,18 @@ class DecisionLedgerTest(unittest.TestCase):
         paths = set(audit["evidence_refs"]) | {bundle["assertion_ref"], bundle["content_digest_ref"]}
         self.assertTrue(validate_current_assertion_bundle(bundle, paths).valid)
         self.assertTrue(compare_policy_audit(audit, evidence).valid)
+
+    def test_self_validation_bundle_links_assertion_and_audit_capture(self):
+        bundle = json.loads(Path(
+            "ledger/evidence/0108-self-validation-bundle.json",
+        ).read_text())
+        paths = {
+            bundle["assertion_ref"], bundle["test_capture_ref"],
+            bundle["self_validation_capture_ref"],
+        }
+        self.assertTrue(validate_self_validation_bundle(bundle, paths).valid)
+        altered = dict(bundle, self_validation_capture_ref=bundle["test_capture_ref"])
+        self.assertFalse(validate_self_validation_bundle(altered, paths).valid)
 
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [

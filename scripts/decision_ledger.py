@@ -276,6 +276,25 @@ def validate_current_assertion_bundle(
     return ContextAssessment(True, "current assertion bundle is complete")
 
 
+def validate_self_validation_bundle(
+    bundle: dict, available_paths: set[str],
+) -> ContextAssessment:
+    """Validate the bundle that records this audit's validation of an assertion."""
+    required = (
+        "bundle_id", "assertion_ref", "test_capture_ref",
+        "self_validation_capture_ref",
+    )
+    missing = [field for field in required if field not in bundle]
+    if missing:
+        return ContextAssessment(False, f"self-validation bundle missing: {', '.join(missing)}")
+    refs = [bundle[field] for field in required[1:]]
+    if any(not isinstance(ref, str) or ref not in available_paths for ref in refs):
+        return ContextAssessment(False, "self-validation bundle reference is unavailable")
+    if bundle["test_capture_ref"] == bundle["self_validation_capture_ref"]:
+        return ContextAssessment(False, "self-validation capture must be distinct")
+    return ContextAssessment(True, "self-validation bundle is complete")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
