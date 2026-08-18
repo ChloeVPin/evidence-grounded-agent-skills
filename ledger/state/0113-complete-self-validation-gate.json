@@ -18,6 +18,11 @@
     "ledger/evidence/0130-dependency-state-diagnostics.json"
   ],
   "diagnostic_refs_sha256": "d5c6d1c1b6ab1fb47f9faa71718b42515ed8cb1ce00a5a67c2519ff330eeb9f6",
+  "graph_provenance_refs": [
+    "ledger/evidence/0137-freshness-dependency-graph.json",
+    "ledger/evidence/0143-graph-state-diagnostic-capture.json"
+  ],
+  "graph_provenance_refs_sha256": "a12693ac198c52eefee60de3e7adafc9d4b1f936a07ff9711a43de8dde3175c3",
   "checks": {
     "bundle": true,
     "chain": true,

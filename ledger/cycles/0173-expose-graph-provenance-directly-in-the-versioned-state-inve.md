@@ -1,7 +1,7 @@
 # Cycle 0173 — Expose graph provenance directly in the versioned state inventory
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Expose graph provenance directly in the versioned state inventory
 
 ## Decision
 
-_To be determined from evidence._
+Versioned self-validation state now records graph and graph-capture provenance
+references with a canonical digest tied to the aggregate summary.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0113 state schema, validator enforcement, content-digest
+refresh, and executable state validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The state remains a complete passing result; 183 tests, compilation, and the
+full four-check audit pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add a dedicated graph-provenance state-drift failure artifact.

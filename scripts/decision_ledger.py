@@ -645,6 +645,7 @@ def validate_self_validation_state(
         "dependency_graph_policy_sha256", "capture_summary_ref",
         "capture_summary_sha256", "capture_inventory_ref",
         "capture_inventory_sha256", "diagnostic_refs", "diagnostic_refs_sha256",
+        "graph_provenance_refs", "graph_provenance_refs_sha256",
     )
     missing = [field for field in required if field not in state]
     if missing:
@@ -681,6 +682,12 @@ def validate_self_validation_state(
             return ContextAssessment(False, "self-validation state summary reference is invalid")
         if state["capture_summary_sha256"] != capture_summary.get("summary_sha256"):
             return ContextAssessment(False, "self-validation state summary digest is stale")
+        expected_graph_refs = capture_summary.get("graph_provenance_refs")
+        if (state["graph_provenance_refs"] != expected_graph_refs
+                or state["graph_provenance_refs_sha256"] != hashlib.sha256(
+                    json.dumps(sorted(expected_graph_refs), separators=(",", ":")).encode("utf-8")
+                ).hexdigest()):
+            return ContextAssessment(False, "self-validation state graph provenance is stale")
     if capture_inventory is not None:
         if state["capture_inventory_ref"] != "ledger/evidence/0154-freshness-capture-inventory.json":
             return ContextAssessment(False, "self-validation state inventory reference is invalid")
