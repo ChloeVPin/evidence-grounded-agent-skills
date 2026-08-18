@@ -1,0 +1,16 @@
+{
+  "capture_id": "0119-four-check-audit-capture",
+  "command": "python3 scripts/audit_current_assertion.py",
+  "revision": "911d5465db020e0db5f837c9033eade711472e04",
+  "exit_status": 0,
+  "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
+  "audit_id": "0093-generation-policy-audit",
+  "checks": {
+    "bundle": true,
+    "content": true,
+    "freshness": true,
+    "result": true
+  },
+  "result": "passed",
+  "error_code": null
+}

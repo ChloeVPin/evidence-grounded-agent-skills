@@ -690,6 +690,21 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertTrue(validate_captured_output(evidence, result.stdout).valid)
         self.assertFalse(validate_captured_output(evidence, result.stdout + "tampered").valid)
 
+    def test_versioned_four_check_capture_matches_live_output(self):
+        root = Path(__file__).resolve().parents[1]
+        capture = json.loads((root / "ledger/evidence/0119-four-check-audit-capture.json").read_text())
+        result = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py"],
+            cwd=root, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, capture["exit_status"])
+        self.assertTrue(validate_captured_output(capture, result.stdout).valid)
+        live = json.loads(result.stdout)
+        self.assertEqual(
+            {key: capture[key] for key in ("audit_id", "checks", "result", "error_code")},
+            live,
+        )
+
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
