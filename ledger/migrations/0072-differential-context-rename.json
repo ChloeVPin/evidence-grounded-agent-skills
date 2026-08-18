@@ -8,5 +8,6 @@
     "tests/test_differential_review.py"
   ],
   "reason": "separate observable behavior comparison from broader differential terminology",
-  "reversible": true
+  "reversible": true,
+  "source_inventory_sha256": "e537cd5a7caa5d75246903ce198bae0ce8460b94032d982c02b7a45ac67e997c"
 }

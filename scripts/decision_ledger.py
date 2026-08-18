@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Validate durable contradiction and failure-learning ledger entries."""
 from dataclasses import dataclass
+import hashlib
+import json
 import re
 
 OUTCOMES = {"supported_refuted", "contextual", "unresolved", "failure"}
@@ -36,6 +38,12 @@ class ContextMigration:
     valid: bool
     contexts: tuple[str, ...]
     reason: str
+
+
+def source_inventory_digest(source_entry_ids: set[str]) -> str:
+    """Return a stable digest for the sorted source-entry inventory."""
+    payload = json.dumps(sorted(source_entry_ids), separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
 def validate_contexts(contexts: object) -> ContextAssessment:
@@ -86,7 +94,7 @@ def validate_migration(migration: dict) -> ContextAssessment:
     """Validate a durable context migration and its artifact continuity."""
     required = (
         "migration_id", "source_entry_id", "source_contexts", "target_contexts",
-        "artifacts", "reason", "reversible",
+        "artifacts", "reason", "reversible", "source_inventory_sha256",
     )
     missing = [field for field in required if field not in migration]
     if missing:
@@ -101,6 +109,13 @@ def validate_migration(migration: dict) -> ContextAssessment:
         return ContextAssessment(False, "migration reason is required")
     if not isinstance(migration["reversible"], bool):
         return ContextAssessment(False, "migration reversibility must be boolean")
+    digest = migration["source_inventory_sha256"]
+    if not isinstance(digest, str) or len(digest) != 64:
+        return ContextAssessment(False, "source inventory digest must be sha256")
+    try:
+        int(digest, 16)
+    except ValueError:
+        return ContextAssessment(False, "source inventory digest must be hexadecimal")
     return validate_context_artifacts({
         "contexts": migration["target_contexts"],
         "artifacts": migration["artifacts"],
