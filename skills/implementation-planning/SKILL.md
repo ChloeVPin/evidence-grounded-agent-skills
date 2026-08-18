@@ -50,6 +50,7 @@ If acceptance criteria are unstable, pause planning and clarify them. If depende
 ## Validation evidence and provenance
 
 - The governing research emphasizes reconnaissance, prioritization, simplicity, reversibility, explicit dependencies, falsifiable questions, and meaningful progress over busyness.
+- [Google SRE: Release Engineering](https://sre.google/sre-book/release-engineering/): repeatable, automated, and staged delivery practices reduce release risk while preserving evidence about what changed.
 - Plan observations are repository or experiment evidence; causal explanations are hypotheses; sequencing and implementation choices are recommendations that must be revised when evidence changes.
 - Trace dependency and architecture claims to their originating code, specifications, or owners; repeated planning assumptions are not independent confirmation.
 - Confidence: high for bounded decomposition and evidence-driven sequencing; medium for a plan’s predicted effort and risk until discovery and experiments run.
