@@ -5,6 +5,7 @@
     "scripts/differential_review.py",
     "tests/test_differential_review.py"
   ],
+  "contexts": ["differential-review"],
   "claims": [
     "happy-path equivalence can hide boundary divergence",
     "differential review requires boundary inputs"

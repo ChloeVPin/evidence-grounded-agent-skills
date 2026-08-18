@@ -6,6 +6,7 @@
     "tests/test_fault_injection.py",
     "scripts/mutation_review.py"
   ],
+  "contexts": ["test-effectiveness"],
   "claims": [
     "happy-path-only tests can miss a boundary regression",
     "mutation survival is evidence of an incomplete test oracle"

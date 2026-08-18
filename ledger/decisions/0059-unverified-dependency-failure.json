@@ -5,6 +5,7 @@
     "scripts/dependency_review.py",
     "tests/test_dependency_review.py"
   ],
+  "contexts": ["dependency-security"],
   "claims": [
     "unverified dependency evidence can conceal supply-chain risk",
     "dependency changes require provenance before acceptance"

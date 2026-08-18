@@ -117,9 +117,9 @@ class DecisionLedgerTest(unittest.TestCase):
         metrics = evaluate_labeled_queries(entries, labels)
         self.assertEqual(len(labels), 9)
         self.assertEqual(metrics["true_positive"], 7)
-        self.assertEqual(metrics["false_positive"], 1)
+        self.assertEqual(metrics["false_positive"], 0)
         self.assertEqual(metrics["false_negative"], 0)
-        self.assertAlmostEqual(metrics["precision"], 7 / 8)
+        self.assertEqual(metrics["precision"], 1.0)
         self.assertEqual(metrics["recall"], 1.0)
 
     def test_adversarial_alias_query_is_only_a_review_candidate(self):
@@ -129,6 +129,17 @@ class DecisionLedgerTest(unittest.TestCase):
         }]
         candidates = find_paraphrase_candidates(entries, "unrestricted authority decisions")
         self.assertEqual([entry["entry_id"] for entry in candidates], ["tool"])
+
+    def test_context_filter_removes_cross_domain_alias_candidate(self):
+        entries = [{
+            "entry_id": "tool", "contexts": ["tool-authorization"],
+            "claims": ["wildcard authority can bypass least-privilege boundaries"],
+        }]
+        self.assertEqual(
+            find_paraphrase_candidates(
+                entries, "unrestricted authority decisions", context="differential-review",
+            ), [],
+        )
 
     def test_threshold_is_explicit_and_conservative(self):
         self.assertEqual(PARAPHRASE_MIN_SHARED_TERMS, 2)

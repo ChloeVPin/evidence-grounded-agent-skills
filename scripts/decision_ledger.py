@@ -24,11 +24,14 @@ def find_matching_entries(entries: list[dict], claim: str) -> list[dict]:
 
 def find_paraphrase_candidates(
     entries: list[dict], claim: str, *, min_shared_terms: int = PARAPHRASE_MIN_SHARED_TERMS,
+    context: str | None = None,
 ) -> list[dict]:
     """Return possible matches for human review; never merge or resolve claims."""
     query_terms = _terms(claim)
     candidates = []
     for entry in entries:
+        if context is not None and context not in entry.get("contexts", []):
+            continue
         recorded_terms = set().union(*(_terms(item) for item in entry.get("claims", [])))
         if len(query_terms & recorded_terms) >= min_shared_terms:
             candidates.append(entry)
@@ -59,6 +62,7 @@ def evaluate_labeled_queries(
             entry["entry_id"]
             for entry in find_paraphrase_candidates(
                 entries, label["query"], min_shared_terms=min_shared_terms,
+                context=label.get("context"),
             )
         }
         metrics = candidate_metrics(set(label["expected_ids"]), predicted)

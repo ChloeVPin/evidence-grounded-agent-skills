@@ -5,6 +5,7 @@
     "scripts/tool_policy.py",
     "tests/test_tool_policy.py"
   ],
+  "contexts": ["tool-authorization"],
   "claims": [
     "wildcard authority can bypass least-privilege boundaries",
     "tool policy must reject wildcard actions and resources"
