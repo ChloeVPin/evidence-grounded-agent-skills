@@ -1,7 +1,7 @@
 # Cycle 0182 — Bind the new graph edge into the graph-state capture summary
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Bind the new graph edge into the graph-state capture summary
 
 ## Decision
 
-_To be determined from evidence._
+Graph-state capture now explicitly records the inventory-to-snapshot-capture
+edge and validates that provenance against the live graph chain.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Evidence: updated 0143 graph capture, validator enforcement, content-digest
+refresh, and executable graph-capture validation.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The capture remains valid; 183 tests, compilation, and all four public audit
+checks pass.
 
 ## Next action
 
-_Research, validate, and update this record._
+Add graph-edge provenance to the next persisted failure diagnostic.

@@ -237,6 +237,11 @@ def validate_graph_state_diagnostic_capture(
         ).hexdigest()
         if capture.get("snapshot_sha256") != expected_digest:
             return ContextAssessment(False, "graph capture snapshot digest is stale")
+        if capture.get("edge_refs") != [[
+            "ledger/evidence/0154-freshness-capture-inventory.json",
+            "ledger/evidence/0134-snapshot-diagnostic-capture.json",
+        ]]:
+            return ContextAssessment(False, "graph capture provenance edges are stale")
     if capture["audit_result"] != "passed":
         return ContextAssessment(False, "graph capture audit result is not passed")
     return ContextAssessment(True, "graph state diagnostic capture is valid")
