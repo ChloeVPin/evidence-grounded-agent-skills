@@ -375,12 +375,13 @@ def validate_dependency_diagnostic_snapshot(
     if snapshot.get("source_state_ref") not in available_paths:
         return ContextAssessment(False, "dependency diagnostic snapshot source is unavailable")
     cases = snapshot.get("cases")
-    if not isinstance(cases, list) or len(cases) != 3:
+    if not isinstance(cases, list) or len(cases) != 4:
         return ContextAssessment(False, "dependency diagnostic snapshot cases are incomplete")
     expected_reasons = {
         "self-validation state dependency digest differs from manifest",
         "self-validation state manifest reference is invalid",
         "self-validation state inventory digest is stale",
+        "self-validation state diagnostic references are stale",
     }
     reasons = set()
     for case in cases:
