@@ -1,7 +1,7 @@
 # Cycle 0011 — Generate Complete Review Record
 
 Date: 2026-08-18
-Status: in progress
+Status: validated with generated records
 
 ## Question
 
@@ -9,16 +9,16 @@ Can Hermes generate a complete version-1 review record from captured evidence ra
 
 ## Decision
 
-_To be determined._
+Generate schema-version-1 records only when captured revision matches, evidence is complete, and the resulting attestation validates.
 
 ## Evidence and provenance
 
-_Record generator output and end-to-end tests._
+Implemented in `scripts/generate_record.py` with three generator tests in `tests/test_generate_record.py`.
 
 ## Disconfirming evidence sought
 
-_Attempt generation with missing capture evidence, stale revision, or incomplete test evidence._
+Mismatched capture revisions and missing boundary/regression evidence are rejected before a record is emitted.
 
 ## Next action
 
-Build a generator that composes command capture, attestation, and review metadata into a validated record.
+Validation passed locally. Limitation: generated records still contain locally supplied paths and criteria; the next cycle should derive those from the actual reviewed diff and run the complete reviewer on the generated artifact.

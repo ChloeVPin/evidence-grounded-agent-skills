@@ -32,6 +32,7 @@ The first cycle is recorded in [`ledger/cycles/0001-institutional-bootstrap.md`]
 - [`scripts/bind_evidence.py`](scripts/bind_evidence.py): binds evidence to diff and acceptance-criteria hashes.
 - [`scripts/review_change.py`](scripts/review_change.py): composes scope, evidence, and attestation gates.
 - [`scripts/review_record.py`](scripts/review_record.py): validates the versioned durable review-record shape.
+- [`scripts/generate_record.py`](scripts/generate_record.py): generates records only from matching captured evidence.
 
 ## Running a cycle
 
