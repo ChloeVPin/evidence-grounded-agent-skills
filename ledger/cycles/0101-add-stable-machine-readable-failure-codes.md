@@ -1,7 +1,7 @@
 # Cycle 0101 — Add stable machine-readable failure codes
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Add stable machine-readable failure codes
 
 ## Decision
 
-_To be determined from evidence._
+The audit CLI now emits stable error codes for no current assertion, malformed
+evidence, and failed audit gates.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Failure-path tests assert `NO_CURRENT_ASSERTION`, `MALFORMED_EVIDENCE`, and
+`AUDIT_GATE_FAILED` respectively.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Codes classify failure classes but do not encode every underlying reason; the
+human-readable reason remains diagnostic context.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: document the CLI contract and exit codes.

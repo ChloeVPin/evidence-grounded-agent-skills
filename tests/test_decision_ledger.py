@@ -559,7 +559,9 @@ class DecisionLedgerTest(unittest.TestCase):
             cwd=root, capture_output=True, text=True,
         )
         self.assertNotEqual(result.returncode, 0)
-        self.assertEqual(json.loads(result.stdout)["result"], "failed")
+        output = json.loads(result.stdout)
+        self.assertEqual(output["result"], "failed")
+        self.assertEqual(output["error_code"], "NO_CURRENT_ASSERTION")
 
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
@@ -576,7 +578,7 @@ class DecisionLedgerTest(unittest.TestCase):
                 cwd=root, capture_output=True, text=True,
             )
             self.assertNotEqual(result.returncode, 0)
-            self.assertEqual(json.loads(result.stdout)["result"], "failed")
+            self.assertEqual(json.loads(result.stdout)["error_code"], "AUDIT_GATE_FAILED")
 
     def test_executable_current_head_audit_reports_malformed_json(self):
         root = Path(__file__).resolve().parents[1]
@@ -592,6 +594,7 @@ class DecisionLedgerTest(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             output = json.loads(result.stdout)
             self.assertEqual(output["result"], "failed")
+            self.assertEqual(output["error_code"], "MALFORMED_EVIDENCE")
             self.assertNotIn("Traceback", result.stderr)
 
 

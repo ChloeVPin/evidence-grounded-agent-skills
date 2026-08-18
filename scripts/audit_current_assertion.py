@@ -8,6 +8,10 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
+NO_CURRENT_ASSERTION = "NO_CURRENT_ASSERTION"
+MALFORMED_EVIDENCE = "MALFORMED_EVIDENCE"
+AUDIT_GATE_FAILED = "AUDIT_GATE_FAILED"
+
 from scripts.decision_ledger import (
     compare_policy_audit,
     discover_current_assertion,
@@ -24,7 +28,8 @@ def _run(root: Path = ROOT) -> int:
     ]
     head = discover_current_assertion(assertions)
     if not head.valid:
-        print(json.dumps({"result": "failed", "reason": head.reason}))
+        print(json.dumps({"error_code": NO_CURRENT_ASSERTION,
+                          "result": "failed", "reason": head.reason}))
         return 1
     audit = head.assertion
     bundle_path = evidence_dir / f"{audit['audit_id'][:4]}-current-assertion-bundle.json"
@@ -45,6 +50,7 @@ def _run(root: Path = ROOT) -> int:
     }
     passed = all(checks.values())
     print(json.dumps({"audit_id": audit["audit_id"], "checks": checks,
+                      "error_code": None if passed else AUDIT_GATE_FAILED,
                       "result": "passed" if passed else "failed"}, sort_keys=True))
     return 0 if passed else 1
 
@@ -53,7 +59,8 @@ def main(root: Path = ROOT) -> int:
     try:
         return _run(root)
     except (OSError, KeyError, TypeError, json.JSONDecodeError) as error:
-        print(json.dumps({"result": "failed", "reason": str(error)}, sort_keys=True))
+        print(json.dumps({"error_code": MALFORMED_EVIDENCE,
+                          "result": "failed", "reason": str(error)}, sort_keys=True))
         return 1
 
 
