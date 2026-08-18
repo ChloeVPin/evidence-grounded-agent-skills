@@ -1,7 +1,7 @@
 # Cycle 0084 — Audit evidence against current revision and command policy
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,19 @@ Audit evidence against current revision and command policy
 
 ## Decision
 
-_To be determined from evidence._
+Persisted generation evidence is now audited against the exact allowed command,
+successful exit status, output digest shape, and reachable revision history.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+Tests accept the stored capture with its historical revision and reject altered
+command text.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+The policy is local and exact-string based; it does not prove command semantics
+or external trust in the captured process.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: persist the policy audit result itself.

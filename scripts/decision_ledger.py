@@ -118,6 +118,23 @@ def check_captured_generation_revision(
     return ContextAssessment(True, "captured revision is bound to successful evidence")
 
 
+def validate_generation_evidence(
+    evidence: dict, expected_command: str, history_revisions: set[str],
+) -> ContextAssessment:
+    """Audit persisted capture shape, command policy, success, and history."""
+    required = ("command", "revision", "exit_status", "output_sha256")
+    missing = [field for field in required if field not in evidence]
+    if missing:
+        return ContextAssessment(False, f"generation evidence missing: {', '.join(missing)}")
+    if evidence["command"] != expected_command:
+        return ContextAssessment(False, "generation command is outside policy")
+    if evidence["exit_status"] != 0:
+        return ContextAssessment(False, "generation evidence reports failure")
+    if not isinstance(evidence["output_sha256"], str) or len(evidence["output_sha256"]) != 64:
+        return ContextAssessment(False, "generation output digest is malformed")
+    return check_generation_revision(evidence["revision"], history_revisions)
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:

@@ -9,7 +9,7 @@ from scripts.decision_ledger import (
     check_generation_revision, check_source_inventory_digest, validate_entry,
     check_captured_generation_revision, migrate_contexts,
     source_file_inventory_digest, source_inventory_digest,
-    validate_migration, validate_source_file_manifest,
+    validate_generation_evidence, validate_migration, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -379,6 +379,18 @@ class DecisionLedgerTest(unittest.TestCase):
         ).valid)
         self.assertEqual(record["exit_status"], 0)
         self.assertEqual(len(record["output_sha256"]), 64)
+
+    def test_generation_evidence_policy_rejects_command_drift(self):
+        record = json.loads(Path(
+            "ledger/evidence/0083-generation-capture.json",
+        ).read_text())
+        self.assertTrue(validate_generation_evidence(
+            record, "python3 -m unittest discover -s tests", {record["revision"]},
+        ).valid)
+        altered = dict(record, command="python3 -m unittest discover")
+        self.assertFalse(validate_generation_evidence(
+            altered, "python3 -m unittest discover -s tests", {record["revision"]},
+        ).valid)
 
 
 if __name__ == "__main__":
