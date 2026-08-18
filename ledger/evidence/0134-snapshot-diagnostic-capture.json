@@ -1,0 +1,10 @@
+{
+  "capture_id": "0134-snapshot-diagnostic-capture",
+  "command": "python3 scripts/audit_current_assertion.py",
+  "revision": "dec1b3ad06373497a55e3a0246781af266688385",
+  "exit_status": 0,
+  "output_sha256": "c4fbeacbe40ad23725ec9754ec86a745c4b1c45f2f3f33d6983b481d68a5f936",
+  "snapshot_ref": "ledger/evidence/0130-dependency-state-diagnostics.json",
+  "snapshot_sha256": "f04caa09ee8f599d0949d9e71a52890edd41a5b1bb62d4a7e1702fd528fa9206",
+  "audit_result": "passed"
+}

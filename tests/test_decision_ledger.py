@@ -773,6 +773,17 @@ class DecisionLedgerTest(unittest.TestCase):
             altered, {snapshot["source_state_ref"]},
         ).valid)
 
+    def test_snapshot_diagnostic_capture_matches_live_audit(self):
+        root = Path(__file__).resolve().parents[1]
+        capture = json.loads((root / "ledger/evidence/0134-snapshot-diagnostic-capture.json").read_text())
+        result = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py"],
+            cwd=root, capture_output=True, text=True,
+        )
+        self.assertEqual(result.returncode, capture["exit_status"])
+        self.assertTrue(validate_captured_output(capture, result.stdout).valid)
+        self.assertEqual(json.loads(result.stdout)["result"], capture["audit_result"])
+
     def test_executable_current_head_audit_rejects_tampered_bundle(self):
         root = Path(__file__).resolve().parents[1]
         with tempfile.TemporaryDirectory() as directory:
