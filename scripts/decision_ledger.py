@@ -293,7 +293,7 @@ def validate_self_validation_bundle(
     """Validate the bundle that records this audit's validation of an assertion."""
     required = (
         "bundle_id", "assertion_ref", "test_capture_ref",
-        "self_validation_capture_ref",
+        "self_validation_capture_ref", "current_assertion_bundle_ref",
     )
     missing = [field for field in required if field not in bundle]
     if missing:
@@ -320,6 +320,40 @@ def validate_self_validation_bundle_against_chain(
     if bundle["assertion_ref"] != expected:
         return ContextAssessment(False, "self-validation bundle does not name current assertion")
     return ContextAssessment(True, "self-validation bundle names current assertion")
+
+
+def validate_complete_self_validation_bundle(
+    bundle: dict, assertions: list[dict], current_bundle: dict,
+    audit: dict, test_capture: dict, self_capture: dict,
+    content_digests: dict[str, str], self_validation_output: str,
+    available_paths: set[str],
+) -> ContextAssessment:
+    """Run every evidence-layer gate for a self-validation bundle."""
+    bundle_check = validate_self_validation_bundle_against_chain(
+        bundle, assertions, available_paths,
+    )
+    if not bundle_check.valid:
+        return bundle_check
+    current_check = validate_current_assertion_bundle(current_bundle, available_paths)
+    if not current_check.valid:
+        return current_check
+    if bundle["current_assertion_bundle_ref"] not in available_paths:
+        return ContextAssessment(False, "current assertion bundle reference is unavailable")
+    if current_bundle["assertion_ref"] != bundle["assertion_ref"]:
+        return ContextAssessment(False, "assertion bundle and self-validation bundle disagree")
+    if not compare_policy_audit(audit, test_capture).valid:
+        return ContextAssessment(False, "current assertion does not match test capture")
+    if not validate_policy_assertion_content(audit, content_digests).valid:
+        return ContextAssessment(False, "current assertion content is not intact")
+    if not validate_generation_evidence(
+        self_capture, "python3 scripts/audit_current_assertion.py",
+        {self_capture.get("revision")},
+    ).valid:
+        return ContextAssessment(False, "self-validation capture is not successful")
+    output_check = validate_captured_output(self_capture, self_validation_output)
+    if not output_check.valid:
+        return output_check
+    return ContextAssessment(True, "complete self-validation bundle is valid")
 
 
 def validate_contexts(contexts: object) -> ContextAssessment:

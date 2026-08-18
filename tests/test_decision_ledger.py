@@ -21,6 +21,7 @@ from scripts.decision_ledger import (
     validate_self_validation_bundle,
     validate_self_validation_bundle_against_chain,
     validate_captured_output,
+    validate_complete_self_validation_bundle,
     validate_cli_output, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -507,7 +508,7 @@ class DecisionLedgerTest(unittest.TestCase):
         ).read_text())
         paths = {
             bundle["assertion_ref"], bundle["test_capture_ref"],
-            bundle["self_validation_capture_ref"],
+            bundle["self_validation_capture_ref"], bundle["current_assertion_bundle_ref"],
         }
         self.assertTrue(validate_self_validation_bundle(bundle, paths).valid)
         altered = dict(bundle, self_validation_capture_ref=bundle["test_capture_ref"])
@@ -523,7 +524,7 @@ class DecisionLedgerTest(unittest.TestCase):
         ]
         paths = {
             bundle["assertion_ref"], bundle["test_capture_ref"],
-            bundle["self_validation_capture_ref"],
+            bundle["self_validation_capture_ref"], bundle["current_assertion_bundle_ref"],
         }
         self.assertTrue(
             validate_self_validation_bundle_against_chain(bundle, assertions, paths).valid,
@@ -533,6 +534,36 @@ class DecisionLedgerTest(unittest.TestCase):
         self.assertFalse(
             validate_self_validation_bundle_against_chain(superseded, assertions, paths).valid,
         )
+
+    def test_complete_self_validation_bundle_runs_all_evidence_gates(self):
+        root = Path(__file__).resolve().parents[1]
+        bundle = json.loads((root / "ledger/evidence/0108-self-validation-bundle.json").read_text())
+        current_bundle = json.loads((root / bundle["current_assertion_bundle_ref"]).read_text())
+        audit = json.loads((root / bundle["assertion_ref"]).read_text())
+        test_capture = json.loads((root / bundle["test_capture_ref"]).read_text())
+        self_capture = json.loads((root / bundle["self_validation_capture_ref"]).read_text())
+        digests = json.loads((root / current_bundle["content_digest_ref"]).read_text())
+        assertions = [
+            json.loads(path.read_text())
+            for path in sorted((root / "ledger/evidence").glob("*-generation-policy-audit.json"))
+        ]
+        paths = {
+            bundle[field] for field in (
+                "assertion_ref", "test_capture_ref", "self_validation_capture_ref",
+                "current_assertion_bundle_ref",
+            )
+        } | set(audit["evidence_refs"]) | {
+            current_bundle["assertion_ref"], current_bundle["capture_ref"],
+            current_bundle["content_digest_ref"],
+        }
+        output = subprocess.run(
+            ["python3", "scripts/audit_current_assertion.py"],
+            cwd=root, capture_output=True, text=True, check=True,
+        ).stdout
+        self.assertTrue(validate_complete_self_validation_bundle(
+            bundle, assertions, current_bundle, audit, test_capture, self_capture,
+            digests, output, paths,
+        ).valid)
 
     def test_expanded_assertion_chain_and_current_content_both_pass(self):
         assertions = [
