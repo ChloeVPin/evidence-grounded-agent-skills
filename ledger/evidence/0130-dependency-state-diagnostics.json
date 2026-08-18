@@ -25,6 +25,12 @@
       "failed_check": "freshness",
       "error_code": "AUDIT_GATE_FAILED",
       "reason": "self-validation state diagnostic references are stale"
+    },
+    {
+      "mutation": "replace graph_provenance_refs_sha256",
+      "failed_check": "freshness",
+      "error_code": "AUDIT_GATE_FAILED",
+      "reason": "self-validation state graph provenance is stale"
     }
   ]
 }
