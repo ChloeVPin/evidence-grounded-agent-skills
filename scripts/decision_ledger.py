@@ -606,7 +606,7 @@ def validate_complete_self_validation_bundle(
 def validate_self_validation_state(
     state: dict, bundle_ref: str, self_capture: dict, manifest: dict | None = None,
     diagnostic_snapshot: dict | None = None, dependency_graph: dict | None = None,
-    capture_summary: dict | None = None,
+    capture_summary: dict | None = None, capture_inventory: dict | None = None,
 ) -> ContextAssessment:
     """Validate the persisted result of the complete self-validation gate."""
     required = (
@@ -615,7 +615,8 @@ def validate_self_validation_state(
         "dependency_paths_sha256", "diagnostic_snapshot_ref",
         "diagnostic_snapshot_sha256", "dependency_graph_ref",
         "dependency_graph_policy_sha256", "capture_summary_ref",
-        "capture_summary_sha256",
+        "capture_summary_sha256", "capture_inventory_ref",
+        "capture_inventory_sha256",
     )
     missing = [field for field in required if field not in state]
     if missing:
@@ -652,6 +653,11 @@ def validate_self_validation_state(
             return ContextAssessment(False, "self-validation state summary reference is invalid")
         if state["capture_summary_sha256"] != capture_summary.get("summary_sha256"):
             return ContextAssessment(False, "self-validation state summary digest is stale")
+    if capture_inventory is not None:
+        if state["capture_inventory_ref"] != "ledger/evidence/0154-freshness-capture-inventory.json":
+            return ContextAssessment(False, "self-validation state inventory reference is invalid")
+        if state["capture_inventory_sha256"] != capture_inventory.get("inventory_sha256"):
+            return ContextAssessment(False, "self-validation state inventory digest is stale")
     if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
         return ContextAssessment(False, "self-validation state bundle or checks are malformed")
     if set(checks) != expected_checks or any(value is not True for value in checks.values()):
