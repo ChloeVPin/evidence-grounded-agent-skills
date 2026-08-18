@@ -26,5 +26,9 @@
   {
     "query": "dependency provenance gaps can hide supply chain risk",
     "expected_ids": ["0059-unverified-dependency-failure"]
+  },
+  {
+    "query": "happy path equivalence can hide boundary divergence",
+    "expected_ids": ["0061-differential-boundary-failure"]
   }
 ]
