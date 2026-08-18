@@ -45,6 +45,11 @@
     "ledger/evidence/0199-diagnostic-state-failure-state-failure.json"
   ],
   "diagnostic_state_failure_refs_sha256": "b523503f5679870ed1ff453ee80f09663b5533067e9e4980fb046e0010f5db40",
+  "diagnostic_case_refs": [
+    "ledger/evidence/0194-state-failure-state-failure.json",
+    "ledger/evidence/0199-diagnostic-state-failure-state-failure.json"
+  ],
+  "diagnostic_case_refs_sha256": "b523503f5679870ed1ff453ee80f09663b5533067e9e4980fb046e0010f5db40",
   "checks": {
     "bundle": true,
     "chain": true,

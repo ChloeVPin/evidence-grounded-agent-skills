@@ -707,6 +707,7 @@ def validate_self_validation_state(
         "edge_failure_refs", "edge_failure_refs_sha256",
         "state_failure_refs", "state_failure_refs_sha256",
         "diagnostic_state_failure_refs", "diagnostic_state_failure_refs_sha256",
+        "diagnostic_case_refs", "diagnostic_case_refs_sha256",
     )
     missing = [field for field in required if field not in state]
     if missing:
@@ -784,6 +785,12 @@ def validate_self_validation_state(
                     json.dumps(sorted(expected_diagnostic_state_failures), separators=(",", ":")).encode("utf-8")
                 ).hexdigest()):
             return ContextAssessment(False, "self-validation state diagnostic state failure provenance is stale")
+        expected_diagnostic_cases = capture_inventory.get("diagnostic_case_refs")
+        if (state["diagnostic_case_refs"] != expected_diagnostic_cases
+                or state["diagnostic_case_refs_sha256"] != hashlib.sha256(
+                    json.dumps(sorted(expected_diagnostic_cases), separators=(",", ":")).encode("utf-8")
+                ).hexdigest()):
+            return ContextAssessment(False, "self-validation state diagnostic case provenance is stale")
     if state["bundle_ref"] != bundle_ref or not isinstance(checks, dict):
         return ContextAssessment(False, "self-validation state bundle or checks are malformed")
     if set(checks) != expected_checks or any(value is not True for value in checks.values()):

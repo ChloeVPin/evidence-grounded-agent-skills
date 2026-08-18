@@ -625,6 +625,11 @@ class DecisionLedgerTest(unittest.TestCase):
             state, state["bundle_ref"], self_capture, manifest, None, graph, summary,
         ).valid)
         self.assertFalse(validate_self_validation_state(
+            dict(state, diagnostic_case_refs_sha256="0" * 64),
+            state["bundle_ref"], self_capture, manifest, None, graph, summary,
+            json.loads(Path("ledger/evidence/0154-freshness-capture-inventory.json").read_text()),
+        ).valid)
+        self.assertFalse(validate_self_validation_state(
             dict(state, capture_summary_sha256="0" * 64),
             state["bundle_ref"], self_capture, manifest, None, graph, summary,
         ).valid)
