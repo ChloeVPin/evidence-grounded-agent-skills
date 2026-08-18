@@ -7,7 +7,8 @@ from scripts.decision_ledger import (
     audit_context_names, audit_migrations, find_matching_entries,
     find_paraphrase_candidates, validate_contexts, validate_context_artifacts,
     check_source_inventory_digest, validate_entry, migrate_contexts,
-    source_file_inventory_digest, source_inventory_digest, validate_migration,
+    source_file_inventory_digest, source_inventory_digest,
+    validate_migration, validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
 
@@ -340,10 +341,15 @@ class DecisionLedgerTest(unittest.TestCase):
         manifest = json.loads(Path(
             "ledger/inventories/0078-source-entry-files.json",
         ).read_text())
+        self.assertTrue(validate_source_file_manifest(manifest).valid)
         self.assertEqual(
-            manifest["mapping_sha256"], source_file_inventory_digest(manifest["entries"]),
+            manifest["mapping_sha256"], source_file_inventory_digest({
+                key: value["path"] for key, value in manifest["entries"].items()
+            }),
         )
-        self.assertTrue(all(Path(path).is_file() for path in manifest["entries"].values()))
+        changed = json.loads(json.dumps(manifest))
+        changed["entries"]["0053-boundary-mutant-failure"]["sha256"] = "0" * 64
+        self.assertFalse(validate_source_file_manifest(changed).valid)
 
 
 if __name__ == "__main__":

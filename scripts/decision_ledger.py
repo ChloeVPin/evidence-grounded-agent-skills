@@ -52,6 +52,30 @@ def source_file_inventory_digest(source_files: dict[str, str]) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def validate_source_file_manifest(manifest: dict) -> ContextAssessment:
+    """Validate source paths, mapping digest, and recorded file contents."""
+    entries = manifest.get("entries")
+    if not isinstance(entries, dict) or not entries:
+        return ContextAssessment(False, "source file entries are required")
+    paths = {}
+    for entry_id, record in entries.items():
+        if not isinstance(record, dict) or not isinstance(record.get("path"), str):
+            return ContextAssessment(False, f"malformed source file record: {entry_id}")
+        if not isinstance(record.get("sha256"), str) or len(record["sha256"]) != 64:
+            return ContextAssessment(False, f"missing source file digest: {entry_id}")
+        paths[entry_id] = record["path"]
+        try:
+            with open(record["path"], "rb") as handle:
+                actual = hashlib.sha256(handle.read()).hexdigest()
+        except OSError:
+            return ContextAssessment(False, f"missing source file: {record['path']}")
+        if actual != record["sha256"]:
+            return ContextAssessment(False, f"source file digest is stale: {entry_id}")
+    if manifest.get("mapping_sha256") != source_file_inventory_digest(paths):
+        return ContextAssessment(False, "source file mapping digest is stale")
+    return ContextAssessment(True, "source file manifest matches")
+
+
 def check_source_inventory_digest(
     recorded_digest: object, source_entry_ids: set[str],
 ) -> ContextAssessment:

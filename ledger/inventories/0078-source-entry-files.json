@@ -1,9 +1,9 @@
 {
   "entries": {
-    "0053-boundary-mutant-failure": "ledger/decisions/0053-boundary-mutant-failure.json",
-    "0055-wildcard-authority-failure": "ledger/decisions/0055-wildcard-authority-failure.json",
-    "0059-unverified-dependency-failure": "ledger/decisions/0059-unverified-dependency-failure.json",
-    "0061-differential-boundary-failure": "ledger/decisions/0061-differential-boundary-failure.json"
+    "0053-boundary-mutant-failure": {"path": "ledger/decisions/0053-boundary-mutant-failure.json", "sha256": "c29f455286d51db44e000fbb21d45bf67f55b0c0e44f57b87b783a76e2d6970f"},
+    "0055-wildcard-authority-failure": {"path": "ledger/decisions/0055-wildcard-authority-failure.json", "sha256": "a5614c99fcb1f94f9a61be4d9017074f7bcba19af4639cb7797c6759a663bf61"},
+    "0059-unverified-dependency-failure": {"path": "ledger/decisions/0059-unverified-dependency-failure.json", "sha256": "9d54e84dfb62e32a9ced5027fd90c4ba0fac27f08d9f8e6cbe9ce4822afe1911"},
+    "0061-differential-boundary-failure": {"path": "ledger/decisions/0061-differential-boundary-failure.json", "sha256": "d62c4f8c380a4632c0c00aed6a5151b5e0083ee293f7afae63c4e6de374ae468"}
   },
   "mapping_sha256": "08c3a27d7d3d210707491e63e62df62ca0bd4200213d18b6824ed2ce57fe7e65"
 }
