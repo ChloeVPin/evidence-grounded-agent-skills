@@ -1,7 +1,7 @@
 # Cycle 0091 — Connect bundle validation to content-digest checks
 
 Date: 2026-08-18
-Status: in progress
+Status: completed
 
 ## Question
 
@@ -9,16 +9,20 @@ Connect bundle validation to content-digest checks
 
 ## Decision
 
-_To be determined from evidence._
+Assertion references now require SHA-256 content digests, allowing the bundle to
+detect replacement of an existing path as well as missing paths.
 
 ## Evidence and provenance
 
-_To be recorded. Primary sources required._
+The current 0087 assertion’s capture, implementation, and test references are
+digest-bound; a tampered capture digest is rejected.
 
 ## Disconfirming evidence sought
 
-_To be recorded._
+Content digests verify bytes at audit time, not semantic correctness or authorship
+of the referenced files.
 
 ## Next action
 
-_Research, validate, and update this record._
+Validation passed locally. Next cycle: persist a complete current assertion bundle
+with references, digests, and fresh result together.

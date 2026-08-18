@@ -13,6 +13,7 @@ from scripts.decision_ledger import (
     compare_policy_audit, validate_generation_evidence,
     validate_migration,
     validate_policy_audit, validate_policy_audit_bundle,
+    validate_policy_assertion_content,
     validate_source_file_manifest,
 )
 from scripts.contradiction_policy import Claim, resolve_claims
@@ -457,6 +458,18 @@ class DecisionLedgerTest(unittest.TestCase):
         paths = set(audit["evidence_refs"])
         self.assertTrue(validate_policy_audit_bundle(audit, evidence, paths).valid)
         self.assertFalse(validate_policy_audit_bundle(audit, evidence, set()).valid)
+
+    def test_policy_assertion_references_match_content_digests(self):
+        audit = json.loads(Path(
+            "ledger/evidence/0087-generation-policy-audit.json",
+        ).read_text())
+        digests = json.loads(Path(
+            "ledger/evidence/0087-policy-content-digests.json",
+        ).read_text())
+        self.assertTrue(validate_policy_assertion_content(audit, digests).valid)
+        altered = dict(digests)
+        altered["ledger/evidence/0087-generation-rerun.json"] = "0" * 64
+        self.assertFalse(validate_policy_assertion_content(audit, altered).valid)
 
 
 if __name__ == "__main__":

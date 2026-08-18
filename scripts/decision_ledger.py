@@ -208,6 +208,27 @@ def validate_policy_audit_bundle(
     return compare_policy_audit(audit, evidence)
 
 
+def validate_policy_assertion_content(
+    audit: dict, content_digests: dict[str, str],
+) -> ContextAssessment:
+    """Verify SHA-256 content digests for every assertion reference."""
+    audit_check = validate_policy_audit(audit)
+    if not audit_check.valid:
+        return audit_check
+    for reference in audit["evidence_refs"]:
+        expected = content_digests.get(reference)
+        if not isinstance(expected, str) or len(expected) != 64:
+            return ContextAssessment(False, f"missing content digest: {reference}")
+        try:
+            with open(reference, "rb") as handle:
+                actual = hashlib.sha256(handle.read()).hexdigest()
+        except OSError:
+            return ContextAssessment(False, f"missing assertion reference: {reference}")
+        if actual != expected:
+            return ContextAssessment(False, f"assertion reference content drift: {reference}")
+    return ContextAssessment(True, "assertion reference content matches")
+
+
 def validate_contexts(contexts: object) -> ContextAssessment:
     """Validate explicit context scope before it can constrain a review."""
     if not isinstance(contexts, list) or not contexts:
