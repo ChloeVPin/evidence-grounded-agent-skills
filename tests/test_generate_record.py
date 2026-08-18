@@ -66,6 +66,35 @@ class GenerateRecordTest(unittest.TestCase):
                 diff="diff", evidence=captured,
             )
 
+    def test_dependency_metadata_is_serialized_when_evidence_is_valid(self):
+        dependency = {
+            "paths": ["requirements.txt"],
+            "packages": {"safe-lib": {"provenance_verified": True, "known_vulnerable": False}},
+            "evidence": {"safe-lib": {
+                "source": "https://registry.example/safe-lib",
+                "looked_up_at": "2026-08-18T12:00:00Z",
+                "status": "verified",
+            }},
+        }
+        record = generate_record(
+            revision=REVISION, paths=["requirements.txt"],
+            allowed_prefixes=["."], criteria=["behavior works"],
+            diff="diff", evidence=evidence(), dependency=dependency,
+        )
+        self.assertEqual(record["dependency"], dependency)
+
+    def test_dependency_metadata_without_provenance_is_rejected(self):
+        dependency = {
+            "paths": ["requirements.txt"],
+            "packages": {"safe-lib": {}}, "evidence": {},
+        }
+        with self.assertRaisesRegex(ValueError, "invalid dependency evidence"):
+            generate_record(
+                revision=REVISION, paths=["requirements.txt"],
+                allowed_prefixes=["."], criteria=["behavior works"],
+                diff="diff", evidence=evidence(), dependency=dependency,
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
