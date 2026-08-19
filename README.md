@@ -26,6 +26,16 @@ The goal is useful skills: clear triggers, bounded procedures, failure handling,
 
 The deliverables are the directories under [`skills/`](skills/). Each contains a standalone `SKILL.md`; no runtime, test suite, or audit framework is required.
 
+## Release status
+
+`v0.1.0-draft` is the first public baseline: 35 standalone skills organized by task path. Every skill remains marked `Lifecycle: draft`, so this release does not claim universal correctness or production validation. Inspect each skill’s scope and sources, then verify its advice against the repository and task where you use it.
+
+Install the baseline with:
+
+```bash
+npx skills add ChloeVPin/open-agent-skills
+```
+
 ## Install with `npx skills`
 
 This repository uses the open Agent Skills layout, so the existing `npx skills` CLI can discover and install these files directly:
