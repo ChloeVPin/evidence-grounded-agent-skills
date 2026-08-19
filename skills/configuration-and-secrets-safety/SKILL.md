@@ -20,6 +20,7 @@ Trigger when changing configuration schemas, defaults, environment variables, fe
 - Configuration is an interface: define names, types, requiredness, defaults, validation, precedence, reload behavior, and failure semantics.
 - A default must be safe for its environment; development convenience must not silently become production behavior.
 - Secrets should be least-privilege, short-lived or rotatable, attributable, revocable, and absent from source, logs, images, committed configuration, and error output.
+- Trust-setting values such as TLS verification, certificate paths, proxy settings, and credential sources are security-sensitive contract inputs; route their boundary behavior to `secure-coding-review` and record the consequence of disabling, omitting, or overriding them.
 - A configuration change is incomplete until affected environments, consumers, and rollback behavior are understood.
 
 ## Procedure

@@ -21,6 +21,7 @@ Trigger when adding or changing endpoints, function signatures, commands, schema
 - Compatibility is relative to identified consumers and versions; “backward compatible” without a consumer set is an unsupported claim.
 - Prefer additive, tolerant, and reversible evolution when consumers cannot migrate atomically; reject ambiguity rather than silently reinterpret data.
 - A deprecation or version signal is actionable only with an effective boundary, migration path, and owner.
+- Preserve distinctions between omitted, explicitly null, defaulted, and disabled values, as well as exception/error behavior; these are observable contract elements for client libraries and serialized interfaces.
 
 ## Procedure
 
