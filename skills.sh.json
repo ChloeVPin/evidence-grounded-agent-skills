@@ -1,0 +1,70 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Start Here",
+      "description": "Skills for understanding a repository, clarifying the request, and choosing an evidence-based path.",
+      "skills": [
+        "epistemic-coding",
+        "repository-exploration",
+        "requirements-to-acceptance",
+        "skill-composition-and-routing",
+        "implementation-planning",
+        "architecture-decision-making"
+      ]
+    },
+    {
+      "title": "Change and Diagnose",
+      "description": "Skills for debugging, refactoring, interface changes, patch comparison, and safe repository review.",
+      "skills": [
+        "evidence-driven-debugging",
+        "behavior-preserving-refactoring",
+        "api-contract-compatibility",
+        "differential-patch-review",
+        "repository-change-verification",
+        "safe-git-workflow"
+      ]
+    },
+    {
+      "title": "Quality and Operations",
+      "description": "Skills for tests, static analysis, concurrency, resilience, performance, observability, accessibility, localization, migration, and release work.",
+      "skills": [
+        "regression-test-design",
+        "test-effectiveness-analysis",
+        "static-analysis-and-type-safety",
+        "concurrency-and-shared-state",
+        "resilience-and-retry-design",
+        "performance-regression-analysis",
+        "observability-and-instrumentation",
+        "accessibility-review",
+        "internationalization-and-localization",
+        "data-migration-safety",
+        "release-and-rollback-safety"
+      ]
+    },
+    {
+      "title": "Security and Trust",
+      "description": "Skills for application security, privacy, secrets, dependencies, build integrity, agent boundaries, and conflicting evidence.",
+      "skills": [
+        "secure-coding-review",
+        "privacy-and-data-handling",
+        "configuration-and-secrets-safety",
+        "dependency-security-audit",
+        "build-and-ci-integrity",
+        "tool-authorization-audit",
+        "prompt-injection-resistance",
+        "contradiction-resolution"
+      ]
+    },
+    {
+      "title": "Maintain and Improve",
+      "description": "Skills for evaluating agents, reviewing skills, and maintaining knowledge as evidence changes.",
+      "skills": [
+        "agent-evaluation-and-benchmarking",
+        "skill-quality-review",
+        "knowledge-maintenance"
+      ]
+    }
+  ]
+}
