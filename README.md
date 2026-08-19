@@ -1,6 +1,8 @@
-# Evidence-Grounded Agent Skills
+# Open Agent Skills
 
-This repository contains practical, evidence-grounded `SKILL.md` files for AI coding agents.
+[![Install with skills.sh](https://skills.sh/b/ChloeVPin/open-agent-skills)](https://skills.sh/ChloeVPin/open-agent-skills)
+
+Research-backed, vendor-neutral `SKILL.md` skills for AI coding agents. Use them for debugging, API compatibility, refactoring, security review, migrations, performance, accessibility, localization, release safety, and evidence-driven repository work.
 
 The skills are vendor-neutral Markdown guidance intended for any coding agent that can read `SKILL.md`. They do not require a particular model, host application, plugin, runtime, tool protocol, or programming language; adapt tool names and repository commands to the agent and codebase in scope.
 
