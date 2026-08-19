@@ -20,6 +20,7 @@
       "skills": [
         "evidence-driven-debugging",
         "behavior-preserving-refactoring",
+        "dead-code-and-comment-cleanup",
         "api-contract-compatibility",
         "differential-patch-review",
         "repository-change-verification",

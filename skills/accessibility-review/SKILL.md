@@ -21,20 +21,22 @@ Trigger when changing user interfaces, interaction flows, forms, navigation, med
 - Accessibility requires perceivable content, operable controls, understandable behavior, and robust interoperability; a passing automated rule set is only partial evidence.
 - Use native platform semantics and controls when they express the intended behavior; custom widgets carry their own keyboard, focus, name, state, and event obligations.
 - Do not infer disability needs from a single persona or declare a design accessible without checking affected users and assistive technology behavior.
+- A review matrix is a scope control, not a conformance certificate: each route or journey, state, viewport, and input mode is an evidence row with its own limitations.
 
 ## Procedure
 
-1. Identify affected tasks, users, content, input modes, output modes, and failure states. Define the applicable platform guidance and target conformance level without overstating it.
-2. Inspect structure and semantics: headings, landmarks, labels, names/roles/states, language, reading order, relationships, tables, alternatives for non-text content, and task-relevant document structure.
-3. Exercise the task without a mouse or pointer. Check focus visibility and order, keyboard operability, shortcuts, traps, drag alternatives, target size, timing, cancellation, and touch or switch input where relevant.
-4. Check presentation and perception: contrast, text resizing/reflow, zoom, motion, color independence, captions/transcripts, audio control, and state/error information that is not conveyed by color alone.
-5. Check forms and dynamic behavior: instructions, required fields, input purpose, validation, error identification, recovery, status announcements, focus movement, dialogs, loading, and content changes for assistive technologies.
-6. For CLI interfaces, inspect output streams, exit status, encoding, color/paging fallbacks, keyboard interaction, and non-interactive use in addition to visual presentation.
-7. Test with representative browsers, devices, accessibility settings, and assistive technologies where applicable. Combine manual task testing, automated checks, source inspection, and user feedback; record each method’s blind spots.
-8. Check authentication, privacy, security, and performance tradeoffs. Do not remove accessible recovery or expose sensitive information merely to simplify an interaction.
-9. Classify findings by blocked task, affected users, reproducibility, conformance impact, and practical risk. Fix the underlying interaction or provide an equivalent path; do not hide the problem with cosmetic changes.
-10. Re-run the affected task and nearby boundaries: empty/error states, validation failures, dynamic updates, zoom/reflow, keyboard-only use, reduced motion, high contrast, localization, and slow or interrupted loading as relevant.
-11. Record evidence, tools and assistive technologies used, untested combinations, residual barriers, target conformance, confidence, and the next review trigger.
+1. Identify affected tasks, users, content, input modes, output modes, and failure states. Define the applicable platform guidance and target conformance level without overstating it. Choose audit-only or remediation mode.
+2. Build a matrix of affected routes or journeys, UI states, viewports or devices, and input modes. Give each row a stable identifier and record exclusions before collecting evidence.
+3. Inspect structure and semantics: headings, landmarks, labels, names/roles/states, language, reading order, relationships, tables, alternatives for non-text content, and task-relevant document structure.
+4. Exercise the task without a mouse or pointer. Check focus visibility and order, keyboard operability, shortcuts, traps, drag alternatives, target size, timing, cancellation, and touch or switch input where relevant.
+5. Check presentation and perception: contrast, text resizing/reflow, zoom, motion, color independence, captions/transcripts, audio control, and state/error information that is not conveyed by color alone.
+6. Check forms and dynamic behavior: instructions, required fields, input purpose, validation, error identification, recovery, status announcements, focus movement, dialogs, loading, and content changes for assistive technologies.
+7. For CLI interfaces, inspect output streams, exit status, encoding, color/paging fallbacks, keyboard interaction, and non-interactive use in addition to visual presentation.
+8. Collect evidence for each matrix row using representative browsers, devices, accessibility settings, and assistive technologies where applicable. Combine manual task testing, automated checks, source inspection, and user feedback; record each method’s blind spots.
+9. Check authentication, privacy, security, and performance tradeoffs. Do not remove accessible recovery or expose sensitive information merely to simplify an interaction.
+10. Classify findings by blocked task, affected users, reproducibility, conformance impact, and practical risk. Fix the underlying interaction or provide an equivalent path; do not hide the problem with cosmetic changes.
+11. Re-run the affected task and nearby boundaries: empty/error states, validation failures, dynamic updates, zoom/reflow, keyboard-only use, reduced motion, high contrast, localization, and slow or interrupted loading as relevant.
+12. Record evidence, tools and assistive technologies used, untested combinations, residual barriers, target conformance, confidence, and the next review trigger.
 
 ## Examples and counterexamples
 

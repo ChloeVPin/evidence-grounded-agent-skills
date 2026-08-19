@@ -153,6 +153,7 @@ Skills are guidance, not guarantees. Repository instructions, user authorization
 
 - [Evidence-driven debugging](skills/evidence-driven-debugging/SKILL.md) — reproduce failures and test competing causes.
 - [Behavior-preserving refactoring](skills/behavior-preserving-refactoring/SKILL.md) — restructure without accidental contract changes.
+- [Dead code and comment cleanup](skills/dead-code-and-comment-cleanup/SKILL.md) — remove proven dead code and redundant comments without losing intent or public behavior.
 - [API contract and compatibility](skills/api-contract-compatibility/SKILL.md) — evolve interfaces without hidden consumer breakage.
 - [Differential patch review](skills/differential-patch-review/SKILL.md) — compare candidate and trusted behavior.
 - [Repository change verification](skills/repository-change-verification/SKILL.md) — assess a complete patch before acceptance.
