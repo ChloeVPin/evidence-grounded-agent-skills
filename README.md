@@ -1,6 +1,13 @@
-# Open Agent Skills
+<p align="center">
+  <img src="logo.png" alt="Open Agent Skills logo" width="160">
+</p>
 
-[![Install with skills.sh](https://skills.sh/b/ChloeVPin/open-agent-skills)](https://skills.sh/ChloeVPin/open-agent-skills)
+<h1 align="center">Open Agent Skills</h1>
+
+<p align="center">
+  <a href="https://skills.sh/ChloeVPin/open-agent-skills"><img src="https://skills.sh/b/ChloeVPin/open-agent-skills" alt="Install with skills.sh"></a>
+  <a href="https://github.com/ChloeVPin/open-agent-skills/stargazers"><img src="https://img.shields.io/github/stars/ChloeVPin/open-agent-skills?style=flat" alt="GitHub stars"></a>
+</p>
 
 Research-backed, vendor-neutral `SKILL.md` skills for AI coding agents. Use them for debugging, API compatibility, refactoring, security review, migrations, performance, accessibility, localization, release safety, and evidence-driven repository work.
 
