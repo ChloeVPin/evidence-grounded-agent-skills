@@ -29,11 +29,12 @@ Trigger when changing user interfaces, interaction flows, forms, navigation, med
 3. Exercise the task without a mouse or pointer. Check focus visibility and order, keyboard operability, shortcuts, traps, drag alternatives, target size, timing, cancellation, and touch or switch input where relevant.
 4. Check presentation and perception: contrast, text resizing/reflow, zoom, motion, color independence, captions/transcripts, audio control, and state/error information that is not conveyed by color alone.
 5. Check forms and dynamic behavior: instructions, required fields, input purpose, validation, error identification, recovery, status announcements, focus movement, dialogs, loading, and content changes for assistive technologies.
-6. Test with representative browsers, devices, accessibility settings, and assistive technologies where applicable. Combine manual task testing, automated checks, source inspection, and user feedback; record each method’s blind spots.
-7. Check authentication, privacy, security, and performance tradeoffs. Do not remove accessible recovery or expose sensitive information merely to simplify an interaction.
-8. Classify findings by blocked task, affected users, reproducibility, conformance impact, and practical risk. Fix the underlying interaction or provide an equivalent path; do not hide the problem with cosmetic changes.
-9. Re-run the affected task and nearby boundaries: empty/error states, validation failures, dynamic updates, zoom/reflow, keyboard-only use, reduced motion, high contrast, localization, and slow or interrupted loading as relevant.
-10. Record evidence, tools and assistive technologies used, untested combinations, residual barriers, target conformance, confidence, and the next review trigger.
+6. For CLI interfaces, inspect output streams, exit status, encoding, color/paging fallbacks, keyboard interaction, and non-interactive use in addition to visual presentation.
+7. Test with representative browsers, devices, accessibility settings, and assistive technologies where applicable. Combine manual task testing, automated checks, source inspection, and user feedback; record each method’s blind spots.
+8. Check authentication, privacy, security, and performance tradeoffs. Do not remove accessible recovery or expose sensitive information merely to simplify an interaction.
+9. Classify findings by blocked task, affected users, reproducibility, conformance impact, and practical risk. Fix the underlying interaction or provide an equivalent path; do not hide the problem with cosmetic changes.
+10. Re-run the affected task and nearby boundaries: empty/error states, validation failures, dynamic updates, zoom/reflow, keyboard-only use, reduced motion, high contrast, localization, and slow or interrupted loading as relevant.
+11. Record evidence, tools and assistive technologies used, untested combinations, residual barriers, target conformance, confidence, and the next review trigger.
 
 ## Examples and counterexamples
 

@@ -22,6 +22,7 @@ Trigger when adding or changing endpoints, function signatures, commands, schema
 - Prefer additive, tolerant, and reversible evolution when consumers cannot migrate atomically; reject ambiguity rather than silently reinterpret data.
 - A deprecation or version signal is actionable only with an effective boundary, migration path, and owner.
 - Preserve distinctions between omitted, explicitly null, defaulted, and disabled values, as well as exception/error behavior; these are observable contract elements for client libraries and serialized interfaces.
+- For CLI interfaces, include exit status, stdout/stderr routing, encoding, help/error text, interactive behavior, and terminal capability assumptions in the contract.
 
 ## Procedure
 
