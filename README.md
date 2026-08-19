@@ -17,6 +17,39 @@ The goal is useful skills: clear triggers, bounded procedures, failure handling,
 
 The deliverables are the directories under [`skills/`](skills/). Each contains a standalone `SKILL.md`; no runtime, test suite, or audit framework is required.
 
+## Install with `npx skills`
+
+This repository uses the open Agent Skills layout, so the existing `npx skills` CLI can discover and install these files directly:
+
+```bash
+# Browse the available skills first
+npx skills add ChloeVPin/open-agent-skills --list
+
+# Install one skill into the current project
+npx skills add ChloeVPin/open-agent-skills --skill evidence-driven-debugging
+
+# Install several selected skills
+npx skills add ChloeVPin/open-agent-skills \\
+  --skill repository-exploration \\
+  --skill requirements-to-acceptance \\
+  --skill repository-change-verification
+
+# Install all skills globally for supported agents
+npx skills add ChloeVPin/open-agent-skills --all -g
+```
+
+Without `-g`, installation is project-scoped; with `-g`, it is user-scoped. The CLI can target supported agents, list installed skills, update them, and remove them without this repository shipping a custom installer or runtime.
+
+### Why this is useful
+
+- One familiar command makes the library discoverable without cloning or manually copying files.
+- Users can install only the skill that matches the task instead of loading the entire catalog into an agent’s context.
+- Project-scoped installation supports reproducible team workflows; global installation supports personal reuse across repositories.
+- The shared `SKILL.md` format allows the same guidance to work across many coding agents, while the CLI handles agent-specific install locations.
+- Updates and removal have a defined workflow instead of leaving unmanaged copies scattered across agent directories.
+
+Skills are instructions that influence agent behavior. Inspect the source, provenance, lifecycle status, and requested permissions before installing; installation is not proof that a skill is safe or correct. Prefer a reviewed revision and avoid granting tools or credentials merely because a skill requests them.
+
 ## Skill structure
 
 Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.
