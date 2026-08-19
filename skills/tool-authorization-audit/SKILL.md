@@ -3,9 +3,9 @@ name: tool-authorization-audit
 description: Review AI-agent tools and proposed calls for least privilege, bounded parameters, explicit authorization, isolation, and auditable high-impact actions. Use when tools, credentials, scopes, or permissions change.
 ---
 
-# Tool Authorization Audit
-
 Lifecycle: `draft`
+
+# Tool Authorization Audit
 
 ## Purpose and scope
 

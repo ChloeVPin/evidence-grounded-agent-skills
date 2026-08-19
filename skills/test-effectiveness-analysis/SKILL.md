@@ -3,9 +3,9 @@ name: test-effectiveness-analysis
 description: Evaluate whether tests detect acceptance-relevant behavioral faults using boundaries, negative cases, differential checks, and mutation-oriented diagnostics. Use when tests are added, changed, weak, or contradicted by regressions.
 ---
 
-# Test-Effectiveness Analysis
-
 Lifecycle: `draft`
+
+# Test-Effectiveness Analysis
 
 ## Purpose and scope
 

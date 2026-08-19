@@ -117,6 +117,18 @@ Add `privacy-and-data-handling`, `dependency-security-audit`, `build-and-ci-inte
 
 Browse the wider ecosystem at [skills.sh](https://skills.sh/) after understanding the source and trust boundary of a skill.
 
+## Quick routing map
+
+| Task signal | Start with | Add when the evidence requires it |
+| --- | --- | --- |
+| Unfamiliar repository or unclear request | [Repository exploration](skills/repository-exploration/SKILL.md) | [Requirements to acceptance](skills/requirements-to-acceptance/SKILL.md), then [implementation planning](skills/implementation-planning/SKILL.md) |
+| Broken or unexplained behavior | [Evidence-driven debugging](skills/evidence-driven-debugging/SKILL.md) | [Regression test design](skills/regression-test-design/SKILL.md), then [repository change verification](skills/repository-change-verification/SKILL.md) |
+| Security, credentials, or untrusted input | [Secure coding review](skills/secure-coding-review/SKILL.md) | [Privacy and data handling](skills/privacy-and-data-handling/SKILL.md), [dependency security audit](skills/dependency-security-audit/SKILL.md), or [tool authorization audit](skills/tool-authorization-audit/SKILL.md) |
+| Interface, schema, or persisted-data change | [API contract and compatibility](skills/api-contract-compatibility/SKILL.md) | [Data migration safety](skills/data-migration-safety/SKILL.md) or [release and rollback safety](skills/release-and-rollback-safety/SKILL.md) |
+| Several skills appear relevant | [Skill composition and routing](skills/skill-composition-and-routing/SKILL.md) | Select the smallest complete set; defer skills whose triggers are not met |
+
+The table is a starting hypothesis, not an authority. Re-route when repository evidence changes the task or reveals a different risk boundary.
+
 ## Skill structure
 
 Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.

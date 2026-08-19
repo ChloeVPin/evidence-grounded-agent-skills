@@ -3,9 +3,9 @@ name: knowledge-maintenance
 description: Keep coding-agent skills and guidance current by tracking provenance, freshness, deprecation, supersession, contradictions, and review triggers. Use when evidence, dependencies, versions, or failures change.
 ---
 
-# Knowledge Maintenance and Freshness
-
 Lifecycle: `draft`
+
+# Knowledge Maintenance and Freshness
 
 ## Purpose and scope
 
