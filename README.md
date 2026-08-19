@@ -50,6 +50,54 @@ Without `-g`, installation is project-scoped; with `-g`, it is user-scoped. The 
 
 Skills are instructions that influence agent behavior. Inspect the source, provenance, lifecycle status, and requested permissions before installing; installation is not proof that a skill is safe or correct. Prefer a reviewed revision and avoid granting tools or credentials merely because a skill requests them.
 
+## Start with a path
+
+Install only the path that matches the work. The sequence is a routing suggestion, not a requirement to load every skill.
+
+### Fix a bug
+
+Use this path when behavior is broken, surprising, flaky, or contradicted by a specification.
+
+```bash
+npx skills add ChloeVPin/open-agent-skills \\
+  --skill repository-exploration \\
+  --skill evidence-driven-debugging \\
+  --skill regression-test-design \\
+  --skill repository-change-verification
+```
+
+Route to `secure-coding-review` if the evidence points to a trust boundary, and to `dependency-security-audit` if an external package or build artifact is involved. Do not use a regression check as proof of a root cause that was never established.
+
+### Add a feature or change an interface
+
+Use this path when requirements are incomplete, the change crosses files or components, or callers may depend on the current behavior.
+
+```bash
+npx skills add ChloeVPin/open-agent-skills \\
+  --skill requirements-to-acceptance \\
+  --skill implementation-planning \\
+  --skill api-contract-compatibility \\
+  --skill repository-change-verification
+```
+
+Use only the domain skill required by the change—for example, `data-migration-safety`, `concurrency-and-shared-state`, or `internationalization-and-localization`. If the request has two materially different interpretations, clarify it before implementation.
+
+### Change security-sensitive behavior
+
+Use this path when code handles authorization, credentials, untrusted input, sensitive data, dependencies, CI permissions, or agent tools.
+
+```bash
+npx skills add ChloeVPin/open-agent-skills \\
+  --skill repository-exploration \\
+  --skill secure-coding-review \\
+  --skill configuration-and-secrets-safety \\
+  --skill repository-change-verification
+```
+
+Add `privacy-and-data-handling`, `dependency-security-audit`, `build-and-ci-integrity`, or `tool-authorization-audit` only when its trigger is actually met. Security review does not authorize bypassing approval, exposing secrets, or claiming safety from a checklist alone.
+
+Browse the wider ecosystem at [skills.sh](https://skills.sh/) after understanding the source and trust boundary of a skill.
+
 ## Skill structure
 
 Each skill should state its purpose, triggers, procedure, examples, failure recovery, evidence, confidence, freshness, and related skills. Keep skills focused on helping AI coding agents perform real work.
